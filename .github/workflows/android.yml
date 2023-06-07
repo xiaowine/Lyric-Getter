@@ -19,7 +19,7 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
           cache: gradle
-      - name: Clone UI
+      - name: Clone Getter
         run: |
           cd Getter
           git submodule init
