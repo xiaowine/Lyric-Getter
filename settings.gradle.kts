@@ -9,3 +9,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Lyrics Getter"
 include(":app")
+include(":Getter:GetterApi")

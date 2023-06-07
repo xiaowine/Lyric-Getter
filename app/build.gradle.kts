@@ -53,7 +53,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    namespace = "com.example.getter"
+    namespace = "cn.lyrics.getter"
     applicationVariants.all {
         outputs.all {
             (this as BaseVariantOutputImpl).outputFileName =
@@ -66,5 +66,6 @@ android {
 dependencies {
     implementation("com.github.kyuubiran:EzXHelper:2.0.5")
     implementation("org.luckypray:DexKit:1.1.8")
+    implementation(project(mapOf("path" to ":Getter:GetterApi")))
     compileOnly("de.robv.android.xposed:api:82")
 }

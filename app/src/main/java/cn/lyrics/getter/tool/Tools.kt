@@ -6,8 +6,8 @@ package cn.lyrics.getter.tool
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import cn.lyrics.getter.BuildConfig
 import com.github.kyuubiran.ezxhelper.Log
-import cn.lyrics.getter.tool.BuildConfig
 import de.robv.android.xposed.XSharedPreferences
 
 

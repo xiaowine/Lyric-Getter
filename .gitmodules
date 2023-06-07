@@ -1,0 +1,3 @@
+[submodule "Getter"]
+	path = Getter
+	url = https://github.com/xiaowine/GetterApi
