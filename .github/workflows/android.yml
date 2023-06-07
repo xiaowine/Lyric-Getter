@@ -19,6 +19,11 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
           cache: gradle
+      - name: Clone UI
+        run: |
+          cd Getter
+          git submodule init
+          git submodule update
 
       - name: Build with Gradle
         run: ./gradlew build
