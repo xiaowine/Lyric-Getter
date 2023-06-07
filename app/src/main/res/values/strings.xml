@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Lyrics Getter</string>
+    <string name="xposed_desc">Lyrics Getter</string>
+</resources>

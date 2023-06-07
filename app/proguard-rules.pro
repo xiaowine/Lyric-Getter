@@ -1,0 +1,1 @@
+-keep class cn.lyrics.getter.hook.MainHook

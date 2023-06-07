@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="need_module">
+        <!--        <item>com.android.systemui</item>-->
+        <!--        <item>android</item>-->
+        <item>com.miui.player</item>
+        <item>com.netease.cloudmusic</item>
+        <item>com.salt.music</item>
+        <item>com.tencent.qqmusic</item>
+        <item>com.kugou.android</item>
+        <item>com.kugou.android.lite</item>
+        <item>cn.kuwo.player</item>
+        <item>remix.myplayer</item>
+        <item>cmccwm.mobilemusic</item>
+        <item>com.meizu.media.music</item>
+        <item>com.r.rplayer</item>
+        <item>cn.toside.music.mobile</item>
+        <item>com.apple.android.music</item>
+        <item>com.luna.music</item>
+    </array>
+</resources>
