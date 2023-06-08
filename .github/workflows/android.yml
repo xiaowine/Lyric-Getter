@@ -34,10 +34,8 @@ jobs:
           cd Getter
           git submodule init
           git submodule update
-      - name: Clone Getter
-        run: |
-          ls
-          cd Getter
-          ls
+
       - name: Build with Gradle
-        run: ./gradlew build
+        run: |
+          ./gradlew assembleRelease
+          ./gradlew assembleDebug
