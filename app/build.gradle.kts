@@ -66,6 +66,6 @@ android {
 dependencies {
     implementation("com.github.kyuubiran:EzXHelper:2.0.5")
     implementation("org.luckypray:DexKit:1.1.8")
-    implementation(project(mapOf("path" to ":Getter:GetterApi")))
+    implementation(project(mapOf("path" to ":Getter:Api")))
     compileOnly("de.robv.android.xposed:api:82")
 }
