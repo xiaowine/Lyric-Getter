@@ -1,10 +1,10 @@
-package cn.lyrics.getter.tool
+package cn.lyric.getter.tool
 
 import android.content.Context
 import android.content.Intent
 import android.util.Log
-import cn.lyrics.getter.api.data.DataType
-import cn.lyrics.getter.api.data.LyricData
+import cn.lyric.getter.api.data.DataType
+import cn.lyric.getter.api.data.LyricData
 
 object EventTools {
     private const val TAG = "Lyrics Getter Api"

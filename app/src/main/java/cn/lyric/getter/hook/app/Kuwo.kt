@@ -1,12 +1,12 @@
-package cn.lyrics.getter.hook.app
+package cn.lyric.getter.hook.app
 
 
-import cn.lyrics.getter.hook.BaseHook
-import cn.lyrics.getter.tool.EventTools.sendLyric
-import cn.lyrics.getter.tool.HookTools
-import cn.lyrics.getter.tool.HookTools.context
-import cn.lyrics.getter.tool.Tools.isNot
-import cn.lyrics.getter.tool.Tools.isNotNull
+import cn.lyric.getter.hook.BaseHook
+import cn.lyric.getter.tool.EventTools.sendLyric
+import cn.lyric.getter.tool.HookTools
+import cn.lyric.getter.tool.HookTools.context
+import cn.lyric.getter.tool.Tools.isNot
+import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassLoaderProvider.classLoader
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull

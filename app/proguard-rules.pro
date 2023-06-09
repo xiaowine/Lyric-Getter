@@ -1,1 +1,1 @@
--keep class cn.lyrics.getter.hook.MainHook
+-keep class cn.lyric.getter.hook.MainHook

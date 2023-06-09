@@ -1,4 +1,4 @@
-package cn.lyrics.getter.tool
+package cn.lyric.getter.tool
 
 import android.app.Notification
 

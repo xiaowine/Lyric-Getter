@@ -1,12 +1,12 @@
 @file:Suppress("DEPRECATION")
 
-package cn.lyrics.getter.tool
+package cn.lyric.getter.tool
 
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
-import cn.lyrics.getter.BuildConfig
+import cn.lyric.getter.BuildConfig
 import com.github.kyuubiran.ezxhelper.Log
 import de.robv.android.xposed.XSharedPreferences
 

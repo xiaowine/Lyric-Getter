@@ -1,6 +1,6 @@
-package cn.lyrics.getter.hook.app
+package cn.lyric.getter.hook.app
 
-import cn.lyrics.getter.hook.BaseHook
+import cn.lyric.getter.hook.BaseHook
 
 object Apple : BaseHook() {
     override val name: String get() = this.javaClass.simpleName

@@ -1,9 +1,9 @@
-package cn.lyrics.getter.tool
+package cn.lyric.getter.tool
 
 
 import android.content.SharedPreferences
-import cn.lyrics.getter.config.Config
-import cn.lyrics.getter.tool.Tools.isNull
+import cn.lyric.getter.config.Config
+import cn.lyric.getter.tool.Tools.isNull
 import de.robv.android.xposed.XSharedPreferences
 
 class ConfigTools {

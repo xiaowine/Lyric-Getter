@@ -1,14 +1,14 @@
-package cn.lyrics.getter.tool
+package cn.lyric.getter.tool
 
 import android.app.AndroidAppHelper
 import android.app.Application
 import android.app.Notification
 import android.content.Context
 import android.os.Build
-import cn.lyrics.getter.tool.EventTools.cleanLyric
-import cn.lyrics.getter.tool.EventTools.sendLyric
-import cn.lyrics.getter.tool.Tools.isNotNull
-import cn.lyrics.getter.tool.Tools.isNull
+import cn.lyric.getter.tool.EventTools.cleanLyric
+import cn.lyric.getter.tool.EventTools.sendLyric
+import cn.lyric.getter.tool.Tools.isNotNull
+import cn.lyric.getter.tool.Tools.isNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.setStaticObject

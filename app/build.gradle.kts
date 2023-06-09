@@ -9,7 +9,7 @@ android {
     compileSdk = 33
     val buildTime = System.currentTimeMillis()
     defaultConfig {
-        applicationId = "cn.lyrics.getter"
+        applicationId = "cn.lyric.getter"
         minSdk = 26
         targetSdk = 33
         versionCode = 1
@@ -53,7 +53,7 @@ android {
     buildFeatures {
         viewBinding = true
     }
-    namespace = "cn.lyrics.getter"
+    namespace = "cn.lyric.getter"
     applicationVariants.all {
         outputs.all {
             (this as BaseVariantOutputImpl).outputFileName =

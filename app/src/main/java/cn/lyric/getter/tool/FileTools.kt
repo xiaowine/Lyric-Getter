@@ -1,6 +1,6 @@
 @file:Suppress("DEPRECATION")
 
-package cn.lyrics.getter.tool
+package cn.lyric.getter.tool
 
 
 import android.content.ContentResolver
@@ -12,8 +12,8 @@ import android.os.Environment
 import android.content.ContentUris
 import android.content.Context
 import android.net.Uri
-import cn.lyrics.getter.tool.Tools.isNotNull
-import cn.lyrics.getter.tool.Tools.isNull
+import cn.lyric.getter.tool.Tools.isNotNull
+import cn.lyric.getter.tool.Tools.isNull
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream

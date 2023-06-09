@@ -1,9 +1,9 @@
-package cn.lyrics.getter.hook.app
+package cn.lyric.getter.hook.app
 
 import android.content.Context
-import cn.lyrics.getter.hook.BaseHook
-import cn.lyrics.getter.tool.HookTools
-import cn.lyrics.getter.tool.Tools.isNotNull
+import cn.lyric.getter.hook.BaseHook
+import cn.lyric.getter.tool.HookTools
+import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder

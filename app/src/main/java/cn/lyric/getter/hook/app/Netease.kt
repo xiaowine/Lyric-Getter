@@ -1,15 +1,15 @@
-package cn.lyrics.getter.hook.app
+package cn.lyric.getter.hook.app
 
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.IntentFilter
-import cn.lyrics.getter.tool.EventTools.sendLyric
-import cn.lyrics.getter.hook.BaseHook
-import cn.lyrics.getter.tool.HookTools.MockFlyme
-import cn.lyrics.getter.tool.HookTools.fuckThinker
-import cn.lyrics.getter.tool.HookTools.mediaMetadataCompatLyric
-import cn.lyrics.getter.tool.Tools.isNotNull
+import cn.lyric.getter.tool.EventTools.sendLyric
+import cn.lyric.getter.hook.BaseHook
+import cn.lyric.getter.tool.HookTools.MockFlyme
+import cn.lyric.getter.tool.HookTools.fuckThinker
+import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
+import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassLoaderProvider
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
