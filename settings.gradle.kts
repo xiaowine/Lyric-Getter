@@ -7,6 +7,6 @@ dependencyResolutionManagement {
         jcenter()
     }
 }
-rootProject.name = "Lyrics Getter"
+rootProject.name = "Lyric Getter"
 include(":app")
 include(":LyricGetterApi")
