@@ -32,11 +32,6 @@ jobs:
           distribution: 'microsoft'
           cache: gradle
 
-      - name: Build with Gradle
-        run: |
-          ./gradlew assembleRelease
-          ./gradlew assembleDebug
-   
 
       - name: Build with Gradle
         run: |
