@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="need_module">
-        <!--        <item>com.android.systemui</item>-->
+        <item>com.android.systemui</item>
         <!--        <item>android</item>-->
         <item>com.miui.player</item>
         <item>com.netease.cloudmusic</item>

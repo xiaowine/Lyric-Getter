@@ -23,8 +23,6 @@ import de.robv.android.xposed.IXposedHookZygoteInit
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 
 
-private const val systemUiPackage = "com.android.systemui"
-
 class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit /* Optional */ {
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
 
@@ -32,7 +30,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit /* Optional */ {
         EzXHelper.setLogTag(TAG)
         EzXHelper.setToastTag(TAG)
         when (lpparam.packageName) {
-            systemUiPackage -> initHooks(SystemUi)
+            "com.android.systemui" -> initHooks(SystemUi)
             "com.tencent.qqmusic" -> initHooks(QQMusic)
             "com.miui.player" -> initHooks(MiPlayer)
             "com.netease.cloudmusic" -> initHooks(Netease)

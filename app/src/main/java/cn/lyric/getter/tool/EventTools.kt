@@ -7,7 +7,7 @@ import cn.lyric.getter.api.data.DataType
 import cn.lyric.getter.api.data.LyricData
 
 object EventTools {
-    private const val TAG = "Lyrics Getter Api"
+    const val TAG = "Lyrics Getter"
 
     /**
      * 发送歌词
@@ -66,6 +66,7 @@ object EventTools {
                 this.type = DataType.STOP
             }
             putExtra("Data", lyricData)
+            Log.d(TAG, lyricData.toString())
         })
     }
 }

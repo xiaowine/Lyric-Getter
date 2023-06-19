@@ -11,7 +11,6 @@ import com.github.kyuubiran.ezxhelper.ClassLoaderProvider.classLoader
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.Log
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
 import io.luckypray.dexkit.DexKitBridge
 import io.luckypray.dexkit.enums.MatchType
@@ -29,7 +28,7 @@ object Kuwo : BaseHook() {
         loadClassOrNull("cn.kuwo.mod.playcontrol.RemoteControlLyricMgr").isNotNull {
             it.methodFinder().first { name == "updateLyricText" }.createHook {
                 after { param ->
-                    Log.d(param.args[0].toString())
+                    sendLyric(context, param.args[0].toString(), context.packageName)
                 }
             }
         }.isNot {
@@ -44,7 +43,7 @@ object Kuwo : BaseHook() {
                         if (!res.declaringClassName.contains("ui") && res.isMethod) {
                             loadClass(res.declaringClassName).methodFinder().first { name == res.name }.createHook {
                                 after { hookParam ->
-                                    sendLyric(context, hookParam.args[0] as String, context.packageName)
+                                    sendLyric(context, hookParam.args[0].toString(), context.packageName)
                                 }
                             }
                             HookTools.openBluetoothA2dpOn()
