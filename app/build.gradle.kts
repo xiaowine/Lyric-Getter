@@ -13,7 +13,7 @@ android {
         minSdk = 26
         targetSdk = 33
         versionCode = 1
-        versionName = "1.0.0$buildTime"
+        versionName = "1.0.0"
         aaptOptions.cruncherEnabled = false
         aaptOptions.useNewCruncher = false
         buildConfigField("String", "BUILD_TIME", "\"$buildTime\"")
