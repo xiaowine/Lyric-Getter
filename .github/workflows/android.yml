@@ -74,7 +74,7 @@ jobs:
       - name: Upload Release APK
         uses: actions/upload-artifact@v2
         with:
-          name: StatusBarLyric_release
+          name: Lyric Getter release
           path: ${{ steps.sign_release.outputs.signedReleaseFile }}
 
       - name: Upload Release AAB APK
