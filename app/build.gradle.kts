@@ -14,8 +14,7 @@ android {
         targetSdk = 33
         versionCode = 1
         versionName = "1.0.0$buildTime"
-        aaptOptions.cruncherEnabled = false
-        aaptOptions.useNewCruncher = false
+
         buildConfigField("String", "BUILD_TIME", "\"$buildTime\"")
     }
 
@@ -33,11 +32,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.majorVersion
+        jvmTarget = JavaVersion.VERSION_11.majorVersion
     }
     packaging {
         resources {

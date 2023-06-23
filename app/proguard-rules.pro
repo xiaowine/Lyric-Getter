@@ -1,1 +1,1 @@
--keep class cn.lyric.getter.hook.MainHook-keep class cn.lyric.getter.tool.MeiZuNotification
+-keep class cn.lyric.getter.hook.MainHook-keep class cn.lyric.getter.tool.MeiZuNotification{*;}

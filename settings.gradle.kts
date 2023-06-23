@@ -4,7 +4,6 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven("https://jitpack.io")
-        jcenter()
     }
 }
 rootProject.name = "Lyric Getter"
