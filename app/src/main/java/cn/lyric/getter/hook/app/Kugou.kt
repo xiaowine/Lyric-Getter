@@ -13,7 +13,7 @@ object Kugou : BaseHook() {
 
     override fun init() {
         HookTools.openBluetoothA2dpOn()
-        HookTools.fuckThinker()
+        HookTools.fuckTinker()
         loadClass("com.kugou.framework.player.c").methodFinder().filterByParamTypes(HashMap::class.java).first { name == "a" }.createHook {
             after {
                 val hashMap = it.args[0] as HashMap<*, *>

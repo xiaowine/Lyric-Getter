@@ -7,7 +7,7 @@ import android.content.IntentFilter
 import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.HookTools.MockFlyme
-import cn.lyric.getter.tool.HookTools.fuckThinker
+import cn.lyric.getter.tool.HookTools.fuckTinker
 import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
 import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassLoaderProvider
@@ -32,7 +32,7 @@ object Netease : BaseHook() {
 
     override fun init() {
         MockFlyme()
-        fuckThinker()
+        fuckTinker()
         Application::class.java.methodFinder().first { name == "attach" }.createHook {
             after {
                 context = it.args[0] as Context

@@ -13,7 +13,6 @@ import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.setStaticObject
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.Log
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
 import java.lang.reflect.Method
@@ -60,7 +59,7 @@ object HookTools {
         }
     }
 
-    fun fuckThinker(classLoader: ClassLoader? = null) {
+    fun fuckTinker(classLoader: ClassLoader? = null) {
         loadClassOrNull("com.tencent.tinker.loader.app.TinkerApplication", classLoader).isNotNull {
             it.methodFinder().first { name == "getTinkerFlags" }.createHook { after { returnConstant(0) } }
         }
