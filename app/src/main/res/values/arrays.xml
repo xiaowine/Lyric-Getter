@@ -2,6 +2,7 @@
 <resources>
     <array name="need_module">
         <item>com.android.systemui</item>
+        <item>cn.lyric.getter.api.demo</item>
         <!--        <item>android</item>-->
         <item>com.miui.player</item>
         <item>com.netease.cloudmusic</item>
