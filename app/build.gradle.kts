@@ -67,6 +67,6 @@ dependencies {
     implementation("org.luckypray:DexKit:1.1.8")
     implementation(project(mapOf("path" to ":LyricGetterApi")))
 //    为啥ci会找不到呢？被迫手动导入jar
-//    compileOnly("de.robv.android.xposed:api:82")
-    compileOnly(files("libs/api-82.jar"))
+    compileOnly("de.robv.android.xposed:api:82")
+//    compileOnly(files("libs/api-82.jar"))
 }
