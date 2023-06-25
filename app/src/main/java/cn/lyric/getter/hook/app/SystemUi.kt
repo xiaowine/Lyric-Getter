@@ -1,13 +1,10 @@
 package cn.lyric.getter.hook.app
 
 
-import android.util.Log
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
-import cn.lyric.getter.tool.EventTools.TAG
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.Tools.isNotNull
-import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
@@ -42,14 +39,5 @@ object SystemUi : BaseHook() {
                 }
             }
         }
-//        "com.android.systemui.media.MediaData".findClass().hookAfterAllConstructors {
-//            val stats = it.thisObject.callMethodAs<Boolean>("isPlaying")
-//            if (lastStats != stats) {
-//                lastStats = stats
-//                if (!stats) {
-//                    offLyric(LogMultiLang.pausePlay)
-//                }
-//            }
-//        }
     }
 }

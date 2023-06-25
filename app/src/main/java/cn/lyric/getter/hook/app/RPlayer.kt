@@ -17,13 +17,9 @@ object RPlayer : BaseHook() {
                 after { param ->
                     val context = param.args[0] as Context
                     val classLoader = context.classLoader
-                    HookTools.isApi(classLoader) {
-                        Api.hook()
-                    }
+                    HookTools.mediaMetadataCompatLyric(context, classLoader)
                 }
             }
-
         }
-
     }
 }
