@@ -3,8 +3,9 @@ name: Android CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    paths-ignore:
+      - 'README.md'
+
   workflow_dispatch:
     inputs:
       run:
