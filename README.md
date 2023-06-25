@@ -18,11 +18,15 @@
 - 酷狗音乐
 - 酷我音乐
 - QQ音乐
-- 洛雪音乐
+- 洛雪音乐（等待升级API）
+- 椒盐音乐（等待升级API）
 - 小米音乐（新版）
 - 魅族音乐
 - 咪咕音乐
 - RPlayer
 - APlayer
 - 汽水音乐（需佩戴耳机）
+- Vanilla Music
+- Phonograph Plus
+- Lmusic
   截至 1.0.0 版本
