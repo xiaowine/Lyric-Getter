@@ -6,12 +6,12 @@ plugins {
 }
 
 android {
-    compileSdk = 33
+    compileSdk = 34
     val buildTime = System.currentTimeMillis()
     defaultConfig {
         applicationId = "cn.lyric.getter"
         minSdk = 26
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
 
