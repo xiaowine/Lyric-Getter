@@ -47,7 +47,7 @@
 
         <meta-data
             android:name="Getter_Version"
-            android:value="1" />
+            android:value="2" />
     </application>
 
 </manifest>
