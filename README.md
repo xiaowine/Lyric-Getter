@@ -18,9 +18,8 @@
 - 酷狗音乐
 - 酷我音乐
 - QQ音乐
-- 洛雪音乐（等待升级API）
-- 椒盐音乐（等待升级API）
-- 小米音乐（新版）
+- 洛雪音乐
+- 小米音乐
 - 魅族音乐
 - 咪咕音乐
 - RPlayer
@@ -29,4 +28,10 @@
 - Vanilla Music
 - Phonograph Plus
 - Lmusic
-  截至 1.0.0 版本
+`使用API的音乐软件不在README中，并且可能不在模块作用域中`
+截至 1.0.0 版本
+
+---
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=xiaowine/Lyric-Getter&type=Timeline)](https://star-history.com/#xiaowine/Lyric-Getter&Timeline)
