@@ -4,15 +4,15 @@ import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
 import android.content.IntentFilter
-import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.hook.BaseHook
+import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.tool.HookTools.MockFlyme
 import cn.lyric.getter.tool.HookTools.fuckTinker
 import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
 import cn.lyric.getter.tool.Tools.isNotNull
-import com.github.kyuubiran.ezxhelper.ClassLoaderProvider
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
+import com.github.kyuubiran.ezxhelper.Log
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
 import com.github.kyuubiran.ezxhelper.paramTypes
 import io.luckypray.dexkit.DexKitBridge
@@ -38,7 +38,8 @@ object Netease : BaseHook() {
                 context = it.args[0] as Context
                 val verCode = context.packageManager?.getPackageInfo("com.netease.cloudmusic", 0)?.versionCode ?: 0
                 if (verCode >= 8000041) {
-                    DexKitBridge.create(ClassLoaderProvider.classLoader, false).use { use ->
+                    DexKitBridge.create(context.classLoader, false).use { use ->
+                        Log.i("aaaaaaaaa")
                         use.isNotNull { bridge ->
                             val result = bridge.findMethodUsingString {
                                 usingString = "com/netease/cloudmusic/notification/flyme/StatusBarLyricController.class:init:(Landroid/content/Context;)V"
@@ -46,6 +47,7 @@ object Netease : BaseHook() {
                                 methodReturnType = "void"
                                 paramTypes(Context::class.java)
                             }
+                            Log.i(result.size.toString())
                             result.forEach { res ->
                                 IntentFilter()
                                 loadClass(res.declaringClassName).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {

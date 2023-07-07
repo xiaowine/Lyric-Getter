@@ -10,7 +10,6 @@ import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.Tools.isNot
 import cn.lyric.getter.tool.Tools.isNotNull
-import com.github.kyuubiran.ezxhelper.ClassLoaderProvider.classLoader
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
@@ -61,7 +60,7 @@ object Kuwo : BaseHook() {
                 }
             }
         }.isNot {
-            DexKitBridge.create(classLoader, false).use {
+            DexKitBridge.create(context.classLoader, false).use {
                 it.isNotNull { bridge ->
                     val result = bridge.findMethodUsingString {
                         usingString = "bluetooth_car_lyric"
