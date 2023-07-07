@@ -39,10 +39,9 @@ object Netease : BaseHook() {
                 val verCode = context.packageManager?.getPackageInfo("com.netease.cloudmusic", 0)?.versionCode ?: 0
                 if (verCode >= 8000041) {
                     DexKitBridge.create(context.classLoader, false).use { use ->
-                        Log.i("aaaaaaaaa")
                         use.isNotNull { bridge ->
                             val result = bridge.findMethodUsingString {
-                                usingString = "com/netease/cloudmusic/notification/flyme/StatusBarLyricController.class:init:(Landroid/content/Context;)V"
+                                usingString = "StatusBarLyricController"
                                 matchType = MatchType.FULL
                                 methodReturnType = "void"
                                 paramTypes(Context::class.java)
