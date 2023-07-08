@@ -63,6 +63,9 @@ object HookTools {
         loadClassOrNull("com.tencent.tinker.loader.app.TinkerApplication", classLoader).isNotNull {
             it.methodFinder().first { name == "getTinkerFlags" }.createHook { after { returnConstant(0) } }
         }
+        loadClassOrNull("com.tencent.tinker.loader.shareutil.ShareTinkerInternals", classLoader).isNotNull {
+            it.methodFinder().first { name == "isTinkerEnabledAll" }.createHook { after { returnConstant(false) } }
+        }
     }
 
 
