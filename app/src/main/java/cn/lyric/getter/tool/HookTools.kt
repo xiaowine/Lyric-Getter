@@ -14,7 +14,9 @@ import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.setStaticObject
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
+import com.github.kyuubiran.ezxhelper.finders.ConstructorFinder.`-Static`.constructorFinder
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+import java.io.File
 import java.lang.reflect.Method
 
 
@@ -60,6 +62,16 @@ object HookTools {
     }
 
     fun fuckTinker(classLoader: ClassLoader? = null) {
+        Application::class.java.constructorFinder().first().createHook {
+            after {
+                val application = it.thisObject as Application
+                val file = File("${application.filesDir.path}/")
+                if (file.exists() && file.canWrite()) {
+                    File("${application.filesDir.path}/tinker").delete()
+                    File("${application.filesDir.path}/tinker_temp").delete()
+                }
+            }
+        }
         loadClassOrNull("com.tencent.tinker.loader.app.TinkerApplication", classLoader).isNotNull {
             it.methodFinder().first { name == "getTinkerFlags" }.createHook { after { returnConstant(0) } }
         }
