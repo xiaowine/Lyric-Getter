@@ -24,10 +24,7 @@
 - 咪咕音乐
 - RPlayer
 - APlayer
-- 汽水音乐（需佩戴耳机）
-- Vanilla Music
-- Phonograph Plus
-- Lmusic  
+- 汽水音乐（需佩戴耳机）  
 `使用API的音乐软件不在README中，并且可能不在模块作用域中`  
 截至 1.0.0.2 版本
 
