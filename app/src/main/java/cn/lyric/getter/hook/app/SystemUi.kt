@@ -41,6 +41,13 @@ object SystemUi : BaseHook() {
     }
 
     override fun init() {
+        loadClassOrNull("com.android.systemui.media.controls.pipeline.MediaDataFilter").isNotNull {
+            it.methodFinder().filterByName("onMediaDataRemoved").first().createHook {
+                after {
+                    EventTools.cleanLyric(context)
+                }
+            }
+        }
         loadClassOrNull("com.android.systemui.media.MediaCarouselController").isNotNull {
             removePlayer(it)
         }.isNot {
