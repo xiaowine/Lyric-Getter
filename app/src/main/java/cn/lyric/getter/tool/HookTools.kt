@@ -61,10 +61,13 @@ object HookTools {
 
     fun fuckTinker(classLoader: ClassLoader? = null) {
         loadClassOrNull("com.tencent.tinker.loader.app.TinkerApplication", classLoader).isNotNull {
-            it.methodFinder().first { name == "getTinkerFlags" }.createHook { after { returnConstant(0) } }
+            it.methodFinder().first { name == "getTinkerFlags" }.createHook { before { returnConstant(0) } }
         }
         loadClassOrNull("com.tencent.tinker.loader.shareutil.ShareTinkerInternals", classLoader).isNotNull {
-            it.methodFinder().first { name == "isTinkerEnabledAll" }.createHook { after { returnConstant(false) } }
+            it.methodFinder().first { name == "isTinkerEnabledAll" }.createHook { before { returnConstant(false) } }
+        }
+        loadClassOrNull("com.tencent.tinker.loader.TinkerLoader").isNotNull {
+            it.methodFinder().filterByName("tryLoad").first().createHook { before { interrupt() } }
         }
     }
 
