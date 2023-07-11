@@ -15,6 +15,7 @@ import com.github.kyuubiran.ezxhelper.ClassUtils.setStaticObject
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+import java.io.File
 import java.lang.reflect.Method
 
 
@@ -59,15 +60,15 @@ object HookTools {
         }
     }
 
-    fun fuckTinker(classLoader: ClassLoader? = null) {
-        loadClassOrNull("com.tencent.tinker.loader.app.TinkerApplication", classLoader).isNotNull {
-            it.methodFinder().first { name == "getTinkerFlags" }.createHook { before { returnConstant(0) } }
-        }
-        loadClassOrNull("com.tencent.tinker.loader.shareutil.ShareTinkerInternals", classLoader).isNotNull {
-            it.methodFinder().first { name == "isTinkerEnabledAll" }.createHook { before { returnConstant(false) } }
-        }
-        loadClassOrNull("com.tencent.tinker.loader.TinkerLoader").isNotNull {
-            it.methodFinder().filterByName("tryLoad").first().createHook { before { interrupt() } }
+    fun fuckTinker() {
+        Application::class.java.methodFinder().filterByName("attach").first().createHook {
+            after { hookParam ->
+                val app = hookParam.thisObject as Application
+                val file = File("${app.dataDir.path}/tinker")
+                if (file.exists()) {
+                    file.delete()
+                }
+            }
         }
     }
 
