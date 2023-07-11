@@ -60,10 +60,19 @@ object HookTools {
         }
     }
 
-    fun fuckTinker() {
+    fun getApplication(callback: (Application) -> Unit) {
         Application::class.java.methodFinder().filterByName("attach").first().createHook {
-            after { hookParam ->
-                val app = hookParam.thisObject as Application
+            after {
+                callback(it.thisObject as Application)
+            }
+        }
+    }
+
+
+    fun fuckTinker() {
+        loadClassOrNull("com.tencent.tinker.loader.app.TinkerApplication").isNotNull {
+            getApplication {
+                val app = it
                 val file = File("${app.dataDir.path}/tinker")
                 if (file.exists()) {
                     file.delete()

@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.IntentFilter
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools.sendLyric
+import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.MockFlyme
 import cn.lyric.getter.tool.HookTools.fuckTinker
 import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
@@ -33,35 +34,32 @@ object Netease : BaseHook() {
     override fun init() {
         MockFlyme()
         fuckTinker()
-        Application::class.java.methodFinder().first { name == "attach" }.createHook {
-            after {
-                context = it.args[0] as Context
-                val verCode = context.packageManager?.getPackageInfo("com.netease.cloudmusic", 0)?.versionCode ?: 0
-                if (verCode >= 8000041) {
-                    DexKitBridge.create(context.classLoader, false).use { use ->
-                        use.isNotNull { bridge ->
-                            val result = bridge.findMethodUsingString {
-                                usingString = "StatusBarLyricController"
-                                matchType = MatchType.FULL
-                                methodReturnType = "void"
-                                paramTypes(Context::class.java)
-                            }
-                            Log.i(result.size.toString())
-                            result.forEach { res ->
-                                IntentFilter()
-                                loadClass(res.declaringClassName).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {
-                                    after { hookParam ->
-                                        sendLyric(context, hookParam.result as String, context.packageName)
-                                    }
+        HookTools.getApplication {
+            context = it
+            val verCode = context.packageManager?.getPackageInfo("com.netease.cloudmusic", 0)?.versionCode ?: 0
+            if (verCode >= 8000041) {
+                DexKitBridge.create(context.classLoader, false).use { use ->
+                    use.isNotNull { bridge ->
+                        val result = bridge.findMethodUsingString {
+                            usingString = "StatusBarLyricController"
+                            matchType = MatchType.FULL
+                            methodReturnType = "void"
+                            paramTypes(Context::class.java)
+                        }
+                        Log.i(result.size.toString())
+                        result.forEach { res ->
+                            IntentFilter()
+                            loadClass(res.declaringClassName).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {
+                                after { hookParam ->
+                                    sendLyric(context, hookParam.result as String, context.packageName)
                                 }
                             }
                         }
                     }
-                } else {
-                    mediaMetadataCompatLyric(context = context)
                 }
+            } else {
+                mediaMetadataCompatLyric(context = context)
             }
         }
-
     }
 }
