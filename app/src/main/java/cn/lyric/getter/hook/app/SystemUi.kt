@@ -1,6 +1,8 @@
 package cn.lyric.getter.hook.app
 
 
+import android.app.Notification
+import android.service.notification.StatusBarNotification
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
@@ -11,6 +13,7 @@ import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.ConstructorFinder.`-Static`.constructorFinder
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+
 
 object SystemUi : BaseHook() {
 
@@ -41,13 +44,6 @@ object SystemUi : BaseHook() {
     }
 
     override fun init() {
-        loadClassOrNull("com.android.systemui.media.controls.pipeline.MediaDataFilter").isNotNull {
-            it.methodFinder().filterByName("onMediaDataRemoved").first().createHook {
-                after {
-                    EventTools.cleanLyric(context)
-                }
-            }
-        }
         loadClassOrNull("com.android.systemui.media.MediaCarouselController").isNotNull {
             removePlayer(it)
         }.isNot {
@@ -64,5 +60,25 @@ object SystemUi : BaseHook() {
             }
         }
 
+        loadClassOrNull("com.android.systemui.statusbar.notification.collection.NotifCollection").isNotNull {
+            it.methodFinder().filterByName("onNotificationRemoved").first().createHook {
+                after { hookParam ->
+                    val sbn = hookParam.args[0] as StatusBarNotification
+                    if (sbn.notification.isMediaNotification()) {
+                        EventTools.cleanLyric(context)
+                    }
+                }
+            }
+        }
+
+    }
+
+    private fun Notification.isMediaNotification(): Boolean {
+        if (extras.containsKey("android.mediaSession")) {
+            return true
+        } else if (!extras.getString(Notification.EXTRA_TEMPLATE).isNullOrEmpty()) {
+            return Notification.MediaStyle::class.java.name == extras.getString(Notification.EXTRA_TEMPLATE)
+        }
+        return false
     }
 }
