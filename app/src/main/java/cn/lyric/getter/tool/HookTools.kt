@@ -61,8 +61,11 @@ object HookTools {
     }
 
     fun getApplication(callback: (Application) -> Unit) {
+        var isLoad = false
         Application::class.java.methodFinder().filterByName("attach").first().createHook {
             after {
+                if (isLoad) return@after
+                isLoad = true
                 callback(it.thisObject as Application)
             }
         }
@@ -75,7 +78,7 @@ object HookTools {
                 val app = it
                 val file = File("${app.dataDir.path}/tinker")
                 if (file.exists()) {
-                    file.delete()
+                    file.deleteRecursively()
                 }
             }
         }
