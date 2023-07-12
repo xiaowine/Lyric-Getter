@@ -7,7 +7,7 @@ import cn.lyric.getter.tool.EventTools.cleanLyric
 import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.tool.HookTools.isApi
 import cn.lyric.getter.tool.Tools.isNot
-import cn.lyric.getter.tool.Tools.isNull
+import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.Log
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
@@ -27,7 +27,7 @@ object Api : BaseHook() {
                 before { hookParam ->
                     hookParam.thisObject.objectHelper {
                         val objectOrNullAs = getObjectOrNullAs<Int>("API_VERSION")
-                        if (objectOrNullAs.isNull() || objectOrNullAs!! != BuildConfig.API_VERSION) {
+                        if (objectOrNullAs.isNotNull() || objectOrNullAs!! == BuildConfig.API_VERSION) {
                             clazz.methodFinder().first { name == "hasEnable" }.createHook { returnConstant(true) }
                             clazz.methodFinder().filterByParamCount(7).first { name == "sendLyric" }.createHook {
                                 after { hookParam ->
