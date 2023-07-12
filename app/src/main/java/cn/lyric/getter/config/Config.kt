@@ -20,22 +20,6 @@ class Config {
     }
 
 
-    fun getString(key: String, def: String = ""): String {
-        return config.opt(key, def)
-    }
-
-    fun getBoolean(key: String, def: Boolean = false): Boolean {
-        return config.opt(key, def)
-    }
-
-    fun getInt(key: String, def: Int = 0): Int {
-        return config.opt(key, def)
-    }
-
-
-    fun setValue(key: String, value: Any) {
-        config.put(key, value)
-    }
 
 
     fun clear() {

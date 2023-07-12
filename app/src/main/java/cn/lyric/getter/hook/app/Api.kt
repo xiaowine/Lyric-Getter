@@ -27,7 +27,7 @@ object Api : BaseHook() {
                 before { hookParam ->
                     hookParam.thisObject.objectHelper {
                         val objectOrNullAs = getObjectOrNullAs<Int>("API_VERSION")
-                        if (objectOrNullAs.isNull() || objectOrNullAs!! != BuildConfig.API_VERSION){
+                        if (objectOrNullAs.isNull() || objectOrNullAs!! != BuildConfig.API_VERSION) {
                             clazz.methodFinder().first { name == "hasEnable" }.createHook { returnConstant(true) }
                             clazz.methodFinder().filterByParamCount(7).first { name == "sendLyric" }.createHook {
                                 after { hookParam ->
@@ -39,6 +39,8 @@ object Api : BaseHook() {
                                     cleanLyric(hookParam.args[0] as Context)
                                 }
                             }
+                        } else {
+                            Log.d("The APIs do not match")
                         }
                     }
                 }

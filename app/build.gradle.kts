@@ -58,7 +58,7 @@ android {
     applicationVariants.all {
         outputs.all {
             (this as BaseVariantOutputImpl).outputFileName =
-                "Lyrics Getter-$versionName($versionCode)-$name-$buildTime.apk"
+                "Lyrics Getter-$versionName-($versionCode)-$name-$buildTime.apk"
         }
     }
 }
