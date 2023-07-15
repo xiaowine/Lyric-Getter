@@ -3,7 +3,6 @@
     <array name="need_module">
         <item>com.android.systemui</item>
         <item>cn.lyric.getter.api.demo</item>
-        <!--        <item>android</item>-->
         <item>com.miui.player</item>
         <item>com.netease.cloudmusic</item>
         <item>com.salt.music</item>
@@ -21,6 +20,7 @@
         <item>com.kyant.vanilla</item>
         <item>player.phonograph.plus</item>
         <item>com.lalilu.lmusic</item>
-
+        <item>com.xuncorp.suvine.music</item>
+        <item>com.caij.puremusic</item>
     </array>
 </resources>
