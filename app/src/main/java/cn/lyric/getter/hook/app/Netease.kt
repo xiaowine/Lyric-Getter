@@ -31,7 +31,7 @@ object Netease : BaseHook() {
     override val name: String get() = this.javaClass.simpleName
 
     override fun init() {
-        MockFlyme()
+        MockFlyme().mock()
         fuckTinker()
         HookTools.getApplication {
             context = it

@@ -22,15 +22,19 @@ import java.lang.reflect.Method
 object HookTools {
     val context: Application by lazy { AndroidAppHelper.currentApplication() }
     fun isQQLite(classLoader: ClassLoader? = null, callback: () -> Unit): Boolean {
-        return loadClassOrNull("com.tencent.qqmusic.core.song.SongInfo", classLoader).isNotNull {
+        loadClassOrNull("com.tencent.qqmusic.core.song.SongInfo", classLoader).isNotNull {
             callback()
-        }.isNotNull()
+            return true
+        }
+        return false
     }
 
     fun isApi(classLoader: ClassLoader? = null, callback: (Class<*>) -> Unit): Boolean {
-        return loadClassOrNull("cn.lyric.getter.api.tools.EventTools", classLoader).isNotNull {
+        loadClassOrNull("cn.lyric.getter.api.tools.EventTools", classLoader).isNotNull {
             callback(it)
-        }.isNotNull()
+            return true
+        }
+        return false
     }
 
     fun mediaMetadataCompatLyric(context: Context? = null, classLoader: ClassLoader? = null) {
@@ -86,8 +90,7 @@ object HookTools {
 
 
     class MockFlyme(private val classLoader: ClassLoader? = null) {
-
-        init {
+        fun mock(): MockFlyme {
             loadClass("android.os.SystemProperties", classLoader).methodFinder().first { name == "get" }.createHook {
                 after {
                     setStaticObject(Build::class.java, "BRAND", "meizu")
@@ -101,10 +104,10 @@ object HookTools {
             }
             Class::class.java.methodFinder().first { name == "getField" }.replaceName()
             Class::class.java.methodFinder().first { name == "getDeclaredField" }.replaceName()
-
+            return this
         }
 
-        fun notificationLyric() {
+        fun notificationLyric(): MockFlyme {
             loadClass("android.app.NotificationManager", classLoader).methodFinder().first { name == "notify" }.createHook {
                 after {
                     val notification = it.args[1] as Notification
@@ -122,6 +125,7 @@ object HookTools {
                     }
                 }
             }
+            return this
         }
 
         private fun Method.replaceName() {
