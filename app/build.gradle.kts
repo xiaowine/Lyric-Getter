@@ -13,8 +13,8 @@ android {
         applicationId = "cn.lyric.getter"
         minSdk = 26
         targetSdk = 34
-        versionCode = 4
-        versionName = "1.0.2.$apiVersion"
+        versionCode = 5
+        versionName = "1.0.3.$apiVersion"
 
         buildConfigField("String", "BUILD_TIME", "\"$buildTime\"")
         buildConfigField("int", "API_VERSION", "$apiVersion")
