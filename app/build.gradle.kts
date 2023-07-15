@@ -8,12 +8,12 @@ plugins {
 android {
     compileSdk = 34
     val buildTime = System.currentTimeMillis()
-    val apiVersion = 3
+    val apiVersion = 4
     defaultConfig {
         applicationId = "cn.lyric.getter"
         minSdk = 26
         targetSdk = 34
-        versionCode = 3
+        versionCode = 4
         versionName = "1.0.2.$apiVersion"
 
         buildConfigField("String", "BUILD_TIME", "\"$buildTime\"")
