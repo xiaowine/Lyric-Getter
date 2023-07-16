@@ -1,6 +1,5 @@
 package cn.lyric.getter.hook
 
-import cn.lyric.getter.hook.app.Salt
 import cn.lyric.getter.hook.app.APlayer
 import cn.lyric.getter.hook.app.Api
 import cn.lyric.getter.hook.app.Apple
@@ -44,7 +43,6 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit /* Optional */ {
             "cn.toside.music.mobile" -> initHooks(Toside)
             "com.apple.android.music" -> initHooks(Apple)
             "com.luna.music" -> initHooks(Luna)
-            "com.salt.music" -> initHooks(Salt)
             else -> initHooks(Api)
         }
     }
