@@ -12,7 +12,6 @@ import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
 import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.Log
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
 import com.github.kyuubiran.ezxhelper.paramTypes
 import io.luckypray.dexkit.DexKitBridge
@@ -45,7 +44,6 @@ object Netease : BaseHook() {
                             methodReturnType = "void"
                             paramTypes(Context::class.java)
                         }
-                        Log.i(result.size.toString())
                         result.forEach { res ->
                             IntentFilter()
                             loadClass(res.declaringClassName).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {

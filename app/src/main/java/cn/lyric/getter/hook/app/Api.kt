@@ -6,10 +6,10 @@ import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools.cleanLyric
 import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.tool.HookTools.isApi
+import cn.lyric.getter.tool.LogTools.log
 import cn.lyric.getter.tool.Tools.isNot
 import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.Log
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.ConstructorFinder.`-Static`.constructorFinder
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
@@ -40,14 +40,14 @@ object Api : BaseHook() {
                                 }
                             }
                         } else {
-                            Log.d("The APIs do not match")
+                            "The APIs do not match".log()
                         }
                     }
                 }
             }
 
         }.isNot {
-            Log.d("Not found")
+            "Not found Api class".log()
         }
     }
 }

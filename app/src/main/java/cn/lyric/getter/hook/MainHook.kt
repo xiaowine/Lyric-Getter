@@ -14,21 +14,16 @@ import cn.lyric.getter.hook.app.QQMusic
 import cn.lyric.getter.hook.app.RPlayer
 import cn.lyric.getter.hook.app.SystemUi
 import cn.lyric.getter.hook.app.Toside
-import cn.lyric.getter.tool.Tools.TAG
+import cn.lyric.getter.tool.LogTools.log
 import com.github.kyuubiran.ezxhelper.EzXHelper
-import com.github.kyuubiran.ezxhelper.Log
-import com.github.kyuubiran.ezxhelper.LogExtensions.logexIfThrow
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.IXposedHookZygoteInit
 import de.robv.android.xposed.callbacks.XC_LoadPackage
 
 
-class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit /* Optional */ {
+class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
-
         EzXHelper.initHandleLoadPackage(lpparam)
-        EzXHelper.setLogTag(TAG)
-        EzXHelper.setToastTag(TAG)
         when (lpparam.packageName) {
             "com.android.systemui" -> initHooks(SystemUi)
             "com.tencent.qqmusic" -> initHooks(QQMusic)
@@ -57,8 +52,10 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit /* Optional */ {
                 if (it.isInit) return@forEach
                 it.init()
                 it.isInit = true
-                Log.i("Inited hook: ${it.javaClass.name}")
-            }.logexIfThrow("Failed init hook: ${it.javaClass.name}")
+                "Inited hook: ${it.javaClass.name}".log()
+            }.exceptionOrNull()?.let {
+                "Init hook ${it.message} failed".log()
+            }
         }
     }
 }

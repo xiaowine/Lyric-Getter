@@ -12,8 +12,6 @@ import de.robv.android.xposed.XSharedPreferences
 
 
 object Tools {
-    const val TAG = "Lyrics Getter"
-
 
     fun getPref(key: String?): XSharedPreferences? {
         val pref = XSharedPreferences(BuildConfig.APPLICATION_ID, key)
@@ -25,11 +23,6 @@ object Tools {
         return context.createDeviceProtectedStorageContext().getSharedPreferences(key, Context.MODE_WORLD_READABLE)
     }
 
-    fun catchNoClass(callback: () -> Unit) {
-        runCatching { callback() }.exceptionOrNull().let {
-            Log.i("${callback.javaClass.name}错误")
-        }
-    }
 
     inline fun <T> T?.isNotNull(callback: (T) -> Unit): Boolean {
         if (this != null) {

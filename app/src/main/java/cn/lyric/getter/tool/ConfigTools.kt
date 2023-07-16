@@ -3,6 +3,7 @@ package cn.lyric.getter.tool
 
 import android.content.SharedPreferences
 import cn.lyric.getter.config.Config
+import cn.lyric.getter.tool.LogTools.TAG
 import cn.lyric.getter.tool.Tools.isNull
 import de.robv.android.xposed.XSharedPreferences
 
@@ -11,7 +12,7 @@ class ConfigTools {
     private var mSP: SharedPreferences? = null
     private var mSPEditor: SharedPreferences.Editor? = null
 
-    private val configName = "${Tools.TAG}_Config"
+    private val configName = "${TAG}_Config"
     val xConfig: Config by lazy { Config(Tools.getPref(configName)) }
 
     constructor(xSharedPreferences: XSharedPreferences?) {
