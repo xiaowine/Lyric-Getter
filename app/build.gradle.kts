@@ -1,9 +1,14 @@
 import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
     id("com.android.application")
     id("kotlin-android")
 }
+
+val localProperties = Properties()
+if (rootProject.file("local.properties").canRead())
+    localProperties.load(rootProject.file("local.properties").inputStream())
 
 android {
     compileSdk = 34
@@ -19,8 +24,20 @@ android {
         buildConfigField("String", "BUILD_TIME", "\"$buildTime\"")
         buildConfigField("int", "API_VERSION", "$apiVersion")
     }
-
+    val config = localProperties.getProperty("androidStoreFile")?.let {
+        signingConfigs.create("config") {
+            storeFile = file(it)
+            storePassword = localProperties.getProperty("androidStorePassword")
+            keyAlias = localProperties.getProperty("androidKeyAlias")
+            keyPassword = localProperties.getProperty("androidKeyPassword")
+            enableV3Signing = true
+            enableV4Signing = true
+        }
+    }
     buildTypes {
+        all {
+            signingConfig = config ?: signingConfigs["debug"]
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true
@@ -52,7 +69,7 @@ android {
         }
     }
     buildFeatures {
-        viewBinding = true
+        buildConfig = true
     }
     namespace = "cn.lyric.getter"
     applicationVariants.all {
@@ -67,8 +84,6 @@ android {
 dependencies {
     implementation("com.github.kyuubiran:EzXHelper:2.0.6")
     implementation("org.luckypray:DexKit:1.1.8")
-    implementation(project(mapOf("path" to ":LyricGetterApi")))
-//    为啥ci会找不到呢？被迫手动导入jar
+    implementation(rootProject.project(":LyricGetterApi"))
     compileOnly("de.robv.android.xposed:api:82")
-//    compileOnly(files("libs/api-82.jar"))
 }
