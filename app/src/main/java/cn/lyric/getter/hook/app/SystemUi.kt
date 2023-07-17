@@ -1,84 +1,64 @@
 package cn.lyric.getter.hook.app
 
 
-import android.app.Notification
-import android.service.notification.StatusBarNotification
+import android.media.session.PlaybackState
+import cn.lyric.getter.BuildConfig
+import cn.lyric.getter.api.tools.Tools
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
-import cn.lyric.getter.tool.Tools.isNot
+import cn.lyric.getter.tool.HookTools.getApplication
 import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
-import com.github.kyuubiran.ezxhelper.finders.ConstructorFinder.`-Static`.constructorFinder
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
 
 
 object SystemUi : BaseHook() {
 
-    private var lastStats: Boolean = false
+    private var useOwnMusicController: Boolean = false
     override val name: String get() = this.javaClass.simpleName
-    private fun removePlayer(it: Class<*>) {
-        it.methodFinder().first { name == "removePlayer" }.createHook {
-            after {
-                EventTools.cleanLyric(context)
+
+    private fun onPlaybackStateChanged(it: Class<*>) {
+        it.methodFinder().filterByName("onPlaybackStateChanged").first().createHook {
+            after { hookParam ->
+                val playbackState = hookParam.args[0] as PlaybackState
+                if (playbackState.state == 2) if (!useOwnMusicController) EventTools.cleanLyric(context)
             }
         }
     }
 
-    private fun isPlaying(it: Class<*>) {
-        it.constructorFinder().first().createHook {
-            after { hookParam ->
-                hookParam.thisObject.objectHelper {
-                    val stats = getObjectOrNullAs<Boolean>("isPlaying") ?: false
-                    if (lastStats != stats) {
-                        lastStats = stats
-                        if (!stats) {
-                            EventTools.cleanLyric(context)
-                        }
-                    }
-                }
+    private fun Class<*>.hasMethod(methodName: String): Boolean {
+        val methods = declaredMethods
+        for (method in methods) {
+            if (method.name == methodName) {
+                return true
             }
         }
+        return false
     }
 
     override fun init() {
-        loadClassOrNull("com.android.systemui.media.MediaCarouselController").isNotNull {
-            removePlayer(it)
-        }.isNot {
-            loadClassOrNull("com.android.systemui.media.controls.ui.MediaCarouselController").isNotNull {
-                removePlayer(it)
-            }
-        }
-
-        loadClassOrNull("com.android.systemui.media.MediaData").isNotNull {
-            isPlaying(it)
-        }.isNot {
-            loadClassOrNull("com.android.systemui.media.controls.models.player.MediaData").isNotNull {
-                isPlaying(it)
-            }
-        }
-
-        loadClassOrNull("com.android.systemui.statusbar.notification.collection.NotifCollection").isNotNull {
-            it.methodFinder().filterByName("onNotificationRemoved").first().createHook {
-                after { hookParam ->
-                    val sbn = hookParam.args[0] as StatusBarNotification
-                    if (sbn.notification.isMediaNotification()) {
-                        EventTools.cleanLyric(context)
-                    }
+        loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager").isNotNull {
+            it.methodFinder().filterByName("clearCurrentMediaNotificationSession").first().createHook {
+                after {
+                    if (!useOwnMusicController) EventTools.cleanLyric(context)
                 }
             }
         }
-
-    }
-
-    private fun Notification.isMediaNotification(): Boolean {
-        if (extras.containsKey("android.mediaSession")) {
-            return true
-        } else if (!extras.getString(Notification.EXTRA_TEMPLATE).isNullOrEmpty()) {
-            return Notification.MediaStyle::class.java.name == extras.getString(Notification.EXTRA_TEMPLATE)
+        for (i in 0..10) {
+            val clazz = loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager$$i")
+            if (clazz.isNotNull()) {
+                if (clazz!!.hasMethod("onPlaybackStateChanged")) {
+                    onPlaybackStateChanged(clazz)
+                    break
+                }
+            }
         }
-        return false
+        getApplication {
+            Tools.receptionLyric(it, BuildConfig.VERSION_CODE) { lyricData ->
+                useOwnMusicController = lyricData.useOwnMusicController
+            }
+        }
     }
 }
