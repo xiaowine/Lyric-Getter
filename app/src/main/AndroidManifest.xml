@@ -3,51 +3,21 @@
 
     <application
         android:extractNativeLibs="false"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher">
-
-<!--        <activity-->
-<!--            android:name=".activity.SettingsActivity"-->
-<!--            android:exported="true">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN"/>-->
-<!--                <action android:name="miui.cn.fkj233.xposed.statusbarlyric.SettingsFragment"/>-->
-<!--                <action android:name="android.service.quicksettings.action.QS_TILE_PREFERENCES"/>-->
-
-<!--                <category android:name="android.intent.category.DEFAULT"/>-->
-<!--                <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS"/>-->
-<!--            </intent-filter>-->
-<!--        </activity>-->
-
-<!--        <activity-alias-->
-<!--            android:name=".launcher"-->
-<!--            android:enabled="true"-->
-<!--            android:exported="true"-->
-<!--            android:targetActivity=".activity.SettingsActivity">-->
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN"/>-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER"/>-->
-<!--            </intent-filter>-->
-<!--        </activity-alias>-->
-
+        android:label="@string/app_name">
         <meta-data
             android:name="xposeddescription"
             android:value="@string/xposed_desc" />
         <meta-data
             android:name="xposedminversion"
-            android:value="93"/>
+            android:value="93" />
         <meta-data
             android:name="xposedsharedprefs"
-            android:value="true"/>
+            android:value="true" />
         <meta-data
             android:name="xposedscope"
             android:resource="@array/need_module" />
-
         <meta-data
             android:name="Getter_Version"
             android:value="3" />
     </application>
-
 </manifest>
