@@ -4,18 +4,19 @@ import android.app.AndroidAppHelper
 import android.app.Application
 import android.app.Notification
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import cn.lyric.getter.tool.EventTools.cleanLyric
 import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.tool.Tools.isNotNull
 import cn.lyric.getter.tool.Tools.isNull
+import com.github.kyuubiran.ezxhelper.ClassLoaderProvider
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.setStaticObject
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
-import java.io.File
 import java.lang.reflect.Method
 
 
@@ -77,12 +78,15 @@ object HookTools {
 
 
     fun fuckTinker() {
-        loadClassOrNull("com.tencent.tinker.loader.app.TinkerApplication").isNotNull {
-            getApplication {
-                val app = it
-                val file = File("${app.dataDir.path}/tinker")
-                if (file.exists()) {
-                    file.deleteRecursively()
+        loadClassOrNull("com.tencent.tinker.loader.TinkerLoader").isNotNull { clazz ->
+            clazz.methodFinder().filterByName("tryLoad").first().createHook {
+                after { param ->
+                    val resultIntent = param.result as Intent
+                    val application = param.args[0] as Application
+                    val resultCode = resultIntent.getIntExtra("intent_return_code", -114514)
+                    if (resultCode == 0) {
+                        ClassLoaderProvider.classLoader = application.classLoader
+                    }
                 }
             }
         }
