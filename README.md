@@ -1,5 +1,5 @@
 ![Release Download](https://img.shields.io/github/downloads/xiaowine/Lyric-Getter/total?style=flat-square)  
-[![Release Version](https://img.shields.io/github/v/release/xiaowine/Lyric-Getter?style=flat-square)](https://github.com/xiaowine/Lyric-Getterreleases/latest)  
+[![Release Version](https://img.shields.io/github/v/release/xiaowine/Lyric-Getter?style=flat-square)](https://github.com/xiaowine/Lyric-Getter/latest)  
 [![GitHub license](https://img.shields.io/github/license/xiaowine/Lyric-Getter?style=flat-square)](LICENSE)  
 [![GitHub Star](https://img.shields.io/github/stars/xiaowine/Lyric-Getter?style=flat-square)](https://github.com/xiaowine/Lyric-Getter/stargazers)  
 [![GitHub Fork](https://img.shields.io/github/forks/xiaowine/Lyric-Getter?style=flat-square)](https://github.com/xiaowine/Lyric-Getter/network/members)  
