@@ -36,6 +36,7 @@ object Kuwo : BaseHook() {
     private var timer: Timer? = null
     private var isRunning = false
     private fun startTimer() {
+        if (isRunning) return
         timer = Timer()
         timer?.schedule(object : TimerTask() {
             override fun run() {
@@ -49,18 +50,19 @@ object Kuwo : BaseHook() {
     }
 
     private fun stopTimer() {
+        if (!isRunning) return
         timer?.cancel()
         isRunning = false
     }
 
 
     override fun init() {
-        HookTools.getApplication{
+        HookTools.getApplication {
             context = it
             loadClassOrNull("cn.kuwo.mod.playcontrol.RemoteControlLyricMgr").isNotNull { clazz ->
                 clazz.methodFinder().first { name == "updateLyricText" }.createHook {
                     after { param ->
-                        if (!isRunning) startTimer()
+                        startTimer()
                         sendLyric(context, param.args[0].toString(), context.packageName)
                     }
                 }
@@ -76,7 +78,7 @@ object Kuwo : BaseHook() {
                             if (!res.declaringClassName.contains("ui") && res.isMethod) {
                                 loadClass(res.declaringClassName).methodFinder().first { name == res.name }.createHook {
                                     after { hookParam ->
-                                        if (!isRunning) startTimer()
+                                        startTimer()
                                         sendLyric(context, hookParam.args[0].toString(), context.packageName)
                                     }
                                 }
