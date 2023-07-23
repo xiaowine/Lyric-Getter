@@ -21,8 +21,6 @@ import io.luckypray.dexkit.enums.MatchType
 @SuppressLint("StaticFieldLeak")
 object Netease : BaseHook() {
 
-    private lateinit var context: Context
-
     init {
         System.loadLibrary("dexkit")
     }
@@ -33,10 +31,9 @@ object Netease : BaseHook() {
         MockFlyme().mock()
         fuckTinker()
         HookTools.getApplication {
-            context = it
-            val verCode = context.packageManager?.getPackageInfo("com.netease.cloudmusic", 0)?.versionCode ?: 0
+            val verCode = it.packageManager?.getPackageInfo("com.netease.cloudmusic", 0)?.versionCode ?: 0
             if (verCode >= 8000041) {
-                DexKitBridge.create(context.classLoader, false).use { use ->
+                DexKitBridge.create(it.classLoader, false).use { use ->
                     use.isNotNull { bridge ->
                         val result = bridge.findMethodUsingString {
                             usingString = "StatusBarLyricController"
@@ -48,14 +45,14 @@ object Netease : BaseHook() {
                             IntentFilter()
                             loadClass(res.declaringClassName).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {
                                 after { hookParam ->
-                                    sendLyric(context, hookParam.result as String, context.packageName)
+                                    sendLyric(it, hookParam.result as String, it.packageName)
                                 }
                             }
                         }
                     }
                 }
             } else {
-                mediaMetadataCompatLyric(context = context)
+                mediaMetadataCompatLyric(it)
             }
         }
     }

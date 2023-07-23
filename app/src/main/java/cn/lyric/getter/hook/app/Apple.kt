@@ -25,6 +25,7 @@ object Apple : BaseHook() {
     private lateinit var playbackState: PlaybackState
 
     data class LyricsLine(val start: Int, val end: Int, val lyric: String)
+
     private val lyricList = LinkedList<LyricsLine>()
 
     private var oldLyric: String = ""
@@ -32,6 +33,8 @@ object Apple : BaseHook() {
 
     private var timer: Timer? = null
     private var isRunning = false
+
+    private lateinit var lyricsLineNative: Any
     private fun startTimer() {
         if (isRunning) return
         timer = Timer()
@@ -42,6 +45,7 @@ object Apple : BaseHook() {
                 lyricList.firstOrNull { it.start <= currentPosition && it.end >= currentPosition }.isNotNull {
                     val lyric = it.lyric
                     if (oldLyric == lyric) return@isNotNull
+                    oldLyric = lyric
                     EventTools.sendLyric(context, it.lyric, context.packageName)
                 }
             }
@@ -52,6 +56,7 @@ object Apple : BaseHook() {
     private fun stopTimer() {
         if (!isRunning) return
         timer?.cancel()
+        EventTools.cleanLyric(context)
         isRunning = false
     }
 
@@ -59,18 +64,32 @@ object Apple : BaseHook() {
     @SuppressLint("SwitchIntDef")
     override fun init() {
         loadClassOrNull("com.apple.android.music.ttml.javanative.model.LyricsLine\$LyricsLineNative").isNotNull {
+            it.constructorFinder().first().createHook {
+                after { hookParam ->
+                    lyricsLineNative = hookParam.thisObject
+                }
+            }
             it.methodFinder().filterByName("getHtmlLineText").first().createHook {
                 after { hookParam ->
                     val start = hookParam.thisObject.objectHelper().invokeMethodBestMatch("getBegin") as Int
                     val end = hookParam.thisObject.objectHelper().invokeMethodBestMatch("getEnd") as Int
                     val lyric = hookParam.result as String
-//                    "$start $end $lyric".log()
                     if (lyricList.isEmpty()) {
                         lyricList.add(LyricsLine(start, end, lyric))
                     } else {
                         if (lyricList.last().end < end) {
                             lyricList.add(LyricsLine(start, end, lyric))
                         }
+                    }
+                }
+            }
+        }
+
+        loadClassOrNull("com.apple.android.music.player.viewmodel.PlayerLyricsViewModel").isNotNull {
+            it.methodFinder().filterByName("buildTimeRangeToLyricsMap").first().createHook {
+                after {
+                    if (this@Apple::lyricsLineNative.isInitialized) {
+                        lyricsLineNative.objectHelper().invokeMethodBestMatch("getHtmlLineText")
                     }
                 }
             }
@@ -92,6 +111,7 @@ object Apple : BaseHook() {
                     if (oldTitle == title) return@after
                     oldTitle = title
                     lyricList.clear()
+                    EventTools.cleanLyric(context)
                 }
             }
         }
@@ -109,7 +129,6 @@ object Apple : BaseHook() {
 
                             PlaybackState.STATE_PAUSED -> {
                                 stopTimer()
-                                EventTools.cleanLyric(context)
                             }
                         }
                     }

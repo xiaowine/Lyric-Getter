@@ -77,8 +77,8 @@ object HookTools {
     }
 
 
-    fun fuckTinker() {
-        loadClassOrNull("com.tencent.tinker.loader.TinkerLoader").isNotNull { clazz ->
+    fun fuckTinker(classLoader: ClassLoader? = null) {
+        loadClassOrNull("com.tencent.tinker.loader.TinkerLoader", classLoader).isNotNull { clazz ->
             clazz.methodFinder().filterByName("tryLoad").first().createHook {
                 after { param ->
                     val resultIntent = param.result as Intent
