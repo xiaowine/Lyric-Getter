@@ -1,30 +1,49 @@
 package cn.lyric.getter.hook.app
 
 import android.annotation.SuppressLint
+import android.app.Application
+import android.content.Context
 import android.media.MediaMetadata
 import android.media.session.PlaybackState
+import android.os.Handler
+import android.os.Looper
 import android.os.Message
 import android.os.SystemClock
+import android.util.Log
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
+import cn.lyric.getter.tool.HookTools.getApplication
+import cn.lyric.getter.tool.LogTools.log
 import cn.lyric.getter.tool.Tools.isNotNull
+import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.ConstructorFinder.`-Static`.constructorFinder
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+import io.luckypray.dexkit.DexKitBridge
+import java.lang.reflect.Constructor
 import java.util.LinkedList
 import java.util.Timer
 import java.util.TimerTask
 
 
-object Apple : BaseHook() {
+object Apple : BaseHook() {  init {
+    System.loadLibrary("dexkit")
+}
+
     override val name: String get() = this.javaClass.simpleName
+
+    private lateinit var lyricConvertConstructor: Data
+
+    private lateinit var lyricReqConstructor: Constructor<*>
 
     private lateinit var playbackState: PlaybackState
 
     data class LyricsLine(val start: Int, val end: Int, val lyric: String)
+
+    data class Data(val clazz: Class<*>, val methodName: String)
 
     private val lyricList = LinkedList<LyricsLine>()
 
@@ -33,8 +52,6 @@ object Apple : BaseHook() {
 
     private var timer: Timer? = null
     private var isRunning = false
-
-    private lateinit var lyricsLineNative: Any
     private fun startTimer() {
         if (isRunning) return
         timer = Timer()
@@ -60,36 +77,33 @@ object Apple : BaseHook() {
         isRunning = false
     }
 
-
     @SuppressLint("SwitchIntDef")
     override fun init() {
-        loadClassOrNull("com.apple.android.music.ttml.javanative.model.LyricsLine\$LyricsLineNative").isNotNull {
-            it.constructorFinder().first().createHook {
-                after { hookParam ->
-                    lyricsLineNative = hookParam.thisObject
-                }
-            }
-            it.methodFinder().filterByName("getHtmlLineText").first().createHook {
-                after { hookParam ->
-                    val start = hookParam.thisObject.objectHelper().invokeMethodBestMatch("getBegin") as Int
-                    val end = hookParam.thisObject.objectHelper().invokeMethodBestMatch("getEnd") as Int
-                    val lyric = hookParam.result as String
-                    if (lyricList.isEmpty()) {
-                        lyricList.add(LyricsLine(start, end, lyric))
-                    } else {
-                        if (lyricList.last().end < end) {
-                            lyricList.add(LyricsLine(start, end, lyric))
-                        }
-                    }
-                }
-            }
-        }
-
         loadClassOrNull("com.apple.android.music.player.viewmodel.PlayerLyricsViewModel").isNotNull {
             it.methodFinder().filterByName("buildTimeRangeToLyricsMap").first().createHook {
-                after {
-                    if (this@Apple::lyricsLineNative.isInitialized) {
-                        lyricsLineNative.objectHelper().invokeMethodBestMatch("getHtmlLineText")
+                after { hookParam ->
+                    hookParam.args[0].isNotNull { any ->
+                        val curSongInfo = any.objectHelper().invokeMethodBestMatch("get")!!
+                        val lyricsSectionVector = curSongInfo.objectHelper().invokeMethodBestMatch("getSections")
+                        if (this@Apple::lyricConvertConstructor.isInitialized) {
+                            val curLyricObj = lyricConvertConstructor.clazz.getConstructor(lyricsSectionVector!!::class.java).newInstance(lyricsSectionVector)
+                            var i = 1
+                            do {
+                                var lyricsLinePtr: Any
+                                try {
+                                    lyricsLinePtr = curLyricObj.objectHelper().invokeMethodBestMatch(lyricConvertConstructor.methodName, null, i)!!
+                                } catch (_: NullPointerException) {
+                                    break
+                                }
+                                val lyricsLine = lyricsLinePtr.objectHelper().invokeMethodBestMatch("get")!!
+                                val lyric = lyricsLine.objectHelper().invokeMethodBestMatch("getHtmlLineText") as String
+                                val start = lyricsLine.objectHelper().invokeMethodBestMatch("getBegin") as Int
+                                val end = lyricsLine.objectHelper().invokeMethodBestMatch("getEnd") as Int
+                                "lyric:$lyric start:$start end:$end".log()
+                                lyricList.add(LyricsLine(start, end, lyric))
+                                i += 1
+                            } while (true)
+                        }
                     }
                 }
             }
@@ -131,6 +145,57 @@ object Apple : BaseHook() {
                                 stopTimer()
                             }
                         }
+                    }
+                }
+            }
+        }
+
+        getApplication {
+            DexKitBridge.create(it.classLoader, false).use { dexKitBridge ->
+                dexKitBridge.isNotNull { bridge ->
+                    val result = bridge.findMethodCaller {
+                        methodReturnType = "LyricsSection\$LyricsSectionNative"
+                        methodDeclareClass = "com.apple.android.music.ttml.javanative.model.LyricsSection\$LyricsSectionPtr"
+                    }
+                    result.forEach { (key, _) ->
+                        if (!key.declaringClassName.contains("apple") && key.isMethod) {
+                            if (key.returnTypeSig == "Lcom/apple/android/music/ttml/javanative/model/LyricsLine\$LyricsLinePtr;") {
+                                lyricConvertConstructor = Data(loadClass(key.declaringClassName), key.name)
+                                return@forEach
+                            }
+                        }
+                    }
+                }
+            }
+            DexKitBridge.create(it.classLoader, false).use { dexKitBridge ->
+                dexKitBridge.isNotNull { bridge ->
+                    val result = bridge.findMethodCaller {
+                        methodName = "get"
+                        methodDeclareClass = "com.apple.android.music.ttml.javanative.model.SongInfo\$SongInfoPtr"
+                    }
+                    result.forEach { (key, _) ->
+                        if (!key.declaringClassName.contains("apple") && key.isMethod && key.name == "call") {
+                            val callBackClass = loadClass(key.declaringClassName)
+                            lyricReqConstructor = callBackClass.enclosingClass.getConstructor(Context::class.java, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, loadClass("com.apple.android.mediaservices.javanative.common.StringVector\$StringVectorNative"), Boolean::class.javaPrimitiveType)
+                            return@forEach
+                        }
+                    }
+                }
+            }
+        }
+
+        val playbackItemClass = loadClass("com.apple.android.music.model.PlaybackItem")
+
+        val playerLyricsViewModelClass = loadClass("com.apple.android.music.player.viewmodel.PlayerLyricsViewModel")
+
+        loadClassOrNull("com.apple.android.music.model.BaseContentItem").isNotNull {
+            it.methodFinder().filterByName("setId").first().createHook {
+                after { hookParam ->
+                    val trace = Log.getStackTraceString(Exception())
+                    if (playbackItemClass.isInstance(hookParam.thisObject) && trace.contains("getItemAtIndex") && (trace.contains("i7.u.accept") || trace.contains("e3.h.w") || trace.contains("k7.t.accept"))) {
+                        Handler(Looper.getMainLooper()).postDelayed({
+                            playerLyricsViewModelClass.getConstructor(Application::class.java).newInstance(context).objectHelper().invokeMethodBestMatch("loadLyrics", null, hookParam.thisObject)
+                        }, 400)
                     }
                 }
             }
