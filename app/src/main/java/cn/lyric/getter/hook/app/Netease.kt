@@ -45,7 +45,7 @@ object Netease : BaseHook() {
                             IntentFilter()
                             loadClass(res.declaringClassName).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {
                                 after { hookParam ->
-                                    sendLyric(it, hookParam.result as String, it.packageName)
+                                    sendLyric(it, hookParam.result as String)
                                 }
                             }
                         }

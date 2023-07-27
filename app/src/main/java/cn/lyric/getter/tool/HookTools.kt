@@ -44,7 +44,7 @@ object HookTools {
                 after { hookParam ->
                     if (hookParam.args[0].toString() == "android.media.metadata.TITLE") {
                         hookParam.args[1].isNotNull {
-                            sendLyric(context ?: this@HookTools.context, hookParam.args[1] as String, (context ?: this@HookTools.context).packageName)
+                            sendLyric(context ?: this@HookTools.context, hookParam.args[1] as String)
                         }
                     }
                 }
@@ -123,7 +123,7 @@ object HookTools {
                         }
                     } else {
                         it.thisObject.objectHelper {
-                            sendLyric(context, charSequence.toString(), getObjectOrNullAs<Context>("mContext")?.packageName ?: "")
+                            sendLyric(context, charSequence.toString())
                         }
 
                     }
@@ -153,7 +153,7 @@ object HookTools {
             remoteControlManager.methodFinder().first { name == "updataMetaData" }.createHook {
                 before {
                     val lyric = if (it.args[1].isNull()) return@before else it.args[1].toString()
-                    sendLyric(context, lyric, context.packageName)
+                    sendLyric(context, lyric)
                 }
             }
         }

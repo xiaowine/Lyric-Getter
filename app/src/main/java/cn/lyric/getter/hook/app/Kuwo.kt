@@ -63,7 +63,7 @@ object Kuwo : BaseHook() {
                 clazz.methodFinder().first { name == "updateLyricText" }.createHook {
                     after { param ->
                         startTimer()
-                        sendLyric(context, param.args[0].toString(), context.packageName)
+                        sendLyric(context, param.args[0].toString())
                     }
                 }
             }.isNot {
@@ -79,7 +79,7 @@ object Kuwo : BaseHook() {
                                 loadClass(res.declaringClassName).methodFinder().first { name == res.name }.createHook {
                                     after { hookParam ->
                                         startTimer()
-                                        sendLyric(context, hookParam.args[0].toString(), context.packageName)
+                                        sendLyric(context, hookParam.args[0].toString())
                                     }
                                 }
                                 HookTools.openBluetoothA2dpOn()

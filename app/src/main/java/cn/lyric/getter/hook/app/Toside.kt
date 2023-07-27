@@ -24,7 +24,7 @@ object Toside : BaseHook() {
             lyricMethod.createHook {
                 after {
                     val lyric = it.args[0] as String
-                    sendLyric(context, lyric, "cn.toside.music.mobile")
+                    sendLyric(context, lyric)
                 }
             }
 

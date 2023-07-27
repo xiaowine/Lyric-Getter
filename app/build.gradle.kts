@@ -13,7 +13,7 @@ if (rootProject.file("local.properties").canRead())
 android {
     compileSdk = 34
     val buildTime = System.currentTimeMillis()
-    val apiVersion = 4
+    val apiVersion = 5
     defaultConfig {
         applicationId = "cn.lyric.getter"
         minSdk = 26
