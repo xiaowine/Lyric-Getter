@@ -14,6 +14,7 @@ import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.HookTools.getApplication
+import cn.lyric.getter.tool.LogTools.log
 import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
@@ -98,7 +99,11 @@ object Apple : BaseHook() {  init {
                                 val lyric = lyricsLine.objectHelper().invokeMethodBestMatch("getHtmlLineText") as String
                                 val start = lyricsLine.objectHelper().invokeMethodBestMatch("getBegin") as Int
                                 val end = lyricsLine.objectHelper().invokeMethodBestMatch("getEnd") as Int
+                                if (lyricList.isNotEmpty() && lyricList.last().end > start) {
+                                    lyricList.clear()
+                                }
                                 lyricList.add(LyricsLine(start, end, lyric))
+                                "Lyric: $lyric".log()
                                 i += 1
                             } while (true)
                         }
