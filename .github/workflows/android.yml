@@ -69,7 +69,7 @@ jobs:
       - name: Upload Release Mapping
         uses: actions/upload-artifact@v3
         with:
-          name: StatusBarLyric_release_mapping
+          name: Lyric Getter mapping
           path: ./app/build/outputs/mapping/release/mapping.txt
 
       - name: Post to channel
