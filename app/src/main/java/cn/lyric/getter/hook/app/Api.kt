@@ -31,7 +31,7 @@ object Api : BaseHook() {
                             clazz.methodFinder().first { name == "hasEnable" }.createHook { returnConstant(true) }
                             clazz.methodFinder().filterByParamCount(8).first { name == "sendLyric" }.createHook {
                                 after { hookParam ->
-                                    sendLyric(hookParam.args[0] as Context, hookParam.args[1] as String, hookParam.args[2] as Boolean, hookParam.args[3] as String, hookParam.args[4] as Boolean, hookParam.args[5] as String, hookParam.args[6] as String, 0)
+                                    sendLyric(hookParam.args[0] as Context, hookParam.args[1] as String, hookParam.args[2] as Boolean, hookParam.args[3] as String, hookParam.args[4] as Boolean, hookParam.args[5] as String, hookParam.args[6] as String,hookParam.args[7] as Int)
                                 }
                             }
                             clazz.methodFinder().first { name == "stopLyric" }.createHook {
