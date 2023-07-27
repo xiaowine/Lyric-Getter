@@ -29,7 +29,7 @@ object Api : BaseHook() {
                         val objectOrNullAs = getObjectOrNullAs<Int>("API_VERSION")
                         if (objectOrNullAs.isNotNull() || objectOrNullAs!! == BuildConfig.API_VERSION) {
                             clazz.methodFinder().first { name == "hasEnable" }.createHook { returnConstant(true) }
-                            clazz.methodFinder().filterByParamCount(7).first { name == "sendLyric" }.createHook {
+                            clazz.methodFinder().filterByParamCount(8).first { name == "sendLyric" }.createHook {
                                 after { hookParam ->
                                     sendLyric(hookParam.args[0] as Context, hookParam.args[1] as String, hookParam.args[2] as Boolean, hookParam.args[3] as String, hookParam.args[4] as Boolean, hookParam.args[5] as String, hookParam.args[6] as String, 0)
                                 }
