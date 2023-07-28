@@ -8,6 +8,8 @@ import cn.lyric.getter.tool.EventTools.cleanLyric
 import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.HookTools.getApplication
+import cn.lyric.getter.tool.HookTools.lockNotStopLyric
+import cn.lyric.getter.tool.LogTools.log
 import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
@@ -27,28 +29,7 @@ object Toside : BaseHook() {
         val lyricModuleClass = loadClassOrNull("cn.toside.music.mobile.lyric.LyricModule")
         lyricModuleClass.isNotNull { clazz ->
             getApplication {
-                DexKitBridge.create(it.classLoader, false).use { dexKitBridge ->
-                    dexKitBridge.isNotNull { bridge ->
-                        val result = bridge.findMethodUsingString {
-                            usingString = "ACTION_SCREEN_OFF"
-                            matchType = MatchType.FULL
-                            methodReturnType = "void"
-                        }
-                        result.forEach { descriptor ->
-                            if (descriptor.name == "onReceive") {
-                                loadClass(result[0].declaringClassName).methodFinder().filterByName(result[0].name).first().createHook {
-                                    before { hookParam ->
-                                        val intent = hookParam.args[1] as Intent
-                                        if (intent.action == Intent.ACTION_SCREEN_OFF) {
-                                            hookParam.result = null
-                                        }
-                                    }
-                                }
-                                return@forEach
-                            }
-                        }
-                    }
-                }
+                lockNotStopLyric(it.classLoader, arrayListOf("MusicModule"))
             }
             clazz.methodFinder().filterByName("pause").first().createHook {
                 after {

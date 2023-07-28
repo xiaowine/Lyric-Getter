@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.Build
 import cn.lyric.getter.tool.EventTools.cleanLyric
 import cn.lyric.getter.tool.EventTools.sendLyric
+import cn.lyric.getter.tool.LogTools.log
 import cn.lyric.getter.tool.Tools.isNotNull
 import cn.lyric.getter.tool.Tools.isNull
 import com.github.kyuubiran.ezxhelper.ClassLoaderProvider
@@ -17,6 +18,8 @@ import com.github.kyuubiran.ezxhelper.ClassUtils.setStaticObject
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+import io.luckypray.dexkit.DexKitBridge
+import io.luckypray.dexkit.enums.MatchType
 import java.lang.reflect.Method
 
 
@@ -76,6 +79,32 @@ object HookTools {
         }
     }
 
+    fun lockNotStopLyric(classLoader: ClassLoader, fileFilter: ArrayList<String>? = null) {
+        DexKitBridge.create(classLoader, true).use { dexKitBridge ->
+            dexKitBridge.isNotNull { bridge ->
+                val result = bridge.findMethodUsingString {
+                    usingString = "android.intent.action.SCREEN_OFF"
+                    matchType = MatchType.FULL
+                    methodReturnType = "void"
+                    methodName = "onReceive"
+                }
+                result.forEach { descriptor ->
+                    val className = descriptor.declaringClassName
+                    if (!className.contains("Fragment") && !className.contains("Activity") && fileFilter?.none { className.contains(it) } != false) {
+                        "lockNotStopLyric:${className}".log()
+                        loadClass(className).methodFinder().filterByName("onReceive").first().createHook {
+                            before { hookParam ->
+                                val intent = hookParam.args[1] as Intent
+                                if (intent.action == Intent.ACTION_SCREEN_OFF) {
+                                    hookParam.result = null
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     fun fuckTinker(classLoader: ClassLoader? = null) {
         loadClassOrNull("com.tencent.tinker.loader.TinkerLoader", classLoader).isNotNull { clazz ->
