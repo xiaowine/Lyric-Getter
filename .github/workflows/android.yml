@@ -43,10 +43,11 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          echo 'org.gradle.parallel=true' >> gradle.properties
-          echo 'org.gradle.jvmargs=-Xmx4g' >> gradle.properties
+          echo '\norg.gradle.parallel=true' >> gradle.properties
+          echo '\norg.gradle.jvmargs=-Xmx4g' >> gradle.properties
           ./gradlew assemble
           ./gradlew bundleRelease
+
 
       - name: Upload Release APK
         uses: actions/upload-artifact@v3
