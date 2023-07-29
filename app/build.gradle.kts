@@ -2,8 +2,8 @@ import com.android.build.gradle.internal.api.BaseVariantOutputImpl
 import org.jetbrains.kotlin.konan.properties.Properties
 
 plugins {
-    id("com.android.application")
-    id("kotlin-android")
+    alias(libs.plugins.androidApplication)
+    alias(libs.plugins.kotlinAndroid)
 }
 
 val localProperties = Properties()
@@ -13,16 +13,15 @@ if (rootProject.file("local.properties").canRead())
 android {
     compileSdk = 34
     val buildTime = System.currentTimeMillis()
-    val apiVersion = 5
     defaultConfig {
         applicationId = "cn.lyric.getter"
         minSdk = 26
         targetSdk = 34
         versionCode = 7
-        versionName = "1.0.5.$apiVersion"
-
-        buildConfigField("String", "BUILD_TIME", "\"$buildTime\"")
-        buildConfigField("int", "API_VERSION", "$apiVersion")
+        versionName = "1.0.5"
+        buildConfigField("long", "BUILD_TIME", "$buildTime")
+        buildConfigField("int", "API_VERSION", "5")
+        buildConfigField("int", "CONFIG_VERSION", "1")
     }
     val config = localProperties.getProperty("androidStoreFile")?.let {
         signingConfigs.create("config") {
@@ -69,8 +68,10 @@ android {
         }
     }
     buildFeatures {
+        viewBinding = true
         buildConfig = true
     }
+
     namespace = "cn.lyric.getter"
     applicationVariants.all {
         outputs.all {
@@ -82,8 +83,21 @@ android {
 
 
 dependencies {
-    implementation("com.github.kyuubiran:EzXHelper:2.0.6")
-    implementation("org.luckypray:DexKit:1.1.8")
+    implementation(libs.ezXHelper)
+    implementation(libs.dexkit)
     implementation(rootProject.project(":LyricGetterApi"))
-    compileOnly("de.robv.android.xposed:api:82")
+    compileOnly(libs.xposed.api)
+
+
+    implementation(libs.core.ktx)
+    implementation(libs.material)
+//    implementation(libs.constraintlayout)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
+    implementation(libs.rikkax.widget.borderview)
+    implementation(libs.rikkax.material.preference)
+    implementation(libs.preference)
+    configurations.all {
+        exclude("androidx.appcompat", "appcompat")
+    }
 }

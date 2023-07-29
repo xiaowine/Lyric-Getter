@@ -1,0 +1,33 @@
+[versions]
+agp = "8.1.0"
+kotlin = "1.9.0"
+core-ktx = "1.10.1"
+appcompat = "1.6.1"
+material = "1.9.0"
+constraintlayout = "2.1.4"
+navigation-fragment-ktx = "2.6.0"
+navigation-ui-ktx = "2.6.0"
+rikkax-borderview = "1.1.0"
+rikkax-material-preference = "2.0.0"
+preference = "1.2.1"
+ezXHelper = "2.0.6"
+dexKit = "1.1.8"
+xposed = "82"
+
+[libraries]
+core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }
+navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation-ui-ktx" }
+rikkax-widget-borderview = { group = "dev.rikka.rikkax.widget", name = "borderview", version.ref = "rikkax-borderview" }
+rikkax-material-preference = { group = "dev.rikka.rikkax.material", name = "material-preference", version.ref = "rikkax-material-preference" }
+preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
+ezXHelper = { group = "com.github.kyuubiran", name = "EzXHelper", version.ref = "ezXHelper" }
+dexkit = { group = "org.luckypray", name = "DexKit", version.ref = "dexKit" }
+xposed-api = { group = "de.robv.android.xposed", name = "api", version.ref = "xposed" }
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+
