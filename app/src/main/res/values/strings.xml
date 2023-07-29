@@ -1,4 +1,18 @@
 <resources>
     <string name="app_name">Lyrics Getter</string>
     <string name="xposed_desc">Lyrics Getter</string>
+    <string name="home_fragment_label">主页</string>
+    <string name="version_name_label">模块版本</string>
+    <string name="version_code_label">模块版本号</string>
+    <string name="version_type_label">模块发行版本</string>
+    <string name="settings_fragment_label">设置</string>
+    <string name="activated">已激活</string>
+    <string name="unactivated">未激活</string>
+    <string name="build_time_label">编译时间</string>
+    <string name="unactivated_summary">点此重启软件</string>
+    <string name="welcome">欢迎使用</string>
+    <string name="restart_the_scoped_software">重启作用域软件</string>
+    <string name="restart">重启</string>
+    <string name="api_version_label">API版本</string>
+    <string name="config_version_label">配置文件版本</string>
 </resources>

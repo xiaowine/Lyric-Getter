@@ -1,11 +1,12 @@
 package cn.lyric.getter.config
 
 import android.content.SharedPreferences
-import cn.lyric.getter.tool.ConfigTools
 import de.robv.android.xposed.XSharedPreferences
+import cn.lyric.getter.tool.ConfigTools
+
 
 class Config {
-    private var config: ConfigTools
+    var config: ConfigTools
 
     constructor(xSharedPreferences: XSharedPreferences?) {
         config = ConfigTools(xSharedPreferences)
@@ -16,22 +17,11 @@ class Config {
     }
 
     fun update() {
-        config.update()
+        config.reload()
     }
-
-
 
 
     fun clear() {
         config.clearConfig()
     }
-
-    var mainSwitch: Boolean
-        get() {
-            return config.opt("mainSwitch", false)
-        }
-        set(value) {
-            config.put("mainSwitch", value)
-        }
-
 }
