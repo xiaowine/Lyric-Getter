@@ -43,8 +43,6 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          echo '\norg.gradle.parallel=true' >> gradle.properties
-          echo '\norg.gradle.jvmargs=-Xmx4g' >> gradle.properties
           ./gradlew assemble
           ./gradlew bundleRelease
 
