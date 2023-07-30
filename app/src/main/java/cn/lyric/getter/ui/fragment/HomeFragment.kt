@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
@@ -44,21 +45,9 @@ class HomeFragment : Fragment() {
                 }
                 floatingActionButton.visibility = View.GONE
             } else {
-                var clickable = true
                 floatingActionButton.setOnClickListener { view ->
-                    if (!clickable) return@setOnClickListener
                     Snackbar.make(view, getString(R.string.restart_the_scoped_software), Snackbar.LENGTH_LONG).apply {
-                        addCallback(object : Snackbar.Callback() {
-                            override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                                super.onDismissed(transientBottomBar, event)
-                                clickable = true
-                            }
-
-                            override fun onShown(sb: Snackbar?) {
-                                super.onShown(sb)
-                                clickable = false
-                            }
-                        })
+                        anchorView = view
                         setAction(getString(R.string.restart)) {
                             restartTheScopedSoftware(context)
                         }

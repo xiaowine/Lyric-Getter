@@ -1,12 +1,12 @@
 package cn.lyric.getter
 
 
+
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import cn.lyric.getter.config.ActivityOwnSP
 import cn.lyric.getter.databinding.ActivityMainBinding
@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
                         navController = findNavController(R.id.nav_host_fragment)
                     }
                     runCatching {
-                        val navController = Navigation.findNavController(this@MainActivity, R.id.nav_host_fragment)
                         val navGraph = navController.navInflater.inflate(R.navigation.nav_graph)
                         navController.setGraph(navGraph, Bundle())
                         when (it.itemId) {
@@ -50,6 +49,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         setContentView(binding.root)
+    }
+    override fun onSupportNavigateUp(): Boolean {
+        if (!this@MainActivity::navController.isInitialized) {
+            navController = findNavController(R.id.nav_host_fragment)
+        }
+        return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
     private fun checkLSPosed(): Boolean {
