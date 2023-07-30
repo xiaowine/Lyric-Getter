@@ -1,9 +1,11 @@
 <resources>
 
-    <style name="Theme.MyApplication" parent="Theme.Material3.DynamicColors.DayNight">
-        <item name="android:windowTranslucentStatus">true</item>
+    <style name="Theme.MyApplication" parent="Theme.Material3.DynamicColors.Light">
+        <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:windowLightStatusBar">true</item>
+        <item name="colorPrimaryVariant">@color/primary_dark_light_light_status_bar</item>
+        <item name="android:statusBarColor">?android:colorBackground</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="preferenceTheme">@style/PreferenceThemeOverlay.Rikka.Material3</item>
