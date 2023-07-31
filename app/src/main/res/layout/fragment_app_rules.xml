@@ -38,13 +38,33 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             tools:ignore="UselessParent">
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/materialTextView"
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Widget.Material3.CardView.Elevated"
+                android:id="@+id/card"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="未知:则需要大家反馈最低支持版本\n同时部分软件也没有收录，欢迎提供和PR"/>
+                android:layout_margin="?dialogPreferredPadding"
+                app:cardBackgroundColor="?colorPrimary"
+                tools:targetApi="p">
+
+                <RelativeLayout
+                    android:id="@+id/status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="?dialogPreferredPadding">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="未知:则需要大家反馈最低支持版本\n同时部分软件也没有收录，欢迎提供和PR"
+                        android:textAppearance="?textAppearanceTitleMedium"
+                        android:textColor="?colorOnPrimary"
+                        android:textSize="16sp" />
+
+                </RelativeLayout>
+            </com.google.android.material.card.MaterialCardView>
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipe_refresh_layout"
