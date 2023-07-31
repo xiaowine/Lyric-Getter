@@ -15,7 +15,7 @@ preference = "1.2.1"
 ezXHelper = "2.0.6"
 dexKit = "1.1.8"
 xposed = "82"
-klaxon = "5.5"
+klaxon = "5.6"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
