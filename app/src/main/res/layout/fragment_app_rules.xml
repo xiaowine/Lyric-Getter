@@ -44,7 +44,7 @@
                 android:id="@+id/materialTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="未知:则需要大家反馈最低支持版本"/>
+                android:text="未知:则需要大家反馈最低支持版本\n同时部分软件也没有收录，欢迎提供和PR"/>
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/swipe_refresh_layout"

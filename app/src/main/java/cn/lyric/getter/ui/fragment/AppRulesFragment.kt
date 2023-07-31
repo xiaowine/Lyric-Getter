@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,16 +16,19 @@ import cn.lyric.getter.data.AppStatus
 import cn.lyric.getter.data.lyricType
 import cn.lyric.getter.databinding.FragmentAppRulesBinding
 import cn.lyric.getter.tool.ActivityTools.getAppRules
-import cn.lyric.getter.tool.ActivityTools.showToast
-import cn.lyric.getter.tool.LogTools.log
+import cn.lyric.getter.tool.JsonTools.toJSON
 import cn.lyric.getter.tool.Tools.goMainThread
 import cn.lyric.getter.ui.adapter.AppAdapter
-import cn.lyric.getter.ui.dialog.MdProgressDialog
+import cn.lyric.getter.ui.dialog.MaterialProgressDialog
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class AppRulesFragment : Fragment() {
 
     private lateinit var appAdapter: AppAdapter
+
+    private val appRules by lazy { getAppRules().appRules }
+
     private var _binding: FragmentAppRulesBinding? = null
     private val binding get() = _binding!!
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
@@ -38,8 +40,20 @@ class AppRulesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val mLayoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-        appAdapter = AppAdapter()
-        binding.run {
+        appAdapter = AppAdapter().apply {
+            setOnItemClickListener(object : AppAdapter.OnItemClickListener {
+                override fun onItemClick(position: Int, view: View) {
+                    MaterialAlertDialogBuilder(requireContext()).apply {
+                        setTitle("Rule")
+                        setMessage(appRules.filter { it.packName == dataLists[position].packageName }.toJSON(true))
+                        setPositiveButton("确定") { _, _ -> }
+                        setCancelable(false)
+                        show()
+                    }
+                }
+            })
+        }
+        binding.apply {
             recyclerView.apply {
                 layoutManager = mLayoutManager
                 setItemViewCacheSize(2000)
@@ -54,13 +68,13 @@ class AppRulesFragment : Fragment() {
 
     private fun loadAppRules() {
         appAdapter.removeAllData()
-        val dialog = MdProgressDialog(requireContext()).apply {
+        val dialog = MaterialProgressDialog(requireContext()).apply {
             setTitle(getString(R.string.getting_app_information))
             setMessage(getString(R.string.getting_app_information_tips))
             show()
         }
         Thread {
-            val appRules = getAppRules().appRules
+
             val appInfosPackNames = appRules.map { it.packName }
             val manager = requireContext().packageManager
             val packageInfos = manager.getInstalledPackages(0)
@@ -95,7 +109,7 @@ class AppRulesFragment : Fragment() {
                             }
                         }
                         goMainThread {
-                            if (appAdapter.data.none { it.packageName == packageName }) {
+                            if (appAdapter.dataLists.none { it.packageName == packageName }) {
                                 val icon = packageInfo.applicationInfo.loadIcon(manager)
                                 val name = packageInfo.applicationInfo.loadLabel(manager).toString()
                                 val description = when (status) {
@@ -106,7 +120,7 @@ class AppRulesFragment : Fragment() {
                                     AppStatus.UnKnow -> getString(R.string.un_know)
                                     AppStatus.NoSupport -> getString(R.string.no_support)
                                 }
-                                val appInfoItem = AppInfo(name, packageName, appVersionCode, icon, description)
+                                val appInfoItem = AppInfo(name, packageName, appVersionCode, icon, description, status, rule)
                                 appAdapter.addData(appInfoItem)
                             }
                         }

@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.run {
+        binding.apply {
             if (!activated) {
                 statusIcon.setImageResource(R.drawable.ic_round_error_outline)
                 statusTitle.text = getString(R.string.unactivated)
