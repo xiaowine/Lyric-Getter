@@ -3,34 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/HomeFragment">
+    app:startDestination="@id/home_nav">
+
 
     <fragment
-        android:id="@+id/HomeFragment"
+        android:id="@+id/app_nav"
+        android:name="cn.lyric.getter.ui.fragment.AppFragment"
+        android:label="@string/settings_fragment_label"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/home_nav"
         android:name="cn.lyric.getter.ui.fragment.HomeFragment"
         android:label="@string/home_fragment_label"
-        tools:layout="@layout/fragment_home">
-
-        <action
-            android:id="@+id/action_HomeFragment_to_SettingsFragment"
-            app:destination="@id/SettingsFragment"
-            app:enterAnim="@anim/fragment_enter"
-            app:exitAnim="@anim/fragment_exit"
-            app:popEnterAnim="@anim/fragment_enter_pop"
-            app:popExitAnim="@anim/fragment_exit_pop" />
-    </fragment>
+        tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/SettingsFragment"
+        android:id="@+id/settings_nav"
         android:name="cn.lyric.getter.ui.fragment.SettingsFragment"
         android:label="@string/settings_fragment_label"
-        tools:layout="@layout/fragment_settings">
-
-        <action
-            android:id="@+id/action_SettingsFragment_to_HomeFragment"
-            app:destination="@id/HomeFragment"
-            app:enterAnim="@anim/fragment_enter"
-            app:exitAnim="@anim/fragment_exit"
-            app:popEnterAnim="@anim/fragment_enter_pop"
-            app:popExitAnim="@anim/fragment_exit_pop" />
-    </fragment>
+        tools:layout="@layout/fragment_settings" />
 </navigation>

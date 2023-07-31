@@ -1,14 +1,17 @@
 package cn.lyric.getter.ui.fragment
 
+
+import android.content.ComponentName
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
+import cn.lyric.getter.config.ActivityOwnSP.config
 import cn.lyric.getter.databinding.FragmentHomeBinding
 import cn.lyric.getter.tool.ActivityTools
 import cn.lyric.getter.tool.ActivityTools.activated
@@ -24,7 +27,6 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
 
     private val binding get() = _binding!!
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
@@ -52,6 +54,22 @@ class HomeFragment : Fragment() {
                             restartTheScopedSoftware(context)
                         }
                     }.show()
+                }
+                toolbar.apply {
+                    inflateMenu(R.menu.home_menu)
+                    setOnMenuItemClickListener {
+                        if  (it.itemId == R.id.show_hide_desktop_icons) {
+                            config.hideDesktopIcons = !config.hideDesktopIcons
+                            requireContext().packageManager.setComponentEnabledSetting(
+                                ComponentName(requireContext(), "${BuildConfig.APPLICATION_ID}.launcher"), if (config.hideDesktopIcons) {
+                                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+                                } else {
+                                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                                }, PackageManager.DONT_KILL_APP
+                            )
+                        }
+                        true
+                    }
                 }
             }
             versionLabelValue.text = BuildConfig.VERSION_NAME

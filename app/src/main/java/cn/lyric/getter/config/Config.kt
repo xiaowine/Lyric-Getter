@@ -24,4 +24,11 @@ class Config {
     fun clear() {
         config.clearConfig()
     }
+    var hideDesktopIcons: Boolean
+        get() {
+            return config.opt("hideDesktopIcons", false)
+        }
+        set(value) {
+            config.put("hideDesktopIcons", value)
+        }
 }

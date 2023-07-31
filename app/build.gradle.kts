@@ -88,15 +88,16 @@ dependencies {
     implementation(rootProject.project(":LyricGetterApi"))
     compileOnly(libs.xposed.api)
 
-
     implementation(libs.core.ktx)
     implementation(libs.material)
 //    implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
     implementation(libs.rikkax.widget.borderview)
+    implementation(libs.rikkax.widget.mainswitchbar)
     implementation(libs.rikkax.material.preference)
     implementation(libs.preference)
+    implementation(libs.gson)
     configurations.all {
         exclude("androidx.appcompat", "appcompat")
     }

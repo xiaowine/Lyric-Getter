@@ -2,13 +2,15 @@ package cn.lyric.getter.tool
 
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.widget.Toast
+import cn.lyric.getter.data.AppRules
+import cn.lyric.getter.tool.JsonTools.parseJSON
 import cn.lyric.getter.tool.LogTools.log
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -23,12 +25,30 @@ object ActivityTools {
 
     private val handler by lazy { Handler(Looper.getMainLooper()) }
 
+    fun getAppRules(): AppRules {
+        context.assets.open("app_rules.json").use {
+            return it.reader().parseJSON<AppRules>()
+        }
+    }
 
-    fun showToastOnLooper(message: Any?) {
+    fun String.getAppVersionCode(context: Context): Long {
+        return try {
+            val packageInfo = context.packageManager.getPackageInfo(this, 0)
+            return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+                packageInfo.longVersionCode
+            } else {
+                packageInfo.versionCode.toLong()
+            }
+        } catch (_: Exception) {
+            0L
+        }
+    }
+
+    fun Any?.showToast() {
         try {
             handler.post {
-                Toast.makeText(context, message.toString(), Toast.LENGTH_LONG).show()
-                message.log()
+                Toast.makeText(context, this.toString(), Toast.LENGTH_LONG).show()
+                this.log()
             }
         } catch (e: RuntimeException) {
             e.printStackTrace()
@@ -59,6 +79,6 @@ object ActivityTools {
         val intent = context.packageManager.getLaunchIntentForPackage(context.packageName)
         intent!!.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         context.startActivity(intent)
-       exitProcess(0)
+        exitProcess(0)
     }
 }

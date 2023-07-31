@@ -30,7 +30,6 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         childFragmentManager.beginTransaction().add(R.id.setting_container, PreferenceFragment()).commitNow()
     }
 

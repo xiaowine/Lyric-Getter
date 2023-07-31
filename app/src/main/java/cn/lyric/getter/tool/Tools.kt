@@ -6,6 +6,8 @@ package cn.lyric.getter.tool
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Handler
+import android.os.Looper
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
 import cn.lyric.getter.tool.LogTools.log
@@ -23,6 +25,11 @@ object Tools {
             e.log()
             null
         }
+    }
+    fun goMainThread(delayed: Long = 0, callback: () -> Unit): Boolean {
+        return Handler(Looper.getMainLooper()).postDelayed({
+            callback()
+        }, delayed * 1000)
     }
 
     @SuppressLint("WorldReadableFiles")

@@ -1,5 +1,6 @@
 [versions]
 agp = "8.1.0"
+gson = "2.10.1"
 kotlin = "1.9.0"
 core-ktx = "1.10.1"
 appcompat = "1.6.1"
@@ -14,9 +15,12 @@ preference = "1.2.1"
 ezXHelper = "2.0.6"
 dexKit = "1.1.8"
 xposed = "82"
+klaxon = "5.5"
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }
@@ -28,6 +32,7 @@ preference = { group = "androidx.preference", name = "preference", version.ref =
 ezXHelper = { group = "com.github.kyuubiran", name = "EzXHelper", version.ref = "ezXHelper" }
 dexkit = { group = "org.luckypray", name = "DexKit", version.ref = "dexKit" }
 xposed-api = { group = "de.robv.android.xposed", name = "api", version.ref = "xposed" }
+klaxon = { group = "com.beust", name = "klaxon", version.ref = "klaxon" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

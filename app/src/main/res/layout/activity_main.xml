@@ -16,7 +16,7 @@
             android:layout_height="0dp"
             android:background="?android:colorBackground"
             app:defaultNavHost="true"
-            app:layout_constraintBottom_toBottomOf="@id/nav"
+            app:layout_constraintBottom_toTopOf="@+id/nav"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
