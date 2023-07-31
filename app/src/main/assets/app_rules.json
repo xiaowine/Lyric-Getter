@@ -5,7 +5,7 @@
       "rules": [
         {
           "startVersionCode": 2023071601,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 4,
           "useApi": true,
           "getLyricType": 0,
@@ -18,7 +18,7 @@
       "rules": [
         {
           "startVersionCode": 2023071601,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 4,
           "useApi": true,
           "getLyricType": 0,
@@ -31,7 +31,7 @@
       "rules": [
         {
           "startVersionCode": 15900,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 0,
@@ -57,7 +57,7 @@
       "rules": [
         {
           "startVersionCode": 0,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 1,
@@ -70,7 +70,7 @@
       "rules": [
         {
           "startVersionCode": 10545,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 1,
@@ -83,7 +83,7 @@
       "rules": [
         {
           "startVersionCode": 0,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 0,
@@ -96,7 +96,7 @@
       "rules": [
         {
           "startVersionCode": 0,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 1,
@@ -117,7 +117,7 @@
         },
         {
           "startVersionCode": 8000041,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 0,
@@ -130,7 +130,7 @@
       "rules": [
         {
           "startVersionCode": 0,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 1,
@@ -143,7 +143,7 @@
       "rules": [
         {
           "startVersionCode": 0,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 1,
@@ -156,7 +156,7 @@
       "rules": [
         {
           "startVersionCode": 0,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 1,
@@ -169,7 +169,7 @@
       "rules": [
         {
           "startVersionCode": 0,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 1,
@@ -182,7 +182,7 @@
       "rules": [
         {
           "startVersionCode": 0,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 2,
@@ -195,7 +195,7 @@
       "rules": [
         {
           "startVersionCode": 0,
-          "endVersionCode": 0,
+          "endVersionCode": 9223372036854775807,
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 1,
@@ -204,5 +204,6 @@
       ]
     }
   ],
+  "appRulesVersion": 1,
   "version": 1
 }

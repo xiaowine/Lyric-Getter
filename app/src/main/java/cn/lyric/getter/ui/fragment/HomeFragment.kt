@@ -15,6 +15,7 @@ import cn.lyric.getter.config.ActivityOwnSP.config
 import cn.lyric.getter.databinding.FragmentHomeBinding
 import cn.lyric.getter.tool.ActivityTools
 import cn.lyric.getter.tool.ActivityTools.activated
+import cn.lyric.getter.tool.ActivityTools.getAppRules
 import cn.lyric.getter.tool.Tools.restartTheScopedSoftware
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.snackbar.Snackbar
@@ -82,6 +83,7 @@ class HomeFragment : Fragment() {
             buildTimeValue.text = SimpleDateFormat("yyyy-MM-dd HH:mm z", Locale.getDefault()).format(BuildConfig.BUILD_TIME)
             apiVersionValue.text = BuildConfig.API_VERSION.toString()
             configVersionValue.text = BuildConfig.CONFIG_VERSION.toString()
+           appRulesVersionValue.text= getAppRules().appRulesVersion.toString()
         }
     }
 

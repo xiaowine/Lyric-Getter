@@ -48,7 +48,6 @@ class AppRulesFragment : Fragment() {
                         setTitle("Rule")
                         setMessage(appRules.filter { it.packName == dataLists[position].packageName }.toJSON(true))
                         setPositiveButton("确定") { _, _ -> }
-                        setCancelable(false)
                         show()
                     }
                 }
@@ -78,7 +77,6 @@ class AppRulesFragment : Fragment() {
             show()
         }
         Thread {
-
             val appInfosPackNames = appRules.map { it.packName }
             val manager = requireContext().packageManager
             val packageInfos = manager.getInstalledPackages(0)
@@ -91,43 +89,48 @@ class AppRulesFragment : Fragment() {
                         @Suppress("DEPRECATION")
                         packageInfo.versionCode.toLong()
                     }
-                    appRules[appInfosPackNames.indexOf(packageName)].rules.forEach { rule ->
-                        val status = if (rule.useApi) {
+                    val filterRule = appRules[appInfosPackNames.indexOf(packageName)].rules.filter {
+                        it.useApi || appVersionCode in it.startVersionCode..it.endVersionCode
+                    }
+
+                    val status = if (filterRule.isEmpty()) {
+                        AppStatus.NoSupport
+                    } else {
+                        val rule = filterRule[0]
+                        if (rule.useApi) {
                             if (rule.apiVersion < BuildConfig.API_VERSION) {
                                 AppStatus.LowApi
                             } else if (rule.apiVersion > BuildConfig.API_VERSION) {
                                 AppStatus.MoreAPI
-
                             } else {
                                 AppStatus.API
                             }
                         } else {
-                            if (rule.startVersionCode == 0L && rule.endVersionCode == 0L) {
+                            if (rule.startVersionCode == 0L) {
                                 AppStatus.UnKnow
                             } else {
-                                if (rule.endVersionCode == 0L || rule.endVersionCode > appVersionCode) {
-                                    if (rule.startVersionCode <= appVersionCode) AppStatus.Hook else AppStatus.NoSupport
+                                if (appVersionCode in rule.startVersionCode..rule.endVersionCode) {
+                                    AppStatus.Hook
                                 } else {
                                     AppStatus.NoSupport
                                 }
                             }
                         }
-                        goMainThread {
-                            if (appAdapter.dataLists.none { it.packageName == packageName }) {
-                                val icon = packageInfo.applicationInfo.loadIcon(manager)
-                                val name = packageInfo.applicationInfo.loadLabel(manager).toString()
-                                val description = when (status) {
-                                    AppStatus.API -> getString(R.string.api)
-                                    AppStatus.Hook -> getString(R.string.hook).format(rule.getLyricType.lyricType())
-                                    AppStatus.LowApi -> getString(R.string.low_api).format(rule.apiVersion, BuildConfig.API_VERSION)
-                                    AppStatus.MoreAPI -> getString(R.string.more_api).format(rule.apiVersion, BuildConfig.API_VERSION)
-                                    AppStatus.UnKnow -> getString(R.string.un_know)
-                                    AppStatus.NoSupport -> getString(R.string.no_support)
-                                }
-                                val appInfoItem = AppInfo(name, packageName, appVersionCode, icon, description, status, rule)
-                                appAdapter.addData(appInfoItem)
-                            }
+                    }
+
+                    goMainThread {
+                        val icon = packageInfo.applicationInfo.loadIcon(manager)
+                        val name = packageInfo.applicationInfo.loadLabel(manager).toString()
+                        val description = when (status) {
+                            AppStatus.API -> getString(R.string.api)
+                            AppStatus.Hook -> getString(R.string.hook).format(filterRule[0].getLyricType.lyricType())
+                            AppStatus.LowApi -> getString(R.string.low_api).format(filterRule[0].apiVersion, BuildConfig.API_VERSION)
+                            AppStatus.MoreAPI -> getString(R.string.more_api).format(filterRule[0].apiVersion, BuildConfig.API_VERSION)
+                            AppStatus.UnKnow -> getString(R.string.un_know)
+                            AppStatus.NoSupport -> getString(R.string.no_support)
                         }
+                        val appInfoItem = AppInfo(name, packageName, appVersionCode, icon, description, status)
+                        appAdapter.addData(appInfoItem)
                     }
                 }
             }

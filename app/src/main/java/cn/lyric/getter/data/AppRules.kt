@@ -11,9 +11,9 @@ fun Int.lyricType(): String {
     }
 }
 
-
 data class AppRules(
     val appRules: List<AppRule>,
+    val appRulesVersion: Int,
     val version: Int
 )
 
