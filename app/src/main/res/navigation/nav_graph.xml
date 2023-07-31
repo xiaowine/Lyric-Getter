@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/app_nav"
-        android:name="cn.lyric.getter.ui.fragment.AppFragment"
+        android:name="cn.lyric.getter.ui.fragment.AppRulesFragment"
         android:label="@string/settings_fragment_label"
         tools:layout="@layout/fragment_settings" />
     <fragment

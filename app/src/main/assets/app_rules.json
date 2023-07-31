@@ -1,205 +1,208 @@
-[
-  {
-    "packName": "com.jio.media.jiobeats",
-    "rules": [
-      {
-        "startVersionCode": 2023071601,
-        "endVersionCode": 0,
-        "apiVersion": 4,
-        "useApi": true,
-        "getLyricType": 0,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "com.salt.music",
-    "rules": [
-      {
-        "startVersionCode": 2023071601,
-        "endVersionCode": 0,
-        "apiVersion": 4,
-        "useApi": true,
-        "getLyricType": 0,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "remix.myplayer",
-    "rules": [
-      {
-        "startVersionCode": 15900,
-        "endVersionCode": 0,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 0,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "com.apple.android.music",
-    "rules": [
-      {
-        "startVersionCode": 1266,
-        "endVersionCode": 1286,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 3,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "com.kugou.android",
-    "rules": [
-      {
-        "startVersionCode": 0,
-        "endVersionCode": 0,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 1,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "com.kugou.android.lite",
-    "rules": [
-      {
-        "startVersionCode": 0,
-        "endVersionCode": 0,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 1,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "com.tencent.qqmusic",
-    "rules": [
-      {
-        "startVersionCode": 0,
-        "endVersionCode": 0,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 0,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "com.miui.player",
-    "rules": [
-      {
-        "startVersionCode": 0,
-        "endVersionCode": 0,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 1,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "com.netease.cloudmusic",
-    "rules": [
-      {
-        "startVersionCode": 7222023,
-        "endVersionCode": 8000041,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 1,
-        "remarks": ""
-      },
-      {
-        "startVersionCode": 8000041,
-        "endVersionCode": 0,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 0,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "cn.kuwo.player",
-    "rules": [
-      {
-        "startVersionCode": 0,
-        "endVersionCode": 0,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 1,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "cmccwm.mobilemusic",
-    "rules": [
-      {
-        "startVersionCode": 0,
-        "endVersionCode": 0,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 1,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "com.meizu.media.music",
-    "rules": [
-      {
-        "startVersionCode": 0,
-        "endVersionCode": 0,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 1,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "com.r.rplayer",
-    "rules": [
-      {
-        "startVersionCode": 0,
-        "endVersionCode": 0,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 1,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "cn.toside.music.mobile",
-    "rules": [
-      {
-        "startVersionCode": 0,
-        "endVersionCode": 0,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 2,
-        "remarks": ""
-      }
-    ]
-  },
-  {
-    "packName": "com.luna.music",
-    "rules": [
-      {
-        "startVersionCode": 0,
-        "endVersionCode": 0,
-        "apiVersion": 0,
-        "useApi": false,
-        "getLyricType": 1,
-        "remarks": ""
-      }
-    ]
-  }
-]
+{
+  "appRules": [
+    {
+      "packName": "com.jio.media.jiobeats",
+      "rules": [
+        {
+          "startVersionCode": 2023071601,
+          "endVersionCode": 0,
+          "apiVersion": 4,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "com.salt.music",
+      "rules": [
+        {
+          "startVersionCode": 2023071601,
+          "endVersionCode": 0,
+          "apiVersion": 4,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "remix.myplayer",
+      "rules": [
+        {
+          "startVersionCode": 15900,
+          "endVersionCode": 0,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "com.apple.android.music",
+      "rules": [
+        {
+          "startVersionCode": 1266,
+          "endVersionCode": 1287,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 3,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "com.kugou.android",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 0,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "com.kugou.android.lite",
+      "rules": [
+        {
+          "startVersionCode": 10545,
+          "endVersionCode": 0,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "com.tencent.qqmusic",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 0,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "com.miui.player",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 0,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "com.netease.cloudmusic",
+      "rules": [
+        {
+          "startVersionCode": 7002022,
+          "endVersionCode": 8000041,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        },
+        {
+          "startVersionCode": 8000041,
+          "endVersionCode": 0,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "cn.kuwo.player",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 0,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "cmccwm.mobilemusic",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 0,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "com.meizu.media.music",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 0,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "com.r.rplayer",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 0,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "cn.toside.music.mobile",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 0,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 2,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packName": "com.luna.music",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 0,
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    }
+  ],
+  "version": 1
+}

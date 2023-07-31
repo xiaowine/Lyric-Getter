@@ -5,12 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.data.AppInfo
+import cn.lyric.getter.data.lyricType
 import cn.lyric.getter.databinding.ItemsAppBinding
+import cn.lyric.getter.tool.LogTools.log
 
 
 class AppAdapter() : RecyclerView.Adapter<BaseViewHolder<*>>() {
     private lateinit var listener: OnItemClickListener
-    private val dataSet: ArrayList<AppInfo> = ArrayList()
+    val data: ArrayList<AppInfo> = ArrayList()
 
     interface OnItemClickListener {
         fun onItemClick(position: Int, view: View)
@@ -18,21 +20,24 @@ class AppAdapter() : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
 
     fun addData(value: AppInfo, position: Int = itemCount) {
-        dataSet.add(position, value)
+        itemCount.log()
+        data.add(position, value)
         notifyItemInserted(position)
         notifyItemChanged(position)
     }
 
 
     fun removeData(position: Int) {
-        dataSet.removeAt(position)
+        data.removeAt(position)
         notifyItemRemoved(position)
         notifyItemChanged(position)
     }
 
     fun removeAllData() {
-        dataSet.forEach {
-            removeData(dataSet.indexOf(it))
+        data.clear()
+        for (i in 0 until data.size) {
+            notifyItemRemoved(i)
+            notifyItemChanged(i)
         }
     }
 
@@ -49,12 +54,12 @@ class AppAdapter() : RecyclerView.Adapter<BaseViewHolder<*>>() {
             }
         }
         binding.run {
-            appIcon.background = dataSet[position].icon
-            appName.text = dataSet[position].name
-            appVersionCode.text = dataSet[position].versionCode.toString()
-            appDescription.text = dataSet[position].description
+            appIcon.background = data[position].icon
+            appName.text = data[position].name
+            appVersionCode.text = data[position].versionCode.toString()
+            appDescription.text = data[position].description
         }
     }
 
-    override fun getItemCount() = dataSet.size
+    override fun getItemCount() = data.size
 }

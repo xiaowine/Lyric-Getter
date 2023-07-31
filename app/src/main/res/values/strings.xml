@@ -6,7 +6,7 @@
     <string name="version_code_label">模块版本号</string>
     <string name="version_type_label">模块发行版本</string>
     <string name="settings_fragment_label">设置</string>
-    <string name="app_fragment_label">App</string>
+    <string name="app_rules_fragment_label">App规则</string>
     <string name="activated">已激活</string>
     <string name="unactivated">未激活</string>
     <string name="build_time_label">编译时间</string>
@@ -19,4 +19,10 @@
     <string name="show_hide_desktop_icons">显示/隐藏桌面图标</string>
     <string name="getting_app_information">正在获取应用信息</string>
     <string name="getting_app_information_tips">请稍后…</string>
+    <string name="api">API模式</string>
+    <string name="more_api">过高的API版本</string>
+    <string name="low_api">过低的API版本</string>
+    <string name="hook">Hook模式：%s</string>
+    <string name="no_support">不支持</string>
+    <string name="un_know">未知</string>
 </resources>
