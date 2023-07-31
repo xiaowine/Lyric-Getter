@@ -115,8 +115,8 @@ class AppRulesFragment : Fragment() {
                                 val description = when (status) {
                                     AppStatus.API -> getString(R.string.api)
                                     AppStatus.Hook -> getString(R.string.hook).format(rule.getLyricType.lyricType())
-                                    AppStatus.LowApi -> getString(R.string.low_api)
-                                    AppStatus.MoreAPI -> getString(R.string.more_api)
+                                    AppStatus.LowApi -> getString(R.string.low_api).format(rule.apiVersion, BuildConfig.API_VERSION)
+                                    AppStatus.MoreAPI -> getString(R.string.more_api).format(rule.apiVersion, BuildConfig.API_VERSION)
                                     AppStatus.UnKnow -> getString(R.string.un_know)
                                     AppStatus.NoSupport -> getString(R.string.no_support)
                                 }
