@@ -99,11 +99,14 @@ object Apple : BaseHook() {  init {
                                 val lyric = lyricsLine.objectHelper().invokeMethodBestMatch("getHtmlLineText") as String
                                 val start = lyricsLine.objectHelper().invokeMethodBestMatch("getBegin") as Int
                                 val end = lyricsLine.objectHelper().invokeMethodBestMatch("getEnd") as Int
-                                if (lyricList.isNotEmpty() && lyricList.last().end > start) {
+                                if (lyricList.isNotEmpty()) {
+                                    lyricList.last().start.log()
+                                }
+                                start.log()
+                                if (lyricList.isNotEmpty() && lyricList.last().start > start) {
                                     lyricList.clear()
                                 }
                                 lyricList.add(LyricsLine(start, end, lyric))
-                                "Lyric: $lyric".log()
                                 i += 1
                             } while (true)
                         }
