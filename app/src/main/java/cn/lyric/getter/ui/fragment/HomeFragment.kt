@@ -57,11 +57,15 @@ class HomeFragment : Fragment() {
                 }
                 toolbar.apply {
                     inflateMenu(R.menu.home_menu)
+                    menu.findItem(R.id.show_hide_desktop_icons).apply {
+                        isChecked = config.hideDesktopIcons
+                    }
                     setOnMenuItemClickListener {
                         if  (it.itemId == R.id.show_hide_desktop_icons) {
-                            config.hideDesktopIcons = !config.hideDesktopIcons
+                            it.isChecked = !it.isChecked
+                            config.hideDesktopIcons = it.isChecked
                             requireContext().packageManager.setComponentEnabledSetting(
-                                ComponentName(requireContext(), "${BuildConfig.APPLICATION_ID}.launcher"), if (config.hideDesktopIcons) {
+                                ComponentName(requireContext(), "${BuildConfig.APPLICATION_ID}.launcher"), if (it.isChecked) {
                                     PackageManager.COMPONENT_ENABLED_STATE_DISABLED
                                 } else {
                                     PackageManager.COMPONENT_ENABLED_STATE_ENABLED
