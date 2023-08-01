@@ -18,11 +18,11 @@
       "packName": "com.xuncorp.suvine.music",
       "rules": [
         {
-          "startVersionCode": 0,
-          "endVersionCode": 0,
+          "startVersionCode": 2023070801,
+          "endVersionCode": 2147483647,
           "excludeVersions": [],
-          "apiVersion": 0,
-          "useApi": false,
+          "apiVersion": 4,
+          "useApi": true,
           "getLyricType": 0,
           "remarks": ""
         }
@@ -61,7 +61,7 @@
       "rules": [
         {
           "startVersionCode": 1266,
-          "endVersionCode": 1287,
+          "endVersionCode": 1299,
           "excludeVersions": [],
           "apiVersion": 0,
           "useApi": false,
