@@ -16,21 +16,12 @@ import cn.lyric.getter.config.ActivityOwnSP
 import cn.lyric.getter.databinding.ActivityMainBinding
 import cn.lyric.getter.tool.ActivityTools
 import cn.lyric.getter.tool.ActivityTools.activated
+import cn.lyric.getter.tool.ActivityTools.updateAppRules
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val navOptions: NavOptions by lazy {
-        NavOptions.Builder()
-            .setEnterAnim(R.anim.fragment_enter)
-            .setExitAnim(R.anim.fragment_exit)
-            .setPopEnterAnim(R.anim.fragment_enter_pop)
-            .setPopExitAnim(R.anim.fragment_exit_pop)
-            .setRestoreState(true)
-            .setLaunchSingleTop(true)
-            .build()
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         binding.nav.setupWithNavController(findNavController(R.id.nav_host_fragment))
+        updateAppRules()
     }
 
     override fun onSupportNavigateUp(): Boolean {

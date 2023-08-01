@@ -54,7 +54,7 @@ class AppRulesFragment : Fragment() {
         }
         binding.apply {
             card.setOnClickListener {
-                openUrl("https://github.com/xiaowine/Lyric-Getter/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=App%E8%A7%84%E5%88%99%E6%94%B9%E5%8A%A8")
+                "https://github.com/xiaowine/Lyric-Getter/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=App%E8%A7%84%E5%88%99%E6%94%B9%E5%8A%A8".openUrl()
             }
             recyclerView.apply {
                 layoutManager = mLayoutManager
