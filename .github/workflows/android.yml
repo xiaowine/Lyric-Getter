@@ -43,9 +43,14 @@ jobs:
 
       - name: Build with Gradle
         run: |
-          ./gradlew assemble
+          echo "$(echo `(cat ./app/src/main/assets/app_rules.json)` | grep -o '"appRulesVersion": [0-9]*' | grep -o '[0-9]*')" > ./doc/app_rules_version
+          cgradlew assemble
           ./gradlew bundleRelease
-
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ github.token }}
+          publish_dir: ./doc
 
       - name: Upload Release APK
         uses: actions/upload-artifact@v3
