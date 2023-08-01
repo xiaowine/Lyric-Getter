@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
     android:minHeight="?attr/listPreferredItemHeight"
@@ -11,60 +10,87 @@
     android:paddingStart="16dp"
     android:paddingEnd="24dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_root"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/app_icon"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@tools:sample/avatars" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/app_name"
-            style="@style/TextLabel"
-            android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/app_icon_view"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/app_name_view"
+                style="@style/TextLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:ellipsize="marquee"
+                android:maxWidth="200dp"
+                android:maxLines="1"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toTopOf="@+id/app_description"
+                app:layout_constraintStart_toEndOf="@+id/app_icon_view"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="app_name" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/app_description_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:ellipsize="marquee"
+
+                android:maxLines="5"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/app_icon_view"
+                app:layout_constraintTop_toBottomOf="@+id/app_name_view"
+                tools:text="app_description" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/app_version_code_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:maxWidth="100dp"
+                android:maxLines="1"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toTopOf="@+id/app_description_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="app_version" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/app_rules_card_view"
+            style="@style/Widget.Material3.CardView.Elevated"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:ellipsize="marquee"
-            android:maxLines="1"
-            android:maxWidth="200dp"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toTopOf="@+id/app_description"
-            app:layout_constraintStart_toEndOf="@+id/app_icon"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="app_name" />
+            android:layout_marginTop="?dialogPreferredPadding"
+            android:layout_marginBottom="?dialogPreferredPadding"
+            android:visibility="gone">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/app_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:ellipsize="marquee"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/app_rules_text_view"
+                style="@style/TextValue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="?dialogPreferredPadding" />
+        </com.google.android.material.card.MaterialCardView>
 
-            android:maxLines="5"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/app_icon"
-            app:layout_constraintTop_toBottomOf="@+id/app_name"
-            tools:text="app_description" />
+    </LinearLayout>
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/app_version_code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="marquee"
-            android:maxWidth="100dp"
-            android:maxLines="1"
-            app:layout_constrainedWidth="true"
-            app:layout_constraintBottom_toTopOf="@+id/app_description"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="app_version" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </FrameLayout>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:checkableBehavior="all">
+        <item
+            android:id="@+id/show_all_rules"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:title="@string/show_app_rules" />
+    </group>
+    <item
+        android:id="@+id/update_app_rules"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/update_app_rules" />
+</menu>

@@ -38,9 +38,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             tools:ignore="UselessParent">
+
             <com.google.android.material.card.MaterialCardView
-                style="@style/Widget.Material3.CardView.Elevated"
                 android:id="@+id/card"
+                style="@style/Widget.Material3.CardView.Elevated"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="?dialogPreferredPadding"
@@ -58,7 +59,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="24dp"
                         android:fontFamily="sans-serif-medium"
-                        android:text="未知:则需要大家反馈最低支持版本\n同时部分软件也没有收录，欢迎提供和PR"
+                        android:text="@string/app_rules_tips"
                         android:textAppearance="?textAppearanceTitleMedium"
                         android:textColor="?colorOnPrimary"
                         android:textSize="16sp" />

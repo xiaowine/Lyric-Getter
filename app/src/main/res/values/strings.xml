@@ -26,4 +26,9 @@
     <string name="no_support">不支持</string>
     <string name="un_know">未知</string>
     <string name="app_rules_version_label">App规则版本</string>
+    <string name="show_app_rules">显示所有规则</string>
+    <string name="update_app_rules">更新规则</string>
+    <string name="multi_rule">规则%s：%s</string>
+    <string name="uninstall_rule">未安装：共%s个规则</string>
+    <string name="app_rules_tips">未知:则需要大家反馈最低支持版本\n部分软件也没有收录，欢迎提供和反馈错误</string>
 </resources>

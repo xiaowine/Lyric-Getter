@@ -91,8 +91,7 @@ object ActivityTools {
             val reader = BufferedReader(InputStreamReader(connection.inputStream))
             callback(reader.readText())
             true
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } catch (_: Exception) {
             false
         }
     }
