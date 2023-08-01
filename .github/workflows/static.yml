@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Setup Pages
         uses: actions/configure-pages@v3
-      - name: Build with Gradle
+      - name: Build
         run: |
           echo "$(echo `(cat app_rules.json)` | grep -o '"appRulesVersion": [0-9]*' | grep -o '[0-9]*')" > app_rules_version
       - name: Upload artifact
@@ -41,6 +41,7 @@ jobs:
         with:
           # Upload entire repository
           path: '.'
+          if-no-files-found: error
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
