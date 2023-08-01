@@ -143,7 +143,7 @@
           "endVersionCode": 2147483647,
           "excludeVersions": [],
           "apiVersion": 0,
-          "useApi": true,
+          "useApi": false,
           "getLyricType": 0,
           "remarks": ""
         }
