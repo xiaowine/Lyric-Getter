@@ -75,7 +75,7 @@
       "rules": [
         {
           "startVersionCode": 0,
-          "endVersionCode": 2147483647,
+          "endVersionCode": 2147483647, 
           "excludeVersions": [],
           "apiVersion": 0,
           "useApi": false,
@@ -262,6 +262,6 @@
       ]
     }
   ],
-  "appRulesVersion": 1,
+  "appRulesVersion": 2,  
   "version": 1
 }
