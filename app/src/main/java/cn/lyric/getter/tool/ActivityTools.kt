@@ -25,6 +25,7 @@ object ActivityTools {
 
     var activated = false
 
+
     private val handler by lazy { Handler(Looper.getMainLooper()) }
 
     fun getAppRules(): AppRules {
