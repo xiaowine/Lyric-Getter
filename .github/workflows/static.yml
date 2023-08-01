@@ -35,9 +35,7 @@ jobs:
         uses: actions/configure-pages@v3
       - name: Build
         run: |
-          echo "$(echo `(cat app_rules.json)` | grep -o '"appRulesVersion": [0-9]*' | grep -o '[0-9]*')"
-#          apt-get install jq
-#          cat app_rules.json | jq '.appRulesVersion' > app_rules_version
+          echo "$(echo `(cat app_rules.json)` | grep -o '"appRulesVersion": [0-9]*' | grep -o '[0-9]*')" > app_rules_version
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
