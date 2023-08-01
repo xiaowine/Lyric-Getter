@@ -1,7 +1,7 @@
 package cn.lyric.getter.ui.fragment
 
 
-import android.os.Build
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,11 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
-import cn.lyric.getter.data.AppInfo
-import cn.lyric.getter.data.AppStatus
-import cn.lyric.getter.data.lyricType
+import cn.lyric.getter.data.AppRule
+import cn.lyric.getter.data.AppRuleInfo
 import cn.lyric.getter.databinding.FragmentAppRulesBinding
 import cn.lyric.getter.tool.ActivityTools.getAppRules
 import cn.lyric.getter.tool.ActivityTools.openUrl
@@ -28,7 +26,8 @@ class AppRulesFragment : Fragment() {
 
     private lateinit var appAdapter: AppAdapter
 
-    private val appRules by lazy { getAppRules().appRules }
+    private val appRules: List<AppRule> by lazy { getAppRules().appRules }
+    private val manager: PackageManager by lazy { requireContext().packageManager }
 
     private var _binding: FragmentAppRulesBinding? = null
     private val binding get() = _binding!!
@@ -46,7 +45,7 @@ class AppRulesFragment : Fragment() {
                 override fun onItemClick(position: Int, view: View) {
                     MaterialAlertDialogBuilder(requireContext()).apply {
                         setTitle("Rule")
-                        setMessage(appRules.filter { it.packName == dataLists[position].packageName }.toJSON(true))
+                        setMessage(appRules.filter { it.packName == dataLists[position].packageInfo.packageName }.toJSON(true))
                         setPositiveButton("确定") { _, _ -> }
                         show()
                     }
@@ -65,9 +64,10 @@ class AppRulesFragment : Fragment() {
             swipeRefreshLayout.setOnRefreshListener {
                 loadAppRules()
             }
+            loadAppRules()
         }
-        loadAppRules()
     }
+
 
     private fun loadAppRules() {
         appAdapter.removeAllData()
@@ -78,60 +78,11 @@ class AppRulesFragment : Fragment() {
         }
         Thread {
             val appInfosPackNames = appRules.map { it.packName }
-            val manager = requireContext().packageManager
-            val packageInfos = manager.getInstalledPackages(0)
-            packageInfos.forEach { packageInfo ->
+            manager.getInstalledPackages(0).forEach { packageInfo ->
                 val packageName = packageInfo.packageName
                 if (appInfosPackNames.contains(packageName)) {
-                    val appVersionCode = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                        packageInfo.longVersionCode
-                    } else {
-                        @Suppress("DEPRECATION")
-                        packageInfo.versionCode.toLong()
-                    }
-                    val filterRule = appRules[appInfosPackNames.indexOf(packageName)].rules.filter {
-                        it.useApi || appVersionCode in it.startVersionCode..it.endVersionCode
-                    }
-
-                    val status = if (filterRule.isEmpty()) {
-                        AppStatus.NoSupport
-                    } else {
-                        val rule = filterRule[0]
-                        if (rule.useApi) {
-                            if (rule.apiVersion < BuildConfig.API_VERSION) {
-                                AppStatus.LowApi
-                            } else if (rule.apiVersion > BuildConfig.API_VERSION) {
-                                AppStatus.MoreAPI
-                            } else {
-                                AppStatus.API
-                            }
-                        } else {
-                            if (rule.startVersionCode == 0L) {
-                                AppStatus.UnKnow
-                            } else {
-                                if (appVersionCode in rule.startVersionCode..rule.endVersionCode) {
-                                    AppStatus.Hook
-                                } else {
-                                    AppStatus.NoSupport
-                                }
-                            }
-                        }
-                    }
-
-                    goMainThread {
-                        val icon = packageInfo.applicationInfo.loadIcon(manager)
-                        val name = packageInfo.applicationInfo.loadLabel(manager).toString()
-                        val description = when (status) {
-                            AppStatus.API -> getString(R.string.api)
-                            AppStatus.Hook -> getString(R.string.hook).format(filterRule[0].getLyricType.lyricType())
-                            AppStatus.LowApi -> getString(R.string.low_api).format(filterRule[0].apiVersion, BuildConfig.API_VERSION)
-                            AppStatus.MoreAPI -> getString(R.string.more_api).format(filterRule[0].apiVersion, BuildConfig.API_VERSION)
-                            AppStatus.UnKnow -> getString(R.string.un_know)
-                            AppStatus.NoSupport -> getString(R.string.no_support)
-                        }
-                        val appInfoItem = AppInfo(name, packageName, appVersionCode, icon, description, status)
-                        appAdapter.addData(appInfoItem)
-                    }
+                    val filter = appRules.filter { it.packName == packageName }[0]
+                    goMainThread { appAdapter.addData(AppRuleInfo(packageInfo, "", filter)) }
                 }
             }
             dialog.dismiss()

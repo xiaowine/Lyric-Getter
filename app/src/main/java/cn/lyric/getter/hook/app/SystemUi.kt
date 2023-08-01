@@ -8,6 +8,7 @@ import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.HookTools.getApplication
+import cn.lyric.getter.tool.LogTools.log
 import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
@@ -48,8 +49,10 @@ object SystemUi : BaseHook() {
         }
         for (i in 0..10) {
             val clazz = loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager$$i")
+            clazz.log()
             if (clazz.isNotNull()) {
-                if (clazz!!.hasMethod("onPlaybackStateChanged")) {
+                clazz!!.hasMethod("onPlaybackStateChanged").log()
+                if (clazz.hasMethod("onPlaybackStateChanged")) {
                     onPlaybackStateChanged(clazz)
                     break
                 }

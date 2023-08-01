@@ -6,5 +6,6 @@ enum class AppStatus {
     LowApi,
     Hook,
     NoSupport,
-    UnKnow
+    UnKnow,
+    Exclude,
 }

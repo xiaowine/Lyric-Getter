@@ -23,10 +23,11 @@ data class AppRule(
 )
 
 data class Rule(
+    val useApi: Boolean,
     val apiVersion: Int,
-    val endVersionCode: Long,
+    val startVersionCode: Int,
+    val endVersionCode: Int,
+    val excludeVersions: List<Int>,
     val getLyricType: Int,
-    val remarks: String,
-    val startVersionCode: Long,
-    val useApi: Boolean
+    val remarks: String
 )

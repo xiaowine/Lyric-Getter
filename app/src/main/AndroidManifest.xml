@@ -7,11 +7,12 @@
         tools:ignore="QueryAllPackagesPermission" />
 
     <application
+        android:enableOnBackInvokedCallback="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
-        tools:targetApi="s">
+        tools:targetApi="tiramisu">
         <activity
             android:name="cn.lyric.getter.ui.MainActivity"
             android:exported="true">

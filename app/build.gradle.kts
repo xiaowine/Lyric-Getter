@@ -94,7 +94,6 @@ dependencies {
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
     implementation(libs.rikkax.widget.borderview)
-    implementation(libs.rikkax.widget.mainswitchbar)
     implementation(libs.rikkax.material.preference)
     implementation(libs.preference)
     implementation(libs.gson)
