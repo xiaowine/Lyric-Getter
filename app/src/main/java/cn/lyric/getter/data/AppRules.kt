@@ -18,7 +18,8 @@ data class AppRules(
 )
 
 data class AppRule(
-    val packName: String,
+    val packageName: String,
+    val name: String,
     val rules: List<Rule>
 )
 

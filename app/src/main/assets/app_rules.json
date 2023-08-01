@@ -1,7 +1,8 @@
 {
   "appRules": [
     {
-      "packName": "com.jio.media.jiobeats",
+      "packageName": "com.jio.media.jiobeats",
+      "name": "椒盐音乐",
       "rules": [
         {
           "startVersionCode": 2023071601,
@@ -15,7 +16,8 @@
       ]
     },
     {
-      "packName": "com.xuncorp.suvine.music",
+      "packageName": "com.xuncorp.suvine.music",
+      "name": "糖醋音乐",
       "rules": [
         {
           "startVersionCode": 0,
@@ -29,7 +31,8 @@
       ]
     },
     {
-      "packName": "com.salt.music",
+      "packageName": "com.salt.music",
+      "name": "椒盐音乐",
       "rules": [
         {
           "startVersionCode": 2023071601,
@@ -43,7 +46,8 @@
       ]
     },
     {
-      "packName": "remix.myplayer",
+      "packageName": "remix.myplayer",
+      "name": "APlayer ",
       "rules": [
         {
           "startVersionCode": 15900,
@@ -57,7 +61,8 @@
       ]
     },
     {
-      "packName": "com.apple.android.music",
+      "packageName": "com.apple.android.music",
+      "name": "Apple Music",
       "rules": [
         {
           "startVersionCode": 1266,
@@ -71,7 +76,8 @@
       ]
     },
     {
-      "packName": "com.kugou.android",
+      "packageName": "com.kugou.android",
+      "name": "酷狗音乐",
       "rules": [
         {
           "startVersionCode": 0,
@@ -85,7 +91,8 @@
       ]
     },
     {
-      "packName": "com.kugou.android.lite",
+      "packageName": "com.kugou.android.lite",
+      "name": "酷狗音乐概念版",
       "rules": [
         {
           "startVersionCode": 10545,
@@ -99,7 +106,8 @@
       ]
     },
     {
-      "packName": "com.tencent.qqmusic",
+      "packageName": "com.tencent.qqmusic",
+      "name": "QQ音乐",
       "rules": [
         {
           "startVersionCode": 1108,
@@ -113,7 +121,8 @@
       ]
     },
     {
-      "packName": "com.miui.player",
+      "packageName": "com.miui.player",
+      "name": "小米音乐",
       "rules": [
         {
           "startVersionCode": 0,
@@ -127,7 +136,8 @@
       ]
     },
     {
-      "packName": "com.netease.cloudmusic",
+      "packageName": "com.netease.cloudmusic",
+      "name": "网易云音乐",
       "rules": [
         {
           "startVersionCode": 7002022,
@@ -150,7 +160,8 @@
       ]
     },
     {
-      "packName": "cn.kuwo.player",
+      "packageName": "cn.kuwo.player",
+      "name": "酷我音乐",
       "rules": [
         {
           "startVersionCode": 0,
@@ -164,7 +175,8 @@
       ]
     },
     {
-      "packName": "cmccwm.mobilemusic",
+      "packageName": "cmccwm.mobilemusic",
+      "name": "咪咕音乐",
       "rules": [
         {
           "startVersionCode": 0,
@@ -178,7 +190,8 @@
       ]
     },
     {
-      "packName": "com.meizu.media.music",
+      "packageName": "com.meizu.media.music",
+      "name": "魅族音乐",
       "rules": [
         {
           "startVersionCode": 0,
@@ -192,7 +205,8 @@
       ]
     },
     {
-      "packName": "com.r.rplayer",
+      "packageName": "com.r.rplayer",
+      "name": "RPlayer",
       "rules": [
         {
           "startVersionCode": 0,
@@ -206,7 +220,8 @@
       ]
     },
     {
-      "packName": "cn.toside.music.mobile",
+      "packageName": "cn.toside.music.mobile",
+      "name": "LX Music",
       "rules": [
         {
           "startVersionCode": 0,
@@ -220,7 +235,8 @@
       ]
     },
     {
-      "packName": "com.luna.music",
+      "packageName": "com.luna.music",
+      "name": "汽水音乐",
       "rules": [
         {
           "startVersionCode": 0,
@@ -234,7 +250,8 @@
       ]
     },
     {
-      "packName": "player.phonograph.plus",
+      "packageName": "player.phonograph.plus",
+      "name": "Phonograph Plus",
       "rules": [
         {
           "startVersionCode": 611,
@@ -248,10 +265,26 @@
       ]
     },
     {
-      "packName": "com.caij.puremusic",
+      "packageName": "com.caij.puremusic",
+      "name": "棉花音乐",
       "rules": [
         {
           "startVersionCode": 1020202,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 4,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.kyant.vanilla",
+      "name": "Vanilla",
+      "rules": [
+        {
+          "startVersionCode": 0,
           "endVersionCode": 2147483647,
           "excludeVersions": [],
           "apiVersion": 4,

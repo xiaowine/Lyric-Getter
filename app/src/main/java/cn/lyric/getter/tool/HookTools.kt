@@ -9,6 +9,7 @@ import android.os.Build
 import cn.lyric.getter.tool.EventTools.cleanLyric
 import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.tool.LogTools.log
+import cn.lyric.getter.tool.Tools.isNot
 import cn.lyric.getter.tool.Tools.isNotNull
 import cn.lyric.getter.tool.Tools.isNull
 import com.github.kyuubiran.ezxhelper.ClassLoaderProvider
@@ -16,7 +17,6 @@ import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.setStaticObject
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
 import io.luckypray.dexkit.DexKitBridge
 import io.luckypray.dexkit.enums.MatchType
@@ -145,16 +145,13 @@ object HookTools {
                 after {
                     val notification = it.args[1] as Notification
                     val charSequence = notification.tickerText
-                    if (notification.flags == 0) {
-                        val isLyric = notification.flags and MeiZuNotification.FLAG_ALWAYS_SHOW_TICKER != 0 || notification.flags and MeiZuNotification.FLAG_ONLY_UPDATE_TICKER != 0
-                        if (charSequence == null || !isLyric) {
+                    val isLyric = notification.flags and MeiZuNotification.FLAG_ALWAYS_SHOW_TICKER != 0 || notification.flags and MeiZuNotification.FLAG_ONLY_UPDATE_TICKER != 0
+                    if (isLyric) {
+                        charSequence.isNotNull {
+                            sendLyric(context, charSequence.toString())
+                        }.isNot {
                             cleanLyric(context)
                         }
-                    } else {
-                        it.thisObject.objectHelper {
-                            sendLyric(context, charSequence.toString())
-                        }
-
                     }
                 }
             }

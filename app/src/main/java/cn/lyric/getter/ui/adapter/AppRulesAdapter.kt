@@ -3,51 +3,45 @@ package cn.lyric.getter.ui.adapter
 import android.content.Context
 import android.text.Html
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
-import cn.lyric.getter.data.AppRuleInfo
+import cn.lyric.getter.data.AppInfos
 import cn.lyric.getter.data.AppStatus
 import cn.lyric.getter.data.Rule
 import cn.lyric.getter.data.lyricType
 import cn.lyric.getter.databinding.ItemsAppBinding
 
 
-class AppAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
+class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
     lateinit var context: Context
 
     private lateinit var listener: OnItemClickListener
-    val dataLists: ArrayList<AppRuleInfo> = ArrayList()
+    val dataLists: ArrayList<AppInfos> = ArrayList()
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int, view: View)
+        fun onItemClick(position: Int, viewBinding: ItemsAppBinding)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
 
-    fun addData(value: AppRuleInfo, position: Int = itemCount) {
-        dataLists.add(position, value)
+    fun addData(value: AppInfos, position: Int = itemCount) {
         notifyItemInserted(position)
-        notifyItemChanged(position)
+        dataLists.add(position, value)
     }
 
 
     fun removeData(position: Int) {
-        dataLists.removeAt(position)
         notifyItemRemoved(position)
-        notifyItemChanged(position)
+        dataLists.removeAt(position)
     }
 
     fun removeAllData() {
+        notifyItemRangeRemoved(0, dataLists.size)
         dataLists.clear()
-        for (i in 0 until dataLists.size) {
-            notifyItemRemoved(i)
-            notifyItemChanged(i)
-        }
     }
 
 
@@ -60,49 +54,51 @@ class AppAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
         val binding = viewHolder.viewBinding as ItemsAppBinding
         if (this::listener.isInitialized) {
             viewHolder.itemView.setOnClickListener {
-                listener.onItemClick(position, it)
+                listener.onItemClick(position, binding)
             }
         }
         binding.run {
             val appInfo = dataLists[position]
-            val packageManager = context.packageManager
-            val applicationInfo = appInfo.packageInfo.applicationInfo
-            val versionCode = appInfo.packageInfo.versionCode
-            appIcon.background = applicationInfo.loadIcon(packageManager)
-            appName.text = applicationInfo.loadLabel(packageManager).toString()
-            appVersionCode.text = versionCode.toString()
-            appDescription.apply {
+            val versionCode = appInfo.versionCode
+            appIconView.background = appInfo.appIcon
+            appNameView.text = appInfo.appName
+            appVersionCodeView.text = if (versionCode != 0) versionCode.toString() else ""
+            appDescriptionView.apply {
                 val rules = appInfo.appRule.rules
-                val status = if (rules.size == 1) {
-                    arrayListOf(getAppStatus(rules[0], versionCode))
-                } else {
-                    rules.map { rule ->
-                        getAppStatus(rule, versionCode)
-                    }
-                }
-
                 var description = ""
-                if (status.size == 1) {
-                    description = getAppStatusDescription(status[0], rules[0])
-                } else {
-                    status.forEach {
-                        description += "规则${status.indexOf(it) + 1}：${getAppStatusDescription(it, rules[status.indexOf(it)])}<br>"
+                if (appInfo.installed) {
+                    val status = if (rules.size == 1) {
+                        arrayListOf(getAppStatus(rules[0], versionCode))
+                    } else {
+                        rules.map { rule ->
+                            getAppStatus(rule, versionCode)
+                        }
                     }
+                    if (status.size == 1) {
+                        description = getAppStatusDescription(status[0], rules[0])
+                    } else {
+                        status.forEach {
+                            description += "${context.getString(R.string.multi_rule).format(status.indexOf(it) + 1, getAppStatusDescription(it, rules[status.indexOf(it)]))}<br>"
+                        }
+                    }
+                } else {
+                    description = context.getString(R.string.uninstall_rule).format(appInfo.appRule.rules.size)
                 }
                 text = Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
             }
+
         }
     }
 
     private fun getAppStatusDescription(status: AppStatus, rule: Rule): String {
         return when (status) {
-            AppStatus.API -> "<font color='green'>${context.getString(R.string.api)}</font>"
-            AppStatus.Hook -> "<font color='green'>${context.getString(R.string.hook).format(rule.getLyricType.lyricType())}</font>"
-            AppStatus.LowApi -> "<font color='yellow'>${context.getString(R.string.low_api).format(rule.apiVersion, BuildConfig.API_VERSION)}</font>"
-            AppStatus.MoreAPI -> "<font color='yellow'>${context.getString(R.string.more_api).format(rule.apiVersion, BuildConfig.API_VERSION)}</font>"
-            AppStatus.UnKnow -> "<font color='red'>${context.getString(R.string.un_know)}</font>"
-            AppStatus.NoSupport -> "<font color='red'>${context.getString(R.string.no_support)}</font>"
-            AppStatus.Exclude -> "<font color='red'>${context.getString(R.string.no_support)}</font>"
+            AppStatus.API -> "<font color='#388E3C'>${context.getString(R.string.api)}</font>"
+            AppStatus.Hook -> "<font color='#388E3C'>${context.getString(R.string.hook).format(rule.getLyricType.lyricType())}</font>"
+            AppStatus.LowApi -> "<font color='#F57C00'>${context.getString(R.string.low_api).format(rule.apiVersion, BuildConfig.API_VERSION)}</font>"
+            AppStatus.MoreAPI -> "<font color='#F57C00'>${context.getString(R.string.more_api).format(rule.apiVersion, BuildConfig.API_VERSION)}</font>"
+            AppStatus.UnKnow -> "<font color='#D32F2F'>${context.getString(R.string.un_know)}</font>"
+            AppStatus.NoSupport -> "<font color='#D32F2F'>${context.getString(R.string.no_support)}</font>"
+            AppStatus.Exclude -> "<font color='#D32F2F'>${context.getString(R.string.no_support)}</font>"
         }
     }
 
