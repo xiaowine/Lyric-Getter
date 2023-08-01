@@ -20,11 +20,11 @@
       "name": "糖醋音乐",
       "rules": [
         {
-          "startVersionCode": 0,
-          "endVersionCode": 0,
+          "startVersionCode": 2023072601,
+          "endVersionCode": 2147483647,
           "excludeVersions": [],
-          "apiVersion": 0,
-          "useApi": false,
+          "apiVersion": 4,
+          "useApi": true,
           "getLyricType": 0,
           "remarks": ""
         }
@@ -66,7 +66,7 @@
       "rules": [
         {
           "startVersionCode": 1266,
-          "endVersionCode": 1287,
+          "endVersionCode": 1299,
           "excludeVersions": [],
           "apiVersion": 0,
           "useApi": false,

@@ -38,7 +38,7 @@
                 android:maxWidth="200dp"
                 android:maxLines="1"
                 app:layout_constrainedWidth="true"
-                app:layout_constraintBottom_toTopOf="@+id/app_description"
+                app:layout_constraintBottom_toTopOf="@+id/app_description_view"
                 app:layout_constraintStart_toEndOf="@+id/app_icon_view"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="app_name" />
