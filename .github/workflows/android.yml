@@ -43,7 +43,9 @@ jobs:
 
       - name: Build with Gradle
         run: |
+          mkdir -p ./doc
           echo "$(echo `(cat ./app/src/main/assets/app_rules.json)` | grep -o '"appRulesVersion": [0-9]*' | grep -o '[0-9]*')" > ./doc/app_rules_version
+          cp ./app/src/main/assets/app_rules.json ./doc/app_rules.json
           cgradlew assemble
           ./gradlew bundleRelease
       - name: Deploy
