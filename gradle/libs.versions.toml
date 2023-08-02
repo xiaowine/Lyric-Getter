@@ -28,7 +28,7 @@ rikkax-material-preference = { group = "dev.rikka.rikkax.material", name = "mate
 preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
 ezXHelper = { group = "com.github.kyuubiran", name = "EzXHelper", version.ref = "ezXHelper" }
 dexkit = { group = "org.luckypray", name = "DexKit", version.ref = "dexKit" }
-xposed-api = { group = "de.robv.android.xposed", name = "api", version.ref = "xposed" }
+xposed-api = { group = "de.robv.android.xposed", name = "api", version.ref = "xposed"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

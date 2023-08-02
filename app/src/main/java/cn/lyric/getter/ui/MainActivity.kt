@@ -2,14 +2,9 @@ package cn.lyric.getter.ui
 
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.NavController
-import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI.setupWithNavController
-import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import cn.lyric.getter.R
 import cn.lyric.getter.config.ActivityOwnSP

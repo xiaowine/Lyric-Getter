@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import cn.lyric.getter.R
+import cn.lyric.getter.config.ActivityOwnSP.config
 import cn.lyric.getter.databinding.FragmentSettingsBinding
 
 
@@ -39,10 +41,15 @@ class SettingsFragment : Fragment() {
     }
 
 
-    class PreferenceFragment: PreferenceFragmentCompat() {
+    class PreferenceFragment : PreferenceFragmentCompat() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             addPreferencesFromResource(R.xml.settings_prefs)
-
+            findPreference<SwitchPreference>("output_repeated_lyrics")?.apply {
+                setOnPreferenceChangeListener { _, newValue ->
+                    config.outputRepeatedLyrics = newValue as Boolean
+                    true
+                }
+            }
         }
     }
 }

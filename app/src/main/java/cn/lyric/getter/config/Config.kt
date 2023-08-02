@@ -39,4 +39,11 @@ class Config {
         set(value) {
             config.put("showAllRules", value)
         }
+    var outputRepeatedLyrics:Boolean
+        get() {
+            return config.opt("output_repeated_lyrics", false)
+        }
+        set(value) {
+            config.put("output_repeated_lyrics", value)
+        }
 }

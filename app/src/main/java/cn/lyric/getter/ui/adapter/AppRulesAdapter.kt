@@ -107,12 +107,16 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
             AppStatus.NoSupport
         } else {
             if (rule.useApi) {
-                if (rule.apiVersion < BuildConfig.API_VERSION) {
-                    AppStatus.LowApi
-                } else if (rule.apiVersion > BuildConfig.API_VERSION) {
-                    AppStatus.MoreAPI
+                if (versionCode in rule.startVersionCode..rule.endVersionCode) {
+                    if (rule.apiVersion < BuildConfig.API_VERSION) {
+                        AppStatus.LowApi
+                    } else if (rule.apiVersion > BuildConfig.API_VERSION) {
+                        AppStatus.MoreAPI
+                    } else {
+                        AppStatus.API
+                    }
                 } else {
-                    AppStatus.API
+                    AppStatus.NoSupport
                 }
             } else {
                 if (rule.startVersionCode == 0) {
