@@ -224,7 +224,7 @@
       "name": "LX Music",
       "rules": [
         {
-          "startVersionCode": 0,
+          "startVersionCode": 42003,
           "endVersionCode": 2147483647,
           "excludeVersions": [],
           "apiVersion": 0,
