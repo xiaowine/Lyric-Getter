@@ -50,6 +50,12 @@ class SettingsFragment : Fragment() {
                     true
                 }
             }
+            findPreference<SwitchPreference>("enhanced_hidden_lyrics")?.apply {
+                setOnPreferenceChangeListener { _, newValue ->
+                    config.enhancedHiddenLyrics = newValue as Boolean
+                    true
+                }
+            }
         }
     }
 }

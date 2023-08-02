@@ -14,9 +14,19 @@ import cn.lyric.getter.tool.LogTools.log
 import com.github.kyuubiran.ezxhelper.Log
 import de.robv.android.xposed.XSharedPreferences
 import java.io.DataOutputStream
+import kotlin.properties.Delegates
+import kotlin.properties.ReadWriteProperty
 
 
 object Tools {
+    fun <T> observableChange(initialValue: T, onChange: (oldValue: T, newValue: T) -> Unit): ReadWriteProperty<Any?, T> {
+        return Delegates.observable(initialValue) { _, oldVal, newVal ->
+            if (oldVal != newVal) {
+                onChange(oldVal, newVal)
+            }
+        }
+    }
+
     fun getPref(key: String): XSharedPreferences? {
         return try {
             val pref = XSharedPreferences(BuildConfig.APPLICATION_ID, key)
@@ -26,6 +36,7 @@ object Tools {
             null
         }
     }
+
     fun goMainThread(delayed: Long = 0, callback: () -> Unit): Boolean {
         return Handler(Looper.getMainLooper()).postDelayed({
             callback()

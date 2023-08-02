@@ -14,7 +14,9 @@ import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.HookTools.getApplication
+import cn.lyric.getter.tool.LogTools.log
 import cn.lyric.getter.tool.Tools.isNotNull
+import cn.lyric.getter.tool.Tools.observableChange
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
@@ -28,9 +30,10 @@ import java.util.Timer
 import java.util.TimerTask
 
 
-object Apple : BaseHook() {  init {
-    System.loadLibrary("dexkit")
-}
+object Apple : BaseHook() {
+    init {
+        System.loadLibrary("dexkit")
+    }
 
     override val name: String get() = this.javaClass.simpleName
 
@@ -46,8 +49,19 @@ object Apple : BaseHook() {  init {
 
     private val lyricList = LinkedList<LyricsLine>()
 
-    private var oldLyric: String = ""
-    private var oldTitle: String = ""
+    private var delay: Int = 0
+
+    private var lyric: String by observableChange("") { oldValue, newValue ->
+        if (oldValue == newValue) return@observableChange
+        EventTools.sendLyric(context, newValue, delay)
+    }
+
+    private var title: String by observableChange("") { oldValue, newValue ->
+        if (oldValue == newValue) return@observableChange
+        lyricList.clear()
+        EventTools.cleanLyric(context)
+    }
+
 
     private var timer: Timer? = null
     private var isRunning = false
@@ -59,10 +73,8 @@ object Apple : BaseHook() {  init {
                 if (lyricList.isEmpty()) return
                 val currentPosition = ((SystemClock.elapsedRealtime() - playbackState.lastPositionUpdateTime) * playbackState.playbackSpeed + playbackState.position).toLong()
                 lyricList.firstOrNull { it.start <= currentPosition && it.end >= currentPosition }.isNotNull {
-                    val lyric = it.lyric
-                    if (oldLyric == lyric) return@isNotNull
-                    oldLyric = lyric
-                    EventTools.sendLyric(context, it.lyric, (it.end - it.start) / 1000)
+                    delay = (it.end - it.start) / 1000
+                    lyric = it.lyric
                 }
             }
         }, 0, 400)
@@ -72,6 +84,7 @@ object Apple : BaseHook() {  init {
     private fun stopTimer() {
         if (!isRunning) return
         timer?.cancel()
+        "stopTimer".log()
         EventTools.cleanLyric(context)
         isRunning = false
     }
@@ -122,11 +135,7 @@ object Apple : BaseHook() {  init {
             it.methodFinder().filterByName("a").first().createHook {
                 after { hookParam ->
                     val mediaMetadata = hookParam.args[0] as MediaMetadata
-                    val title = mediaMetadata.getString(MediaMetadata.METADATA_KEY_TITLE)
-                    if (oldTitle == title) return@after
-                    oldTitle = title
-                    lyricList.clear()
-                    EventTools.cleanLyric(context)
+                    title = mediaMetadata.getString(MediaMetadata.METADATA_KEY_TITLE)
                 }
             }
         }

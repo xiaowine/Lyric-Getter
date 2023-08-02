@@ -7,4 +7,11 @@
         android:defaultValue="false"
         android:key="output_repeated_lyrics"
         android:title="@string/output_repeated_lyrics" />
+    <SwitchPreference
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:defaultValue="false"
+        android:key="enhanced_hidden_lyrics"
+        android:summary="@string/enhanced_hidden_lyrics_tips"
+        android:title="@string/enhanced_hidden_lyrics" />
 </PreferenceScreen>

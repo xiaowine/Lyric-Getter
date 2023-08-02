@@ -1,15 +1,26 @@
 package cn.lyric.getter.tool
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import cn.lyric.getter.api.data.DataType
 import cn.lyric.getter.api.data.LyricData
-import cn.lyric.getter.config.XposedOwnSP.config
-import cn.lyric.getter.tool.Tools.isNotNull
 
+@SuppressLint("StaticFieldLeak")
 object EventTools {
-    private var lastLyricData: LyricData? = null
+    lateinit var context: Context
+
+    private var lastLyricData: LyricData? by Tools.observableChange(null) { _, newValue ->
+        newValue?.run {
+            if (lyric.isEmpty()) return@observableChange
+            context.sendBroadcast(Intent().apply {
+                action = "Lyric_Data"
+                putExtra("Data", newValue)
+            })
+            Log.d(TAG, this.toString())
+        }
+    }
     private const val TAG = "Lyrics Getter"
 
     fun sendLyric(context: Context, lyric: String) {
@@ -31,26 +42,17 @@ object EventTools {
         packageName: String,
         delay: Int
     ) {
-        if (lyric.isEmpty()) return
-        if (lastLyricData.isNotNull()) {
-            if (config.outputRepeatedLyrics || lastLyricData!!.lyric == lyric && lastLyricData!!.customIcon == customIcon && lastLyricData!!.base64Icon == base64Icon && lastLyricData!!.useOwnMusicController == useOwnMusicController && lastLyricData!!.serviceName == serviceName && lastLyricData!!.packageName == packageName && lastLyricData!!.delay == delay) return
+        this.context = context
+        lastLyricData = LyricData().apply {
+            this.type = DataType.UPDATE
+            this.lyric = lyric
+            this.customIcon = customIcon
+            this.base64Icon = base64Icon
+            this.useOwnMusicController = useOwnMusicController
+            this.serviceName = serviceName
+            this.packageName = packageName
+            this.delay = delay
         }
-        context.sendBroadcast(Intent().apply {
-            action = "Lyric_Data"
-            val lyricData = LyricData().apply {
-                this.type = DataType.UPDATE
-                this.lyric = lyric
-                this.customIcon = customIcon
-                this.base64Icon = base64Icon
-                this.useOwnMusicController = useOwnMusicController
-                this.serviceName = serviceName
-                this.packageName = packageName
-                this.delay = delay
-            }
-            lastLyricData = lyricData
-            putExtra("Data", lyricData)
-            Log.d(TAG, lyricData.toString())
-        })
     }
 
 
