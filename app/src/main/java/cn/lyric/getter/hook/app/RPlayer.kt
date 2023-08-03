@@ -2,6 +2,7 @@ package cn.lyric.getter.hook.app
 
 import android.content.Context
 import android.content.Intent
+import cn.lyric.getter.config.XposedOwnSP.config
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.LogTools.log
@@ -28,7 +29,7 @@ object RPlayer : BaseHook() {
                     val context = param.args[0] as Context
                     val classLoader = context.classLoader
                     HookTools.mediaMetadataCompatLyric(context, classLoader)
-                    HookTools.lockNotStopLyric(classLoader)
+                    if (config.allowSomeSoftwareToOutputAfterTheScreen) HookTools.lockNotStopLyric(classLoader)
                 }
             }
         }

@@ -34,4 +34,5 @@
     <string name="output_repeated_lyrics">输出重复歌词</string>
     <string name="enhanced_hidden_lyrics">增强隐藏歌词</string>
     <string name="enhanced_hidden_lyrics_tips">部分软件不适用，会导致歌词鬼畜</string>
+    <string name="allow_some_software_to_output_after_the_screen">允许部分软件息屏后依旧输出</string>
 </resources>

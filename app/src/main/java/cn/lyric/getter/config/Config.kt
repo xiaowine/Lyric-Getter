@@ -39,18 +39,26 @@ class Config {
         set(value) {
             config.put("showAllRules", value)
         }
-    var outputRepeatedLyrics:Boolean
+    var outputRepeatedLyrics: Boolean
         get() {
             return config.opt("output_repeated_lyrics", false)
         }
         set(value) {
             config.put("output_repeated_lyrics", value)
         }
-    var enhancedHiddenLyrics:Boolean
+    var enhancedHiddenLyrics: Boolean
         get() {
             return config.opt("enhanced_hidden_lyrics", false)
         }
         set(value) {
             config.put("enhanced_hidden_lyrics", value)
+        }
+
+    var allowSomeSoftwareToOutputAfterTheScreen: Boolean
+        get() {
+            return config.opt("allowSomeSoftwareToOutputAfterTheScreen", false)
+        }
+        set(value) {
+            config.put("allowSomeSoftwareToOutputAfterTheScreen", value)
         }
 }
