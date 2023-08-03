@@ -48,9 +48,7 @@ class MainActivity : AppCompatActivity() {
                 setPositiveButton(android.R.string.ok, null)
                 show()
             }
-
         }
-
     }
 
     override fun onSupportNavigateUp(): Boolean {

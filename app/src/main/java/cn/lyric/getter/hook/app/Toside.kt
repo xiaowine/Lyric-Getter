@@ -1,22 +1,19 @@
 package cn.lyric.getter.hook.app
 
 import android.app.Activity
-import android.content.Intent
 import android.view.View
+import cn.lyric.getter.config.XposedOwnSP.config
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools.cleanLyric
 import cn.lyric.getter.tool.EventTools.sendLyric
+import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.HookTools.getApplication
-import cn.lyric.getter.tool.HookTools.lockNotStopLyric
-import cn.lyric.getter.tool.LogTools.log
 import cn.lyric.getter.tool.Tools.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
-import io.luckypray.dexkit.DexKitBridge
-import io.luckypray.dexkit.enums.MatchType
 
 object Toside : BaseHook() {
     init {
@@ -28,8 +25,10 @@ object Toside : BaseHook() {
     override fun init() {
         val lyricModuleClass = loadClassOrNull("cn.toside.music.mobile.lyric.LyricModule")
         lyricModuleClass.isNotNull { clazz ->
-            getApplication {
-                lockNotStopLyric(it.classLoader, arrayListOf("MusicModule"))
+            if (config.allowSomeSoftwareToOutputAfterTheScreen) {
+                getApplication {
+                    HookTools.lockNotStopLyric(it.classLoader, arrayListOf("MusicModule"))
+                }
             }
             clazz.methodFinder().filterByName("pause").first().createHook {
                 after {

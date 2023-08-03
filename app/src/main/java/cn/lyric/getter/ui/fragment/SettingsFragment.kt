@@ -56,6 +56,12 @@ class SettingsFragment : Fragment() {
                     true
                 }
             }
+            findPreference<SwitchPreference>("allow_some_software_to_output_after_the_screen")?.apply {
+                setOnPreferenceChangeListener { _, newValue ->
+                    config.allowSomeSoftwareToOutputAfterTheScreen = newValue as Boolean
+                    true
+                }
+            }
         }
     }
 }
