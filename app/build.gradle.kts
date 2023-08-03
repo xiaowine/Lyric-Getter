@@ -18,7 +18,7 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = 7
-        versionName = "1.0.5$buildTime"
+        versionName = "1.0.5"
         buildConfigField("long", "BUILD_TIME", "$buildTime")
         buildConfigField("int", "API_VERSION", "5")
         buildConfigField("int", "CONFIG_VERSION", "1")
