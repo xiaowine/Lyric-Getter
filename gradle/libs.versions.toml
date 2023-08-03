@@ -4,6 +4,7 @@ gson = "2.10.1"
 kotlin = "1.9.0"
 core-ktx = "1.10.1"
 appcompat = "1.6.1"
+lyricGetterApi = "5.0.1"
 material = "1.9.0"
 constraintlayout = "2.1.4"
 navigation-fragment-ktx = "2.6.0"
@@ -29,6 +30,7 @@ preference = { group = "androidx.preference", name = "preference", version.ref =
 ezXHelper = { group = "com.github.kyuubiran", name = "EzXHelper", version.ref = "ezXHelper" }
 dexkit = { group = "org.luckypray", name = "DexKit", version.ref = "dexKit" }
 xposed-api = { group = "de.robv.android.xposed", name = "api", version.ref = "xposed"}
+lyricGetter-api = { group = "com.github.xiaowine", name = "Lyric-Getter-Api", version.ref = "lyricGetterApi"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

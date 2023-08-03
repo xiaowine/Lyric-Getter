@@ -16,4 +16,3 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Lyric Getter"
 include(":app")
-include(":LyricGetterApi")

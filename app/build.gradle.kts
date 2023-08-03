@@ -85,7 +85,6 @@ android {
 dependencies {
     implementation(libs.ezXHelper)
     implementation(libs.dexkit)
-    implementation(rootProject.project(":LyricGetterApi"))
     compileOnly(libs.xposed.api)
 
     implementation(libs.core.ktx)
@@ -97,6 +96,7 @@ dependencies {
     implementation(libs.rikkax.material.preference)
     implementation(libs.preference)
     implementation(libs.gson)
+    implementation(libs.lyricGetter.api)
     configurations.all {
         exclude("androidx.appcompat", "appcompat")
     }
