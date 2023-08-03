@@ -11,7 +11,6 @@ import android.os.Looper
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
 import cn.lyric.getter.tool.LogTools.log
-import com.github.kyuubiran.ezxhelper.Log
 import de.robv.android.xposed.XSharedPreferences
 import java.io.DataOutputStream
 import kotlin.properties.Delegates

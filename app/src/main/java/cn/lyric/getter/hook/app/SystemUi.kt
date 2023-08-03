@@ -3,7 +3,6 @@ package cn.lyric.getter.hook.app
 
 import android.media.MediaMetadata
 import android.media.session.PlaybackState
-import androidx.appcompat.app.ActionBarDrawerToggle.Delegate
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
 import cn.lyric.getter.api.tools.Tools
@@ -18,20 +17,20 @@ import cn.lyric.getter.tool.Tools.observableChange
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.EzXHelper.moduleRes
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
-import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
-import kotlin.properties.Delegates
 
 
 object SystemUi : BaseHook() {
+
+    override val name: String get() = this.javaClass.simpleName
 
     private var title: String by observableChange("") { _, newValue ->
         if (newValue.isNotEmpty()) {
             EventTools.cleanLyric(context)
         }
     }
+
     private var useOwnMusicController: Boolean = false
-    override val name: String get() = this.javaClass.simpleName
 
     private fun Class<*>.hasMethod(methodName: String): Boolean {
         val methods = declaredMethods
@@ -45,9 +44,11 @@ object SystemUi : BaseHook() {
 
     override fun init() {
         loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager").isNotNull {
-            it.methodFinder().filterByName("clearCurrentMediaNotificationSession").first().createHook {
+            it.methodFinder().filterByName("clearCurrentMediaNotification").first().createHook {
                 after {
-                    if (!useOwnMusicController) EventTools.cleanLyric(context)
+                    if (!useOwnMusicController) {
+                        EventTools.cleanLyric(context)
+                    }
                 }
             }
         }
@@ -58,7 +59,11 @@ object SystemUi : BaseHook() {
                     clazz.methodFinder().filterByName("onPlaybackStateChanged").first().createHook {
                         after { hookParam ->
                             val playbackState = hookParam.args[0] as PlaybackState
-                            if (playbackState.state == 2) if (!useOwnMusicController) EventTools.cleanLyric(context)
+                            if (playbackState.state == 2) {
+                                if (!useOwnMusicController) {
+                                    EventTools.cleanLyric(context)
+                                }
+                            }
                         }
                     }
                     break
@@ -84,7 +89,7 @@ object SystemUi : BaseHook() {
             }
         }
         getApplication { application ->
-            Tools.receptionLyric(application, BuildConfig.VERSION_CODE) { lyricData ->
+            Tools.receptionLyric(application, BuildConfig.API_VERSION) { lyricData ->
                 useOwnMusicController = lyricData.useOwnMusicController
             }
         }
