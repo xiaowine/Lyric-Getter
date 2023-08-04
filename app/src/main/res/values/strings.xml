@@ -35,5 +35,11 @@
     <string name="enhanced_hidden_lyrics">增强隐藏歌词</string>
     <string name="enhanced_hidden_lyrics_tips">部分软件不适用，会导致歌词鬼畜</string>
     <string name="allow_some_software_to_output_after_the_screen">允许部分软件息屏后依旧输出</string>
-    <string name="device_label">设备信息\n</string>
+    <string name="device_label">设备信息</string>
+    <string name="new_rule_detected_loading">检测到新的App规则，正在加载</string>
+    <string name="new_rule_detected">检测到新的App规则</string>
+    <string name="new_rule_detected_tips">检测到新的App规则，重启生效</string>
+    <string name="new_version_detected">检测到新版本</string>
+    <string name="update">更新</string>
+    <string name="check_update_error">检查更新时出现错误</string>
 </resources>

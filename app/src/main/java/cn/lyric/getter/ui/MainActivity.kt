@@ -12,6 +12,7 @@ import cn.lyric.getter.config.ActivityOwnSP
 import cn.lyric.getter.databinding.ActivityMainBinding
 import cn.lyric.getter.tool.ActivityTools
 import cn.lyric.getter.tool.ActivityTools.activated
+import cn.lyric.getter.tool.ActivityTools.checkUpdate
 import cn.lyric.getter.tool.ActivityTools.updateAppRules
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         binding.nav.setupWithNavController(findNavController(R.id.nav_host_fragment))
+        checkUpdate()
         updateAppRules()
     }
 
