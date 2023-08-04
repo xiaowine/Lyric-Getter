@@ -82,6 +82,7 @@
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/app_rules_text_view"
                 style="@style/TextValue"
+                android:textIsSelectable="true"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="?dialogPreferredPadding" />
