@@ -18,7 +18,7 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = 7
-        versionName = "1.0.5"
+        versionName = "1.0.5$buildTime"
         buildConfigField("long", "BUILD_TIME", "$buildTime")
         buildConfigField("int", "API_VERSION", "5")
         buildConfigField("int", "CONFIG_VERSION", "1")
@@ -92,7 +92,6 @@ dependencies {
 //    implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
-    implementation(libs.rikkax.widget.borderview)
     implementation(libs.rikkax.material.preference)
     implementation(libs.preference)
     implementation(libs.gson)

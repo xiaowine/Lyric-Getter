@@ -120,7 +120,7 @@ class AppRulesFragment : Fragment() {
             }
             dialog.dismiss()
             goMainThread {
-                binding.toolbar.title = "${getString(R.string.app_rules_fragment_label)}:(${appAdapter.dataLists.size})"
+                binding.toolbar.title = "${getString(R.string.app_rules_fragment_label)}(${appAdapter.dataLists.size})"
                 if (isSwipeRefresh) binding.swipeRefreshLayout.isRefreshing = false
             }
         }.start()

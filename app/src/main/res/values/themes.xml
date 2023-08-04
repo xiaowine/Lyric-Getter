@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="Theme.MyApplication" parent="Theme.Material3.DynamicColors.Light.Rikka">
+    <style name="Theme.MyApplication" parent="Theme.Material3.DynamicColors.Light">
         <item name="android:windowTranslucentStatus">false</item>
         <item name="android:windowTranslucentNavigation">true</item>
         <item name="android:windowLightStatusBar">true</item>

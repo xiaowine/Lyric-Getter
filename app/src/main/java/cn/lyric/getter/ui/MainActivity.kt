@@ -41,14 +41,6 @@ class MainActivity : AppCompatActivity() {
         super.onStart()
         binding.nav.setupWithNavController(findNavController(R.id.nav_host_fragment))
         updateAppRules()
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.R) {
-            MaterialAlertDialogBuilder(this).apply {
-                setTitle("提示")
-                setMessage("能力有限，本模块在Android12以下没有莫奈取色的系统上运行颜色异常，不会修了")
-                setPositiveButton(android.R.string.ok, null)
-                show()
-            }
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
