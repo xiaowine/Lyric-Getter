@@ -1,9 +1,11 @@
 package cn.lyric.getter.ui.fragment
 
 
+import android.annotation.SuppressLint
 import android.content.ComponentName
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -33,7 +35,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    @SuppressLint("SetTextI18n") override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             if (!activated) {
@@ -62,7 +64,7 @@ class HomeFragment : Fragment() {
                         isChecked = config.hideDesktopIcons
                     }
                     setOnMenuItemClickListener {
-                        if  (it.itemId == R.id.show_hide_desktop_icons) {
+                        if (it.itemId == R.id.show_hide_desktop_icons) {
                             it.isChecked = !it.isChecked
                             config.hideDesktopIcons = it.isChecked
                             requireContext().packageManager.setComponentEnabledSetting(
@@ -77,13 +79,14 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
+            deviceValue.text = "${Build.BRAND} ${Build.MODEL} Android${Build.VERSION.RELEASE}"
             versionLabelValue.text = BuildConfig.VERSION_NAME
             versionCodeValue.text = BuildConfig.VERSION_CODE.toString()
             versionTypeValue.text = BuildConfig.BUILD_TYPE.uppercase()
             buildTimeValue.text = SimpleDateFormat("yyyy-MM-dd HH:mm z", Locale.getDefault()).format(BuildConfig.BUILD_TIME)
             apiVersionValue.text = BuildConfig.API_VERSION.toString()
             configVersionValue.text = BuildConfig.CONFIG_VERSION.toString()
-           appRulesVersionValue.text= getAppRules().appRulesVersion.toString()
+            appRulesVersionValue.text = getAppRules().appRulesVersion.toString()
         }
     }
 

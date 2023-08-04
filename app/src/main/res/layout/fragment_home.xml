@@ -129,6 +129,18 @@
                             style="@style/TextLabel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:text="@string/device_label" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/device_value"
+                            style="@style/TextValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:text="@string/version_name_label" />
 
                         <com.google.android.material.textview.MaterialTextView
