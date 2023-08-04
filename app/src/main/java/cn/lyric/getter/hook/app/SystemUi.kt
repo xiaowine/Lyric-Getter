@@ -22,8 +22,6 @@ import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinde
 
 object SystemUi : BaseHook() {
 
-    override val name: String get() = this.javaClass.simpleName
-
     private var title: String by observableChange("") { _, newValue ->
         if (newValue.isNotEmpty()) {
             EventTools.cleanLyric(context)

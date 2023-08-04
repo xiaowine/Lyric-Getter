@@ -35,7 +35,6 @@ object Apple : BaseHook() {
         System.loadLibrary("dexkit")
     }
 
-    override val name: String get() = this.javaClass.simpleName
 
     private lateinit var lyricConvertConstructor: Data
 

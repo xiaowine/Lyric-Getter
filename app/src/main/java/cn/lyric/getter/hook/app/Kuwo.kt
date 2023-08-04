@@ -27,7 +27,6 @@ object Kuwo : BaseHook() {
         System.loadLibrary("dexkit")
     }
 
-    override val name: String get() = this.javaClass.simpleName
 
     val audioManager by lazy { context.getSystemService(Context.AUDIO_SERVICE) as AudioManager }
 

@@ -9,7 +9,6 @@ import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
 
 object Kugou : BaseHook() {
-    override val name: String get() = this.javaClass.simpleName
 
     override fun init() {
         HookTools.openBluetoothA2dpOn()
