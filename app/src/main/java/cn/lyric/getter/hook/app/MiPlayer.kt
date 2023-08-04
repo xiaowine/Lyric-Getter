@@ -5,8 +5,6 @@ import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.isQQLite
 
 object MiPlayer : BaseHook() {
-    override val name: String
-        get() = this.javaClass.simpleName
 
     override fun init() {
         isQQLite {

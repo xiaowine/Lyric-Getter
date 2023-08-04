@@ -6,8 +6,6 @@ import cn.lyric.getter.tool.HookTools.isQQLite
 import cn.lyric.getter.tool.Tools.isNot
 
 object Meizu : BaseHook() {
-    override val name: String
-        get() = this.javaClass.simpleName
 
     override fun init() {
         isQQLite {

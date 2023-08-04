@@ -15,7 +15,6 @@ import com.github.kyuubiran.ezxhelper.finders.ConstructorFinder.`-Static`.constr
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
 
 object Api : BaseHook() {
-    override val name: String get() = this.javaClass.simpleName
 
     override fun init() {
         hook()
@@ -25,13 +24,12 @@ object Api : BaseHook() {
         isApi(classLoader) { clazz ->
             clazz.constructorFinder().first().createHook {
                 before { hookParam ->
-                    hookParam.thisObject.objectHelper {
-                        val objectOrNullAs = getObjectOrNullAs<Int>("API_VERSION")
-                        if (objectOrNullAs.isNotNull() || objectOrNullAs!! == BuildConfig.API_VERSION) {
-                            clazz.methodFinder().first { name == "hasEnable" }.createHook { returnConstant(true) }
+                    hookParam.thisObject.objectHelper().getObjectOrNullAs<Int>("API_VERSION").isNotNull {
+                        if (it == BuildConfig.API_VERSION) {
+                            hookParam.thisObject.objectHelper().setObject("hasEnable", true)
                             clazz.methodFinder().filterByParamCount(8).first { name == "sendLyric" }.createHook {
                                 after { hookParam ->
-                                    sendLyric(hookParam.args[0] as Context, hookParam.args[1] as String, hookParam.args[2] as Boolean, hookParam.args[3] as String, hookParam.args[4] as Boolean, hookParam.args[5] as String, hookParam.args[6] as String,hookParam.args[7] as Int)
+                                    sendLyric(hookParam.args[0] as Context, hookParam.args[1] as String, hookParam.args[2] as Boolean, hookParam.args[3] as String, hookParam.args[4] as Boolean, hookParam.args[5] as String, hookParam.args[6] as String, hookParam.args[7] as Int)
                                 }
                             }
                             clazz.methodFinder().first { name == "stopLyric" }.createHook {
@@ -39,10 +37,10 @@ object Api : BaseHook() {
                                     cleanLyric(hookParam.args[0] as Context)
                                 }
                             }
-                        } else {
-                            "The APIs do not match".log()
+                            return@before
                         }
                     }
+                    "The APIs do not match".log()
                 }
             }
 

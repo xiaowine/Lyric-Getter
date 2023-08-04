@@ -25,7 +25,6 @@ object Netease : BaseHook() {
         System.loadLibrary("dexkit")
     }
 
-    override val name: String get() = this.javaClass.simpleName
 
     override fun init() {
         MockFlyme().mock()

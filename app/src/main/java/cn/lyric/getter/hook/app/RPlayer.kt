@@ -20,7 +20,6 @@ object RPlayer : BaseHook() {
         System.loadLibrary("dexkit")
     }
 
-    override val name: String get() = this.javaClass.simpleName
 
     override fun init() {
         loadClassOrNull("com.stub.StubApp").isNotNull {

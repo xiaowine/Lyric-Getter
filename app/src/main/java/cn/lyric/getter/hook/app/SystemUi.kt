@@ -5,6 +5,8 @@ import android.media.MediaMetadata
 import android.media.session.PlaybackState
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
+import cn.lyric.getter.api.LyricListener
+import cn.lyric.getter.api.data.LyricData
 import cn.lyric.getter.api.tools.Tools
 import cn.lyric.getter.config.XposedOwnSP.config
 import cn.lyric.getter.hook.BaseHook
@@ -21,8 +23,6 @@ import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinde
 
 
 object SystemUi : BaseHook() {
-
-    override val name: String get() = this.javaClass.simpleName
 
     private var title: String by observableChange("") { _, newValue ->
         if (newValue.isNotEmpty()) {
@@ -89,9 +89,11 @@ object SystemUi : BaseHook() {
             }
         }
         getApplication { application ->
-            Tools.receptionLyric(application, BuildConfig.API_VERSION) { lyricData ->
-                useOwnMusicController = lyricData.useOwnMusicController
-            }
+            Tools.registerLyricListener(application, BuildConfig.API_VERSION, object : LyricListener {
+                override fun onReceived(lyricData: LyricData) {
+                    useOwnMusicController = lyricData.useOwnMusicController
+                }
+            })
         }
     }
 }
