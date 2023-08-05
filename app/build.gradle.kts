@@ -22,6 +22,7 @@ android {
         buildConfigField("long", "BUILD_TIME", "$buildTime")
         buildConfigField("int", "API_VERSION", "5")
         buildConfigField("int", "CONFIG_VERSION", "1")
+        buildConfigField("int", "APP_RULES_API_VERSION", "1")
     }
     val config = localProperties.getProperty("androidStoreFile")?.let {
         signingConfigs.create("config") {
