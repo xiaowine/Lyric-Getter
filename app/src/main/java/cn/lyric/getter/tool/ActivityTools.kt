@@ -50,17 +50,19 @@ object ActivityTools {
                 if (i > getAppRules().appRulesVersion) {
                     context.getString(R.string.new_rule_detected_loading).showToast()
                     "https://xiaowine.github.io/Lyric-Getter/app_rules.json".getHttp { it1 ->
-                        val file = File("${context.filesDir.path}/app_rules.json")
-                        if (file.canWrite() || file.createNewFile()) {
-                            file.writeText(it1)
-                            goMainThread {
-                                MaterialAlertDialogBuilder(context).apply {
-                                    setTitle(R.string.new_rule_detected)
-                                    setMessage(R.string.new_rule_detected_tips)
-                                    setPositiveButton(R.string.restart) { _, _ ->
-                                        restartApp()
+                        if (it1.parseJSON<AppRules>().version == BuildConfig.APP_RULES_API_VERSION) {
+                            val file = File("${context.filesDir.path}/app_rules.json")
+                            if (file.canWrite() || file.createNewFile()) {
+                                file.writeText(it1)
+                                goMainThread {
+                                    MaterialAlertDialogBuilder(context).apply {
+                                        setTitle(R.string.new_rule_detected)
+                                        setMessage(R.string.new_rule_detected_tips)
+                                        setPositiveButton(R.string.restart) { _, _ ->
+                                            restartApp()
+                                        }
+                                        show()
                                     }
-                                    show()
                                 }
                             }
                         }

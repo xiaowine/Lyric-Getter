@@ -87,6 +87,7 @@ class HomeFragment : Fragment() {
             apiVersionValue.text = BuildConfig.API_VERSION.toString()
             configVersionValue.text = BuildConfig.CONFIG_VERSION.toString()
             appRulesVersionValue.text = getAppRules().appRulesVersion.toString()
+            appRulesApiVersionValue.text = BuildConfig.APP_RULES_API_VERSION.toString()
         }
     }
 

@@ -222,6 +222,17 @@
                             style="@style/TextValue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/app_rules_api_version_label" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/app_rules_api_version_value"
+                            style="@style/TextValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
             </LinearLayout>
