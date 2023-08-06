@@ -89,8 +89,8 @@ object SystemUi : BaseHook() {
             }
         }
         getApplication { application ->
-            Tools.registerLyricListener(application, BuildConfig.API_VERSION, object : LyricListener {
-                override fun onReceived(lyricData: LyricData) {
+            Tools.registerLyricListener(application, BuildConfig.API_VERSION, object : LyricListener() {
+                override fun onUpdate(lyricData: LyricData) {
                     useOwnMusicController = lyricData.useOwnMusicController
                 }
             })

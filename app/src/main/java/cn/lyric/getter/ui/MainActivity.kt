@@ -1,7 +1,6 @@
 package cn.lyric.getter.ui
 
 
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,6 @@ import cn.lyric.getter.tool.ActivityTools
 import cn.lyric.getter.tool.ActivityTools.activated
 import cn.lyric.getter.tool.ActivityTools.checkUpdate
 import cn.lyric.getter.tool.ActivityTools.updateAppRules
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class MainActivity : AppCompatActivity() {
