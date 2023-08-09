@@ -47,11 +47,18 @@ class AppRulesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         appAdapter = AppRulesAdapter().apply {
+            expandedList = appRulesViewModel.expandedList
             setOnItemClickListener(object : AppRulesAdapter.OnItemClickListener {
                 override fun onItemClick(position: Int, viewBinding: ItemsAppBinding) {
                     viewBinding.apply {
                         appRulesCardView.apply {
-                            visibility = if (visibility == View.VISIBLE) View.GONE else View.VISIBLE
+                            visibility = if (visibility == View.VISIBLE) {
+                                expandedList.remove(dataLists[position].packageName)
+                                View.GONE
+                            } else {
+                                expandedList.add(dataLists[position].packageName)
+                                View.VISIBLE
+                            }
                         }
                         appRulesTextView.apply {
                             if (text.isEmpty()) {
@@ -102,7 +109,9 @@ class AppRulesFragment : Fragment() {
     private fun loadAppRules(isSwipeRefresh: Boolean = false) {
         appAdapter.removeAllData()
         if (appRulesViewModel.dataLists.isNotEmpty()) {
-            appRulesViewModel.dataLists.forEach { appAdapter.addData(it) }
+            appRulesViewModel.dataLists.forEach {
+                appAdapter.addData(it)
+            }
         } else {
             val dialog = MaterialProgressDialog(requireContext()).apply {
                 setTitle(getString(R.string.getting_app_information))
@@ -138,10 +147,11 @@ class AppRulesFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        appAdapter.dataLists.size.log()
+        appAdapter.expandedList.size.log()
         appRulesViewModel.apply {
             dataLists = appAdapter.dataLists
             scrollY = binding.recyclerView.scrollY
+            expandedList = appAdapter.expandedList
         }
         _binding = null
     }

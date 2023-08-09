@@ -109,8 +109,10 @@ class HomeFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        homeViewModel.scrollY = binding.nestedScrollView.scrollY
-        homeViewModel.expanded = if (verticalOffset == 0) true else scrollRange < verticalOffset
+        homeViewModel.apply {
+            scrollY = binding.nestedScrollView.scrollY
+            expanded = if (verticalOffset == 0) true else scrollRange < verticalOffset
+        }
         _binding = null
     }
 }

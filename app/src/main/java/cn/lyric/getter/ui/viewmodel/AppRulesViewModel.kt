@@ -5,6 +5,12 @@ import androidx.lifecycle.ViewModel
 import cn.lyric.getter.data.AppInfos
 
 class AppRulesViewModel(private val state: SavedStateHandle) : ViewModel() {
+
+    var expandedList: ArrayList<String>
+        get() = state["expandedList"] ?: ArrayList<String>().also { state["expandedList"] = it }
+        set(value) {
+            state["expandedList"] = value
+        }
     var dataLists: ArrayList<AppInfos>
         get() = state["dataLists"] ?: ArrayList<AppInfos>().also { state["dataLists"] = it }
         set(value) {
