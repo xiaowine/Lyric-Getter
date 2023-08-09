@@ -26,8 +26,6 @@ import kotlin.system.exitProcess
 object ActivityTools {
     lateinit var context: Context
 
-    var activated = false
-
 
     private val handler by lazy { Handler(Looper.getMainLooper()) }
 
@@ -105,11 +103,9 @@ object ActivityTools {
     }
 
     fun Any?.showToast() {
-        runCatching {
-            handler.post {
-                Toast.makeText(context, this.toString(), Toast.LENGTH_LONG).show()
-                this.log()
-            }
+        handler.post {
+            Toast.makeText(context, this.toString(), Toast.LENGTH_LONG).show()
+            this.log()
         }
     }
 

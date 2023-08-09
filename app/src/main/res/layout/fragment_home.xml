@@ -8,16 +8,18 @@
     app:fitsSystemWindowsInsets="@integer/internal_fragment_insets">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing_toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="?collapsingToolbarLayoutLargeSize"
             android:fitsSystemWindows="false"
             app:fitsSystemWindowsInsets="@integer/internal_fragment_top_insets"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:titleCollapseMode="scale">
 
             <com.google.android.material.appbar.MaterialToolbar
@@ -52,8 +54,10 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nested_scroll_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -222,6 +226,7 @@
                             style="@style/TextValue"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content" />
+
                         <com.google.android.material.textview.MaterialTextView
                             style="@style/TextLabel"
                             android:layout_width="match_parent"

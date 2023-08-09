@@ -4,6 +4,7 @@ gson = "2.10.1"
 kotlin = "1.9.0"
 core-ktx = "1.10.1"
 appcompat = "1.6.1"
+lifecycleViewmodelKtx = "2.6.1"
 lyricGetterApi = "5.0.3"
 material = "1.9.0"
 constraintlayout = "2.1.4"
@@ -19,6 +20,7 @@ xposed = "82"
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
+lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }

@@ -97,6 +97,7 @@ dependencies {
     implementation(libs.preference)
     implementation(libs.gson)
     implementation(libs.lyricGetter.api)
+    implementation(libs.lifecycle.viewmodel.ktx)
     configurations.all {
         exclude("androidx.appcompat", "appcompat")
     }

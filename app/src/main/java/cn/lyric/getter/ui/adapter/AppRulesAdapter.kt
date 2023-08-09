@@ -14,15 +14,16 @@ import cn.lyric.getter.data.lyricType
 import cn.lyric.getter.databinding.ItemsAppBinding
 
 
-class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
+class AppRulesAdapter() : RecyclerView.Adapter<BaseViewHolder<*>>() {
     lateinit var context: Context
-
+    var dataLists: ArrayList<AppInfos> = ArrayList()
     private lateinit var listener: OnItemClickListener
-    val dataLists: ArrayList<AppInfos> = ArrayList()
+
 
     interface OnItemClickListener {
         fun onItemClick(position: Int, viewBinding: ItemsAppBinding)
     }
+
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
