@@ -93,6 +93,8 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
             if (expandedList.contains(appInfo.packageName)) {
                 appRulesCardView.visibility = View.VISIBLE
                 appRulesTextView.text = dataLists.filter { it.packageName == dataLists[position].packageName }[0].appRule.toJSON(true)
+            } else {
+                appRulesCardView.visibility = View.GONE
             }
         }
     }

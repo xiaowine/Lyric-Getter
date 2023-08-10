@@ -80,6 +80,7 @@ class AppRulesFragment : Fragment() {
                         R.id.show_all_rules -> {
                             it.isChecked = !it.isChecked
                             config.showAllRules = it.isChecked
+                            appAdapter.expandedList.clear()
                             loadAppRules()
                         }
 
@@ -99,6 +100,7 @@ class AppRulesFragment : Fragment() {
                 scrollY = appRulesViewModel.scrollY
             }
             swipeRefreshLayout.setOnRefreshListener {
+                appAdapter.expandedList.clear()
                 loadAppRules(true)
             }
             loadAppRules()
