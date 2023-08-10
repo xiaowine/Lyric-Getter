@@ -6,6 +6,14 @@
       "rules": [
         {
           "startVersionCode": 2023071601,
+          "endVersionCode": 2023081001,
+          "excludeVersions": [],
+          "apiVersion": 4,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        },{
+          "startVersionCode": 2023081001,
           "endVersionCode": 2147483647,
           "excludeVersions": [],
           "apiVersion": 4,
