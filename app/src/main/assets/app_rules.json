@@ -1,21 +1,6 @@
 {
   "appRules": [
     {
-      "packageName": "com.jio.media.jiobeats",
-      "name": "椒盐音乐",
-      "rules": [
-        {
-          "startVersionCode": 2023071601,
-          "endVersionCode": 2023081001,
-          "excludeVersions": [],
-          "apiVersion": 4,
-          "useApi": true,
-          "getLyricType": 0,
-          "remarks": ""
-        }
-      ]
-    },
-    {
       "packageName": "com.xuncorp.suvine.music",
       "name": "糖醋音乐",
       "rules": [
@@ -313,6 +298,6 @@
       ]
     }
   ],
-  "appRulesVersion": 1,
+  "appRulesVersion": 2,
   "version": 1
 }
