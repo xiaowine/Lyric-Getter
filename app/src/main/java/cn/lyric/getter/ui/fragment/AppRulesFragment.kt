@@ -115,6 +115,9 @@ class AppRulesFragment : Fragment() {
             appRulesViewModel.dataLists.forEach {
                 appAdapter.addData(it)
             }
+            goMainThread {
+                binding.toolbar.title = "${getString(R.string.app_rules_fragment_label)}(${appRulesViewModel.dataLists.size})"
+            }
         } else {
             val dialog = MaterialProgressDialog(requireContext()).apply {
                 setTitle(getString(R.string.getting_app_information))
@@ -140,10 +143,8 @@ class AppRulesFragment : Fragment() {
                 dialog.dismiss()
                 goMainThread {
                     binding.toolbar.title = "${getString(R.string.app_rules_fragment_label)}(${appAdapter.dataLists.size})"
-
                 }
             }.start()
-
         }
         if (isSwipeRefresh) binding.swipeRefreshLayout.isRefreshing = false
     }
