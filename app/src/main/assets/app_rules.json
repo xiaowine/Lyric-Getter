@@ -21,7 +21,7 @@
       "rules": [
         {
           "startVersionCode": 2023072601,
-          "endVersionCode": 2147483647,
+          "endVersionCode": 2023081000,
           "excludeVersions": [],
           "apiVersion": 4,
           "useApi": true,
@@ -45,7 +45,7 @@
       "rules": [
         {
           "startVersionCode": 2023071601,
-          "endVersionCode": 2147483647,
+          "endVersionCode": 2023081000,
           "excludeVersions": [],
           "apiVersion": 4,
           "useApi": true,
@@ -167,7 +167,7 @@
           "remarks": ""
         },
         {
-          "startVersionCode": 8000041,
+          "startVersionCode": 8000042,
           "endVersionCode": 2147483647,
           "excludeVersions": [],
           "apiVersion": 0,
