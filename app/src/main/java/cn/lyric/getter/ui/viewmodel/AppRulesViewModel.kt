@@ -7,12 +7,12 @@ import cn.lyric.getter.data.AppInfos
 class AppRulesViewModel(private val state: SavedStateHandle) : ViewModel() {
 
     var expandedList: ArrayList<String>
-        get() = state["expandedList"] ?: ArrayList<String>().also { state["expandedList"] = it }
+        get() = state["expandedList"] ?: ArrayList()
         set(value) {
             state["expandedList"] = value
         }
     var dataLists: ArrayList<AppInfos>
-        get() = state["dataLists"] ?: ArrayList<AppInfos>().also { state["dataLists"] = it }
+        get() = state["dataLists"] ?: ArrayList()
         set(value) {
             state["dataLists"] = value
         }

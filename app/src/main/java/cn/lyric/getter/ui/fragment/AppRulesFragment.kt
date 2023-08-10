@@ -81,7 +81,7 @@ class AppRulesFragment : Fragment() {
                             it.isChecked = !it.isChecked
                             config.showAllRules = it.isChecked
                             appAdapter.expandedList.clear()
-                            loadAppRules()
+                            loadAppRules(isFirst = false, isSwipeRefresh = false)
                         }
 
                         R.id.update_app_rules -> {
@@ -101,16 +101,17 @@ class AppRulesFragment : Fragment() {
             }
             swipeRefreshLayout.setOnRefreshListener {
                 appAdapter.expandedList.clear()
-                loadAppRules(true)
+                loadAppRules(isFirst = false, isSwipeRefresh = true)
             }
-            loadAppRules()
+
+            loadAppRules(isFirst = true, isSwipeRefresh = false)
         }
     }
 
 
-    private fun loadAppRules(isSwipeRefresh: Boolean = false) {
+    private fun loadAppRules(isFirst: Boolean = false, isSwipeRefresh: Boolean = false) {
         appAdapter.removeAllData()
-        if (appRulesViewModel.dataLists.isNotEmpty()) {
+        if (isFirst && appRulesViewModel.dataLists.isNotEmpty()) {
             appRulesViewModel.dataLists.forEach {
                 appAdapter.addData(it)
             }

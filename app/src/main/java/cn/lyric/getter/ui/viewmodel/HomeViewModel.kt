@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 
 class HomeViewModel(private val state: SavedStateHandle) : ViewModel() {
     var scrollY: Int
-        get() =  state["scrollY"] ?: 0
+        get() = state["scrollY"] ?: 0
         set(value) {
             state["scrollY"] = value
         }
@@ -15,5 +15,14 @@ class HomeViewModel(private val state: SavedStateHandle) : ViewModel() {
         set(value) {
             state["expanded"] = value
         }
-
+    var appRulesVersionValue: String?
+        get() = state["appRulesVersionValue"]
+        set(value) {
+            state["appRulesVersionValue"] = value
+        }
+    var buildTimeValue: String?
+        get() = state["buildTimeValue"]
+        set(value) {
+            state["buildTimeValue"] = value
+        }
 }

@@ -98,11 +98,11 @@ class HomeFragment : Fragment() {
             deviceValue.text = "${Build.BRAND} ${Build.MODEL} Android${Build.VERSION.RELEASE}"
             versionLabelValue.text = BuildConfig.VERSION_NAME
             versionCodeValue.text = BuildConfig.VERSION_CODE.toString()
-            versionTypeValue.text = BuildConfig.BUILD_TYPE.uppercase()
+            versionTypeValue.text = homeViewModel.buildTimeValue ?: BuildConfig.BUILD_TYPE.uppercase()
             buildTimeValue.text = SimpleDateFormat("yyyy-MM-dd HH:mm z", Locale.getDefault()).format(BuildConfig.BUILD_TIME)
             apiVersionValue.text = BuildConfig.API_VERSION.toString()
             configVersionValue.text = BuildConfig.CONFIG_VERSION.toString()
-            appRulesVersionValue.text = getAppRules().appRulesVersion.toString()
+            appRulesVersionValue.text = homeViewModel.appRulesVersionValue ?: getAppRules().appRulesVersion.toString()
             appRulesApiVersionValue.text = BuildConfig.APP_RULES_API_VERSION.toString()
         }
     }
@@ -112,6 +112,8 @@ class HomeFragment : Fragment() {
         homeViewModel.apply {
             scrollY = binding.nestedScrollView.scrollY
             expanded = if (verticalOffset == 0) true else scrollRange < verticalOffset
+            appRulesVersionValue = binding.appRulesVersionValue.text.toString()
+            homeViewModel.buildTimeValue = binding.buildTimeValue.text.toString()
         }
         _binding = null
     }
