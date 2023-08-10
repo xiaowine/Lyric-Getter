@@ -12,8 +12,8 @@ import android.os.Environment
 import android.content.ContentUris
 import android.content.Context
 import android.net.Uri
-import cn.lyric.getter.tool.Tools.isNotNull
-import cn.lyric.getter.tool.Tools.isNull
+import cn.xiaowine.xkt.Tool.isNotNull
+import cn.xiaowine.xkt.Tool.isNull
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream

@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
+import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
 import cn.lyric.getter.config.ActivityOwnSP
 import cn.lyric.getter.databinding.ActivityMainBinding
@@ -14,6 +15,8 @@ import cn.lyric.getter.tool.ActivityTools
 import cn.lyric.getter.tool.ActivityTools.checkUpdate
 import cn.lyric.getter.tool.ActivityTools.updateAppRules
 import cn.lyric.getter.ui.viewmodel.ShareViewModel
+import cn.xiaowine.xkt.AcTool
+import cn.xiaowine.xkt.LogTools
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,18 +26,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ActivityTools.context = this
-        shareViewModel.activated = checkLSPosed()
-        applicationContext.theme.applyStyle(rikka.material.preference.R.style.ThemeOverlay_Rikka_Material3_Preference, true)
+        init()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.run {
             if (!shareViewModel.activated) {
                 nav.visibility = View.GONE
-            } else {
-                nav.apply {
-                    selectedItemId = menu.findItem(R.id.home_nav).itemId
-                }
             }
         }
     }
@@ -44,6 +41,14 @@ class MainActivity : AppCompatActivity() {
         binding.nav.setupWithNavController(findNavController(R.id.nav_host_fragment))
         checkUpdate()
         updateAppRules()
+    }
+
+    fun init() {
+        AcTool.init(this)
+        ActivityTools.context = this
+        shareViewModel.activated = checkLSPosed()
+        applicationContext.theme.applyStyle(rikka.material.preference.R.style.ThemeOverlay_Rikka_Material3_Preference, true)
+        LogTools.init("Lyrics Getter", BuildConfig.DEBUG)
     }
 
     override fun onSupportNavigateUp(): Boolean {

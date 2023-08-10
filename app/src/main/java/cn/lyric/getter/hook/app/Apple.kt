@@ -14,9 +14,9 @@ import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.HookTools.getApplication
-import cn.lyric.getter.tool.LogTools.log
-import cn.lyric.getter.tool.Tools.isNotNull
-import cn.lyric.getter.tool.Tools.observableChange
+import cn.xiaowine.xkt.LogTools.log
+import cn.xiaowine.xkt.Tool.isNotNull
+import cn.xiaowine.xkt.Tool.observableChange
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
@@ -50,12 +50,12 @@ object Apple : BaseHook() {
 
     private var delay: Int = 0
 
-    private var lyric: String by observableChange("") { oldValue, newValue ->
+    private var lyric: String by observableChange("") { _, oldValue, newValue ->
         if (oldValue == newValue) return@observableChange
         EventTools.sendLyric(context, newValue, delay)
     }
 
-    private var title: String by observableChange("") { oldValue, newValue ->
+    private var title: String by observableChange("") { _, oldValue, newValue ->
         if (oldValue == newValue) return@observableChange
         lyricList.clear()
         EventTools.cleanLyric(context)

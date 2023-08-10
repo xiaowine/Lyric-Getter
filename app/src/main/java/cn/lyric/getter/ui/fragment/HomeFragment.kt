@@ -17,12 +17,12 @@ import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
 import cn.lyric.getter.config.ActivityOwnSP.config
 import cn.lyric.getter.databinding.FragmentHomeBinding
-import cn.lyric.getter.tool.ActivityTools
 import cn.lyric.getter.tool.ActivityTools.getAppRules
 import cn.lyric.getter.tool.Tools.restartTheScopedSoftware
 import cn.lyric.getter.ui.viewmodel.HomeViewModel
 import cn.lyric.getter.ui.viewmodel.ShareViewModel
-import com.google.android.material.appbar.AppBarLayout
+import cn.xiaowine.xkt.AcTool.restartApp
+import cn.xiaowine.xkt.Tool.toUpperFirstCaseAndLowerOthers
 import com.google.android.material.color.MaterialColors
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
@@ -49,10 +49,10 @@ class HomeFragment : Fragment() {
         binding.apply {
             appbarLayout.setExpanded(homeViewModel.expanded)
             //监听AppBarLayout偏移量
-            appbarLayout.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appbarLayout, verticalOffset ->
+            appbarLayout.addOnOffsetChangedListener { appbarLayout, verticalOffset ->
                 this@HomeFragment.verticalOffset = verticalOffset
                 scrollRange = appbarLayout.totalScrollRange
-            })
+            }
             nestedScrollView.scrollY = homeViewModel.scrollY
             if (!shareViewModel.activated) {
                 statusIcon.setImageResource(R.drawable.ic_round_error_outline)
@@ -61,7 +61,7 @@ class HomeFragment : Fragment() {
                 status.apply {
                     setBackgroundColor(MaterialColors.getColor(requireContext(), android.R.attr.colorError, Color.RED))
                     setOnClickListener {
-                        ActivityTools.restartApp()
+                        restartApp()
                     }
                 }
                 floatingActionButton.visibility = View.GONE
@@ -98,8 +98,8 @@ class HomeFragment : Fragment() {
             deviceValue.text = "${Build.BRAND} ${Build.MODEL} Android${Build.VERSION.RELEASE}"
             versionLabelValue.text = BuildConfig.VERSION_NAME
             versionCodeValue.text = BuildConfig.VERSION_CODE.toString()
-            versionTypeValue.text = homeViewModel.buildTimeValue ?: BuildConfig.BUILD_TYPE.uppercase()
-            buildTimeValue.text = SimpleDateFormat("yyyy-MM-dd HH:mm z", Locale.getDefault()).format(BuildConfig.BUILD_TIME)
+            versionTypeValue.text = BuildConfig.BUILD_TYPE.toUpperFirstCaseAndLowerOthers()
+            buildTimeValue.text = homeViewModel.buildTimeValue ?: SimpleDateFormat("yyyy-MM-dd HH:mm z", Locale.getDefault()).format(BuildConfig.BUILD_TIME)
             apiVersionValue.text = BuildConfig.API_VERSION.toString()
             configVersionValue.text = BuildConfig.CONFIG_VERSION.toString()
             appRulesVersionValue.text = homeViewModel.appRulesVersionValue ?: getAppRules().appRulesVersion.toString()

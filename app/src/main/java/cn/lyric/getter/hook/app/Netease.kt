@@ -9,7 +9,7 @@ import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.MockFlyme
 import cn.lyric.getter.tool.HookTools.fuckTinker
 import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
-import cn.lyric.getter.tool.Tools.isNotNull
+import cn.xiaowine.xkt.Tool.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder

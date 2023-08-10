@@ -13,9 +13,9 @@ import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.HookTools.getApplication
-import cn.lyric.getter.tool.LogTools.log
-import cn.lyric.getter.tool.Tools.isNotNull
-import cn.lyric.getter.tool.Tools.observableChange
+import cn.xiaowine.xkt.LogTools.log
+import cn.xiaowine.xkt.Tool.isNotNull
+import cn.xiaowine.xkt.Tool.observableChange
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.EzXHelper.moduleRes
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
@@ -24,7 +24,7 @@ import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinde
 
 object SystemUi : BaseHook() {
 
-    private var title: String by observableChange("") { _, newValue ->
+    private var title: String by observableChange("") { _, _, newValue ->
         if (newValue.isNotEmpty()) {
             EventTools.cleanLyric(context)
         }

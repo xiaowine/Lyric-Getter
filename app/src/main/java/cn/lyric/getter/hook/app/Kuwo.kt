@@ -8,8 +8,8 @@ import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools.cleanLyric
 import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.tool.HookTools
-import cn.lyric.getter.tool.Tools.isNot
-import cn.lyric.getter.tool.Tools.isNotNull
+import cn.xiaowine.xkt.Tool.isNot
+import cn.xiaowine.xkt.Tool.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
@@ -20,8 +20,7 @@ import java.util.Timer
 import java.util.TimerTask
 
 
-@SuppressLint("StaticFieldLeak")
-object Kuwo : BaseHook() {
+@SuppressLint("StaticFieldLeak") object Kuwo : BaseHook() {
 
     init {
         System.loadLibrary("dexkit")

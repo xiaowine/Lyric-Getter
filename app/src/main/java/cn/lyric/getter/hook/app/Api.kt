@@ -6,9 +6,9 @@ import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools.cleanLyric
 import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.tool.HookTools.isApi
-import cn.lyric.getter.tool.LogTools.log
-import cn.lyric.getter.tool.Tools.isNot
-import cn.lyric.getter.tool.Tools.isNotNull
+import cn.xiaowine.xkt.LogTools.log
+import cn.xiaowine.xkt.Tool.isNot
+import cn.xiaowine.xkt.Tool.isNotNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.ConstructorFinder.`-Static`.constructorFinder

@@ -6,12 +6,13 @@ import android.content.Intent
 import android.util.Log
 import cn.lyric.getter.api.data.DataType
 import cn.lyric.getter.api.data.LyricData
+import cn.xiaowine.xkt.Tool.observableChange
 
 @SuppressLint("StaticFieldLeak")
 object EventTools {
     lateinit var context: Context
 
-    private var lastLyricData: LyricData? by Tools.observableChange(null) { _, newValue ->
+    private var lastLyricData: LyricData? by observableChange(null) { _, _, newValue ->
         newValue?.run {
             if (lyric.isEmpty()) return@observableChange
             context.sendBroadcast(Intent().apply {

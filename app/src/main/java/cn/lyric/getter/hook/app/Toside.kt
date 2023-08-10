@@ -9,7 +9,7 @@ import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.HookTools.getApplication
-import cn.lyric.getter.tool.Tools.isNotNull
+import cn.xiaowine.xkt.Tool.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook

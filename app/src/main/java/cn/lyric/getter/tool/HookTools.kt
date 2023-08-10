@@ -8,10 +8,10 @@ import android.content.Intent
 import android.os.Build
 import cn.lyric.getter.tool.EventTools.cleanLyric
 import cn.lyric.getter.tool.EventTools.sendLyric
-import cn.lyric.getter.tool.LogTools.log
-import cn.lyric.getter.tool.Tools.isNot
-import cn.lyric.getter.tool.Tools.isNotNull
-import cn.lyric.getter.tool.Tools.isNull
+import cn.xiaowine.xkt.LogTools.log
+import cn.xiaowine.xkt.Tool.isNot
+import cn.xiaowine.xkt.Tool.isNotNull
+import cn.xiaowine.xkt.Tool.isNull
 import com.github.kyuubiran.ezxhelper.ClassLoaderProvider
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull

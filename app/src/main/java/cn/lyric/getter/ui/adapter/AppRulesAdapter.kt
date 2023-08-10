@@ -15,7 +15,6 @@ import cn.lyric.getter.data.Rule
 import cn.lyric.getter.data.lyricType
 import cn.lyric.getter.databinding.ItemsAppBinding
 import cn.lyric.getter.tool.JsonTools.toJSON
-import cn.lyric.getter.tool.LogTools.log
 
 
 class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
@@ -89,7 +88,6 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
                             }
                         } else {
                             val status1 = status.filter { it == AppStatus.API || it == AppStatus.Hook }
-                            status1.log()
                             if (status1.size == 1) {
                                 description = getAppStatusDescription(status1[0], rules[status.indexOf(status1[0])])
                             }

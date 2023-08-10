@@ -14,6 +14,7 @@ rikkax-material-preference = "2.0.0"
 preference = "1.2.1"
 ezXHelper = "2.0.6"
 dexKit = "1.1.8"
+xkt = "1.0.5"
 xposed = "82"
 
 [libraries]
@@ -29,6 +30,7 @@ rikkax-material-preference = { group = "dev.rikka.rikkax.material", name = "mate
 preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
 ezXHelper = { group = "com.github.kyuubiran", name = "EzXHelper", version.ref = "ezXHelper" }
 dexkit = { group = "org.luckypray", name = "DexKit", version.ref = "dexKit" }
+xkt = { module = "com.github.xiaowine:XKT", version.ref = "xkt" }
 xposed-api = { group = "de.robv.android.xposed", name = "api", version.ref = "xposed"}
 lyricGetter-api = { group = "com.github.xiaowine", name = "Lyric-Getter-Api", version.ref = "lyricGetterApi"}
 

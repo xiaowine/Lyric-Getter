@@ -14,7 +14,7 @@ import cn.lyric.getter.hook.app.QQMusic
 import cn.lyric.getter.hook.app.RPlayer
 import cn.lyric.getter.hook.app.SystemUi
 import cn.lyric.getter.hook.app.Toside
-import cn.lyric.getter.tool.LogTools.log
+import cn.xiaowine.xkt.LogTools.log
 import com.github.kyuubiran.ezxhelper.EzXHelper
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.IXposedHookZygoteInit

@@ -17,14 +17,14 @@ import cn.lyric.getter.data.AppRule
 import cn.lyric.getter.databinding.FragmentAppRulesBinding
 import cn.lyric.getter.databinding.ItemsAppBinding
 import cn.lyric.getter.tool.ActivityTools.getAppRules
-import cn.lyric.getter.tool.ActivityTools.openUrl
 import cn.lyric.getter.tool.ActivityTools.updateAppRules
 import cn.lyric.getter.tool.JsonTools.toJSON
-import cn.lyric.getter.tool.LogTools.log
-import cn.lyric.getter.tool.Tools.goMainThread
 import cn.lyric.getter.ui.adapter.AppRulesAdapter
 import cn.lyric.getter.ui.dialog.MaterialProgressDialog
 import cn.lyric.getter.ui.viewmodel.AppRulesViewModel
+import cn.xiaowine.xkt.AcTool.openURL
+import cn.xiaowine.xkt.LogTools.log
+import cn.xiaowine.xkt.Tool.goMainThread
 
 
 class AppRulesFragment : Fragment() {
@@ -92,7 +92,7 @@ class AppRulesFragment : Fragment() {
                 }
             }
             card.setOnClickListener {
-                "https://github.com/xiaowine/Lyric-Getter/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=App%E8%A7%84%E5%88%99%E6%94%B9%E5%8A%A8".openUrl()
+                "https://github.com/xiaowine/Lyric-Getter/issues/new?assignees=&labels=&projects=&template=feature_request.md&title=App%E8%A7%84%E5%88%99%E6%94%B9%E5%8A%A8".openURL()
             }
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
