@@ -12,14 +12,6 @@
           "useApi": true,
           "getLyricType": 0,
           "remarks": ""
-        },{
-          "startVersionCode": 2023081001,
-          "endVersionCode": 2147483647,
-          "excludeVersions": [],
-          "apiVersion": 4,
-          "useApi": true,
-          "getLyricType": 0,
-          "remarks": ""
         }
       ]
     },
@@ -35,6 +27,15 @@
           "useApi": true,
           "getLyricType": 0,
           "remarks": ""
+        },
+        {
+          "startVersionCode": 2023081001,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 5,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
         }
       ]
     },
@@ -47,6 +48,15 @@
           "endVersionCode": 2147483647,
           "excludeVersions": [],
           "apiVersion": 4,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        },
+        {
+          "startVersionCode": 2023081001,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 5,
           "useApi": true,
           "getLyricType": 0,
           "remarks": ""
@@ -303,6 +313,6 @@
       ]
     }
   ],
-  "appRulesVersion": 2,
+  "appRulesVersion": 1,
   "version": 1
 }
