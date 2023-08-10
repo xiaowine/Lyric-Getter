@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
+import cn.lyric.getter.config.ActivityOwnSP
 import cn.lyric.getter.data.AppInfos
 import cn.lyric.getter.data.AppStatus
 import cn.lyric.getter.data.Rule
 import cn.lyric.getter.data.lyricType
 import cn.lyric.getter.databinding.ItemsAppBinding
 import cn.lyric.getter.tool.JsonTools.toJSON
+import cn.lyric.getter.tool.LogTools.log
 
 
 class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
@@ -81,8 +83,16 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
                     if (status.size == 1) {
                         description = getAppStatusDescription(status[0], rules[0])
                     } else {
-                        status.forEach {
-                            description += "${context.getString(R.string.multi_rule).format(status.indexOf(it) + 1, getAppStatusDescription(it, rules[status.indexOf(it)]))}<br>"
+                        if (ActivityOwnSP.config.showAllRules) {
+                            status.forEach {
+                                description += "${context.getString(R.string.multi_rule).format(status.indexOf(it) + 1, getAppStatusDescription(it, rules[status.indexOf(it)]))}<br>"
+                            }
+                        } else {
+                            val status1 = status.filter { it == AppStatus.API || it == AppStatus.Hook }
+                            status1.log()
+                            if (status1.size == 1) {
+                                description = getAppStatusDescription(status1[0], rules[status.indexOf(status1[0])])
+                            }
                         }
                     }
                 } else {
