@@ -1,5 +1,6 @@
 package cn.lyric.getter.hook
 
+import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.hook.app.APlayer
 import cn.lyric.getter.hook.app.Api
 import cn.lyric.getter.hook.app.Apple
@@ -14,6 +15,7 @@ import cn.lyric.getter.hook.app.QQMusic
 import cn.lyric.getter.hook.app.RPlayer
 import cn.lyric.getter.hook.app.SystemUi
 import cn.lyric.getter.hook.app.Toside
+import cn.xiaowine.xkt.LogTools
 import cn.xiaowine.xkt.LogTools.log
 import com.github.kyuubiran.ezxhelper.EzXHelper
 import de.robv.android.xposed.IXposedHookLoadPackage
@@ -24,6 +26,7 @@ import de.robv.android.xposed.callbacks.XC_LoadPackage
 class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {
         EzXHelper.initHandleLoadPackage(lpparam)
+        LogTools.init("Lyrics Getter", BuildConfig.DEBUG)
         when (lpparam.packageName) {
             "com.android.systemui" -> initHooks(SystemUi)
             "com.tencent.qqmusic" -> initHooks(QQMusic)
