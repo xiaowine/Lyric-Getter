@@ -93,7 +93,6 @@ dependencies {
 //    implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
-    implementation(libs.preference)
     implementation(libs.gson)
     implementation(libs.lyricGetter.api)
     implementation(libs.lifecycle.viewmodel.ktx)
