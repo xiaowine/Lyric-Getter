@@ -1,38 +1,25 @@
 [versions]
 agp = "8.1.0"
-gson = "2.10.1"
 kotlin = "1.9.0"
-core-ktx = "1.10.1"
-appcompat = "1.6.1"
-lifecycleViewmodelKtx = "2.6.1"
-lyricGetterApi = "5.0.3"
-material = "1.9.0"
-constraintlayout = "2.1.4"
-navigation-fragment-ktx = "2.6.0"
-navigation-ui-ktx = "2.6.0"
-rikkax-material-preference = "2.0.0"
-preference = "1.2.1"
-ezXHelper = "2.0.6"
-dexKit = "1.1.8"
-xkt = "1.0.5"
-xposed = "82"
 
 [libraries]
-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+core-ktx = { module = "androidx.core:core-ktx", version = "1.10.1" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation-fragment-ktx" }
-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation-ui-ktx" }
-rikkax-material-preference = { group = "dev.rikka.rikkax.material", name = "material-preference", version.ref = "rikkax-material-preference" }
-preference = { group = "androidx.preference", name = "preference", version.ref = "preference" }
-ezXHelper = { group = "com.github.kyuubiran", name = "EzXHelper", version.ref = "ezXHelper" }
-dexkit = { group = "org.luckypray", name = "DexKit", version.ref = "dexKit" }
-xkt = { module = "com.github.xiaowine:XKT", version.ref = "xkt" }
-xposed-api = { group = "de.robv.android.xposed", name = "api", version.ref = "xposed"}
-lyricGetter-api = { group = "com.github.xiaowine", name = "Lyric-Getter-Api", version.ref = "lyricGetterApi"}
+material = { module = "com.google.android.material:material", version = "1.9.0" }
+modernandroidpreferences = { module = "de.maxr1998:modernandroidpreferences", version = "2.3.2" }
+preference = { module = "androidx.preference:preference", version = "1.2.1" }
+constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version = "2.1.4" }
+navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version = "2.6.0" }
+navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version = "2.6.0" }
+lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version = "2.6.1" }
+swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version= "1.2.0-alpha01" }
+
+xposed = { module = "de.robv.android.xposed:api", version = "82" }
+ezXHelper = { module = "com.github.kyuubiran:EzXHelper", version = "2.0.6" }
+dexkit = { module = "org.luckypray:DexKit", version = "1.1.8" }
+lyricGetter-api = { module = "com.github.xiaowine:Lyric-Getter-Api", version = "5.0.3" }
+xkt = { module = "com.github.xiaowine:XKT", version = "1.0.5" }
+gson = { module = "com.google.code.gson:gson", version = "2.10.1" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

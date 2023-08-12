@@ -2,10 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:consumeSystemWindowsInsets="@integer/internal_fragment_insets"
-    app:edgeToEdge="true"
-    app:fitsSystemWindowsInsets="@integer/internal_fragment_insets">
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_layout"
@@ -18,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="?collapsingToolbarLayoutLargeSize"
             android:fitsSystemWindows="false"
-            app:fitsSystemWindowsInsets="@integer/internal_fragment_top_insets"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:titleCollapseMode="scale">
 
@@ -29,7 +25,7 @@
                 app:layout_collapseMode="pin"
                 app:logo="@drawable/ic_launcher_round"
                 app:title="@string/home_fragment_label"
-                app:titleMarginStart="@dimen/list_item_padding" />
+                app:titleMarginStart="@android:dimen/system_app_widget_background_radius" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
 
@@ -44,7 +40,6 @@
         android:contentDescription="@string/app_name"
         android:src="@android:drawable/ic_popup_sync"
         app:backgroundTint="?attr/colorPrimary"
-        app:layout_fitsSystemWindowsInsets="@integer/internal_fragment_bottom_insets"
         app:tint="?attr/colorOnPrimary" />
 
 

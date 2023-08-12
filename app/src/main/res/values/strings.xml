@@ -33,7 +33,7 @@
     <string name="app_rules_tips">未知:则需要大家反馈最低支持版本\n部分软件也没有收录，欢迎提供和反馈错误</string>
     <string name="output_repeated_lyrics">输出重复歌词</string>
     <string name="enhanced_hidden_lyrics">增强隐藏歌词</string>
-    <string name="enhanced_hidden_lyrics_tips">部分软件不适用，会导致歌词鬼畜</string>
+    <string name="enhanced_hidden_lyrics_summary">部分软件不适用，会导致歌词鬼畜</string>
     <string name="allow_some_software_to_output_after_the_screen">允许部分软件息屏后依旧输出</string>
     <string name="device_label">设备信息</string>
     <string name="new_rule_detected_loading">检测到新的App规则，正在加载</string>

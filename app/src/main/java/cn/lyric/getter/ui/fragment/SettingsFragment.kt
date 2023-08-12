@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.preference.PreferenceFragmentCompat
-import androidx.preference.SwitchPreference
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.R
 import cn.lyric.getter.config.ActivityOwnSP.config
 import cn.lyric.getter.databinding.FragmentSettingsBinding
+import de.Maxr1998.modernpreferences.PreferencesAdapter
+import de.Maxr1998.modernpreferences.helpers.onClick
+import de.Maxr1998.modernpreferences.helpers.screen
+import de.Maxr1998.modernpreferences.helpers.switch
 
 
 class SettingsFragment : Fragment() {
@@ -21,8 +25,7 @@ class SettingsFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
 
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
@@ -32,36 +35,38 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        childFragmentManager.beginTransaction().add(R.id.setting_container, PreferenceFragment()).commitNow()
+        val screen = screen(context) {
+            switch("output_repeated_lyrics") {
+                titleRes = R.string.output_repeated_lyrics
+                onClick {
+                    config.outputRepeatedLyrics = checked
+                    false
+                }
+            }
+            switch("enhanced_hidden_lyrics") {
+                titleRes = R.string.enhanced_hidden_lyrics
+                summaryRes = R.string.enhanced_hidden_lyrics_summary
+                onClick {
+                    config.enhancedHiddenLyrics = checked
+                    false
+                }
+            }
+            switch("allow_some_software_to_output_after_the_screen") {
+                titleRes = R.string.allow_some_software_to_output_after_the_screen
+                onClick {
+                    config.allowSomeSoftwareToOutputAfterTheScreen = checked
+                    false
+                }
+            }
+        }
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
+            adapter = PreferencesAdapter(screen)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-
-    class PreferenceFragment : PreferenceFragmentCompat() {
-        override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-            addPreferencesFromResource(R.xml.settings_prefs)
-            findPreference<SwitchPreference>("output_repeated_lyrics")?.apply {
-                setOnPreferenceChangeListener { _, newValue ->
-                    config.outputRepeatedLyrics = newValue as Boolean
-                    true
-                }
-            }
-            findPreference<SwitchPreference>("enhanced_hidden_lyrics")?.apply {
-                setOnPreferenceChangeListener { _, newValue ->
-                    config.enhancedHiddenLyrics = newValue as Boolean
-                    true
-                }
-            }
-            findPreference<SwitchPreference>("allow_some_software_to_output_after_the_screen")?.apply {
-                setOnPreferenceChangeListener { _, newValue ->
-                    config.allowSomeSoftwareToOutputAfterTheScreen = newValue as Boolean
-                    true
-                }
-            }
-        }
     }
 }

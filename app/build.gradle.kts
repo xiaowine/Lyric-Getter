@@ -18,7 +18,7 @@ android {
         minSdk = 26
         targetSdk = 34
         versionCode = 8
-        versionName = "2.0.0$buildTime"
+        versionName = "2.0.0"
         buildConfigField("long", "BUILD_TIME", "$buildTime")
         buildConfigField("int", "API_VERSION", "5")
         buildConfigField("int", "CONFIG_VERSION", "1")
@@ -86,20 +86,19 @@ android {
 dependencies {
     implementation(libs.ezXHelper)
     implementation(libs.dexkit)
-    compileOnly(libs.xposed.api)
+    compileOnly(libs.xposed)
 
     implementation(libs.core.ktx)
     implementation(libs.material)
 //    implementation(libs.constraintlayout)
     implementation(libs.navigation.fragment.ktx)
     implementation(libs.navigation.ui.ktx)
-    implementation(libs.rikkax.material.preference)
     implementation(libs.preference)
     implementation(libs.gson)
     implementation(libs.lyricGetter.api)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.xkt)
-    configurations.all {
-        exclude("androidx.appcompat", "appcompat")
-    }
+    implementation(libs.modernandroidpreferences)
+    implementation(libs.swiperefreshlayout)
+
 }

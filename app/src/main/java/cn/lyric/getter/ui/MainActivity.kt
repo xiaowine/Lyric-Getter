@@ -47,7 +47,6 @@ class MainActivity : AppCompatActivity() {
         AcTool.init(this)
         ActivityTools.context = this
         shareViewModel.activated = checkLSPosed()
-        applicationContext.theme.applyStyle(rikka.material.preference.R.style.ThemeOverlay_Rikka_Material3_Preference, true)
         LogTools.init("Lyrics Getter", BuildConfig.DEBUG)
     }
 
