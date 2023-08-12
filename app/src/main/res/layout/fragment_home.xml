@@ -25,7 +25,7 @@
                 app:layout_collapseMode="pin"
                 app:logo="@drawable/ic_launcher_round"
                 app:title="@string/home_fragment_label"
-                app:titleMarginStart="@android:dimen/system_app_widget_background_radius" />
+                app:titleMarginStart="24dp" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
 
