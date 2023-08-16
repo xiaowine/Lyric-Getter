@@ -35,6 +35,7 @@
     <string name="enhanced_hidden_lyrics">增强隐藏歌词</string>
     <string name="enhanced_hidden_lyrics_summary">部分软件不适用，会导致歌词鬼畜</string>
     <string name="allow_some_software_to_output_after_the_screen">允许部分软件息屏后依旧输出</string>
+    <string name="regex_replace">正则表达式屏蔽歌词</string>
     <string name="device_label">设备信息</string>
     <string name="new_rule_detected_loading">检测到新的App规则，正在加载</string>
     <string name="new_rule_detected">检测到新的App规则</string>

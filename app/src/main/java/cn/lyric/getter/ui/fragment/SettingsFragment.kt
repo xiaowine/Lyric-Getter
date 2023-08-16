@@ -11,10 +11,13 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.R
 import cn.lyric.getter.config.ActivityOwnSP.config
 import cn.lyric.getter.databinding.FragmentSettingsBinding
+import cn.xiaowine.xkt.AcTool.showToast
 import de.Maxr1998.modernpreferences.PreferencesAdapter
+import de.Maxr1998.modernpreferences.helpers.editText
 import de.Maxr1998.modernpreferences.helpers.onClick
 import de.Maxr1998.modernpreferences.helpers.screen
 import de.Maxr1998.modernpreferences.helpers.switch
+import de.Maxr1998.modernpreferences.preferences.EditTextPreference
 
 
 class SettingsFragment : Fragment() {
@@ -55,6 +58,14 @@ class SettingsFragment : Fragment() {
                 titleRes = R.string.allow_some_software_to_output_after_the_screen
                 onClick {
                     config.allowSomeSoftwareToOutputAfterTheScreen = checked
+                    false
+                }
+            }
+            editText("regex_replace") {
+                titleRes = R.string.regex_replace
+                defaultValue = config.regexReplace
+                textChangeListener = EditTextPreference.OnTextChangeListener { _, text ->
+                    config.regexReplace = text.toString()
                     false
                 }
             }

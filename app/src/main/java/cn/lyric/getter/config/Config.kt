@@ -61,4 +61,12 @@ class Config {
         set(value) {
             config.put("allowSomeSoftwareToOutputAfterTheScreen", value)
         }
+
+    var regexReplace: String
+        get() {
+            return config.opt("regexReplace", "")
+        }
+        set(value) {
+            config.put("regexReplace", value)
+        }
 }

@@ -6,7 +6,10 @@ import android.content.Intent
 import android.util.Log
 import cn.lyric.getter.api.data.DataType
 import cn.lyric.getter.api.data.LyricData
+import cn.lyric.getter.config.XposedOwnSP.config
+import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.observableChange
+import cn.xiaowine.xkt.Tool.regexReplace
 
 @SuppressLint("StaticFieldLeak")
 object EventTools {
@@ -14,12 +17,18 @@ object EventTools {
 
     private var lastLyricData: LyricData? by observableChange(null) { _, _, newValue ->
         newValue?.run {
-            if (lyric.isEmpty()) return@observableChange
-            context.sendBroadcast(Intent().apply {
-                action = "Lyric_Data"
-                putExtra("Data", newValue)
-            })
-            Log.d(TAG, this.toString())
+            val regexReplace = lyric.regexReplace(config.regexReplace, "")
+            if (regexReplace.isEmpty()) {
+                cleanLyric(context)
+            } else {
+                context.sendBroadcast(Intent().apply {
+                    action = "Lyric_Data"
+                    putExtra("Data", newValue.apply {
+                        lyric = regexReplace
+                    })
+                })
+                Log.d(TAG, this.toString())
+            }
         }
     }
     private const val TAG = "Lyrics Getter"
