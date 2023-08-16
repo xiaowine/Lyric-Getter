@@ -8,7 +8,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
-import cn.xiaowine.xkt.LogTools.log
+import cn.xiaowine.xkt.LogTool.log
 import de.robv.android.xposed.XSharedPreferences
 import java.io.DataOutputStream
 

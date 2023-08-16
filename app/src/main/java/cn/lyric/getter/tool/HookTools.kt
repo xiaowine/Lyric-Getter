@@ -8,7 +8,7 @@ import android.content.Intent
 import android.os.Build
 import cn.lyric.getter.tool.EventTools.cleanLyric
 import cn.lyric.getter.tool.EventTools.sendLyric
-import cn.xiaowine.xkt.LogTools.log
+import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.isNot
 import cn.xiaowine.xkt.Tool.isNotNull
 import cn.xiaowine.xkt.Tool.isNull

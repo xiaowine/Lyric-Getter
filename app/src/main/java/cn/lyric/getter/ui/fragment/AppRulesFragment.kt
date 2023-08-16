@@ -23,7 +23,7 @@ import cn.lyric.getter.ui.adapter.AppRulesAdapter
 import cn.lyric.getter.ui.dialog.MaterialProgressDialog
 import cn.lyric.getter.ui.viewmodel.AppRulesViewModel
 import cn.xiaowine.xkt.AcTool.openURL
-import cn.xiaowine.xkt.LogTools.log
+import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.goMainThread
 
 

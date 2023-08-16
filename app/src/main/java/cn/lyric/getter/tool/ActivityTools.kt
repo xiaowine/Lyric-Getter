@@ -11,7 +11,7 @@ import cn.lyric.getter.tool.JsonTools.parseJSON
 import cn.xiaowine.xkt.AcTool.openURL
 import cn.xiaowine.xkt.AcTool.restartApp
 import cn.xiaowine.xkt.AcTool.showToast
-import cn.xiaowine.xkt.SimpleHttpClient.get
+import cn.xiaowine.xkt.SimpleHttpTool.get
 import cn.xiaowine.xkt.Tool.goMainThread
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import java.io.File

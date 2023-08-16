@@ -16,7 +16,7 @@ import cn.lyric.getter.tool.ActivityTools.checkUpdate
 import cn.lyric.getter.tool.ActivityTools.updateAppRules
 import cn.lyric.getter.ui.viewmodel.ShareViewModel
 import cn.xiaowine.xkt.AcTool
-import cn.xiaowine.xkt.LogTools
+import cn.xiaowine.xkt.LogTool
 
 
 class MainActivity : AppCompatActivity() {
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         AcTool.init(this)
         ActivityTools.context = this
         shareViewModel.activated = checkLSPosed()
-        LogTools.init("Lyrics Getter", BuildConfig.DEBUG)
+        LogTool.init("Lyrics Getter", BuildConfig.DEBUG)
     }
 
     override fun onSupportNavigateUp(): Boolean {

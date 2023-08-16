@@ -14,7 +14,7 @@ import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.HookTools.getApplication
-import cn.xiaowine.xkt.LogTools.log
+import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.isNotNull
 import cn.xiaowine.xkt.Tool.observableChange
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass

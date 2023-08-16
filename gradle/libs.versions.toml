@@ -4,12 +4,11 @@ kotlin = "1.9.0"
 
 [libraries]
 core-ktx = { module = "androidx.core:core-ktx", version = "1.10.1" }
-kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 material = { module = "com.google.android.material:material", version = "1.9.0" }
 modernandroidpreferences = { module = "de.maxr1998:modernandroidpreferences", version = "2.3.2" }
 constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version = "2.1.4" }
-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version = "2.6.0" }
-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version = "2.6.0" }
+navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version = "2.7.0" }
+navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version = "2.7.0" }
 lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version = "2.6.1" }
 swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version= "1.2.0-alpha01" }
 
@@ -17,7 +16,7 @@ xposed = { module = "de.robv.android.xposed:api", version = "82" }
 ezXHelper = { module = "com.github.kyuubiran:EzXHelper", version = "2.0.6" }
 dexkit = { module = "org.luckypray:DexKit", version = "1.1.8" }
 lyricGetter-api = { module = "com.github.xiaowine:Lyric-Getter-Api", version = "5.0.3" }
-xkt = { module = "com.github.xiaowine:XKT", version = "1.0.5" }
+xkt = { module = "com.github.xiaowine:XKT", version = "1.0.9" }
 gson = { module = "com.google.code.gson:gson", version = "2.10.1" }
 
 [plugins]
