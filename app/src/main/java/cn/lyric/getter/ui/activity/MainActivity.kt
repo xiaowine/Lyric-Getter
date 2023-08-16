@@ -1,4 +1,4 @@
-package cn.lyric.getter.ui
+package cn.lyric.getter.ui.activity
 
 
 import android.os.Bundle

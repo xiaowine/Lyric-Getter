@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" tools:ignore="QueryAllPackagesPermission" />
 
     <application
+        android:name=".ui.App"
         android:enableOnBackInvokedCallback="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +14,7 @@
         android:theme="@style/Theme.MyApplication"
         tools:targetApi="tiramisu">
         <activity
-            android:name="cn.lyric.getter.ui.MainActivity"
+            android:name="cn.lyric.getter.ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,7 +27,7 @@
             android:name=".launcher"
             android:enabled="true"
             android:exported="true"
-            android:targetActivity="cn.lyric.getter.ui.MainActivity">
+            android:targetActivity="cn.lyric.getter.ui.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
