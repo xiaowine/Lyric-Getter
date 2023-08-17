@@ -16,7 +16,7 @@
 
 #### 因为模块通过监听媒体通知事件，来判断是否应该隐藏歌词。而部分音乐软件默认通知样式为自定义的，所以需要将通知样式改为系统样式
 ---
-### 支持软件请在模块内查看，或查看[规则文件](https://github.com/xiaowine/Lyric-Getter/blob/gh-pages/app_rules_version)
+### 支持软件请在模块内查看，或查看[规则文件](https://github.com/xiaowine/Lyric-Getter/blob/gh-pages/app_rules.json)
 ---
 
 ### 你也可以主动使用本模块API，用于收发歌词[Lyric-Getter-Api](https://github.com/xiaowine/Lyric-Getter-Api)
