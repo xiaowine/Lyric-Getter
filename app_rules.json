@@ -49,6 +49,21 @@
       ]
     },
     {
+      "packageName": "com.xuncorp.qinalt.music",
+      "name": "青盐云听",
+      "rules": [
+        {
+          "startVersionCode": 2023082101,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
       "packageName": "remix.myplayer",
       "name": "APlayer ",
       "rules": [
@@ -298,6 +313,6 @@
       ]
     }
   ],
-  "appRulesVersion": 2,
-  "version": 1
+  "appRulesVersion": 3,
+  "version": 2
 }
