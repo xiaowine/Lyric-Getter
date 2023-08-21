@@ -16,7 +16,7 @@ xposed = { module = "de.robv.android.xposed:api", version = "82" }
 ezXHelper = { module = "com.github.kyuubiran:EzXHelper", version = "2.0.6" }
 dexkit = { module = "org.luckypray:DexKit", version = "1.1.8" }
 lyricGetter-api = { module = "com.github.xiaowine:Lyric-Getter-Api", version = "5.0.5" }
-xkt = { module = "com.github.xiaowine:XKT", version = "1.0.9" }
+xkt = { module = "com.github.xiaowine:XKT", version = "1.0.10" }
 gson = { module = "com.google.code.gson:gson", version = "2.10.1" }
 
 [plugins]

@@ -33,6 +33,7 @@ class ConfigTools {
     fun put(key: String?, any: Any) {
         when (any) {
             is Int -> mSPEditor?.putInt(key, any)
+            is Long -> mSPEditor?.putLong(key, any)
             is String -> mSPEditor?.putString(key, any)
             is Boolean -> mSPEditor?.putBoolean(key, any)
             is Float -> mSPEditor?.putFloat(key, any)
@@ -47,9 +48,9 @@ class ConfigTools {
         }
         return when (defValue) {
             is String -> mSP!!.getString(key, defValue.toString()) as T
+            is Long -> mSP!!.getLong(key, defValue.toLong()) as T
             is Int -> mSP!!.getInt(key, defValue) as T
             is Boolean -> mSP!!.getBoolean(key, defValue) as T
-            is Double -> mSP!!.getFloat(key, defValue.toFloat()) as T
             is Float -> mSP!!.getFloat(key, defValue) as T
             else -> "" as T
         }
