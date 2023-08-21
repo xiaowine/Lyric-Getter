@@ -12,6 +12,7 @@ import cn.lyric.getter.hook.app.MiPlayer
 import cn.lyric.getter.hook.app.MobileMusic
 import cn.lyric.getter.hook.app.Netease
 import cn.lyric.getter.hook.app.QQMusic
+import cn.lyric.getter.hook.app.Qinalt
 import cn.lyric.getter.hook.app.RPlayer
 import cn.lyric.getter.hook.app.SystemUi
 import cn.lyric.getter.hook.app.Toside
@@ -41,6 +42,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "cn.toside.music.mobile" -> initHooks(Toside)
             "com.apple.android.music" -> initHooks(Apple)
             "com.luna.music" -> initHooks(Luna)
+            "com.xuncorp.qinalt.music" -> initHooks(Qinalt)
             else -> initHooks(Api)
         }
     }
