@@ -10,4 +10,15 @@
             android:layout_height="wrap_content"
             android:title="@string/show_hide_desktop_icons" />
     </group>
+
+    <item
+        android:id="@+id/backup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/backup" />
+    <item
+        android:id="@+id/recovery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:title="@string/recovery" />
 </menu>

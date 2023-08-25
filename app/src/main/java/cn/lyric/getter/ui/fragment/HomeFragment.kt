@@ -10,26 +10,51 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
 import cn.lyric.getter.config.ActivityOwnSP.config
+import cn.lyric.getter.config.ActivityOwnSP.ownSP
 import cn.lyric.getter.databinding.FragmentHomeBinding
 import cn.lyric.getter.tool.ActivityTools.getAppRules
+import cn.lyric.getter.tool.BackupTools
 import cn.lyric.getter.tool.Tools.restartTheScopedSoftware
 import cn.lyric.getter.ui.viewmodel.HomeViewModel
 import cn.lyric.getter.ui.viewmodel.ShareViewModel
 import cn.xiaowine.xkt.AcTool.restartApp
+import cn.xiaowine.xkt.Tool.isNotNull
 import cn.xiaowine.xkt.Tool.toUpperFirstCaseAndLowerOthers
 import com.google.android.material.color.MaterialColors
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.snackbar.Snackbar
 import java.text.SimpleDateFormat
 import java.util.Locale
 
 
 class HomeFragment : Fragment() {
+    private var recoveryPickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
+        it.isNotNull { uri ->
+            BackupTools.handleReadDocument(requireActivity(), ownSP, uri)
+            MaterialAlertDialogBuilder(requireContext()).apply {
+                setTitle(R.string.recovery)
+                setCancelable(false)
+                setMessage(R.string.recovery_summary)
+                setPositiveButton(R.string.restart) { _, _ ->
+                    restartApp()
+                }
+                show()
+            }
+        }
+    }
+    private var backupPickerLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("application/json")) {
+        it.isNotNull { uri ->
+            BackupTools.handleCreateDocument(requireActivity(), ownSP, uri)
+        }
+    }
+
     private val shareViewModel: ShareViewModel by activityViewModels()
     private val homeViewModel: HomeViewModel by viewModels()
 
@@ -80,16 +105,26 @@ class HomeFragment : Fragment() {
                         isChecked = config.hideDesktopIcons
                     }
                     setOnMenuItemClickListener {
-                        if (it.itemId == R.id.show_hide_desktop_icons) {
-                            it.isChecked = !it.isChecked
-                            config.hideDesktopIcons = it.isChecked
-                            requireContext().packageManager.setComponentEnabledSetting(
-                                ComponentName(requireContext(), "${BuildConfig.APPLICATION_ID}.launcher"), if (it.isChecked) {
-                                    PackageManager.COMPONENT_ENABLED_STATE_DISABLED
-                                } else {
-                                    PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-                                }, PackageManager.DONT_KILL_APP
-                            )
+                        when (it.itemId) {
+                            R.id.backup -> {
+                                backupPickerLauncher.launch("LyricGetter_Backup_${SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(System.currentTimeMillis())}.json")
+                            }
+
+                            R.id.recovery -> {
+                                recoveryPickerLauncher.launch("application/json")
+                            }
+
+                            R.id.show_hide_desktop_icons -> {
+                                it.isChecked = !it.isChecked
+                                config.hideDesktopIcons = it.isChecked
+                                requireContext().packageManager.setComponentEnabledSetting(
+                                    ComponentName(requireContext(), "${BuildConfig.APPLICATION_ID}.launcher"), if (it.isChecked) {
+                                        PackageManager.COMPONENT_ENABLED_STATE_DISABLED
+                                    } else {
+                                        PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+                                    }, PackageManager.DONT_KILL_APP
+                                )
+                            }
                         }
                         true
                     }

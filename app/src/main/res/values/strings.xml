@@ -44,4 +44,7 @@
     <string name="update">更新</string>
     <string name="check_update_error">检查更新时出现错误</string>
     <string name="app_rules_api_version_label">APP规则API版本</string>
+    <string name="backup">备份</string>
+    <string name="recovery">恢复</string>
+    <string name="recovery_summary">重启应用程序生效</string>
 </resources>
