@@ -32,6 +32,12 @@ object Api : BaseHook() {
                                     sendLyric(hookParam.args[0] as Context, hookParam.args[1] as String, hookParam.args[2] as Boolean, hookParam.args[3] as String, hookParam.args[4] as Boolean, hookParam.args[5] as String, hookParam.args[6] as String, hookParam.args[7] as Int)
                                 }
                             }
+                            clazz.methodFinder().filterByParamCount(9).first { name == "sendLyric" }.createHook {
+                                after { hookParam ->
+                                    @Suppress("UNCHECKED_CAST")
+                                    sendLyric(hookParam.args[0] as Context, hookParam.args[1] as String, hookParam.args[2] as Boolean, hookParam.args[3] as String, hookParam.args[4] as Boolean, hookParam.args[5] as String, hookParam.args[6] as String, hookParam.args[7] as Int, hookParam.args[8] as HashMap<String, Any>?)
+                                }
+                            }
                             clazz.methodFinder().first { name == "stopLyric" }.createHook {
                                 after { hookParam ->
                                     cleanLyric(hookParam.args[0] as Context)

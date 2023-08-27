@@ -37,7 +37,7 @@ object ActivityTools {
             "https://xiaowine.github.io/Lyric-Getter/app_rules_version".get(onSuccess = {
                 val i = it.replace("\n", "").toInt()
                 if (i > getAppRules().appRulesVersion) {
-                    context.getString(R.string.new_rule_detected_loading).showToast(false)
+                    context.getString(R.string.new_rule_detected_loading).showToast()
                     "https://xiaowine.github.io/Lyric-Getter/app_rules.json".get(onSuccess = { it1 ->
                         if (it1.parseJSON<AppRules>().version == BuildConfig.APP_RULES_API_VERSION) {
                             val file = File("${context.filesDir.path}/app_rules.json")
@@ -87,7 +87,7 @@ object ActivityTools {
                     }
                 } catch (e: Exception) {
                     e.printStackTrace()
-                    context.getString(R.string.check_update_error).showToast(false)
+                    context.getString(R.string.check_update_error).showToast()
                 }
             })
         }.start()

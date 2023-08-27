@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        init()
+        shareViewModel.activated = checkLSPosed()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.run {
@@ -41,13 +41,6 @@ class MainActivity : AppCompatActivity() {
         binding.nav.setupWithNavController(findNavController(R.id.nav_host_fragment))
         checkUpdate()
         updateAppRules()
-    }
-
-    fun init() {
-        AcTool.init(this)
-        ActivityTools.context = this
-        shareViewModel.activated = checkLSPosed()
-        LogTool.init("Lyrics Getter", BuildConfig.DEBUG)
     }
 
     override fun onSupportNavigateUp(): Boolean {
