@@ -97,13 +97,12 @@ class AppRulesFragment : Fragment() {
             recyclerView.apply {
                 layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
                 adapter = appAdapter
-                scrollY = appRulesViewModel.scrollY
             }
             swipeRefreshLayout.setOnRefreshListener {
                 appAdapter.expandedList.clear()
                 loadAppRules(isFirst = false, isSwipeRefresh = true)
             }
-
+            nestedScrollView.scrollY = appRulesViewModel.scrollY.log()!!
             loadAppRules(isFirst = true, isSwipeRefresh = false)
         }
     }
@@ -154,7 +153,7 @@ class AppRulesFragment : Fragment() {
         appAdapter.expandedList.size.log()
         appRulesViewModel.apply {
             dataLists = appAdapter.dataLists
-            scrollY = binding.recyclerView.scrollY
+            scrollY = binding.nestedScrollView.scrollY
             expandedList = appAdapter.expandedList
         }
         _binding = null
