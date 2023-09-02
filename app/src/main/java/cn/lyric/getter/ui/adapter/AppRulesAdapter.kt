@@ -3,7 +3,6 @@ package cn.lyric.getter.ui.adapter
 import android.content.Context
 import android.text.Html
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.BuildConfig
@@ -14,13 +13,11 @@ import cn.lyric.getter.data.AppStatus
 import cn.lyric.getter.data.Rule
 import cn.lyric.getter.data.lyricType
 import cn.lyric.getter.databinding.ItemsAppBinding
-import cn.lyric.getter.tool.JsonTools.toJSON
 
 
 class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
     lateinit var context: Context
     var dataLists: ArrayList<AppInfos> = ArrayList()
-    var expandedList: ArrayList<String> = ArrayList()
     private lateinit var listener: OnItemClickListener
 
 
@@ -97,12 +94,6 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
                     description = context.getString(R.string.uninstall_rule).format(appInfo.appRule.rules.size)
                 }
                 text = Html.fromHtml(description, Html.FROM_HTML_MODE_COMPACT)
-            }
-            if (expandedList.contains(appInfo.packageName)) {
-                appRulesCardView.visibility = View.VISIBLE
-                appRulesTextView.text = dataLists.filter { it.packageName == dataLists[position].packageName }[0].appRule.toJSON(true)
-            } else {
-                appRulesCardView.visibility = View.GONE
             }
         }
     }

@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package cn.lyric.getter.ui.fragment
 
 
@@ -14,17 +16,19 @@ import cn.lyric.getter.R
 import cn.lyric.getter.config.ActivityOwnSP.config
 import cn.lyric.getter.data.AppInfos
 import cn.lyric.getter.data.AppRule
+import cn.lyric.getter.data.Rule
+import cn.lyric.getter.data.lyricType
 import cn.lyric.getter.databinding.FragmentAppRulesBinding
 import cn.lyric.getter.databinding.ItemsAppBinding
 import cn.lyric.getter.tool.ActivityTools.getAppRules
 import cn.lyric.getter.tool.ActivityTools.updateAppRules
-import cn.lyric.getter.tool.JsonTools.toJSON
 import cn.lyric.getter.ui.adapter.AppRulesAdapter
 import cn.lyric.getter.ui.dialog.MaterialProgressDialog
 import cn.lyric.getter.ui.viewmodel.AppRulesViewModel
 import cn.xiaowine.xkt.AcTool.openURL
-import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.goMainThread
+import cn.xiaowine.xkt.Tool.toUpperFirstCaseAndLowerOthers
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class AppRulesFragment : Fragment() {
@@ -47,23 +51,20 @@ class AppRulesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         appAdapter = AppRulesAdapter().apply {
-            expandedList = appRulesViewModel.expandedList
             setOnItemClickListener(object : AppRulesAdapter.OnItemClickListener {
                 override fun onItemClick(position: Int, viewBinding: ItemsAppBinding) {
-                    viewBinding.apply {
-                        appRulesCardView.apply {
-                            visibility = if (visibility == View.VISIBLE) {
-                                expandedList.remove(dataLists[position].packageName)
-                                View.GONE
-                            } else {
-                                expandedList.add(dataLists[position].packageName)
-                                View.VISIBLE
+                    val packageName = dataLists[position].packageName
+                    val appRule = appRules.filter { it.packageName == packageName }[0]
+                    if (appRule.rules.size == 1) {
+                        showRuleDialog(appRule.rules[0], appRule.name)
+                    } else {
+                        MaterialAlertDialogBuilder(requireContext()).apply {
+                            setTitle(R.string.select_the_rule_you_want_to_view)
+                            setItems(Array(appRule.rules.size) { getString(R.string.rule, (it + 1).toString()) }) { _, which ->
+                                showRuleDialog(appRule.rules[which], "${appRule.name}: ${getString(R.string.rule, (which + 1).toString())}")
                             }
-                        }
-                        appRulesTextView.apply {
-                            if (text.isEmpty()) {
-                                text = appRules.filter { it.packageName == dataLists[position].packageName }.toJSON(true)
-                            }
+                            setNegativeButton(R.string.cancel, null)
+                            show()
                         }
                     }
                 }
@@ -80,7 +81,6 @@ class AppRulesFragment : Fragment() {
                         R.id.show_all_rules -> {
                             it.isChecked = !it.isChecked
                             config.showAllRules = it.isChecked
-                            appAdapter.expandedList.clear()
                             loadAppRules(isFirst = false, isSwipeRefresh = false)
                         }
 
@@ -99,14 +99,30 @@ class AppRulesFragment : Fragment() {
                 adapter = appAdapter
             }
             swipeRefreshLayout.setOnRefreshListener {
-                appAdapter.expandedList.clear()
                 loadAppRules(isFirst = false, isSwipeRefresh = true)
             }
-            nestedScrollView.scrollY = appRulesViewModel.scrollY.log()!!
+            nestedScrollView.scrollY = appRulesViewModel.scrollY
             loadAppRules(isFirst = true, isSwipeRefresh = false)
         }
     }
 
+    fun showRuleDialog(rule: Rule, title: String) {
+        val items = arrayOf(
+            "${getString(R.string.use_api)}：${rule.useApi.toString().toUpperFirstCaseAndLowerOthers()}",
+            "${getString(R.string.api_version)}：${rule.apiVersion.let { if (!rule.useApi) getString(R.string.no_have) else it }}",
+            "${getString(R.string.start_version_code)}：${rule.startVersionCode}",
+            "${getString(R.string.end_version_code)}：${rule.endVersionCode}",
+            "${getString(R.string.exclude_versions)}：${rule.excludeVersions.ifEmpty { getString(R.string.no_have) }}",
+            "${getString(R.string.get_lyric_type)}：${rule.getLyricType.lyricType()}",
+            "${getString(R.string.remarks)}：${rule.remarks.ifEmpty { getString(R.string.no_have) }}"
+        )
+        MaterialAlertDialogBuilder(requireContext()).apply {
+            setTitle(title)
+            setItems(items, null)
+            setNegativeButton(R.string.ok, null)
+            show()
+        }
+    }
 
     private fun loadAppRules(isFirst: Boolean = false, isSwipeRefresh: Boolean = false) {
         appAdapter.removeAllData()
@@ -150,11 +166,9 @@ class AppRulesFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        appAdapter.expandedList.size.log()
         appRulesViewModel.apply {
             dataLists = appAdapter.dataLists
             scrollY = binding.nestedScrollView.scrollY
-            expandedList = appAdapter.expandedList
         }
         _binding = null
     }

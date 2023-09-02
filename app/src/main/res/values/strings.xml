@@ -47,4 +47,16 @@
     <string name="backup">备份</string>
     <string name="recovery">恢复</string>
     <string name="recovery_summary">重启应用程序生效</string>
+    <string name="select_the_rule_you_want_to_view">请选择要查看的规则</string>
+    <string name="rule">规则 %s</string>
+    <string name="cancel">取消</string>
+    <string name="ok">确定</string>
+    <string name="api_version">API版本</string>
+    <string name="start_version_code">起始版本代码</string>
+    <string name="end_version_code">结束版本代码</string>
+    <string name="exclude_versions">排除版本</string>
+    <string name="get_lyric_type">获取歌词类型</string>
+    <string name="remarks">备注</string>
+    <string name="use_api">使用API</string>
+    <string name="no_have">无</string>
 </resources>
