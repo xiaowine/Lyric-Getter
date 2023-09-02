@@ -40,7 +40,9 @@
         {
           "startVersionCode": 2023081001,
           "endVersionCode": 2147483647,
-          "excludeVersions": [],
+          "excludeVersions": [
+            2023082301
+          ],
           "apiVersion": 5,
           "useApi": true,
           "getLyricType": 0,
