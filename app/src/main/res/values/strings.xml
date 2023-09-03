@@ -24,6 +24,7 @@
     <string name="low_api">过低的API版本\n目前版本%s，所需版本%s</string>
     <string name="hook">Hook模式：%s</string>
     <string name="no_support">不支持</string>
+    <string name="exclude">排除版本，不支持</string>
     <string name="un_know">未知</string>
     <string name="app_rules_version_label">App规则版本</string>
     <string name="show_app_rules">显示所有规则</string>
@@ -59,4 +60,10 @@
     <string name="remarks">备注</string>
     <string name="use_api">使用API</string>
     <string name="no_have">无</string>
+    <string name="api_pattern">API模式</string>
+    <string name="meizu_status_bar_mode">魅族状态栏模式</string>
+    <string name="car_bluetooth_lyrics_mode">车载蓝牙歌词模式</string>
+    <string name="desktop_lyrics_mode">桌面歌词模式</string>
+    <string name="enforced_mode">强制模式</string>
+    <string name="current_status">当前状态</string>
 </resources>

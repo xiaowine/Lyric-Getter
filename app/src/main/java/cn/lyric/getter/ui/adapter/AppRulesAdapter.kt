@@ -5,14 +5,13 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
 import cn.lyric.getter.config.ActivityOwnSP
 import cn.lyric.getter.data.AppInfos
 import cn.lyric.getter.data.AppStatus
-import cn.lyric.getter.data.Rule
-import cn.lyric.getter.data.lyricType
 import cn.lyric.getter.databinding.ItemsAppBinding
+import cn.lyric.getter.tool.AppRulesTools.getAppStatus
+import cn.lyric.getter.tool.AppRulesTools.getAppStatusDescription
 
 
 class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
@@ -98,48 +97,6 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
         }
     }
 
-    private fun getAppStatusDescription(status: AppStatus, rule: Rule): String {
-        return when (status) {
-            AppStatus.API -> "<font color='#388E3C'>${context.getString(R.string.api)}</font>"
-            AppStatus.Hook -> "<font color='#388E3C'>${context.getString(R.string.hook).format(rule.getLyricType.lyricType())}</font>"
-            AppStatus.LowApi -> "<font color='#F57C00'>${context.getString(R.string.low_api).format(rule.apiVersion, BuildConfig.API_VERSION)}</font>"
-            AppStatus.MoreAPI -> "<font color='#F57C00'>${context.getString(R.string.more_api).format(rule.apiVersion, BuildConfig.API_VERSION)}</font>"
-            AppStatus.UnKnow -> "<font color='#D32F2F'>${context.getString(R.string.un_know)}</font>"
-            AppStatus.NoSupport -> "<font color='#D32F2F'>${context.getString(R.string.no_support)}</font>"
-            AppStatus.Exclude -> "<font color='#D32F2F'>${context.getString(R.string.no_support)}</font>"
-        }
-    }
-
-    private fun getAppStatus(rule: Rule, versionCode: Int): AppStatus {
-        return if (rule.excludeVersions.contains(versionCode)) {
-            AppStatus.NoSupport
-        } else {
-            if (rule.useApi) {
-                if (versionCode in rule.startVersionCode..rule.endVersionCode) {
-                    if (rule.apiVersion < BuildConfig.API_VERSION) {
-                        AppStatus.LowApi
-                    } else if (rule.apiVersion > BuildConfig.API_VERSION) {
-                        AppStatus.MoreAPI
-                    } else {
-                        AppStatus.API
-                    }
-                } else {
-                    AppStatus.NoSupport
-                }
-            } else {
-                if (rule.startVersionCode == 0) {
-                    AppStatus.UnKnow
-                } else {
-                    if (versionCode in rule.startVersionCode..rule.endVersionCode) {
-                        AppStatus.Hook
-                    } else {
-                        AppStatus.NoSupport
-                    }
-                }
-            }
-        }
-
-    }
 
     override fun getItemCount() = dataLists.size
 }

@@ -17,11 +17,13 @@ import cn.lyric.getter.config.ActivityOwnSP.config
 import cn.lyric.getter.data.AppInfos
 import cn.lyric.getter.data.AppRule
 import cn.lyric.getter.data.Rule
-import cn.lyric.getter.data.lyricType
 import cn.lyric.getter.databinding.FragmentAppRulesBinding
 import cn.lyric.getter.databinding.ItemsAppBinding
 import cn.lyric.getter.tool.ActivityTools.getAppRules
 import cn.lyric.getter.tool.ActivityTools.updateAppRules
+import cn.lyric.getter.tool.AppRulesTools.getAppStatus
+import cn.lyric.getter.tool.AppRulesTools.getAppStatusDescription
+import cn.lyric.getter.tool.AppRulesTools.lyricType
 import cn.lyric.getter.ui.adapter.AppRulesAdapter
 import cn.lyric.getter.ui.dialog.MaterialProgressDialog
 import cn.lyric.getter.ui.viewmodel.AppRulesViewModel
@@ -53,15 +55,16 @@ class AppRulesFragment : Fragment() {
         appAdapter = AppRulesAdapter().apply {
             setOnItemClickListener(object : AppRulesAdapter.OnItemClickListener {
                 override fun onItemClick(position: Int, viewBinding: ItemsAppBinding) {
+                    val versionCode = viewBinding.appVersionCodeView.text.toString().toInt()
                     val packageName = dataLists[position].packageName
                     val appRule = appRules.filter { it.packageName == packageName }[0]
                     if (appRule.rules.size == 1) {
-                        showRuleDialog(appRule.rules[0], appRule.name)
+                        showRuleDialog(appRule.rules[0], appRule.name, versionCode)
                     } else {
                         MaterialAlertDialogBuilder(requireContext()).apply {
                             setTitle(R.string.select_the_rule_you_want_to_view)
                             setItems(Array(appRule.rules.size) { getString(R.string.rule, (it + 1).toString()) }) { _, which ->
-                                showRuleDialog(appRule.rules[which], "${appRule.name}: ${getString(R.string.rule, (which + 1).toString())}")
+                                showRuleDialog(appRule.rules[which], "${appRule.name}: ${getString(R.string.rule, (which + 1).toString())}", versionCode)
                             }
                             setNegativeButton(R.string.cancel, null)
                             show()
@@ -106,14 +109,15 @@ class AppRulesFragment : Fragment() {
         }
     }
 
-    fun showRuleDialog(rule: Rule, title: String) {
+    fun showRuleDialog(rule: Rule, title: String, versionCode: Int) {
         val items = arrayOf(
+            "${getString(R.string.current_status)}：${getAppStatusDescription(getAppStatus(rule, versionCode), rule,false)}",
             "${getString(R.string.use_api)}：${rule.useApi.toString().toUpperFirstCaseAndLowerOthers()}",
-            "${getString(R.string.api_version)}：${rule.apiVersion.let { if (!rule.useApi) getString(R.string.no_have) else it }}",
+            "${getString(R.string.api_version)}：${rule.useApi.takeIf { it }?.let { rule.apiVersion } ?: getString(R.string.no_have)}",
             "${getString(R.string.start_version_code)}：${rule.startVersionCode}",
             "${getString(R.string.end_version_code)}：${rule.endVersionCode}",
             "${getString(R.string.exclude_versions)}：${rule.excludeVersions.ifEmpty { getString(R.string.no_have) }}",
-            "${getString(R.string.get_lyric_type)}：${rule.getLyricType.lyricType()}",
+            "${getString(R.string.get_lyric_type)}：${rule.useApi.takeIf { !it }?.let { rule.getLyricType.lyricType() } ?: getString(R.string.api_pattern)}",
             "${getString(R.string.remarks)}：${rule.remarks.ifEmpty { getString(R.string.no_have) }}"
         )
         MaterialAlertDialogBuilder(requireContext()).apply {
