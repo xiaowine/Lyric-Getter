@@ -313,6 +313,21 @@
           "remarks": ""
         }
       ]
+    },
+    {
+      "packageName": "statusbar.finder",
+      "name": "LyricsGetter Ext",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 4,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
     }
   ],
   "appRulesVersion": 3,
