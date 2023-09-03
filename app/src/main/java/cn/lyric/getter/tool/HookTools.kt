@@ -179,7 +179,6 @@ object HookTools {
             remoteControlManager.methodFinder().first { name == "updataMetaData" }.createHook {
                 before {
                     val lyric = if (it.args[1].isNull()) return@before else it.args[1].toString()
-                    if ("NEED_NOT_UPDATE_TITLE" == lyric) return@before
                     sendLyric(context, lyric)
                 }
             }
