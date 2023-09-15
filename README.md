@@ -1,3 +1,4 @@
+![Release Download](https://img.shields.io/github/downloads/Xposed-Modules-Repo/cn.lyric.getter/total?style=flat-square)  
 ![Release Download](https://img.shields.io/github/downloads/xiaowine/Lyric-Getter/total?style=flat-square)  
 [![Release Version](https://img.shields.io/github/v/release/xiaowine/Lyric-Getter?style=flat-square)](https://github.com/xiaowine/Lyric-Getter/releases/latest)  
 [![GitHub license](https://img.shields.io/github/license/xiaowine/Lyric-Getter?style=flat-square)](https://github.com/xiaowine/Lyric-Getter/LICENSE)  
