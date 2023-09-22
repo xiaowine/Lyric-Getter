@@ -28,6 +28,7 @@ import cn.lyric.getter.ui.adapter.AppRulesAdapter
 import cn.lyric.getter.ui.dialog.MaterialProgressDialog
 import cn.lyric.getter.ui.viewmodel.AppRulesViewModel
 import cn.xiaowine.xkt.AcTool.openURL
+import cn.xiaowine.xkt.AcTool.showToast
 import cn.xiaowine.xkt.Tool.goMainThread
 import cn.xiaowine.xkt.Tool.toUpperFirstCaseAndLowerOthers
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -52,6 +53,7 @@ class AppRulesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        getString(R.string.rules_are_only_for_viewing_supported_versions).showToast()
         appAdapter = AppRulesAdapter().apply {
             setOnItemClickListener(object : AppRulesAdapter.OnItemClickListener {
                 override fun onItemClick(position: Int, viewBinding: ItemsAppBinding) {
@@ -111,7 +113,7 @@ class AppRulesFragment : Fragment() {
 
     fun showRuleDialog(rule: Rule, title: String, versionCode: Int) {
         val items = arrayOf(
-            "${getString(R.string.current_status)}：${getAppStatusDescription(getAppStatus(rule, versionCode), rule,false)}",
+            "${getString(R.string.current_status)}：${getAppStatusDescription(getAppStatus(rule, versionCode), rule, false)}",
             "${getString(R.string.use_api)}：${rule.useApi.toString().toUpperFirstCaseAndLowerOthers()}",
             "${getString(R.string.api_version)}：${rule.useApi.takeIf { it }?.let { rule.apiVersion } ?: getString(R.string.no_have)}",
             "${getString(R.string.start_version_code)}：${rule.startVersionCode}",
