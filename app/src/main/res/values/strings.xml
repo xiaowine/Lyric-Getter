@@ -66,5 +66,5 @@
     <string name="desktop_lyrics_mode">桌面歌词模式</string>
     <string name="enforced_mode">强制模式</string>
     <string name="current_status">当前状态</string>
-    <string name="rules_are_only_for_viewing_supported_versions">规则仅供查看支持版本，与实际获取没有关联</string>
+    <string name="rules_are_only_for_viewing_supported_versions">规则仅供查看支持软件版本\n与实际获取检测没有关联</string>
 </resources>

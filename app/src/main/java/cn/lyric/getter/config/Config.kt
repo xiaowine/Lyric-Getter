@@ -69,4 +69,12 @@ class Config {
         set(value) {
             config.put("regexReplace", value)
         }
+
+    var isFirstLookRules: Boolean
+        get() {
+            return config.opt("isFirstRules", true)
+        }
+        set(value) {
+            config.put("isFirstRules", value)
+        }
 }

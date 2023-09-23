@@ -3,6 +3,7 @@
 package cn.lyric.getter.ui.fragment
 
 
+import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -28,7 +29,6 @@ import cn.lyric.getter.ui.adapter.AppRulesAdapter
 import cn.lyric.getter.ui.dialog.MaterialProgressDialog
 import cn.lyric.getter.ui.viewmodel.AppRulesViewModel
 import cn.xiaowine.xkt.AcTool.openURL
-import cn.xiaowine.xkt.AcTool.showToast
 import cn.xiaowine.xkt.Tool.goMainThread
 import cn.xiaowine.xkt.Tool.toUpperFirstCaseAndLowerOthers
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -53,7 +53,15 @@ class AppRulesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getString(R.string.rules_are_only_for_viewing_supported_versions).showToast()
+        if (config.isFirstLookRules) {
+            MaterialAlertDialogBuilder(requireContext()).apply {
+                setTitle(R.string.remarks)
+                setMessage(R.string.rules_are_only_for_viewing_supported_versions)
+                setNegativeButton(R.string.ok) { _, _ -> config.isFirstLookRules = false }
+                setCancelable(false)
+                show()
+            }
+        }
         appAdapter = AppRulesAdapter().apply {
             setOnItemClickListener(object : AppRulesAdapter.OnItemClickListener {
                 override fun onItemClick(position: Int, viewBinding: ItemsAppBinding) {
