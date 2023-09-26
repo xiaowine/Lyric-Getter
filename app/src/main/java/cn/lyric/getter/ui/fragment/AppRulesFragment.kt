@@ -3,7 +3,6 @@
 package cn.lyric.getter.ui.fragment
 
 
-import android.content.DialogInterface
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -65,7 +64,13 @@ class AppRulesFragment : Fragment() {
         appAdapter = AppRulesAdapter().apply {
             setOnItemClickListener(object : AppRulesAdapter.OnItemClickListener {
                 override fun onItemClick(position: Int, viewBinding: ItemsAppBinding) {
-                    val versionCode = viewBinding.appVersionCodeView.text.toString().toInt()
+                    val versionCode = viewBinding.appVersionCodeView.text.let {
+                        if (it.isEmpty()) {
+                            0
+                        } else {
+                            it.toString().toInt()
+                        }
+                    }
                     val packageName = dataLists[position].packageName
                     val appRule = appRules.filter { it.packageName == packageName }[0]
                     if (appRule.rules.size == 1) {
