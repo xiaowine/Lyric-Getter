@@ -1,1 +1,1 @@
--keep class cn.lyric.getter.hook.MainHook-keep class cn.lyric.getter.api.data.*{*;}-keep class cn.lyric.getter.tool.MeiZuNotification{*;}-keep class cn.lyric.getter.data.**{*;}-keep class cn.xiaowine.dsp.**{*;}
+-keep class cn.lyric.getter.hook.MainHook-keep class cn.lyric.getter.api.data.*{*;}-keep class cn.lyric.getter.tool.MeiZuNotification{*;}-keep class cn.lyric.getter.data.**{*;}-keep class cn.xiaowine.dsp.annotation.**{*;}-keep class cn.xiaowine.dsp.data.**{*;}-keep @cn.xiaowine.dsp.annotation.SerializeConfig class * {}
