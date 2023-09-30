@@ -14,20 +14,15 @@ import java.io.DataOutputStream
 
 
 object Tools {
-    fun getPref(key: String): XSharedPreferences? {
-        return try {
-            val pref = XSharedPreferences(BuildConfig.APPLICATION_ID, key)
-            if (pref.file.canRead()) pref else null
-        } catch (e: Throwable) {
-            e.log()
-            null
-        }
-    }
-
-
     @SuppressLint("WorldReadableFiles")
-    fun getSP(context: Context, key: String): SharedPreferences? {
-        @Suppress("DEPRECATION") return context.createDeviceProtectedStorageContext().getSharedPreferences(key, Context.MODE_WORLD_READABLE)
+    fun activation(context: Context, key: String): Boolean {
+       return try {
+            @Suppress("DEPRECATION") context.createDeviceProtectedStorageContext().getSharedPreferences(key, Context.MODE_WORLD_READABLE)
+            true
+        } catch (_: Exception) {
+            false
+        }
+
     }
 
     fun restartTheScopedSoftware(context: Context) {

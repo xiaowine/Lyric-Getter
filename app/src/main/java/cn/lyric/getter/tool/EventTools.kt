@@ -6,7 +6,7 @@ import android.content.Intent
 import android.util.Log
 import cn.lyric.getter.api.data.DataType
 import cn.lyric.getter.api.data.LyricData
-import cn.lyric.getter.config.XposedOwnSP.config
+import cn.lyric.getter.tool.ConfigTools.xConfig
 import cn.xiaowine.xkt.Tool.observableChange
 import cn.xiaowine.xkt.Tool.regexReplace
 
@@ -16,7 +16,7 @@ object EventTools {
 
     private var lastLyricData: LyricData? by observableChange(null) { _, _, newValue ->
         newValue?.run {
-            val regexReplace = lyric.regexReplace(config.regexReplace, "")
+            val regexReplace = lyric.regexReplace(xConfig.regexReplace, "")
             if (regexReplace.isEmpty()) {
                 cleanLyric(context)
             } else {

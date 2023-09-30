@@ -9,9 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.R
-import cn.lyric.getter.config.ActivityOwnSP.config
+import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.databinding.FragmentSettingsBinding
-import cn.xiaowine.xkt.AcTool.showToast
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.editText
 import de.Maxr1998.modernpreferences.helpers.onClick

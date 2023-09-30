@@ -51,11 +51,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.majorVersion
+        jvmTarget = JavaVersion.VERSION_17.majorVersion
     }
     packaging {
         resources {
@@ -97,6 +97,7 @@ dependencies {
     implementation(libs.lyricGetter.api)
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.xkt)
+    implementation(libs.dsp)
     implementation(libs.modernandroidpreferences)
     implementation(libs.swiperefreshlayout)
 

@@ -2,7 +2,6 @@ package cn.lyric.getter.hook.app
 
 import android.app.Activity
 import android.view.View
-import cn.lyric.getter.config.XposedOwnSP.config
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools.cleanLyric
 import cn.lyric.getter.tool.EventTools.sendLyric

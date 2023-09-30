@@ -7,16 +7,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
-import cn.lyric.getter.config.ActivityOwnSP
 import cn.lyric.getter.databinding.ActivityMainBinding
-import cn.lyric.getter.tool.ActivityTools
 import cn.lyric.getter.tool.ActivityTools.checkUpdate
 import cn.lyric.getter.tool.ActivityTools.updateAppRules
+import cn.lyric.getter.tool.Tools.activation
 import cn.lyric.getter.ui.viewmodel.ShareViewModel
-import cn.xiaowine.xkt.AcTool
-import cn.xiaowine.xkt.LogTool
 
 
 class MainActivity : AppCompatActivity() {
@@ -50,7 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun checkLSPosed(): Boolean {
         return try {
-            ActivityOwnSP.ownSP
+            activation(this, "config")
             true
         } catch (_: Exception) {
             false

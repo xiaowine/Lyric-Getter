@@ -13,7 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.R
-import cn.lyric.getter.config.ActivityOwnSP.config
+import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.data.AppInfos
 import cn.lyric.getter.data.AppRule
 import cn.lyric.getter.data.Rule

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.R
-import cn.lyric.getter.config.ActivityOwnSP
+import cn.lyric.getter.tool.ConfigTools
 import cn.lyric.getter.data.AppInfos
 import cn.lyric.getter.data.AppStatus
 import cn.lyric.getter.databinding.ItemsAppBinding
@@ -78,7 +78,7 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
                     if (status.size == 1) {
                         description = getAppStatusDescription(status[0], rules[0])
                     } else {
-                        if (ActivityOwnSP.config.showAllRules) {
+                        if (ConfigTools.config.showAllRules) {
                             status.forEach {
                                 description += "${context.getString(R.string.multi_rule).format(status.indexOf(it) + 1, getAppStatusDescription(it, rules[status.indexOf(it)]))}<br>"
                             }

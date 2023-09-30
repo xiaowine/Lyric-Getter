@@ -16,8 +16,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
-import cn.lyric.getter.config.ActivityOwnSP.config
-import cn.lyric.getter.config.ActivityOwnSP.ownSP
+import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.databinding.FragmentHomeBinding
 import cn.lyric.getter.tool.ActivityTools.getAppRules
 import cn.lyric.getter.tool.BackupTools
@@ -37,7 +36,7 @@ import java.util.Locale
 class HomeFragment : Fragment() {
     private var recoveryPickerLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
         it.isNotNull { uri ->
-            BackupTools.handleReadDocument(requireActivity(), ownSP, uri)
+            BackupTools.handleReadDocument(requireActivity(), config.sharedPreferences, uri)
             MaterialAlertDialogBuilder(requireContext()).apply {
                 setTitle(R.string.recovery)
                 setCancelable(false)
@@ -51,7 +50,7 @@ class HomeFragment : Fragment() {
     }
     private var backupPickerLauncher = registerForActivityResult(ActivityResultContracts.CreateDocument("application/json")) {
         it.isNotNull { uri ->
-            BackupTools.handleCreateDocument(requireActivity(), ownSP, uri)
+            BackupTools.handleCreateDocument(requireActivity(), config.sharedPreferences, uri)
         }
     }
 

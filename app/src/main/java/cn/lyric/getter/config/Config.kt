@@ -1,80 +1,17 @@
 package cn.lyric.getter.config
 
-import android.content.SharedPreferences
-import de.robv.android.xposed.XSharedPreferences
-import cn.lyric.getter.tool.ConfigTools
+import android.app.Application
+import cn.xiaowine.dsp.DSP
+import cn.xiaowine.dsp.annotation.SerializeConfig
+import cn.xiaowine.dsp.data.MODE
 
-
-class Config {
-    var config: ConfigTools
-
-    constructor(xSharedPreferences: XSharedPreferences?) {
-        config = ConfigTools(xSharedPreferences)
-    }
-
-    constructor(sharedPreferences: SharedPreferences) {
-        config = ConfigTools(sharedPreferences)
-    }
-
-    fun update() {
-        config.reload()
-    }
-
-
-    fun clear() {
-        config.clearConfig()
-    }
-
-    var hideDesktopIcons: Boolean
-        get() {
-            return config.opt("hideDesktopIcons", false)
-        }
-        set(value) {
-            config.put("hideDesktopIcons", value)
-        }
-    var showAllRules: Boolean
-        get() {
-            return config.opt("showAllRules", false)
-        }
-        set(value) {
-            config.put("showAllRules", value)
-        }
-    var outputRepeatedLyrics: Boolean
-        get() {
-            return config.opt("output_repeated_lyrics", false)
-        }
-        set(value) {
-            config.put("output_repeated_lyrics", value)
-        }
-    var enhancedHiddenLyrics: Boolean
-        get() {
-            return config.opt("enhanced_hidden_lyrics", false)
-        }
-        set(value) {
-            config.put("enhanced_hidden_lyrics", value)
-        }
-
-    var allowSomeSoftwareToOutputAfterTheScreen: Boolean
-        get() {
-            return config.opt("allowSomeSoftwareToOutputAfterTheScreen", false)
-        }
-        set(value) {
-            config.put("allowSomeSoftwareToOutputAfterTheScreen", value)
-        }
-
-    var regexReplace: String
-        get() {
-            return config.opt("regexReplace", "")
-        }
-        set(value) {
-            config.put("regexReplace", value)
-        }
-
-    var isFirstLookRules: Boolean
-        get() {
-            return config.opt("isFirstRules", true)
-        }
-        set(value) {
-            config.put("isFirstRules", value)
-        }
+@SerializeConfig("config", MODE.HOOK)
+class Config(application: Application?, packageName: String, isXSPf: Boolean = false) : DSP(application, packageName, isXSPf) {
+    var hideDesktopIcons: Boolean by serialLazy(false)
+    var showAllRules: Boolean by serialLazy(false)
+    var outputRepeatedLyrics: Boolean by serialLazy(false)
+    var allowSomeSoftwareToOutputAfterTheScreen: Boolean by serialLazy(false)
+    var enhancedHiddenLyrics: Boolean by serialLazy(false)
+    var regexReplace: String by serialLazy("")
+    var isFirstLookRules: Boolean by serialLazy(true)
 }

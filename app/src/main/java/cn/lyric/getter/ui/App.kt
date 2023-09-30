@@ -13,6 +13,7 @@ class App : Application() {
         DynamicColors.applyToActivitiesIfAvailable(this)
         AcTool.init(this)
         ActivityTools.context = this
+        ActivityTools.application = this
         LogTool.init("Lyrics Getter", { BuildConfig.DEBUG })
     }
 }

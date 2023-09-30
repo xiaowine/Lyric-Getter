@@ -8,7 +8,6 @@ import cn.lyric.getter.R
 import cn.lyric.getter.api.LyricListener
 import cn.lyric.getter.api.data.LyricData
 import cn.lyric.getter.api.tools.Tools
-import cn.lyric.getter.config.XposedOwnSP.config
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context

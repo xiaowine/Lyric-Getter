@@ -2,6 +2,7 @@ package cn.lyric.getter.tool
 
 
 import android.annotation.SuppressLint
+import android.app.Application
 import android.content.Context
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
@@ -19,6 +20,7 @@ import java.io.File
 @SuppressLint("StaticFieldLeak")
 object ActivityTools {
     lateinit var context: Context
+    lateinit var application: Application
 
     fun getAppRules(): AppRules {
         val file = File("${context.filesDir.path}/app_rules.json")
