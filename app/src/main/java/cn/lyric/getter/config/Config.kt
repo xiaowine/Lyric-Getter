@@ -1,12 +1,9 @@
 package cn.lyric.getter.config
 
-import android.app.Application
-import cn.xiaowine.dsp.DSP
-import cn.xiaowine.dsp.annotation.SerializeConfig
-import cn.xiaowine.dsp.data.MODE
+import cn.xiaowine.dsp.delegate.Delegate.serialLazy
 
-@SerializeConfig("config", MODE.HOOK)
-class Config(application: Application?, packageName: String, isXSPf: Boolean = false) : DSP(application, packageName, isXSPf) {
+
+class Config {
     var hideDesktopIcons: Boolean by serialLazy(false)
     var showAllRules: Boolean by serialLazy(false)
     var outputRepeatedLyrics: Boolean by serialLazy(false)
@@ -14,4 +11,5 @@ class Config(application: Application?, packageName: String, isXSPf: Boolean = f
     var enhancedHiddenLyrics: Boolean by serialLazy(false)
     var regexReplace: String by serialLazy("")
     var isFirstLookRules: Boolean by serialLazy(true)
+    var updateTime: Long by serialLazy(0L)
 }

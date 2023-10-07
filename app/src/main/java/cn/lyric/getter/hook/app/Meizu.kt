@@ -8,6 +8,7 @@ import cn.xiaowine.xkt.Tool.isNot
 object Meizu : BaseHook() {
 
     override fun init() {
+        super.init()
         isQQLite {
             HookTools.QQLite()
         }.isNot {

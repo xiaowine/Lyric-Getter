@@ -7,6 +7,7 @@ import cn.lyric.getter.tool.HookTools.isQQLite
 object MiPlayer : BaseHook() {
 
     override fun init() {
+        super.init()
         isQQLite {
             HookTools.QQLite()
         }

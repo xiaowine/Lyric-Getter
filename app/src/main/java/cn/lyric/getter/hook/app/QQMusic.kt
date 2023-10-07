@@ -5,6 +5,7 @@ import cn.lyric.getter.tool.HookTools
 
 object QQMusic : BaseHook() {
     override fun init() {
+        super.init()
         HookTools.MockFlyme().mock().notificationLyric()
     }
 }

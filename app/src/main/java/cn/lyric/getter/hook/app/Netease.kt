@@ -27,6 +27,7 @@ object Netease : BaseHook() {
 
 
     override fun init() {
+        super.init()
         MockFlyme().mock()
         fuckTinker()
         HookTools.getApplication {

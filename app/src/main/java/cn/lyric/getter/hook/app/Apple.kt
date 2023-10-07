@@ -90,6 +90,7 @@ object Apple : BaseHook() {
 
     @SuppressLint("SwitchIntDef")
     override fun init() {
+        super.init()
         loadClassOrNull("com.apple.android.music.player.viewmodel.PlayerLyricsViewModel").isNotNull {
             it.methodFinder().filterByName("buildTimeRangeToLyricsMap").first().createHook {
                 after { hookParam ->

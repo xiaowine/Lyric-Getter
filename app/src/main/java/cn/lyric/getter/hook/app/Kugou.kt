@@ -11,6 +11,7 @@ import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinde
 object Kugou : BaseHook() {
 
     override fun init() {
+        super.init()
         HookTools.openBluetoothA2dpOn()
         HookTools.fuckTinker()
         loadClass("com.kugou.framework.player.c").methodFinder().filterByParamTypes(HashMap::class.java).first { name == "a" }.createHook {

@@ -17,6 +17,7 @@ import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinde
 object Api : BaseHook() {
 
     override fun init() {
+        super.init()
         hook()
     }
 

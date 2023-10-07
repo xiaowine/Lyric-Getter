@@ -11,7 +11,7 @@ import cn.lyric.getter.R
 import cn.lyric.getter.databinding.ActivityMainBinding
 import cn.lyric.getter.tool.ActivityTools.checkUpdate
 import cn.lyric.getter.tool.ActivityTools.updateAppRules
-import cn.lyric.getter.tool.Tools.activation
+import cn.lyric.getter.tool.Tools.xpActivation
 import cn.lyric.getter.ui.viewmodel.ShareViewModel
 
 
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        shareViewModel.activated = checkLSPosed()
+        shareViewModel.activated = xpActivation
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.run {
@@ -43,14 +43,4 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
-
-    private fun checkLSPosed(): Boolean {
-        return try {
-            activation(this, "config")
-            true
-        } catch (_: Exception) {
-            false
-        }
-    }
-
 }

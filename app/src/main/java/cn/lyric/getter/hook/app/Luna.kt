@@ -6,6 +6,7 @@ import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
 object Luna : BaseHook() {
 
     override fun init() {
+        super.init()
         mediaMetadataCompatLyric()
     }
 }

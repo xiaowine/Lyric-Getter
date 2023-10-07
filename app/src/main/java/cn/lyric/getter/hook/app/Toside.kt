@@ -20,6 +20,7 @@ object Toside : BaseHook() {
     }
 
     override fun init() {
+        super.init()
         val lyricModuleClass = loadClassOrNull("cn.toside.music.mobile.lyric.LyricModule")
         lyricModuleClass.isNotNull { clazz ->
             if (config.allowSomeSoftwareToOutputAfterTheScreen) {

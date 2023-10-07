@@ -12,6 +12,7 @@ import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinde
 object Qinalt : BaseHook() {
 
     override fun init() {
+        super.init()
         ClassUtils.loadClassOrNull("com.stub.StubApp").isNotNull {
             it.methodFinder().first { name == "attachBaseContext" }.createHook {
                 after { param ->

@@ -1,29 +1,14 @@
-@file:Suppress("DEPRECATION")
-
 package cn.lyric.getter.tool
 
 
-import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
-import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
 import cn.xiaowine.xkt.LogTool.log
-import de.robv.android.xposed.XSharedPreferences
 import java.io.DataOutputStream
 
 
 object Tools {
-    @SuppressLint("WorldReadableFiles")
-    fun activation(context: Context, key: String): Boolean {
-       return try {
-            @Suppress("DEPRECATION") context.createDeviceProtectedStorageContext().getSharedPreferences(key, Context.MODE_WORLD_READABLE)
-            true
-        } catch (_: Exception) {
-            false
-        }
-
-    }
+    var xpActivation: Boolean = false
 
     fun restartTheScopedSoftware(context: Context) {
         var s = ""

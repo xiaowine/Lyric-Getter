@@ -42,6 +42,7 @@ object SystemUi : BaseHook() {
     }
 
     override fun init() {
+        super.init()
         loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager").isNotNull {
             it.methodFinder().filterByName("clearCurrentMediaNotification").first().createHook {
                 after {

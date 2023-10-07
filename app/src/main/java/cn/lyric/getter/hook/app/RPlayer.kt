@@ -15,6 +15,7 @@ object RPlayer : BaseHook() {
 
 
     override fun init() {
+        super.init()
         loadClassOrNull("com.stub.StubApp").isNotNull {
             it.methodFinder().first { name == "attachBaseContext" }.createHook {
                 after { param ->

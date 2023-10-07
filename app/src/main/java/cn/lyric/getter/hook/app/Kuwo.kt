@@ -55,6 +55,7 @@ import java.util.TimerTask
 
 
     override fun init() {
+        super.init()
         HookTools.getApplication {
             context = it
             loadClassOrNull("cn.kuwo.mod.playcontrol.RemoteControlLyricMgr").isNotNull { clazz ->
