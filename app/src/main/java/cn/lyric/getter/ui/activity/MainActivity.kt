@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import cn.lyric.getter.R
 import cn.lyric.getter.databinding.ActivityMainBinding
+import cn.lyric.getter.tool.ActivityTools
 import cn.lyric.getter.tool.ActivityTools.checkUpdate
 import cn.lyric.getter.tool.ActivityTools.updateAppRules
 import cn.lyric.getter.tool.Tools.xpActivation
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        ActivityTools.context = this
         shareViewModel.activated = xpActivation
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

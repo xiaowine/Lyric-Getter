@@ -16,7 +16,6 @@ class App : Application() {
         super.onCreate()
         DynamicColors.applyToActivitiesIfAvailable(this)
         AcTool.init(this)
-        ActivityTools.context = this
         ActivityTools.application = this
         LogTool.init("Lyrics Getter", { BuildConfig.DEBUG })
         xpActivation = DSP.init(this, BuildConfig.APPLICATION_ID, MODE.HOOK, false)
