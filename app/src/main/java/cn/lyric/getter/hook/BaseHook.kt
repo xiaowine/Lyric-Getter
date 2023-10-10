@@ -11,8 +11,6 @@ abstract class BaseHook {
     var isInit: Boolean = false
     val config: Config by lazy { xConfig }
     open fun init() {
-        HookTools.getApplication {
-            DSP.init(it, BuildConfig.APPLICATION_ID, MODE.HOOK, true)
-        }
+        DSP.init(null, BuildConfig.APPLICATION_ID, MODE.HOOK, true)
     }
 }
