@@ -5,9 +5,9 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.media.AudioManager
 import cn.lyric.getter.hook.BaseHook
-import cn.lyric.getter.tool.EventTools.cleanLyric
-import cn.lyric.getter.tool.EventTools.sendLyric
+import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools
+import cn.lyric.getter.tool.HookTools.eventTools
 import cn.xiaowine.xkt.Tool.isNot
 import cn.xiaowine.xkt.Tool.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
@@ -20,7 +20,8 @@ import java.util.Timer
 import java.util.TimerTask
 
 
-@SuppressLint("StaticFieldLeak") object Kuwo : BaseHook() {
+@SuppressLint("StaticFieldLeak")
+object Kuwo : BaseHook() {
 
     init {
         System.loadLibrary("dexkit")
@@ -39,7 +40,7 @@ import java.util.TimerTask
         timer?.schedule(object : TimerTask() {
             override fun run() {
                 if (!audioManager.isMusicActive) {
-                    cleanLyric(context)
+                    eventTools.cleanLyric()
                     stopTimer()
                 }
             }
@@ -62,7 +63,7 @@ import java.util.TimerTask
                 clazz.methodFinder().first { name == "updateLyricText" }.createHook {
                     after { param ->
                         startTimer()
-                        sendLyric(context, param.args[0].toString())
+                        eventTools.sendLyric(param.args[0].toString())
                     }
                 }
             }.isNot {
@@ -78,7 +79,7 @@ import java.util.TimerTask
                                 loadClass(res.declaringClassName).methodFinder().first { name == res.name }.createHook {
                                     after { hookParam ->
                                         startTimer()
-                                        sendLyric(context, hookParam.args[0].toString())
+                                        eventTools.sendLyric(hookParam.args[0].toString())
                                     }
                                 }
                                 HookTools.openBluetoothA2dpOn()

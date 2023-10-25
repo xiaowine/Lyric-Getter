@@ -10,9 +10,11 @@ import android.os.Looper
 import android.os.Message
 import android.os.SystemClock
 import android.util.Log
+import cn.lyric.getter.api.data.ExtraData
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
+import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.getApplication
 import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.isNotNull
@@ -31,6 +33,7 @@ import java.util.TimerTask
 
 
 object Apple : BaseHook() {
+
     init {
         System.loadLibrary("dexkit")
     }
@@ -52,13 +55,15 @@ object Apple : BaseHook() {
 
     private var lyric: String by observableChange("") { _, oldValue, newValue ->
         if (oldValue == newValue) return@observableChange
-        EventTools.sendLyric(context, newValue, delay)
+        eventTools.sendLyric(newValue, ExtraData().apply {
+            this.delay = delay
+        })
     }
 
     private var title: String by observableChange("") { _, oldValue, newValue ->
         if (oldValue == newValue) return@observableChange
         lyricList.clear()
-        EventTools.cleanLyric(context)
+        eventTools.cleanLyric()
     }
 
 
@@ -84,7 +89,7 @@ object Apple : BaseHook() {
         if (!isRunning) return
         timer?.cancel()
         "stopTimer".log()
-        EventTools.cleanLyric(context)
+        eventTools.cleanLyric()
         isRunning = false
     }
 

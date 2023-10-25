@@ -21,7 +21,7 @@ object RPlayer : BaseHook() {
                 after { param ->
                     val context = param.args[0] as Context
                     val classLoader = context.classLoader
-                    HookTools.mediaMetadataCompatLyric(context, classLoader)
+                    HookTools.mediaMetadataCompatLyric(classLoader)
                     if (config.allowSomeSoftwareToOutputAfterTheScreen) HookTools.lockNotStopLyric(classLoader)
                 }
             }

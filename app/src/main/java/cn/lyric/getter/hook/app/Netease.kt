@@ -4,11 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.IntentFilter
 import cn.lyric.getter.hook.BaseHook
-import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.MockFlyme
+import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.fuckTinker
 import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
+import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
@@ -45,14 +46,14 @@ object Netease : BaseHook() {
                             IntentFilter()
                             loadClass(res.declaringClassName).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {
                                 after { hookParam ->
-                                    sendLyric(it, hookParam.result as String)
+                                    eventTools.sendLyric(hookParam.result as String)
                                 }
                             }
                         }
                     }
                 }
             } else {
-                mediaMetadataCompatLyric(it)
+                mediaMetadataCompatLyric(it.classLoader)
             }
         }
     }

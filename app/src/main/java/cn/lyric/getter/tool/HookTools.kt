@@ -3,11 +3,8 @@ package cn.lyric.getter.tool
 import android.app.AndroidAppHelper
 import android.app.Application
 import android.app.Notification
-import android.content.Context
 import android.content.Intent
 import android.os.Build
-import cn.lyric.getter.tool.EventTools.cleanLyric
-import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.isNot
 import cn.xiaowine.xkt.Tool.isNotNull
@@ -24,6 +21,8 @@ import java.lang.reflect.Method
 
 
 object HookTools {
+    val eventTools by lazy { EventTools(context) }
+
     val context: Application by lazy { AndroidAppHelper.currentApplication() }
     fun isQQLite(classLoader: ClassLoader? = null, callback: () -> Unit): Boolean {
         loadClassOrNull("com.tencent.qqmusic.core.song.SongInfo", classLoader).isNotNull {
@@ -34,20 +33,20 @@ object HookTools {
     }
 
     fun isApi(classLoader: ClassLoader? = null, callback: (Class<*>) -> Unit): Boolean {
-        loadClassOrNull("cn.lyric.getter.api.tools.EventTools", classLoader).isNotNull {
+        loadClassOrNull("cn.lyric.getter.api.Api", classLoader).isNotNull {
             callback(it)
             return true
         }
         return false
     }
 
-    fun mediaMetadataCompatLyric(context: Context? = null, classLoader: ClassLoader? = null) {
+    fun mediaMetadataCompatLyric(classLoader: ClassLoader? = null) {
         loadClassOrNull("android.support.v4.media.MediaMetadataCompat\$Builder", classLoader).isNotNull {
             it.methodFinder().first { name == "putString" }.createHook {
                 after { hookParam ->
                     if (hookParam.args[0].toString() == "android.media.metadata.TITLE") {
                         hookParam.args[1].isNotNull {
-                            sendLyric(context ?: this@HookTools.context, hookParam.args[1] as String)
+                            eventTools.sendLyric(hookParam.args[1] as String)
                         }
                     }
                 }
@@ -148,9 +147,9 @@ object HookTools {
                     val isLyric = notification.flags and MeiZuNotification.FLAG_ALWAYS_SHOW_TICKER != 0 || notification.flags and MeiZuNotification.FLAG_ONLY_UPDATE_TICKER != 0
                     if (isLyric) {
                         charSequence.isNotNull {
-                            sendLyric(context, charSequence.toString())
+                            eventTools.sendLyric(charSequence.toString())
                         }.isNot {
-                            cleanLyric(context)
+                            eventTools.cleanLyric()
                         }
                     }
                 }
@@ -180,7 +179,7 @@ object HookTools {
                 before {
                     val lyric = if (it.args[1].isNull()) return@before else it.args[1].toString()
                     if ("NEED_NOT_UPDATE_TITLE" == lyric) return@before
-                    sendLyric(context, lyric)
+                    eventTools.sendLyric(lyric)
                 }
             }
         }

@@ -5,12 +5,14 @@ import android.media.MediaMetadata
 import android.media.session.PlaybackState
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
-import cn.lyric.getter.api.LyricListener
+import cn.lyric.getter.api.listener.LyricReceiver
 import cn.lyric.getter.api.data.LyricData
+import cn.lyric.getter.api.listener.LyricListener
 import cn.lyric.getter.api.tools.Tools
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
+import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.getApplication
 import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.isNotNull
@@ -22,10 +24,11 @@ import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinde
 
 
 object SystemUi : BaseHook() {
+    private lateinit var receiver: LyricReceiver
 
     private var title: String by observableChange("") { _, _, newValue ->
         if (newValue.isNotEmpty()) {
-            EventTools.cleanLyric(context)
+            eventTools.cleanLyric()
         }
     }
 
@@ -47,7 +50,7 @@ object SystemUi : BaseHook() {
             it.methodFinder().filterByName("clearCurrentMediaNotification").first().createHook {
                 after {
                     if (!useOwnMusicController) {
-                        EventTools.cleanLyric(context)
+                        eventTools.cleanLyric()
                     }
                 }
             }
@@ -61,7 +64,7 @@ object SystemUi : BaseHook() {
                             val playbackState = hookParam.args[0] as PlaybackState
                             if (playbackState.state == 2) {
                                 if (!useOwnMusicController) {
-                                    EventTools.cleanLyric(context)
+                                    eventTools.cleanLyric()
                                 }
                             }
                         }
@@ -89,11 +92,12 @@ object SystemUi : BaseHook() {
             }
         }
         getApplication { application ->
-            Tools.registerLyricListener(application, BuildConfig.API_VERSION, object : LyricListener() {
+            receiver = LyricReceiver(object : LyricListener() {
                 override fun onUpdate(lyricData: LyricData) {
-                    useOwnMusicController = lyricData.useOwnMusicController
+                    useOwnMusicController = lyricData.extraData.useOwnMusicController
                 }
             })
+            Tools.registerLyricListener(application, BuildConfig.API_VERSION, receiver)
         }
     }
 }

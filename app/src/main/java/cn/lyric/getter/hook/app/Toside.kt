@@ -3,10 +3,9 @@ package cn.lyric.getter.hook.app
 import android.app.Activity
 import android.view.View
 import cn.lyric.getter.hook.BaseHook
-import cn.lyric.getter.tool.EventTools.cleanLyric
-import cn.lyric.getter.tool.EventTools.sendLyric
 import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.context
+import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.getApplication
 import cn.xiaowine.xkt.Tool.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
@@ -30,7 +29,7 @@ object Toside : BaseHook() {
             }
             clazz.methodFinder().filterByName("pause").first().createHook {
                 after {
-                    cleanLyric(context)
+                    eventTools.cleanLyric()
                 }
             }
             val lyricField = clazz.declaredFields.first { it.name == "lyric" }
@@ -39,7 +38,7 @@ object Toside : BaseHook() {
             lyricMethod.createHook {
                 after {
                     val lyric = it.args[0] as String
-                    sendLyric(context, lyric)
+                    eventTools.sendLyric(lyric)
                 }
             }
 
