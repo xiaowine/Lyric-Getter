@@ -5,13 +5,11 @@ import android.media.MediaMetadata
 import android.media.session.PlaybackState
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
-import cn.lyric.getter.api.listener.LyricReceiver
 import cn.lyric.getter.api.data.LyricData
 import cn.lyric.getter.api.listener.LyricListener
+import cn.lyric.getter.api.listener.LyricReceiver
 import cn.lyric.getter.api.tools.Tools
 import cn.lyric.getter.hook.BaseHook
-import cn.lyric.getter.tool.EventTools
-import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.getApplication
 import cn.xiaowine.xkt.LogTool.log
@@ -46,8 +44,9 @@ object SystemUi : BaseHook() {
 
     override fun init() {
         super.init()
-        loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager").isNotNull {
-            it.methodFinder().filterByName("clearCurrentMediaNotification").first().createHook {
+
+        loadClassOrNull("com.android.systemui.media.controls.ui.MediaCarouselController").isNotNull {
+            it.methodFinder().filterByName("removePlayer").first().createHook {
                 after {
                     if (!useOwnMusicController) {
                         eventTools.cleanLyric()

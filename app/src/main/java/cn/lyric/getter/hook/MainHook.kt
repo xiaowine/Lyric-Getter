@@ -59,6 +59,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
                 it.isInit = true
                 "Inited hook: ${it.javaClass.name}".log()
             }.exceptionOrNull()?.let {
+                it.printStackTrace()
                 "Init hook ${it.message} failed".log()
             }
         }
