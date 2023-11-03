@@ -53,14 +53,14 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
 
     private fun initHooks(vararg hook: BaseHook) {
         hook.forEach {
-            runCatching {
+            try {
                 if (it.isInit) return@forEach
                 it.init()
                 it.isInit = true
                 "Inited hook: ${it.javaClass.name}".log()
-            }.exceptionOrNull()?.let {
-                it.printStackTrace()
-                "Init hook ${it.message} failed".log()
+            }catch (e:Exception) {
+                e.printStackTrace()
+                "Init hook ${e.message} failed".log()
             }
         }
     }
