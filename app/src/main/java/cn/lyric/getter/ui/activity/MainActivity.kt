@@ -14,6 +14,7 @@ import cn.lyric.getter.tool.ActivityTools.checkUpdate
 import cn.lyric.getter.tool.ActivityTools.updateAppRules
 import cn.lyric.getter.tool.Tools.xpActivation
 import cn.lyric.getter.ui.viewmodel.ShareViewModel
+import com.google.android.material.navigation.NavigationBarView
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        binding.nav.setupWithNavController(findNavController(R.id.nav_host_fragment))
+        (binding.nav as NavigationBarView).setupWithNavController(findNavController(R.id.nav_host_fragment))
         checkUpdate()
         updateAppRules()
     }
