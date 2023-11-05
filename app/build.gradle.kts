@@ -20,7 +20,7 @@ android {
         versionCode = 13
         versionName = "2.0.5"
         buildConfigField("long", "BUILD_TIME", "$buildTime")
-        buildConfigField("int", "API_VERSION", "5")
+        buildConfigField("int", "API_VERSION", "6")
         buildConfigField("int", "CONFIG_VERSION", "1")
         buildConfigField("int", "APP_RULES_API_VERSION", "2")
     }
@@ -98,6 +98,7 @@ dependencies {
     implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.xkt)
     implementation(libs.dsp)
+    implementation(libs.cardSlider)
     implementation(libs.modernandroidpreferences)
     implementation(libs.swiperefreshlayout)
 

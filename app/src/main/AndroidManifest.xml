@@ -48,6 +48,6 @@
                 android:resource="@array/need_module" />
         <meta-data
                 android:name="Getter_Version"
-                android:value="5" />
+                android:value="6" />
     </application>
 </manifest>

@@ -3,8 +3,6 @@ package cn.lyric.getter.hook.app
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.api.data.ExtraData
 import cn.lyric.getter.hook.BaseHook
-import cn.lyric.getter.tool.EventTools
-import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.isApi
 import cn.xiaowine.xkt.LogTool.log
@@ -28,7 +26,7 @@ object Api : BaseHook() {
                     hookParam.thisObject.objectHelper().getObjectOrNullAs<Int>("API_VERSION").isNotNull {
                         if (it == BuildConfig.API_VERSION) {
                             hookParam.thisObject.objectHelper().setObject("hasEnable", true)
-                            clazz.methodFinder().filterByParamCount(2).first { name == "sendLyric" }.createHook {
+                            clazz.methodFinder().first { name == "sendLyric" }.createHook {
                                 after { hookParam ->
                                     eventTools.sendLyric(
                                         hookParam.args[0] as String,
@@ -36,7 +34,7 @@ object Api : BaseHook() {
                                     )
                                 }
                             }
-                            clazz.methodFinder().first { name == "stopLyric" }.createHook {
+                            clazz.methodFinder().first { name == "clearLyric" }.createHook {
                                 after {
                                     eventTools.cleanLyric()
                                 }

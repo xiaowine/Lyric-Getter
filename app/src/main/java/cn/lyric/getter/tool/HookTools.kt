@@ -33,7 +33,7 @@ object HookTools {
     }
 
     fun isApi(classLoader: ClassLoader? = null, callback: (Class<*>) -> Unit): Boolean {
-        loadClassOrNull("cn.lyric.getter.api.Api", classLoader).isNotNull {
+        loadClassOrNull("cn.lyric.getter.api.API", classLoader).isNotNull {
             callback(it)
             return true
         }
