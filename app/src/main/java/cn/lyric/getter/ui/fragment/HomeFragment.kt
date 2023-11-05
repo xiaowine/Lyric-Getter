@@ -16,11 +16,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
+import cn.lyric.getter.data.NoticeData
 import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.databinding.FragmentHomeBinding
 import cn.lyric.getter.tool.ActivityTools.getAppRules
 import cn.lyric.getter.tool.BackupTools
 import cn.lyric.getter.tool.Tools.restartTheScopedSoftware
+import cn.lyric.getter.ui.adapter.NoticeAdapter
 import cn.lyric.getter.ui.viewmodel.HomeViewModel
 import cn.lyric.getter.ui.viewmodel.ShareViewModel
 import cn.xiaowine.dsp.DSP
@@ -139,6 +141,13 @@ class HomeFragment : Fragment() {
             configVersionValue.text = BuildConfig.CONFIG_VERSION.toString()
             appRulesVersionValue.text = homeViewModel.appRulesVersionValue ?: getAppRules().appRulesVersion.toString()
             appRulesApiVersionValue.text = BuildConfig.APP_RULES_API_VERSION.toString()
+            viewPager.adapter = NoticeAdapter(
+                arrayListOf(
+                    NoticeData("这是一个标题", "这是一个副标题", "这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容"),
+                    NoticeData("这是一个标题", "这是一个副标题", "这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容"),
+                    NoticeData("这是一个标题", "这是一个副标题", "这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容，这是内容")
+                )
+            )
         }
     }
 

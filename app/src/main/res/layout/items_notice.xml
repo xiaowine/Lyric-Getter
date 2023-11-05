@@ -1,0 +1,45 @@
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clickable="true"
+        android:focusable="true"
+        android:minHeight="?attr/listPreferredItemHeight"
+        app:cardBackgroundColor="?colorPrimary">
+
+    <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingVertical="16dp">
+
+        <com.google.android.material.textview.MaterialTextView
+                android:textColor="?colorOnPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/title"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+                android:layout_marginHorizontal="16dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/subheading"
+                android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+                android:textColor="?colorOnPrimary"
+                android:layout_marginHorizontal="32dp"
+                android:layout_marginTop="8dp" />
+
+        <com.google.android.material.textview.MaterialTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/content"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                android:textColor="?colorOnPrimary"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>
