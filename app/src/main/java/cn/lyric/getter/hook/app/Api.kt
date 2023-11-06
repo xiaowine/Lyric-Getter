@@ -28,9 +28,12 @@ object Api : BaseHook() {
                             hookParam.thisObject.objectHelper().setObject("hasEnable", true)
                             clazz.methodFinder().first { name == "sendLyric" }.createHook {
                                 after { hookParam ->
+                                    val extraData = ExtraData()
+                                    val extra = (hookParam.args[1]).objectHelper().getObjectOrNullAs<HashMap<String, Any>>("extra")!!
+                                    extraData.mergeExtra(extra)
                                     eventTools.sendLyric(
                                         hookParam.args[0] as String,
-                                        hookParam.args[1] as ExtraData
+                                        extraData
                                     )
                                 }
                             }

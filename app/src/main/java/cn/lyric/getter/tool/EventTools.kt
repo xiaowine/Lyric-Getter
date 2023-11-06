@@ -8,6 +8,7 @@ import cn.lyric.getter.api.data.ExtraData
 import cn.lyric.getter.api.data.LyricData
 import cn.lyric.getter.api.data.OperateType
 import cn.lyric.getter.tool.ConfigTools.xConfig
+import cn.xiaowine.xkt.Tool.isNull
 import cn.xiaowine.xkt.Tool.observableChange
 import cn.xiaowine.xkt.Tool.regexReplace
 
@@ -31,11 +32,22 @@ class EventTools(val context: Context) {
     }
 
 
-    fun sendLyric(lyric: String, extra: ExtraData = ExtraData()) {
+    fun sendLyric(lyric: String, extra: ExtraData? = null) {
         lastLyricData = LyricData().apply {
             this.type = OperateType.UPDATE
             this.lyric = lyric
-            this.extraData.mergeExtra(extra)
+            if (extra.isNull()) {
+                this.extraData.mergeExtra(ExtraData().apply {
+                    this.packageName = context.packageName
+                    this.customIcon = false
+                    this.base64Icon = ""
+                    this.useOwnMusicController = false
+                    this.delay = 0
+                })
+            } else {
+                this.extraData.mergeExtra(extra!!)
+            }
+
         }
     }
 
@@ -51,7 +63,7 @@ class EventTools(val context: Context) {
         })
     }
 
-    companion object{
+    companion object {
         private const val TAG = "Lyrics Getter"
     }
 }
