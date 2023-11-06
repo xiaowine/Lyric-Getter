@@ -65,6 +65,8 @@
                     android:paddingVertical="?dialogPreferredPadding"
                     tools:ignore="PrivateResource">
 
+
+
                 <com.google.android.material.card.MaterialCardView
                         style="@style/Widget.Material3.CardView.Elevated"
                         android:layout_width="match_parent"
@@ -111,16 +113,18 @@
                     </RelativeLayout>
                 </com.google.android.material.card.MaterialCardView>
 
+
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:minHeight="50dp"
                         android:layout_marginVertical="?dialogPreferredPadding"
                         android:gravity="center"
+                        android:visibility="gone"
+                        android:id="@+id/notice"
                         android:orientation="vertical">
 
                     <com.google.android.material.textview.MaterialTextView
-                            android:text="通知"
+                            android:text="@string/notice"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content" />
 
@@ -129,19 +133,19 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/viewPager"
                             app:cardSlider_smallScaleFactor="0.9"
-                            app:cardSlider_otherPagesWidth="24dp"
-                            app:cardSlider_pageMargin="12dp"
+                            app:cardSlider_otherPagesWidth="12dp"
                             android:layout_marginTop="8dp"
-                            app:auto_slide_time="5"
+                            app:auto_slide_time="3"
                             app:cardSlider_indicator="@id/indicator" />
 
                     <com.github.islamkhsh.CardSliderIndicator
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="?dialogPreferredPadding"
+                            app:selectedIndicator="@drawable/selected_dot"
                             android:id="@+id/indicator" />
-                </LinearLayout>
 
+                </LinearLayout>
                 <com.google.android.material.card.MaterialCardView
                         android:id="@+id/info_card"
                         android:layout_width="match_parent"

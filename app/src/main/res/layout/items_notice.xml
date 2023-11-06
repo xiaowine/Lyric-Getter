@@ -39,6 +39,7 @@
                 android:textColor="?colorOnPrimary"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="8dp"
+                android:maxLines="8"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     </LinearLayout>

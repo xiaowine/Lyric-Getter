@@ -21,7 +21,7 @@ class NoticeAdapter(private val noticeDataList: ArrayList<NoticeData>) : CardSli
         val data = noticeDataList[position]
         binding.apply {
             title.text = data.title
-            subheading.text = data.subheading
+            subheading.text = data.subhead
             content.text = data.content
             if (data.url.isNotEmpty()) {
                 linearLayout.setOnClickListener {
