@@ -320,9 +320,18 @@
       "rules": [
         {
           "startVersionCode": 0,
-          "endVersionCode": 2147483647,
+          "endVersionCode": 6,
           "excludeVersions": [],
           "apiVersion": 5,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        },
+        {
+          "startVersionCode": 7,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 6,
           "useApi": true,
           "getLyricType": 0,
           "remarks": ""
