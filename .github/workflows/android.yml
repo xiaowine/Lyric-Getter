@@ -2,7 +2,7 @@ name: Android CI
 
 on:
   push:
-    branches: [master]
+    branches: [ master ]
     paths-ignore:
       - "README.md"
   pull_request:
@@ -46,8 +46,10 @@ jobs:
           mkdir -p ./doc
           echo "$(echo `(cat ./app/src/main/assets/app_rules.json)` | grep -o '"appRulesVersion": [0-9]*' | grep -o '[0-9]*')" > ./doc/app_rules_version
           cp ./app/src/main/assets/app_rules.json ./doc/app_rules.json
+          wget -O ./doc/notice_list.json https://xiaowine.github.io/Lyric-Getter/notice_list.json
           ./gradlew assemble
           ./gradlew bundleRelease
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
