@@ -7,6 +7,9 @@ import cn.lyric.getter.data.NoticeData
 import cn.lyric.getter.tool.JsonTools.parseJSON
 import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.SimpleHttpTool.get
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
 
 class HomeViewModel(private val state: SavedStateHandle) : ViewModel() {
     var noticeList: MutableLiveData<ArrayList<NoticeData>> = MutableLiveData()
@@ -36,9 +39,9 @@ class HomeViewModel(private val state: SavedStateHandle) : ViewModel() {
     fun getNotice() {
         Thread {
             "https://xiaowine.github.io/Lyric-Getter/notice_list.json".get(onSuccess = {
-                val parseJSON = it.parseJSON<ArrayList<NoticeData>>()
-                parseJSON.log()
-                noticeList.postValue(parseJSON)
+                val type = object : TypeToken<ArrayList<NoticeData>>() {}.type
+                val list: ArrayList<NoticeData> = Gson().fromJson(it, type)
+                noticeList.postValue(list)
             }, onError = {
                 it.printStackTrace()
                 noticeList.postValue(ArrayList())
