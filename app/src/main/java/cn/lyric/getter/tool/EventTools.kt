@@ -6,7 +6,7 @@ import android.content.Intent
 import android.util.Log
 import cn.lyric.getter.api.data.ExtraData
 import cn.lyric.getter.api.data.LyricData
-import cn.lyric.getter.api.data.OperateType
+import cn.lyric.getter.api.data.type.OperateType
 import cn.lyric.getter.tool.ConfigTools.xConfig
 import cn.xiaowine.xkt.Tool.isNull
 import cn.xiaowine.xkt.Tool.observableChange
