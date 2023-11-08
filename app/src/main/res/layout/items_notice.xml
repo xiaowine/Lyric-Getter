@@ -12,6 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:paddingHorizontal="16dp"
             android:paddingVertical="16dp">
 
         <com.google.android.material.textview.MaterialTextView
@@ -19,16 +20,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/title"
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
-                android:layout_marginHorizontal="16dp" />
+                android:singleLine="true"
+                android:ellipsize="marquee"
+                android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
 
         <com.google.android.material.textview.MaterialTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/subheading"
+                android:id="@+id/subhead"
+                android:singleLine="true"
+                android:ellipsize="marquee"
                 android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
                 android:textColor="?colorOnPrimary"
-                android:layout_marginHorizontal="32dp"
                 android:layout_marginTop="8dp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -37,7 +40,7 @@
                 android:id="@+id/content"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 android:textColor="?colorOnPrimary"
-                android:layout_marginHorizontal="16dp"
+                android:textSize="14sp"
                 android:layout_marginTop="8dp"
                 android:maxLines="8"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />

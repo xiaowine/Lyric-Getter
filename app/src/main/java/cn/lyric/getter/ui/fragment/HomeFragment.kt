@@ -99,6 +99,11 @@ class HomeFragment : Fragment() {
                         viewPager.adapter = NoticeAdapter(it)
                         notice.visibility = View.VISIBLE
                     }
+                    if (it.size==1){
+                        indicator.visibility=View.GONE
+                    }else{
+                        indicator.visibility=View.VISIBLE
+                    }
                 }
                 floatingActionButton.setOnClickListener { view ->
                     Snackbar.make(view, getString(R.string.restart_the_scoped_software), Snackbar.LENGTH_LONG).apply {
