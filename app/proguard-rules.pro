@@ -1,1 +1,1 @@
--keep class cn.lyric.getter.hook.MainHook-keep class cn.lyric.getter.api.data.*{*;}-keep class cn.lyric.getter.tool.MeiZuNotification{*;}-keep class cn.lyric.getter.data.**{*;}
+-keep class cn.lyric.getter.hook.MainHook-keep class cn.lyric.getter.api.data.*{*;}-keep class cn.lyric.getter.tool.MeiZuNotification{*;}-keep class cn.lyric.getter.data.**{*;}-keep class com.google.gson.reflect.TypeToken { *;}-keep class * extends com.google.gson.reflect.TypeToken
