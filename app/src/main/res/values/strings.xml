@@ -68,4 +68,6 @@
     <string name="current_status">当前状态</string>
     <string name="rules_are_only_for_viewing_supported_versions">规则仅供查看支持软件版本\n与实际获取检测没有关联</string>
     <string name="notice">通知</string>
+    <string name="salt_use_flyme">椒盐/糖醋音乐使用魅族状态栏歌词接口</string>
+    <string name="salt_use_flyme_summary">在API模式正常时，不建议切换</string>
 </resources>

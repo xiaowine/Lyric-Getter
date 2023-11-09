@@ -17,12 +17,12 @@ android {
         applicationId = "cn.lyric.getter"
         minSdk = 26
         targetSdk = 34
-        versionCode = 15
-        versionName = "2.0.7"
+        versionCode = 16
+        versionName = "2.0.8"
         buildConfigField("long", "BUILD_TIME", "$buildTime")
         buildConfigField("int", "API_VERSION", "6")
         buildConfigField("int", "CONFIG_VERSION", "1")
-        buildConfigField("int", "APP_RULES_API_VERSION", "2")
+        buildConfigField("int", "APP_RULES_API_VERSION", "3")
     }
     val config = localProperties.getProperty("androidStoreFile")?.let {
         signingConfigs.create("config") {

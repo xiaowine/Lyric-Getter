@@ -14,6 +14,7 @@ import cn.lyric.getter.hook.app.Netease
 import cn.lyric.getter.hook.app.QQMusic
 import cn.lyric.getter.hook.app.Qinalt
 import cn.lyric.getter.hook.app.RPlayer
+import cn.lyric.getter.hook.app.Salt
 import cn.lyric.getter.hook.app.SystemUi
 import cn.lyric.getter.hook.app.Toside
 import cn.xiaowine.xkt.LogTool
@@ -43,6 +44,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "com.apple.android.music" -> initHooks(Apple)
             "com.luna.music" -> initHooks(Luna)
             "com.xuncorp.qinalt.music" -> initHooks(Qinalt)
+            "com.xuncorp.suvine.music", "com.salt.music" -> initHooks(Salt)
             else -> initHooks(Api)
         }
     }
@@ -58,7 +60,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
                 it.init()
                 it.isInit = true
                 "Inited hook: ${it.javaClass.name}".log()
-            }catch (e:Exception) {
+            } catch (e: Exception) {
                 e.printStackTrace()
                 "Init hook ${e.message} failed".log()
             }

@@ -60,6 +60,14 @@ class SettingsFragment : Fragment() {
                     false
                 }
             }
+            switch("salt_use_flyme") {
+                titleRes = R.string.salt_use_flyme
+                summaryRes = R.string.salt_use_flyme_summary
+                onClick {
+                    config.saltUseFlyme = checked
+                    false
+                }
+            }
             editText("regex_replace") {
                 titleRes = R.string.regex_replace
                 defaultValue = config.regexReplace
