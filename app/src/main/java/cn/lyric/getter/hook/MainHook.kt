@@ -4,8 +4,10 @@ import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.hook.app.APlayer
 import cn.lyric.getter.hook.app.Api
 import cn.lyric.getter.hook.app.Apple
+import cn.lyric.getter.hook.app.Aqzscn
 import cn.lyric.getter.hook.app.Kugou
 import cn.lyric.getter.hook.app.Kuwo
+import cn.lyric.getter.hook.app.LMusic
 import cn.lyric.getter.hook.app.Luna
 import cn.lyric.getter.hook.app.Meizu
 import cn.lyric.getter.hook.app.MiPlayer
@@ -46,6 +48,8 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "com.xuncorp.qinalt.music" -> initHooks(Qinalt)
             "com.xuncorp.suvine.music", "com.salt.music" -> initHooks(Salt)
             "com.hihonor.cloudmusic" -> initHooks(Netease)
+            "cn.aqzscn.stream_music" -> initHooks(Aqzscn)
+            "com.lalilu.lmusic" -> initHooks(LMusic)
             else -> initHooks(Api)
         }
     }

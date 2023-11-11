@@ -370,6 +370,36 @@
 		  "remarks": ""
 		}
 	  ]
+	},
+	{
+	  "packageName": "cn.aqzscn.stream_music",
+	  "name": "音流",
+	  "rules": [
+		{
+		  "startVersionCode": 2008,
+		  "endVersionCode": 2147483647,
+		  "excludeVersions": [],
+		  "apiVersion": 0,
+		  "useApi": false,
+		  "getLyricType": 0,
+		  "remarks": ""
+		}
+	  ]
+	},
+	{
+	  "packageName": "com.lalilu.lmusic",
+	  "name": "Lmusic",
+	  "rules": [
+		{
+		  "startVersionCode": 0,
+		  "endVersionCode": 2147483647,
+		  "excludeVersions": [],
+		  "apiVersion": 0,
+		  "useApi": false,
+		  "getLyricType": 0,
+		  "remarks": ""
+		}
+	  ]
 	}
   ],
   "appRulesVersion": 4,
