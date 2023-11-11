@@ -355,8 +355,23 @@
 		  "remarks": ""
 		}
 	  ]
+	},
+	{
+	  "packageName": "com.hihonor.cloudmusic",
+	  "name": "荣耀音乐",
+	  "rules": [
+		{
+		  "startVersionCode": 1000022,
+		  "endVersionCode": 2147483647,
+		  "excludeVersions": [],
+		  "apiVersion": 0,
+		  "useApi": false,
+		  "getLyricType": 0,
+		  "remarks": ""
+		}
+	  ]
 	}
   ],
-  "appRulesVersion": 3,
+  "appRulesVersion": 4,
   "version": 3
 }
