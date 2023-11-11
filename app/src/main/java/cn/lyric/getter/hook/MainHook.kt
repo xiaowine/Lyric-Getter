@@ -45,6 +45,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "com.luna.music" -> initHooks(Luna)
             "com.xuncorp.qinalt.music" -> initHooks(Qinalt)
             "com.xuncorp.suvine.music", "com.salt.music" -> initHooks(Salt)
+            "com.hihonor.cloudmusic" -> initHooks(Netease)
             else -> initHooks(Api)
         }
     }

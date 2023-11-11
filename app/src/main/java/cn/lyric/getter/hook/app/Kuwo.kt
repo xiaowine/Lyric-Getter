@@ -22,12 +22,6 @@ import java.util.TimerTask
 
 @SuppressLint("StaticFieldLeak")
 object Kuwo : BaseHook() {
-
-    init {
-        System.loadLibrary("dexkit")
-    }
-
-
     val audioManager by lazy { context.getSystemService(Context.AUDIO_SERVICE) as AudioManager }
 
     lateinit var context: Context
@@ -67,6 +61,7 @@ object Kuwo : BaseHook() {
                     }
                 }
             }.isNot {
+                System.loadLibrary("dexkit")
                 DexKitBridge.create(context.classLoader, false).use { dexKitBridge ->
                     dexKitBridge.isNotNull { bridge ->
                         val result = bridge.findMethodUsingString {

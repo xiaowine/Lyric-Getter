@@ -79,6 +79,7 @@ object HookTools {
     }
 
     fun lockNotStopLyric(classLoader: ClassLoader, fileFilter: ArrayList<String>? = null) {
+        System.loadLibrary("dexkit")
         DexKitBridge.create(classLoader, true).use { dexKitBridge ->
             dexKitBridge.isNotNull { bridge ->
                 val result = bridge.findMethodUsingString {

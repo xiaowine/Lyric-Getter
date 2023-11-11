@@ -14,9 +14,6 @@ import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
 
 object Toside : BaseHook() {
-    init {
-        System.loadLibrary("dexkit")
-    }
 
     override fun init() {
         super.init()
