@@ -24,9 +24,7 @@ import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.ConstructorFinder.`-Static`.constructorFinder
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
-import com.github.kyuubiran.ezxhelper.params
 import org.luckypray.dexkit.DexKitBridge
-import java.lang.reflect.Constructor
 import java.util.LinkedList
 import java.util.Timer
 import java.util.TimerTask
@@ -40,8 +38,6 @@ object Apple : BaseHook() {
 
 
     private lateinit var lyricConvertConstructor: Data
-
-    private lateinit var lyricReqConstructor: Constructor<*>
 
     private lateinit var playbackState: PlaybackState
 
@@ -170,8 +166,9 @@ object Apple : BaseHook() {
                 dexKitBridge.apply {
                     val result = findMethod {
                         matcher {
-                            returnType = "com.apple.android.music.ttml.javanative.model.LyricsSection\$LyricsSectionNative"
-                            declaredClass = "com.apple.android.music.ttml.javanative.model.LyricsSection\$LyricsSectionPtr"
+                            returnType = "com.apple.android.music.ttml.javanative.model.LyricsLine\$LyricsLinePtr"
+                            paramTypes = listOf("int")
+                            usingNumbers(0)
                         }
                     }.single()
                     lyricConvertConstructor = Data(loadClass(result.declaredClassName), result.name)
@@ -179,25 +176,12 @@ object Apple : BaseHook() {
             }
             DexKitBridge.create(application.classLoader, false).use { dexKitBridge ->
                 dexKitBridge.apply {
-                    val result = findMethod {
-                        excludePackages = listOf("com.apple.android")
+                    val result = findClass {
                         matcher {
-                            name = "call"
-                            paramTypes = listOf("com.apple.android.music.ttml.javanative.model.SongInfo\$SongInfoPtr", "int", "long")
-                            paramCount = 3
-                            returnType = "void"
-
+                            addEqString("No Internet, Unable to get the SongInfo instance.")
                         }
                     }.single()
-//                    result.forEach {
-//                        if (!it.declaredClassName.contains("apple") && it.isMethod && it.name == "call") {
-                            val callBackClass = loadClass(result.declaredClassName)
-                    callBackClass.log()
-                            lyricReqConstructor = callBackClass.enclosingClass.getConstructor(Context::class.java, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, loadClass("com.apple.android.mediaservices.javanative.common.StringVector\$StringVectorNative"), Boolean::class.javaPrimitiveType)
-//                    lyricReqConstructor.log()
-//                            return@forEach
-//                        }
-//                    }
+                    loadClass(result.name).getConstructor(Context::class.java, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, loadClass("com.apple.android.mediaservices.javanative.common.StringVector\$StringVectorNative"), Boolean::class.javaPrimitiveType)
                 }
             }
         }
