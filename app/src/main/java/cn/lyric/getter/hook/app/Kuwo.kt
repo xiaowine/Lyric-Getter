@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.media.AudioManager
 import cn.lyric.getter.hook.BaseHook
-import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.eventTools
 import cn.xiaowine.xkt.Tool.isNot
@@ -14,8 +13,8 @@ import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
-import io.luckypray.dexkit.DexKitBridge
-import io.luckypray.dexkit.enums.MatchType
+import org.luckypray.dexkit.DexKitBridge
+import org.luckypray.dexkit.query.enums.StringMatchType
 import java.util.Timer
 import java.util.TimerTask
 
@@ -63,15 +62,18 @@ object Kuwo : BaseHook() {
             }.isNot {
                 System.loadLibrary("dexkit")
                 DexKitBridge.create(context.classLoader, false).use { dexKitBridge ->
-                    dexKitBridge.isNotNull { bridge ->
-                        val result = bridge.findMethodUsingString {
-                            usingString = "bluetooth_car_lyric"
-                            matchType = MatchType.FULL
-                            methodReturnType = "void"
+                    dexKitBridge.apply {
+
+                        val result = findMethod {
+                            matcher {
+                                usingStrings(listOf("updateLyricText"), StringMatchType.Contains, false)
+                                returnType = Void::class.java.name
+
+                            }
                         }
                         result.forEach { res ->
-                            if (!res.declaringClassName.contains("ui") && res.isMethod) {
-                                loadClass(res.declaringClassName).methodFinder().first { name == res.name }.createHook {
+                            if (!res.declaredClassName.contains("ui") && res.isMethod) {
+                                loadClass(res.declaredClassName).methodFinder().first { name == res.name }.createHook {
                                     after { hookParam ->
                                         startTimer()
                                         eventTools.sendLyric(hookParam.args[0].toString())

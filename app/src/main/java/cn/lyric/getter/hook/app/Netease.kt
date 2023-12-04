@@ -9,13 +9,11 @@ import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.fuckTinker
 import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
 import cn.xiaowine.xkt.LogTool.log
-import cn.xiaowine.xkt.Tool.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
-import com.github.kyuubiran.ezxhelper.paramTypes
-import io.luckypray.dexkit.DexKitBridge
-import io.luckypray.dexkit.enums.MatchType
+import org.luckypray.dexkit.DexKitBridge
+import org.luckypray.dexkit.query.enums.StringMatchType
 
 
 @SuppressLint("StaticFieldLeak")
@@ -30,15 +28,16 @@ object Netease : BaseHook() {
             verCode.log()
             if (verCode >= 8000041 || it.packageName == "com.hihonor.cloudmusic") {
                 DexKitBridge.create(it.classLoader, false).use { use ->
-                    use.isNotNull { bridge ->
-                        val result = bridge.findMethodUsingString {
-                            usingString = "StatusBarLyricController"
-                            matchType = MatchType.FULL
-                            methodReturnType = "void"
-                            paramTypes(Context::class.java)
+                    use.apply {
+                        val result = findMethod {
+                            matcher {
+                                usingStrings(listOf("StatusBarLyricController"), StringMatchType.Contains, false)
+                                returnType = Void::class.java.name
+                                paramTypes(Context::class.java)
+                            }
                         }
                         result.forEach { res ->
-                            loadClass(res.declaringClassName).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {
+                            loadClass(res.declaredClassName).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {
                                 after { hookParam ->
                                     eventTools.sendLyric(hookParam.result as String)
                                 }

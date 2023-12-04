@@ -12,7 +12,6 @@ import android.os.SystemClock
 import android.util.Log
 import cn.lyric.getter.api.data.ExtraData
 import cn.lyric.getter.hook.BaseHook
-import cn.lyric.getter.tool.EventTools
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.getApplication
@@ -25,7 +24,7 @@ import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.ConstructorFinder.`-Static`.constructorFinder
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
-import io.luckypray.dexkit.DexKitBridge
+import org.luckypray.dexkit.DexKitBridge
 import java.lang.reflect.Constructor
 import java.util.LinkedList
 import java.util.Timer
@@ -165,32 +164,38 @@ object Apple : BaseHook() {
             }
         }
 
-        getApplication {
-            DexKitBridge.create(it.classLoader, false).use { dexKitBridge ->
-                dexKitBridge.isNotNull { bridge ->
-                    val result = bridge.findMethodCaller {
-                        methodReturnType = "LyricsSection\$LyricsSectionNative"
-                        methodDeclareClass = "com.apple.android.music.ttml.javanative.model.LyricsSection\$LyricsSectionPtr"
+        getApplication { application ->
+            DexKitBridge.create(application.classLoader, false).use { dexKitBridge ->
+                dexKitBridge.apply {
+                    val result = findMethod {
+                        matcher {
+                            returnType = "LyricsSection\$LyricsSectionNative"
+                            declaredClass = "com.apple.android.music.ttml.javanative.model.LyricsSection\$LyricsSectionPtr"
+                        }
                     }
-                    result.forEach { (key, _) ->
-                        if (!key.declaringClassName.contains("apple") && key.isMethod) {
-                            if (key.returnTypeSig == "Lcom/apple/android/music/ttml/javanative/model/LyricsLine\$LyricsLinePtr;") {
-                                lyricConvertConstructor = Data(loadClass(key.declaringClassName), key.name)
+                    result.forEach {
+                        if (!it.className.contains("apple") && it.isMethod) {
+                            if (it.returnTypeName == "LyricsLinePtr") {
+                                lyricConvertConstructor = Data(loadClass(it.declaredClassName), it.name)
                                 return@forEach
                             }
                         }
                     }
                 }
             }
-            DexKitBridge.create(it.classLoader, false).use { dexKitBridge ->
-                dexKitBridge.isNotNull { bridge ->
-                    val result = bridge.findMethodCaller {
-                        methodName = "get"
-                        methodDeclareClass = "com.apple.android.music.ttml.javanative.model.SongInfo\$SongInfoPtr"
+            DexKitBridge.create(application.classLoader, false).use { dexKitBridge ->
+                dexKitBridge.apply {
+                    val result = findMethod {
+                        matcher {
+                            addCall {
+                                name = "get"
+                                declaredClass = "com.apple.android.music.ttml.javanative.model.SongInfo\\\$SongInfoPtr"
+                            }
+                        }
                     }
-                    result.forEach { (key, _) ->
-                        if (!key.declaringClassName.contains("apple") && key.isMethod && key.name == "call") {
-                            val callBackClass = loadClass(key.declaringClassName)
+                    result.forEach {
+                        if (!it.declaredClassName.contains("apple") && it.isMethod && it.name == "call") {
+                            val callBackClass = loadClass(it.declaredClassName)
                             lyricReqConstructor = callBackClass.enclosingClass.getConstructor(Context::class.java, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, loadClass("com.apple.android.mediaservices.javanative.common.StringVector\$StringVectorNative"), Boolean::class.javaPrimitiveType)
                             return@forEach
                         }

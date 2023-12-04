@@ -3,6 +3,7 @@ package cn.lyric.getter.tool
 import android.app.AndroidAppHelper
 import android.app.Application
 import android.app.Notification
+import android.content.Context
 import android.content.Intent
 import android.os.Build
 import cn.xiaowine.xkt.LogTool.log
@@ -15,8 +16,8 @@ import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.setStaticObject
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
-import io.luckypray.dexkit.DexKitBridge
-import io.luckypray.dexkit.enums.MatchType
+import org.luckypray.dexkit.DexKitBridge
+import org.luckypray.dexkit.query.enums.StringMatchType
 import java.lang.reflect.Method
 
 
@@ -81,15 +82,17 @@ object HookTools {
     fun lockNotStopLyric(classLoader: ClassLoader, fileFilter: ArrayList<String>? = null) {
         System.loadLibrary("dexkit")
         DexKitBridge.create(classLoader, true).use { dexKitBridge ->
-            dexKitBridge.isNotNull { bridge ->
-                val result = bridge.findMethodUsingString {
-                    usingString = "android.intent.action.SCREEN_OFF"
-                    matchType = MatchType.FULL
-                    methodReturnType = "void"
-                    methodName = "onReceive"
+            dexKitBridge.apply {
+                val result = findMethod {
+                    matcher {
+                        usingStrings(listOf("android.intent.action.SCREEN_OFF"), StringMatchType.Contains, false)
+                        returnType = Void::class.java.name
+                        name = "onReceive"
+                        paramTypes(Context::class.java)
+                    }
                 }
                 result.forEach { descriptor ->
-                    val className = descriptor.declaringClassName
+                    val className = descriptor.declaredClassName
                     if (!className.contains("Fragment") && !className.contains("Activity") && fileFilter?.none { className.contains(it) } != false) {
                         "lockNotStopLyric:${className}".log()
                         loadClass(className).methodFinder().filterByName("onReceive").first().createHook {
