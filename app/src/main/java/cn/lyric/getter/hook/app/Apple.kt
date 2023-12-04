@@ -169,18 +169,11 @@ object Apple : BaseHook() {
                 dexKitBridge.apply {
                     val result = findMethod {
                         matcher {
-                            returnType = "LyricsSection\$LyricsSectionNative"
+                            returnType = "com.apple.android.music.ttml.javanative.model.LyricsSection\$LyricsSectionNative"
                             declaredClass = "com.apple.android.music.ttml.javanative.model.LyricsSection\$LyricsSectionPtr"
                         }
-                    }
-                    result.forEach {
-                        if (!it.className.contains("apple") && it.isMethod) {
-                            if (it.returnTypeName == "LyricsLinePtr") {
-                                lyricConvertConstructor = Data(loadClass(it.declaredClassName), it.name)
-                                return@forEach
-                            }
-                        }
-                    }
+                    }.single()
+                    lyricConvertConstructor = Data(loadClass(result.declaredClassName), result.name)
                 }
             }
             DexKitBridge.create(application.classLoader, false).use { dexKitBridge ->
@@ -188,11 +181,12 @@ object Apple : BaseHook() {
                     val result = findMethod {
                         matcher {
                             addCall {
-                                name = "get"
-                                declaredClass = "com.apple.android.music.ttml.javanative.model.SongInfo\\\$SongInfoPtr"
+//                                name = "get"
+                                declaredClass = "com.apple.android.music.ttml.javanative.model.SongInfo\$SongInfoPtr"
                             }
                         }
                     }
+                    result.log()
                     result.forEach {
                         if (!it.declaredClassName.contains("apple") && it.isMethod && it.name == "call") {
                             val callBackClass = loadClass(it.declaredClassName)

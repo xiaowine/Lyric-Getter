@@ -19,6 +19,7 @@ android {
         targetSdk = 34
         versionCode = 16
         versionName = "2.0.8"
+        ndk.abiFilters += arrayOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64")
         buildConfigField("long", "BUILD_TIME", "$buildTime")
         buildConfigField("int", "API_VERSION", "6")
         buildConfigField("int", "CONFIG_VERSION", "1")

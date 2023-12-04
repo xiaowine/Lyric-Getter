@@ -13,7 +13,6 @@ import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
 import org.luckypray.dexkit.DexKitBridge
-import org.luckypray.dexkit.query.enums.StringMatchType
 
 
 @SuppressLint("StaticFieldLeak")
@@ -31,16 +30,14 @@ object Netease : BaseHook() {
                     use.apply {
                         val result = findMethod {
                             matcher {
-                                usingStrings(listOf("StatusBarLyricController"), StringMatchType.Contains, false)
+                                addEqString("StatusBarLyricController")
                                 returnType = Void::class.java.name
                                 paramTypes(Context::class.java)
                             }
-                        }
-                        result.forEach { res ->
-                            loadClass(res.declaredClassName).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {
-                                after { hookParam ->
-                                    eventTools.sendLyric(hookParam.result as String)
-                                }
+                        }.single()
+                        loadClass(result.declaredClassName).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {
+                            after { hookParam ->
+                                eventTools.sendLyric(hookParam.result as String)
                             }
                         }
                     }

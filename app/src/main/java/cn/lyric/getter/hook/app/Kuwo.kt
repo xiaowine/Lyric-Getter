@@ -7,6 +7,7 @@ import android.media.AudioManager
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.eventTools
+import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.isNot
 import cn.xiaowine.xkt.Tool.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
@@ -63,12 +64,10 @@ object Kuwo : BaseHook() {
                 System.loadLibrary("dexkit")
                 DexKitBridge.create(context.classLoader, false).use { dexKitBridge ->
                     dexKitBridge.apply {
-
                         val result = findMethod {
                             matcher {
-                                usingStrings(listOf("updateLyricText"), StringMatchType.Contains, false)
-                                returnType = Void::class.java.name
-
+                                addEqString("bluetooth_car_lyric")
+                                returnType = "void"
                             }
                         }
                         result.forEach { res ->
