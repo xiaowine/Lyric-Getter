@@ -77,9 +77,9 @@ class AppRulesFragment : Fragment() {
                         showRuleDialog(appRule.rules[0], appRule.name, versionCode)
                     } else {
                         MaterialAlertDialogBuilder(requireContext()).apply {
-                            setTitle(R.string.select_the_rule_you_want_to_view)
-                            setItems(Array(appRule.rules.size) { getString(R.string.rule, (it + 1).toString()) }) { _, which ->
-                                showRuleDialog(appRule.rules[which], "${appRule.name}: ${getString(R.string.rule, (which + 1).toString())}", versionCode)
+                            setTitle(R.string.select_the_mode_you_want_to_view)
+                            setItems(Array(appRule.rules.size) { getString(R.string.mode_num, (it + 1).toString()) }) { _, which ->
+                                showRuleDialog(appRule.rules[which], "${appRule.name}: ${getString(R.string.mode_num, (which + 1).toString())}", versionCode)
                             }
                             setNegativeButton(R.string.cancel, null)
                             show()
