@@ -282,7 +282,7 @@
 		  "excludeVersions": [],
 		  "apiVersion": 0,
 		  "useApi": false,
-		  "getLyricType": 1,
+		  "getLyricType": 2,
 		  "remarks": ""
 		}
 	  ]
