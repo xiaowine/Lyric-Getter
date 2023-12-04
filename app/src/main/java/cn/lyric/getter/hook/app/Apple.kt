@@ -24,6 +24,7 @@ import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.ConstructorFinder.`-Static`.constructorFinder
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+import com.github.kyuubiran.ezxhelper.params
 import org.luckypray.dexkit.DexKitBridge
 import java.lang.reflect.Constructor
 import java.util.LinkedList
@@ -179,21 +180,24 @@ object Apple : BaseHook() {
             DexKitBridge.create(application.classLoader, false).use { dexKitBridge ->
                 dexKitBridge.apply {
                     val result = findMethod {
+                        excludePackages = listOf("com.apple.android")
                         matcher {
-                            addCall {
-//                                name = "get"
-                                declaredClass = "com.apple.android.music.ttml.javanative.model.SongInfo\$SongInfoPtr"
-                            }
+                            name = "call"
+                            paramTypes = listOf("com.apple.android.music.ttml.javanative.model.SongInfo\$SongInfoPtr", "int", "long")
+                            paramCount = 3
+                            returnType = "void"
+
                         }
-                    }
-                    result.log()
-                    result.forEach {
-                        if (!it.declaredClassName.contains("apple") && it.isMethod && it.name == "call") {
-                            val callBackClass = loadClass(it.declaredClassName)
+                    }.single()
+//                    result.forEach {
+//                        if (!it.declaredClassName.contains("apple") && it.isMethod && it.name == "call") {
+                            val callBackClass = loadClass(result.declaredClassName)
+                    callBackClass.log()
                             lyricReqConstructor = callBackClass.enclosingClass.getConstructor(Context::class.java, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, loadClass("com.apple.android.mediaservices.javanative.common.StringVector\$StringVectorNative"), Boolean::class.javaPrimitiveType)
-                            return@forEach
-                        }
-                    }
+//                    lyricReqConstructor.log()
+//                            return@forEach
+//                        }
+//                    }
                 }
             }
         }
