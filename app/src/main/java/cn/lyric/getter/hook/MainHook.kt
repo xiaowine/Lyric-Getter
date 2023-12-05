@@ -13,6 +13,7 @@ import cn.lyric.getter.hook.app.Meizu
 import cn.lyric.getter.hook.app.MiPlayer
 import cn.lyric.getter.hook.app.MobileMusic
 import cn.lyric.getter.hook.app.Netease
+import cn.lyric.getter.hook.app.NeteaseLite
 import cn.lyric.getter.hook.app.QQMusic
 import cn.lyric.getter.hook.app.Qinalt
 import cn.lyric.getter.hook.app.RPlayer
@@ -36,6 +37,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "com.tencent.qqmusic" -> initHooks(QQMusic)
             "com.miui.player" -> initHooks(MiPlayer)
             "com.netease.cloudmusic" -> initHooks(Netease)
+            "com.netease.cloudmusic.lite" -> initHooks(NeteaseLite)
             "com.kugou.android", "com.kugou.android.lite" -> initHooks(Kugou)
             "cn.kuwo.player" -> initHooks(Kuwo)
             "remix.myplayer" -> initHooks(APlayer)
