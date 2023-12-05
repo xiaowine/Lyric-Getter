@@ -400,8 +400,23 @@
 		  "remarks": ""
 		}
 	  ]
+	},
+	{
+	  "packageName": "com.netease.cloudmusic.lite",
+	  "name": "网易云音乐极速版",
+	  "rules": [
+		{
+		  "startVersionCode": 0,
+		  "endVersionCode": 2147483647,
+		  "excludeVersions": [],
+		  "apiVersion": 0,
+		  "useApi": false,
+		  "getLyricType": 2,
+		  "remarks": ""
+		}
+	  ]
 	}
   ],
-  "appRulesVersion": 4,
+  "appRulesVersion": 5,
   "version": 3
 }
