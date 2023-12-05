@@ -172,16 +172,12 @@ object Apple : BaseHook() {
                         }
                     }.single()
                     lyricConvertConstructor = Data(loadClass(result.declaredClassName), result.name)
-                }
-            }
-            DexKitBridge.create(application.classLoader, false).use { dexKitBridge ->
-                dexKitBridge.apply {
-                    val result = findClass {
+                    val result1 = findClass {
                         matcher {
                             addEqString("No Internet, Unable to get the SongInfo instance.")
                         }
                     }.single()
-                    loadClass(result.name).getConstructor(Context::class.java, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, loadClass("com.apple.android.mediaservices.javanative.common.StringVector\$StringVectorNative"), Boolean::class.javaPrimitiveType)
+                    loadClass(result1.name).getConstructor(Context::class.java, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, loadClass("com.apple.android.mediaservices.javanative.common.StringVector\$StringVectorNative"), Boolean::class.javaPrimitiveType)
                 }
             }
         }
