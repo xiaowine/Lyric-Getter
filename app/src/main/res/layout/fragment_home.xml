@@ -132,8 +132,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/viewPager"
-                            app:cardSlider_smallScaleFactor="0.9"
-                            app:cardSlider_otherPagesWidth="12dp"
                             android:layout_marginTop="8dp"
                             app:auto_slide_time="3"
                             app:cardSlider_indicator="@id/indicator" />

@@ -4,10 +4,12 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import cn.lyric.getter.BuildConfig
+import cn.lyric.getter.R
 import cn.lyric.getter.data.NoticeData
 import cn.lyric.getter.databinding.ItemsNoticeBinding
 import cn.xiaowine.xkt.AcTool.openURL
 import com.github.islamkhsh.CardSliderAdapter
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class NoticeAdapter(private val noticeDataList: ArrayList<NoticeData>) : CardSliderAdapter<BaseViewHolder<*>>() {
 
@@ -29,6 +31,14 @@ class NoticeAdapter(private val noticeDataList: ArrayList<NoticeData>) : CardSli
             if (data.url.isNotEmpty()) {
                 linearLayout.setOnClickListener {
                     data.url.openURL()
+                }
+            } else {
+                linearLayout.setOnClickListener {
+                    MaterialAlertDialogBuilder(it.context)
+                        .setTitle(title.text)
+                        .setMessage(content.text)
+                        .setPositiveButton(R.string.ok, null)
+                        .show()
                 }
             }
         }
