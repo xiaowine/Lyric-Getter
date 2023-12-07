@@ -6,7 +6,7 @@
     <string name="version_code_label">模块版本号</string>
     <string name="version_type_label">模块发行版本</string>
     <string name="settings_fragment_label">设置</string>
-    <string name="app_rules_fragment_label">支持APP</string>
+    <string name="app_rules_fragment_label">支持APP列表</string>
     <string name="activated">已激活</string>
     <string name="unactivated">未激活</string>
     <string name="build_time_label">编译时间</string>
@@ -25,13 +25,13 @@
     <string name="hook">Hook模式：%s</string>
     <string name="no_support">不支持</string>
     <string name="exclude">排除版本，不支持</string>
-    <string name="un_know">未知</string>
+    <string name="un_know">未收录</string>
     <string name="app_rules_version_label">App支持列表版本</string>
     <string name="show_app_rules">显示所有App支持列表</string>
     <string name="update_app_rules">更新支持列表</string>
     <string name="multi_rule">详情%s：%s</string>
     <string name="uninstall_rule">未安装：共支持%s个模式</string>
-    <string name="app_rules_tips">未知:不代表不能用，需要大家反馈最低支持版本收录后才能正常显示\n部分软件也没有收录，欢迎提供和反馈错误</string>
+    <string name="app_rules_tips">未收录:不代表不能用，需要大家反馈最低支持版本收录后才能正常显示\n部分软件也没有收录，欢迎提供和反馈错误</string>
     <string name="output_repeated_lyrics">输出重复歌词</string>
     <string name="enhanced_hidden_lyrics">增强隐藏歌词</string>
     <string name="enhanced_hidden_lyrics_summary">部分软件不适用，会导致歌词鬼畜</string>

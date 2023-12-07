@@ -58,6 +58,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
                             android:fontFamily="sans-serif-medium"
                             android:padding="?dialogPreferredPadding"
                             android:text="@string/app_rules_tips"
