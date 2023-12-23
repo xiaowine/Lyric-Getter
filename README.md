@@ -1,3 +1,5 @@
+![](https://socialify.git.ci/xiaowine/Lyric-Getter/image?description=1&descriptionEditable=通过Hook获取音乐软件的歌词，提供给其他模块\软件使用&language=1&name=1&owner=1&theme=Auto)
+---
 ![Release Download](https://img.shields.io/github/downloads/Xposed-Modules-Repo/cn.lyric.getter/total?style=flat-square)  
 ![Release Download](https://img.shields.io/github/downloads/xiaowine/Lyric-Getter/total?style=flat-square)  
 [![Release Version](https://img.shields.io/github/v/release/xiaowine/Lyric-Getter?style=flat-square)](https://github.com/xiaowine/Lyric-Getter/releases/latest)  
