@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.TextView
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.HookTools
-import cn.xiaowine.xkt.LogTool.log
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
@@ -29,18 +28,16 @@ object Luna : BaseHook() {
             DexKitBridge.create(it.classLoader, true).use { dexKitBridge ->
                 dexKitBridge.apply {
                     val clazz = findMethod {
+                        searchPackages = listOf("com.luna.biz.playing.lyric.floatinglyrics.view")
                         matcher {
-                            usingNumbers = listOf(300L, 200L, 22025)
-                        }
-                    }.log()!!
-                        .single().declaredClass!!.name
-                    val name = findMethod {
-                        matcher {
-                            declaredClass = clazz
+                            addAnnotation {
+                                addEqString("android.view.LayoutInflater")
+                            }
+                            paramCount = 3
                             returnType = View::class.java.name
                         }
-                    }.single().name
-                    loadClass(clazz).methodFinder().filterByName(name).first().createHook {
+                    }.single()
+                    loadClass(clazz.declaredClassName).methodFinder().filterByName(clazz.name).first().createHook {
                         after { param ->
                             (param.result as View).visibility = View.GONE
                         }
