@@ -5,6 +5,7 @@ import cn.lyric.getter.hook.app.APlayer
 import cn.lyric.getter.hook.app.Api
 import cn.lyric.getter.hook.app.Apple
 import cn.lyric.getter.hook.app.Aqzscn
+import cn.lyric.getter.hook.app.Bodian
 import cn.lyric.getter.hook.app.Kugou
 import cn.lyric.getter.hook.app.Kuwo
 import cn.lyric.getter.hook.app.LMusic
@@ -52,6 +53,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "com.hihonor.cloudmusic" -> initHooks(Netease)
             "cn.aqzscn.stream_music" -> initHooks(Aqzscn)
             "com.lalilu.lmusic" -> initHooks(LMusic)
+            "cn.wenyu.bodian" -> initHooks(Bodian)
             else -> initHooks(Api)
         }
     }

@@ -49,8 +49,7 @@ object Apple : BaseHook() {
 
     private var delay: Int = 0
 
-    private var lyric: String by observableChange("") { _, oldValue, newValue ->
-        if (oldValue == newValue) return@observableChange
+    private var lyric: String by observableChange("") { _, _, newValue ->
         eventTools.sendLyric(newValue, ExtraData().apply {
             this.delay = delay
         })
