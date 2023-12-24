@@ -6,6 +6,7 @@ import android.content.Context
 import android.media.AudioManager
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.HookTools
+import cn.lyric.getter.tool.HookTools.dexKitBridge
 import cn.lyric.getter.tool.HookTools.eventTools
 import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.isNot
@@ -14,8 +15,6 @@ import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClassOrNull
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
-import org.luckypray.dexkit.DexKitBridge
-import org.luckypray.dexkit.query.enums.StringMatchType
 import java.util.Timer
 import java.util.TimerTask
 
@@ -61,27 +60,24 @@ object Kuwo : BaseHook() {
                     }
                 }
             }.isNot {
-                System.loadLibrary("dexkit")
-                DexKitBridge.create(context.classLoader, false).use { dexKitBridge ->
-                    dexKitBridge.apply {
-                        val result = findMethod {
-                            matcher {
-                                addEqString("bluetooth_car_lyric")
-                                returnType = "void"
-                            }
-                        }
-                        result.forEach { res ->
-                            if (!res.declaredClassName.contains("ui") && res.isMethod) {
-                                loadClass(res.declaredClassName).methodFinder().first { name == res.name }.createHook {
-                                    after { hookParam ->
-                                        startTimer()
-                                        eventTools.sendLyric(hookParam.args[0].toString())
-                                    }
-                                }
-                                HookTools.openBluetoothA2dpOn()
-                            }
+                dexKitBridge(context.classLoader) { dexKitBridge ->
+                    val result = dexKitBridge.findMethod {
+                        matcher {
+                            addEqString("bluetooth_car_lyric")
+                            returnType = "void"
 
                         }
+                        excludePackages = arrayListOf("cn.kuwo.ui")
+                    }
+                    result.forEach { res ->
+                        res.declaredClassName.log()
+                        loadClass(res.declaredClassName).methodFinder().first { name == res.name }.createHook {
+                            after { hookParam ->
+                                startTimer()
+                                eventTools.sendLyric(hookParam.args[0].toString())
+                            }
+                        }
+                        HookTools.openBluetoothA2dpOn()
                     }
                 }
             }

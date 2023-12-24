@@ -6,6 +6,7 @@ import android.os.SystemClock
 import cn.lyric.getter.api.data.ExtraData
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.HookTools
+import cn.lyric.getter.tool.HookTools.dexKitBridge
 import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool
 import cn.xiaowine.xkt.Tool.isNotNull
@@ -24,7 +25,7 @@ object Bodian : BaseHook() {
 
     private var lyricList = mutableListOf<Lyric>()
 
-    private var lyric: String by Tool.observableChange("") { _, oldValue, newValue ->
+    private var lyric: String by Tool.observableChange("") { _, _, newValue ->
         HookTools.eventTools.sendLyric(newValue, ExtraData().apply {
             this.delay = delay
         })
@@ -56,28 +57,38 @@ object Bodian : BaseHook() {
         isRunning = false
     }
 
+
     @SuppressLint("SwitchIntDef")
     override fun init() {
         super.init()
-        loadClass("cn.kuwo.player.lyrics.parser.f").methodFinder().filterByName("a").filterByParamCount(1).filterByParamTypes(String::class.java).first().createHook {
-            after {
-                lyricList = mutableListOf()
-                it.args[0].toString().lines().forEach { str ->
-                    val input = str.replace(" ", "")
-                    val cleanedInput = input.replace("<\\d+,-?\\d+>".toRegex(), "")
-                    val regex = "\\[(\\d{2}:\\d{2}\\.\\d{3})](.*)"
-                    val pattern = Pattern.compile(regex)
-                    val matcher = pattern.matcher(cleanedInput)
-                    if (matcher.matches()) {
-                        val time = matcher.group(1).ifEmpty { "0" }
-                        val text = matcher.group(2).ifEmpty { "" }
-                        val t = 28800000 + SimpleDateFormat("mm:ss.SSS", Locale.getDefault()).parse(time)?.time!!
-                        lyricList.add(Lyric(t, text))
+        dexKitBridge { dexKitBridge ->
+            val clazz = dexKitBridge.findClass {
+                matcher {
+                    addEqString("<(-?\\d+),(-?\\d+)(?:,-?\\d+)?>")
+                }
+            }.findMethod {
+                matcher {
+                    usingStrings = arrayListOf("\\n")
+                }
+            }.single()
+            loadClass(clazz.declaredClassName).methodFinder().filterByName(clazz.name).filterByParamCount(1).filterByParamTypes(String::class.java).first().createHook {
+                after {
+                    lyricList = mutableListOf()
+                    stopTimer()
+                    it.args[0].toString().lines().forEach { input ->
+                        val cleanedInput = input.replace("<\\d+,-?\\d+>".toRegex(), "")
+                        val pattern = Pattern.compile("\\[(\\d{2}:\\d{2}\\.\\d{3})](.*)")
+                        val matcher = pattern.matcher(cleanedInput)
+                        if (matcher.matches()) {
+                            val time = matcher.group(1).ifEmpty { "0" }
+                            val text = matcher.group(2).ifEmpty { "" }
+                            val t = 28800000 + SimpleDateFormat("mm:ss.SSS", Locale.getDefault()).parse(time)?.time!!
+                            lyricList.add(Lyric(t, text))
+                        }
                     }
                 }
             }
         }
-
         loadClass("android.media.session.PlaybackState").isNotNull {
             it.constructorFinder().first().createHook {
                 after { hookParam ->

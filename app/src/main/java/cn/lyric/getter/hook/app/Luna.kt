@@ -7,7 +7,6 @@ import cn.lyric.getter.tool.HookTools
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
-import org.luckypray.dexkit.DexKitBridge
 
 object Luna : BaseHook() {
     private var rightLyric: String = ""
@@ -23,25 +22,20 @@ object Luna : BaseHook() {
                 }
             }
         }
-        HookTools.getApplication {
-            System.loadLibrary("dexkit")
-            DexKitBridge.create(it.classLoader, true).use { dexKitBridge ->
-                dexKitBridge.apply {
-                    val clazz = findMethod {
-                        searchPackages = listOf("com.luna.biz.playing.lyric.floatinglyrics.view")
-                        matcher {
-                            addAnnotation {
-                                addEqString("android.view.LayoutInflater")
-                            }
-                            paramCount = 3
-                            returnType = View::class.java.name
-                        }
-                    }.single()
-                    loadClass(clazz.declaredClassName).methodFinder().filterByName(clazz.name).first().createHook {
-                        after { param ->
-                            (param.result as View).visibility = View.GONE
-                        }
+        HookTools.dexKitBridge {
+            val clazz = it.findMethod {
+                searchPackages = listOf("com.luna.biz.playing.lyric.floatinglyrics.view")
+                matcher {
+                    addAnnotation {
+                        addEqString("android.view.LayoutInflater")
                     }
+                    paramCount = 3
+                    returnType = View::class.java.name
+                }
+            }.single()
+            loadClass(clazz.declaredClassName).methodFinder().filterByName(clazz.name).first().createHook {
+                after { param ->
+                    (param.result as View).visibility = View.GONE
                 }
             }
         }

@@ -25,6 +25,22 @@ object HookTools {
     val eventTools by lazy { EventTools(context) }
 
     val context: Application by lazy { AndroidAppHelper.currentApplication() }
+
+    fun dexKitBridge(classLoader: ClassLoader? = null, block: (DexKitBridge) -> Unit) {
+        System.loadLibrary("dexkit")
+        if (classLoader.isNull()) {
+            getApplication { application ->
+                DexKitBridge.create(application.classLoader, false).use {
+                    block(it)
+                }
+            }
+        } else {
+            DexKitBridge.create(classLoader!!, false).use {
+                block(it)
+            }
+        }
+    }
+
     fun isQQLite(classLoader: ClassLoader? = null, callback: () -> Unit): Boolean {
         loadClassOrNull("com.tencent.qqmusic.core.song.SongInfo", classLoader).isNotNull {
             callback()
@@ -80,8 +96,7 @@ object HookTools {
     }
 
     fun lockNotStopLyric(classLoader: ClassLoader, fileFilter: ArrayList<String>? = null) {
-        System.loadLibrary("dexkit")
-        DexKitBridge.create(classLoader, true).use { dexKitBridge ->
+        dexKitBridge(classLoader) { dexKitBridge ->
             dexKitBridge.apply {
                 val result = findMethod {
                     matcher {

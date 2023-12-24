@@ -9,10 +9,6 @@ import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
 
 object NeteaseLite : BaseHook() {
-    init {
-        System.loadLibrary("dexkit")
-    }
-
     private var nowLyric: String = ""
 
     private var nextLyric: String by Tool.observableChange("") { _, _, newValue ->

@@ -12,9 +12,9 @@ import android.os.SystemClock
 import android.util.Log
 import cn.lyric.getter.api.data.ExtraData
 import cn.lyric.getter.hook.BaseHook
+import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.context
 import cn.lyric.getter.tool.HookTools.eventTools
-import cn.lyric.getter.tool.HookTools.getApplication
 import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.isNotNull
 import cn.xiaowine.xkt.Tool.observableChange
@@ -24,19 +24,12 @@ import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.ObjectHelper.Companion.objectHelper
 import com.github.kyuubiran.ezxhelper.finders.ConstructorFinder.`-Static`.constructorFinder
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
-import org.luckypray.dexkit.DexKitBridge
 import java.util.LinkedList
 import java.util.Timer
 import java.util.TimerTask
 
 
 object Apple : BaseHook() {
-
-    init {
-        System.loadLibrary("dexkit")
-    }
-
-
     private lateinit var lyricConvertConstructor: Data
 
     private lateinit var playbackState: PlaybackState
@@ -159,28 +152,23 @@ object Apple : BaseHook() {
                 }
             }
         }
-
-        getApplication { application ->
-            DexKitBridge.create(application.classLoader, false).use { dexKitBridge ->
-                dexKitBridge.apply {
-                    val result = findMethod {
-                        matcher {
-                            returnType = "com.apple.android.music.ttml.javanative.model.LyricsLine\$LyricsLinePtr"
-                            paramTypes = listOf("int")
-                            usingNumbers(0)
-                        }
-                    }.single()
-                    lyricConvertConstructor = Data(loadClass(result.declaredClassName), result.name)
-                    val result1 = findClass {
-                        matcher {
-                            addEqString("No Internet, Unable to get the SongInfo instance.")
-                        }
-                    }.single()
-                    loadClass(result1.name).getConstructor(Context::class.java, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, loadClass("com.apple.android.mediaservices.javanative.common.StringVector\$StringVectorNative"), Boolean::class.javaPrimitiveType)
+        HookTools.dexKitBridge { dexKitBridge->
+            val result = dexKitBridge.findMethod {
+                matcher {
+                    returnType = "com.apple.android.music.ttml.javanative.model.LyricsLine\$LyricsLinePtr"
+                    paramTypes = listOf("int")
+                    usingNumbers(0)
                 }
-            }
-        }
+            }.single()
+            lyricConvertConstructor = Data(loadClass(result.declaredClassName), result.name)
+            val result1 = dexKitBridge.findClass {
+                matcher {
+                    addEqString("No Internet, Unable to get the SongInfo instance.")
+                }
+            }.single()
+            loadClass(result1.name).getConstructor(Context::class.java, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, Long::class.javaPrimitiveType, loadClass("com.apple.android.mediaservices.javanative.common.StringVector\$StringVectorNative"), Boolean::class.javaPrimitiveType)
 
+        }
         val playbackItemClass = loadClass("com.apple.android.music.model.PlaybackItem")
 
         val playerLyricsViewModelClass = loadClass("com.apple.android.music.player.viewmodel.PlayerLyricsViewModel")
