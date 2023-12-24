@@ -19,6 +19,7 @@ import cn.lyric.getter.hook.app.QQMusic
 import cn.lyric.getter.hook.app.Qinalt
 import cn.lyric.getter.hook.app.RPlayer
 import cn.lyric.getter.hook.app.Salt
+import cn.lyric.getter.hook.app.Spotify
 import cn.lyric.getter.hook.app.SystemUi
 import cn.lyric.getter.hook.app.Toside
 import cn.xiaowine.xkt.LogTool
@@ -54,6 +55,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "cn.aqzscn.stream_music" -> initHooks(Aqzscn)
             "com.lalilu.lmusic" -> initHooks(LMusic)
             "cn.wenyu.bodian" -> initHooks(Bodian)
+            "com.spotify.music" -> initHooks(Spotify)
             else -> initHooks(Api)
         }
     }
