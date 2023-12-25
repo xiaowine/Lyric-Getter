@@ -105,17 +105,15 @@ object HookTools {
                         name = "onReceive"
                         paramTypes(Context::class.java)
                     }
-                }
+                }.filter { clz -> !clz.declaredClassName.contains("Fragment") && !clz.declaredClassName.contains("Activity") && fileFilter?.none { clz.declaredClassName.contains(it) } != false }
                 result.forEach { descriptor ->
                     val className = descriptor.declaredClassName
-                    if (!className.contains("Fragment") && !className.contains("Activity") && fileFilter?.none { className.contains(it) } != false) {
-                        "lockNotStopLyric:${className}".log()
-                        loadClass(className).methodFinder().filterByName("onReceive").first().createHook {
-                            before { hookParam ->
-                                val intent = hookParam.args[1] as Intent
-                                if (intent.action == Intent.ACTION_SCREEN_OFF) {
-                                    hookParam.result = null
-                                }
+                    "lockNotStopLyric:${className}".log()
+                    loadClass(className).methodFinder().filterByName("onReceive").first().createHook {
+                        before { hookParam ->
+                            val intent = hookParam.args[1] as Intent
+                            if (intent.action == Intent.ACTION_SCREEN_OFF) {
+                                hookParam.result = null
                             }
                         }
                     }

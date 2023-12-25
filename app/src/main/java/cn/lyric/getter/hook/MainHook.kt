@@ -15,6 +15,7 @@ import cn.lyric.getter.hook.app.MiPlayer
 import cn.lyric.getter.hook.app.MobileMusic
 import cn.lyric.getter.hook.app.Netease
 import cn.lyric.getter.hook.app.NeteaseLite
+import cn.lyric.getter.hook.app.Poweramp
 import cn.lyric.getter.hook.app.QQMusic
 import cn.lyric.getter.hook.app.Qinalt
 import cn.lyric.getter.hook.app.RPlayer
@@ -54,6 +55,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "cn.aqzscn.stream_music" -> initHooks(Aqzscn)
             "com.lalilu.lmusic" -> initHooks(LMusic)
             "cn.wenyu.bodian" -> initHooks(Bodian)
+            "com.maxmpz.audioplayer" -> initHooks(Poweramp)
             else -> initHooks(Api)
         }
     }
