@@ -424,8 +424,23 @@
           "remarks": ""
         }
       ]
+    },
+    {
+      "packageName": "cn.wenyu.bodian",
+      "name": "波点音乐",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 2,
+          "remarks": ""
+        }
+      ]
     }
   ],
   "appRulesVersion": 5,
-  "version": 4
+  "version": 5
 }
