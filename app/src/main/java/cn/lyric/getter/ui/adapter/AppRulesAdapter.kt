@@ -84,8 +84,10 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
                             }
                         } else {
                             val status1 = status.filter { it == AppStatus.API || it == AppStatus.Hook }
-                            if (status1.size == 1) {
-                                description = getAppStatusDescription(status1[0], rules[status.indexOf(status1[0])])
+                            description = if (status1.size == 1) {
+                                getAppStatusDescription(status1[0], rules[status.indexOf(status1[0])])
+                            } else {
+                                "<font color='#388E3C'>${context.getString(R.string.multiple_modes_work)}</font>"
                             }
                         }
                     }

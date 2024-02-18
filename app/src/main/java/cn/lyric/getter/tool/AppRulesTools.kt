@@ -11,7 +11,7 @@ object AppRulesTools {
 
     fun getAppStatusDescription(status: AppStatus, rule: Rule, useColor: Boolean = true): String {
         return when (status) {
-            AppStatus.API -> addHtmlColor(R.string.api, "#388E3C", useColor)
+            AppStatus.API -> addHtmlColor(context.getString(R.string.api).format(rule.apiVersion), "#388E3C", useColor)
             AppStatus.Hook -> addHtmlColor(context.getString(R.string.hook).format(rule.getLyricType.lyricType()), "#388E3C", useColor)
             AppStatus.LowApi -> addHtmlColor(context.getString(R.string.low_api).format(rule.apiVersion, BuildConfig.API_VERSION), "#F57C00", useColor)
             AppStatus.MoreAPI -> addHtmlColor(context.getString(R.string.more_api).format(rule.apiVersion, BuildConfig.API_VERSION), "#F57C00", useColor)
