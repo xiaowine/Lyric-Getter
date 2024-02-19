@@ -7,7 +7,7 @@ core-ktx = { module = "androidx.core:core-ktx", version = "1.12.0" }
 material = { module = "com.google.android.material:material", version = "1.10.0" }
 modernandroidpreferences = { module = "de.maxr1998:modernandroidpreferences", version = "2.3.2" }
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version = "2.7.5" }
-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version = "2.7.5" }
+navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version = "2.7.7" }
 lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version = "2.6.2" }
 swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version= "1.2.0-alpha01" }
 
