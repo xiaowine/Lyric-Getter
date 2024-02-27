@@ -24,11 +24,16 @@ import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinde
 
 
 object SystemUi : BaseHook() {
+    var isPlayer: Boolean = false
     private lateinit var receiver: LyricReceiver
 
     private var title: String by observableChange("") { _, _, newValue ->
-        if (newValue.isNotEmpty()) {
+        "title: $newValue".log()
+        if (config.enhancedHiddenLyrics) {
             eventTools.cleanLyric()
+        }
+        if (config.showTitle) {
+            eventTools.sendLyric(newValue)
         }
     }
 
@@ -87,7 +92,7 @@ object SystemUi : BaseHook() {
 //                }
 //            }
 //        }
-        if (config.enhancedHiddenLyrics) {
+        if (config.enhancedHiddenLyrics || config.showTitle) {
             moduleRes.getString(R.string.enhanced_hidden_lyrics).log()
             for (i in 0..10) {
                 val clazz = loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager$$i")
@@ -109,21 +114,24 @@ object SystemUi : BaseHook() {
 
         loadClass("android.media.session.MediaController").methodFinder().filterByParamCount(1).filterByName("unregisterCallback").first().createHook {
             after {
+                if (!isPlayer || !useOwnMusicController) return@after
                 if (it.args[0]::class.java.name.contains("statusbar")) {
-                    if (!useOwnMusicController) {
-                        eventTools.cleanLyric()
-                    }
+                    isPlayer = false
+                    eventTools.cleanLyric()
                 }
+
             }
         }
         loadClass("android.media.session.MediaController").methodFinder().filterByParamCount(1).filterByName("registerCallback").first().createHook {
             after {
+                if (!isPlayer || !useOwnMusicController) return@after
                 if (it.args[0]::class.java.name.contains("statusbar")) {
                     (it.thisObject as MediaController).registerCallback(object : MediaController.Callback() {
                         override fun onPlaybackStateChanged(state: PlaybackState?) {
                             super.onPlaybackStateChanged(state)
-                            if (!useOwnMusicController && state != null) {
+                            if (state != null) {
                                 if (state.state == PlaybackState.STATE_PAUSED) {
+                                    isPlayer = false
                                     eventTools.cleanLyric()
                                 }
 
@@ -137,7 +145,12 @@ object SystemUi : BaseHook() {
         getApplication { application ->
             receiver = LyricReceiver(object : LyricListener() {
                 override fun onUpdate(lyricData: LyricData) {
+                    isPlayer = true
                     useOwnMusicController = lyricData.extraData.useOwnMusicController
+                }
+
+                override fun onStop(lyricData: LyricData) {
+                    isPlayer = false
                 }
             })
             Tools.registerLyricListener(application, BuildConfig.API_VERSION, receiver)

@@ -13,4 +13,5 @@ class Config {
     var saltUseFlyme: Boolean by serialLazy(false)
     var isFirstLookRules: Boolean by serialLazy(true)
     var updateTime: Long by serialLazy(0L)
+    var showTitle: Boolean by serialLazy(false)
 }

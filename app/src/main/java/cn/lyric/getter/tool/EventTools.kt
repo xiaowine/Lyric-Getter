@@ -33,9 +33,11 @@ class EventTools(val context: Context) {
 
 
     fun sendLyric(lyric: String, extra: ExtraData? = null) {
+        val str = lyric.trim()
+        if (str.isEmpty()) return
         lastLyricData = LyricData().apply {
             this.type = OperateType.UPDATE
-            this.lyric = lyric
+            this.lyric = str
             if (extra.isNull()) {
                 this.extraData.mergeExtra(ExtraData().apply {
                     this.packageName = context.packageName

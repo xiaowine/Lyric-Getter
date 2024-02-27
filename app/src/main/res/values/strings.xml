@@ -71,4 +71,5 @@
     <string name="salt_use_flyme">椒盐/糖醋音乐使用魅族状态栏歌词接口</string>
     <string name="salt_use_flyme_summary">在API模式正常时，不建议切换</string>
     <string name="multiple_modes_work">有多个可正常使用的模式</string>
+    <string name="show_title">强制显示标题</string>
 </resources>

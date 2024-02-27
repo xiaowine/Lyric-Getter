@@ -76,6 +76,14 @@ class SettingsFragment : Fragment() {
                     false
                 }
             }
+            switch("show_title") {
+                titleRes = R.string.show_title
+                defaultValue = config.showTitle
+                onClick {
+                    config.showTitle = checked
+                    false
+                }
+            }
         }
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
