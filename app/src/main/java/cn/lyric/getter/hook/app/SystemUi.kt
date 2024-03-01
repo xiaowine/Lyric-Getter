@@ -4,8 +4,10 @@ package cn.lyric.getter.hook.app
 import android.media.MediaMetadata
 import android.media.session.MediaController
 import android.media.session.PlaybackState
+import android.os.Build
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
+import cn.lyric.getter.tool.ConfigTools.xConfig as config
 import cn.lyric.getter.api.data.LyricData
 import cn.lyric.getter.api.listener.LyricListener
 import cn.lyric.getter.api.listener.LyricReceiver
@@ -51,52 +53,51 @@ object SystemUi : BaseHook() {
 
     override fun init() {
         super.init()
-//        if (Build.VERSION.SDK_INT <= 33) {
-////            Android13及其以下适用这个方法
-//            loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager").isNotNull {
-//                it.methodFinder().filterByName("clearCurrentMediaNotification").first().createHook {
-//                    after {
-//                        if (!useOwnMusicController) {
-//                            eventTools.cleanLyric()
-//                        }
-//                    }
-//                }
-//            }
-//        } else {
-////            Android14 clearCurrentMediaNotification消失了，使用removePlayer代替
-//            loadClassOrNull("com.android.systemui.media.controls.ui.MediaCarouselController").isNotNull {
-//                it.methodFinder().filterByName("removePlayer\$default").first().createHook {
-//                    after {
-//                        if (!useOwnMusicController) {
-//                            eventTools.cleanLyric()
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        for (i in 0..10) {
-//            val clazz = loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager$$i")
-//            if (clazz.isNotNull()) {
-//                if (clazz!!.hasMethod("onPlaybackStateChanged")) {
-//                    clazz.methodFinder().filterByName("onPlaybackStateChanged").first().createHook {
-//                        after { hookParam ->
-//                            if (!useOwnMusicController) {
-//                                val playbackState = hookParam.args[0] as PlaybackState
-//                                if (playbackState.state == 2) {
-//                                    eventTools.cleanLyric()
-//                                }
-//                            }
-//                        }
-//                    }
-//                    break
-//                }
-//            }
-//        }
+        if (Build.VERSION.SDK_INT <= 33) {
+//            Android13及其以下适用这个方法
+            loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager").isNotNull {
+                it.methodFinder().filterByName("clearCurrentMediaNotification").first().createHook {
+                    after {
+                        if (!isPlayer || !useOwnMusicController) return@after
+                        isPlayer = false
+                        eventTools.cleanLyric()
+                    }
+                }
+            }
+        } else {
+//            Android14 clearCurrentMediaNotification消失了，使用removePlayer代替
+            loadClassOrNull("com.android.systemui.media.controls.ui.MediaCarouselController").isNotNull {
+                it.methodFinder().filterByName("removePlayer\$default").first().createHook {
+                    after {
+                        if (!isPlayer || !useOwnMusicController) return@after
+                        isPlayer = false
+                        eventTools.cleanLyric()
+                    }
+                }
+            }
+        }
+        for (i in 0..10) {
+            val clazz = loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager$$i")
+            if (clazz.isNotNull()) {
+                if (clazz!!.hasMethod("onPlaybackStateChanged")) {
+                    clazz.methodFinder().filterByName("onPlaybackStateChanged").first().createHook {
+                        after { hookParam ->
+                            if (!isPlayer || !useOwnMusicController) return@after
+                            val playbackState = hookParam.args[0] as PlaybackState
+                            if (playbackState.state == 2) {
+                                isPlayer = false
+                                eventTools.cleanLyric()
+                            }
+                        }
+                    }
+                    break
+                }
+            }
+        }
         if (config.enhancedHiddenLyrics || config.showTitle) {
             moduleRes.getString(R.string.enhanced_hidden_lyrics).log()
             for (i in 0..10) {
                 val clazz = loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager$$i")
-                clazz.log()
                 if (clazz.isNotNull()) {
                     if (clazz!!.hasMethod("onMetadataChanged")) {
                         clazz.methodFinder().filterByName("onMetadataChanged").first().createHook {
