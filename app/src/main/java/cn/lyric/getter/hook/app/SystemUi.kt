@@ -26,7 +26,6 @@ import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinde
 
 
 object SystemUi : BaseHook() {
-    var isPlayer: Boolean = false
     private lateinit var receiver: LyricReceiver
 
     private var title: String by observableChange("") { _, _, newValue ->
@@ -58,8 +57,7 @@ object SystemUi : BaseHook() {
             loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager").isNotNull {
                 it.methodFinder().filterByName("clearCurrentMediaNotification").first().createHook {
                     after {
-                        if (!isPlayer || !useOwnMusicController) return@after
-                        isPlayer = false
+                        if (useOwnMusicController) return@after
                         eventTools.cleanLyric()
                     }
                 }
@@ -69,8 +67,7 @@ object SystemUi : BaseHook() {
             loadClassOrNull("com.android.systemui.media.controls.ui.MediaCarouselController").isNotNull {
                 it.methodFinder().filterByName("removePlayer\$default").first().createHook {
                     after {
-                        if (!isPlayer || !useOwnMusicController) return@after
-                        isPlayer = false
+                        if (useOwnMusicController) return@after
                         eventTools.cleanLyric()
                     }
                 }
@@ -82,10 +79,9 @@ object SystemUi : BaseHook() {
                 if (clazz!!.hasMethod("onPlaybackStateChanged")) {
                     clazz.methodFinder().filterByName("onPlaybackStateChanged").first().createHook {
                         after { hookParam ->
-                            if (!isPlayer || !useOwnMusicController) return@after
+                            if (useOwnMusicController) return@after
                             val playbackState = hookParam.args[0] as PlaybackState
                             if (playbackState.state == 2) {
-                                isPlayer = false
                                 eventTools.cleanLyric()
                             }
                         }
@@ -94,6 +90,34 @@ object SystemUi : BaseHook() {
                 }
             }
         }
+
+        loadClass("android.media.session.MediaController").methodFinder().filterByParamCount(1).filterByName("unregisterCallback").first().createHook {
+            after {
+                if (useOwnMusicController) return@after
+                if (it.args[0]::class.java.name.contains("statusbar")) {
+                    eventTools.cleanLyric()
+                }
+
+            }
+        }
+        loadClass("android.media.session.MediaController").methodFinder().filterByParamCount(1).filterByName("registerCallback").first().createHook {
+            after {
+                if (useOwnMusicController) return@after
+                if (it.args[0]::class.java.name.contains("statusbar")) {
+                    (it.thisObject as MediaController).registerCallback(object : MediaController.Callback() {
+                        override fun onPlaybackStateChanged(state: PlaybackState?) {
+                            super.onPlaybackStateChanged(state)
+                            if (state != null) {
+                                if (state.state == PlaybackState.STATE_PAUSED) {
+                                    eventTools.cleanLyric()
+                                }
+                            }
+                        }
+                    })
+                }
+            }
+        }
+
         if (config.enhancedHiddenLyrics || config.showTitle) {
             moduleRes.getString(R.string.enhanced_hidden_lyrics).log()
             for (i in 0..10) {
@@ -111,47 +135,10 @@ object SystemUi : BaseHook() {
                 }
             }
         }
-
-
-        loadClass("android.media.session.MediaController").methodFinder().filterByParamCount(1).filterByName("unregisterCallback").first().createHook {
-            after {
-                if (!isPlayer || !useOwnMusicController) return@after
-                if (it.args[0]::class.java.name.contains("statusbar")) {
-                    isPlayer = false
-                    eventTools.cleanLyric()
-                }
-
-            }
-        }
-        loadClass("android.media.session.MediaController").methodFinder().filterByParamCount(1).filterByName("registerCallback").first().createHook {
-            after {
-                if (!isPlayer || !useOwnMusicController) return@after
-                if (it.args[0]::class.java.name.contains("statusbar")) {
-                    (it.thisObject as MediaController).registerCallback(object : MediaController.Callback() {
-                        override fun onPlaybackStateChanged(state: PlaybackState?) {
-                            super.onPlaybackStateChanged(state)
-                            if (state != null) {
-                                if (state.state == PlaybackState.STATE_PAUSED) {
-                                    isPlayer = false
-                                    eventTools.cleanLyric()
-                                }
-
-                            }
-                        }
-                    })
-                }
-            }
-        }
-
         getApplication { application ->
             receiver = LyricReceiver(object : LyricListener() {
                 override fun onUpdate(lyricData: LyricData) {
-                    isPlayer = true
                     useOwnMusicController = lyricData.extraData.useOwnMusicController
-                }
-
-                override fun onStop(lyricData: LyricData) {
-                    isPlayer = false
                 }
             })
             Tools.registerLyricListener(application, BuildConfig.API_VERSION, receiver)
