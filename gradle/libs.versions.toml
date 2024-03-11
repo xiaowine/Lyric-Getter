@@ -12,7 +12,7 @@ lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx
 swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version= "1.2.0-alpha01" }
 
 xposed = { module = "de.robv.android.xposed:api", version = "82" }
-ezXHelper = { module = "com.github.kyuubiran:EzXHelper", version = "2.0.9" }
+ezXHelper = { module = "com.github.kyuubiran:EzXHelper", version = "2.1.1" }
 dexkit = { module = "org.luckypray:dexkit", version = "2.0.0" }
 lyricGetter-api = { module = "com.github.xiaowine:Lyric-Getter-Api", version = "6.0.0" }
 xkt = { module = "com.github.xiaowine:XKT", version = "1.0.12" }
