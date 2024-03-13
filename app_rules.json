@@ -1,408 +1,470 @@
 {
-	"appRules": [{
-			"packageName": "com.xuncorp.suvine.music",
-			"name": "糖醋音乐",
-			"rules": [{
-					"startVersionCode": 2023072601,
-					"endVersionCode": 2023081000,
-					"excludeVersions": [],
-					"apiVersion": 4,
-					"useApi": true,
-					"getLyricType": 0,
-					"remarks": ""
-				},
-				{
-					"startVersionCode": 2023081001,
-					"endVersionCode": 2147483647,
-					"excludeVersions": [],
-					"apiVersion": 5,
-					"useApi": true,
-					"getLyricType": 0,
-					"remarks": ""
-				},
-				{
-					"startVersionCode": 2023010101,
-					"endVersionCode": 2147483647,
-					"excludeVersions": [],
-					"apiVersion": 0,
-					"useApi": false,
-					"getLyricType": 0,
-					"remarks": ""
-				}
-			]
-		},
-		{
-			"packageName": "com.salt.music",
-			"name": "椒盐音乐",
-			"rules": [{
-					"startVersionCode": 2023071601,
-					"endVersionCode": 2023081000,
-					"excludeVersions": [],
-					"apiVersion": 4,
-					"useApi": true,
-					"getLyricType": 0,
-					"remarks": ""
-				},
-				{
-					"startVersionCode": 2023081001,
-					"endVersionCode": 2147483647,
-					"excludeVersions": [
-						2023082301
-					],
-					"apiVersion": 5,
-					"useApi": true,
-					"getLyricType": 0,
-					"remarks": ""
-				}, {
-					"startVersionCode": 2024021601,
-					"endVersionCode": 2147483647,
-					"excludeVersions": [],
-					"apiVersion": 6,
-					"useApi": true,
-					"getLyricType": 0,
-					"remarks": ""
-				},
-				{
-					"startVersionCode": 2023010101,
-					"endVersionCode": 2147483647,
-					"excludeVersions": [],
-					"apiVersion": 0,
-					"useApi": false,
-					"getLyricType": 0,
-					"remarks": ""
-				}
-			]
-		},
-		{
-			"packageName": "com.xuncorp.qinalt.music",
-			"name": "青盐云听",
-			"rules": [{
-				"startVersionCode": 2023082101,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 0,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "remix.myplayer",
-			"name": "APlayer ",
-			"rules": [{
-				"startVersionCode": 15900,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 0,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "com.apple.android.music",
-			"name": "Apple Music",
-			"rules": [{
-				"startVersionCode": 1266,
-				"endVersionCode": 1299,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 3,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "com.kugou.android",
-			"name": "酷狗音乐",
-			"rules": [{
-				"startVersionCode": 0,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 1,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "com.kugou.android.lite",
-			"name": "酷狗音乐概念版",
-			"rules": [{
-				"startVersionCode": 10545,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 1,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "com.tencent.qqmusic",
-			"name": "QQ音乐",
-			"rules": [{
-				"startVersionCode": 1108,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 0,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "com.miui.player",
-			"name": "小米音乐",
-			"rules": [{
-				"startVersionCode": 0,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 1,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "com.netease.cloudmusic",
-			"name": "网易云音乐",
-			"rules": [{
-					"startVersionCode": 7002022,
-					"endVersionCode": 8000041,
-					"excludeVersions": [],
-					"apiVersion": 0,
-					"useApi": false,
-					"getLyricType": 1,
-					"remarks": ""
-				},
-				{
-					"startVersionCode": 8000042,
-					"endVersionCode": 2147483647,
-					"excludeVersions": [],
-					"apiVersion": 0,
-					"useApi": false,
-					"getLyricType": 0,
-					"remarks": ""
-				}
-			]
-		},
-		{
-			"packageName": "cn.kuwo.player",
-			"name": "酷我音乐",
-			"rules": [{
-				"startVersionCode": 0,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 1,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "cmccwm.mobilemusic",
-			"name": "咪咕音乐",
-			"rules": [{
-				"startVersionCode": 0,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 1,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "com.meizu.media.music",
-			"name": "魅族音乐",
-			"rules": [{
-				"startVersionCode": 0,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 1,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "com.r.rplayer",
-			"name": "RPlayer",
-			"rules": [{
-				"startVersionCode": 0,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 1,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "cn.toside.music.mobile",
-			"name": "LX Music",
-			"rules": [{
-				"startVersionCode": 42003,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 2,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "com.luna.music",
-			"name": "汽水音乐",
-			"rules": [{
-				"startVersionCode": 0,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 2,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "player.phonograph.plus",
-			"name": "Phonograph Plus",
-			"rules": [{
-				"startVersionCode": 611,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 4,
-				"useApi": true,
-				"getLyricType": 0,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "com.caij.puremusic",
-			"name": "棉花音乐",
-			"rules": [{
-					"startVersionCode": 1020202,
-					"endVersionCode": 1024008,
-					"excludeVersions": [],
-					"apiVersion": 4,
-					"useApi": true,
-					"getLyricType": 0,
-					"remarks": ""
-				},
-				{
-					"startVersionCode": 1024009,
-					"endVersionCode": 2147483647,
-					"excludeVersions": [],
-					"apiVersion": 6,
-					"useApi": true,
-					"getLyricType": 0,
-					"remarks": ""
-				}
-			]
-		},
-		{
-			"packageName": "com.kyant.vanilla",
-			"name": "Vanilla",
-			"rules": [{
-				"startVersionCode": 0,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 4,
-				"useApi": true,
-				"getLyricType": 0,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "statusbar.finder",
-			"name": "LyricsGetter Ext",
-			"rules": [{
-					"startVersionCode": 0,
-					"endVersionCode": 6,
-					"excludeVersions": [],
-					"apiVersion": 5,
-					"useApi": true,
-					"getLyricType": 0,
-					"remarks": ""
-				},
-				{
-					"startVersionCode": 7,
-					"endVersionCode": 2147483647,
-					"excludeVersions": [],
-					"apiVersion": 6,
-					"useApi": true,
-					"getLyricType": 0,
-					"remarks": ""
-				}
-			]
-		},
-		{
-			"packageName": "com.hihonor.cloudmusic",
-			"name": "荣耀音乐",
-			"rules": [{
-				"startVersionCode": 1000022,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 0,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "cn.aqzscn.stream_music",
-			"name": "音流",
-			"rules": [{
-				"startVersionCode": 2008,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 0,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "com.lalilu.lmusic",
-			"name": "Lmusic",
-			"rules": [{
-				"startVersionCode": 0,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 0,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "com.netease.cloudmusic.lite",
-			"name": "网易云音乐极速版",
-			"rules": [{
-				"startVersionCode": 0,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 2,
-				"remarks": ""
-			}]
-		},
-		{
-			"packageName": "cn.wenyu.bodian",
-			"name": "波点音乐",
-			"rules": [{
-				"startVersionCode": 0,
-				"endVersionCode": 2147483647,
-				"excludeVersions": [],
-				"apiVersion": 0,
-				"useApi": false,
-				"getLyricType": 2,
-				"remarks": ""
-			}]
-		}
-	],
-	"appRulesVersion": 6,
-	"version": 5
+  "appRules": [
+    {
+      "packageName": "com.xuncorp.suvine.music",
+      "name": "糖醋音乐",
+      "rules": [
+        {
+          "startVersionCode": 2023072601,
+          "endVersionCode": 2023081000,
+          "excludeVersions": [],
+          "apiVersion": 4,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        },
+        {
+          "startVersionCode": 2023081001,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 5,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        },
+        {
+          "startVersionCode": 2023010101,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.salt.music",
+      "name": "椒盐音乐",
+      "rules": [
+        {
+          "startVersionCode": 2023071601,
+          "endVersionCode": 2023081000,
+          "excludeVersions": [],
+          "apiVersion": 4,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        },
+        {
+          "startVersionCode": 2023081001,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [
+            2023082301
+          ],
+          "apiVersion": 5,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        },
+        {
+          "startVersionCode": 2024021601,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 6,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        },
+        {
+          "startVersionCode": 2023010101,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.xuncorp.qinalt.music",
+      "name": "青盐云听",
+      "rules": [
+        {
+          "startVersionCode": 2023082101,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "remix.myplayer",
+      "name": "APlayer ",
+      "rules": [
+        {
+          "startVersionCode": 15900,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.apple.android.music",
+      "name": "Apple Music",
+      "rules": [
+        {
+          "startVersionCode": 1266,
+          "endVersionCode": 1299,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 3,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.kugou.android",
+      "name": "酷狗音乐",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.kugou.android.lite",
+      "name": "酷狗音乐概念版",
+      "rules": [
+        {
+          "startVersionCode": 10545,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.tencent.qqmusic",
+      "name": "QQ音乐",
+      "rules": [
+        {
+          "startVersionCode": 1108,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.miui.player",
+      "name": "小米音乐",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.netease.cloudmusic",
+      "name": "网易云音乐",
+      "rules": [
+        {
+          "startVersionCode": 7002022,
+          "endVersionCode": 8000041,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        },
+        {
+          "startVersionCode": 8000042,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "cn.kuwo.player",
+      "name": "酷我音乐",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "cmccwm.mobilemusic",
+      "name": "咪咕音乐",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.meizu.media.music",
+      "name": "魅族音乐",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.r.rplayer",
+      "name": "RPlayer",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "cn.toside.music.mobile",
+      "name": "LX Music",
+      "rules": [
+        {
+          "startVersionCode": 42003,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 2,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.luna.music",
+      "name": "汽水音乐",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 2,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "player.phonograph.plus",
+      "name": "Phonograph Plus",
+      "rules": [
+        {
+          "startVersionCode": 611,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 4,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.caij.puremusic",
+      "name": "棉花音乐",
+      "rules": [
+        {
+          "startVersionCode": 1020202,
+          "endVersionCode": 1024008,
+          "excludeVersions": [],
+          "apiVersion": 4,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        },
+        {
+          "startVersionCode": 1024009,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 6,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.kyant.vanilla",
+      "name": "Vanilla",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 4,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "statusbar.finder",
+      "name": "LyricsGetter Ext",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 6,
+          "excludeVersions": [],
+          "apiVersion": 5,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        },
+        {
+          "startVersionCode": 7,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 6,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.hihonor.cloudmusic",
+      "name": "荣耀音乐",
+      "rules": [
+        {
+          "startVersionCode": 1000022,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "cn.aqzscn.stream_music",
+      "name": "音流",
+      "rules": [
+        {
+          "startVersionCode": 2008,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.lalilu.lmusic",
+      "name": "Lmusic",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "com.netease.cloudmusic.lite",
+      "name": "网易云音乐极速版",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 2,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "cn.wenyu.bodian",
+      "name": "波点音乐",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 2,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "fun.upup.musicfree",
+      "name": "MusicFree",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 2,
+          "remarks": ""
+        }
+      ]
+    }
+  ],
+  "appRulesVersion": 7,
+  "version": 6
 }
