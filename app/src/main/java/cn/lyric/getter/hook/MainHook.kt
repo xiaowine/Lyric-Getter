@@ -13,6 +13,7 @@ import cn.lyric.getter.hook.app.Luna
 import cn.lyric.getter.hook.app.Meizu
 import cn.lyric.getter.hook.app.MiPlayer
 import cn.lyric.getter.hook.app.MobileMusic
+import cn.lyric.getter.hook.app.MusicFree
 import cn.lyric.getter.hook.app.Netease
 import cn.lyric.getter.hook.app.NeteaseLite
 import cn.lyric.getter.hook.app.QQMusic
@@ -54,6 +55,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "cn.aqzscn.stream_music" -> initHooks(Aqzscn)
             "com.lalilu.lmusic" -> initHooks(LMusic)
             "cn.wenyu.bodian" -> initHooks(Bodian)
+            "fun.upup.musicfree" -> initHooks(MusicFree)
             else -> initHooks(Api)
         }
     }
