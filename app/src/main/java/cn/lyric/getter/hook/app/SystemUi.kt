@@ -43,78 +43,82 @@ object SystemUi : BaseHook() {
 
     override fun init() {
         super.init()
-        if (Build.VERSION.SDK_INT <= 33) {
+        if (config.stopOption1) {
+            if (Build.VERSION.SDK_INT <= 33) {
 //            Android13及其以下适用这个方法
-            loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager").isNotNull {
-                it.methodFinder().filterByName("clearCurrentMediaNotification").first().createHook {
-                    after {
-                        if (!isPlayer || useOwnMusicController) return@after
-                        isPlayer = false
-                        eventTools.cleanLyric()
-                        "clearCurrentMediaNotification".log()
-                    }
-                }
-            }
-        } else {
-//            Android14 clearCurrentMediaNotification消失了，使用removePlayer代替
-            loadClassOrNull("com.android.systemui.media.controls.ui.MediaCarouselController").isNotNull {
-                it.methodFinder().filterByName("removePlayer\$default").first().createHook {
-                    after {
-                        if (!isPlayer || useOwnMusicController) return@after
-                        isPlayer = false
-                        eventTools.cleanLyric()
-                        "removePlayer\$default".log()
-                    }
-                }
-            }
-        }
-        for (i in 0..10) {
-            val clazz = loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager$$i")
-            if (clazz.isNotNull()) {
-                if (clazz!!.hasMethod("onPlaybackStateChanged")) {
-                    clazz.methodFinder().filterByName("onPlaybackStateChanged").first().createHook {
-                        after { hookParam ->
+                loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager").isNotNull {
+                    it.methodFinder().filterByName("clearCurrentMediaNotification").first().createHook {
+                        after {
                             if (!isPlayer || useOwnMusicController) return@after
-                            val playbackState = hookParam.args[0] as PlaybackState
-                            if (playbackState.state == 2) {
-                                isPlayer = false
-                                eventTools.cleanLyric()
-                                "onPlaybackStateChanged".log()
-                            }
+                            isPlayer = false
+                            eventTools.cleanLyric()
+                            "clearCurrentMediaNotification".log()
                         }
                     }
-                    break
+                }
+            } else {
+//            Android14 clearCurrentMediaNotification消失了，使用removePlayer代替
+                loadClassOrNull("com.android.systemui.media.controls.ui.MediaCarouselController").isNotNull {
+                    it.methodFinder().filterByName("removePlayer\$default").first().createHook {
+                        after {
+                            if (!isPlayer || useOwnMusicController) return@after
+                            isPlayer = false
+                            eventTools.cleanLyric()
+                            "removePlayer\$default".log()
+                        }
+                    }
                 }
             }
-        }
-        loadClass("android.media.session.MediaController").methodFinder().filterByParamCount(1).filterByName("unregisterCallback").first().createHook {
-            after {
-                if (!isPlayer || useOwnMusicController) return@after
-                if (it.args[0]::class.java.name.contains("statusbar")) {
-                    isPlayer = false
-                    eventTools.cleanLyric()
-                    "unregisterCallback".log()
-                }
-
-            }
-        }
-        loadClass("android.media.session.MediaController").methodFinder().filterByParamCount(1).filterByName("registerCallback").first().createHook {
-            after {
-                if (!isPlayer || useOwnMusicController) return@after
-                if (it.args[0]::class.java.name.contains("statusbar")) {
-                    (it.thisObject as MediaController).registerCallback(object : MediaController.Callback() {
-                        override fun onPlaybackStateChanged(state: PlaybackState?) {
-                            super.onPlaybackStateChanged(state)
-                            if (state != null) {
-                                if (state.state == PlaybackState.STATE_PAUSED) {
+            for (i in 0..10) {
+                val clazz = loadClassOrNull("com.android.systemui.statusbar.NotificationMediaManager$$i")
+                if (clazz.isNotNull()) {
+                    if (clazz!!.hasMethod("onPlaybackStateChanged")) {
+                        clazz.methodFinder().filterByName("onPlaybackStateChanged").first().createHook {
+                            after { hookParam ->
+                                if (!isPlayer || useOwnMusicController) return@after
+                                val playbackState = hookParam.args[0] as PlaybackState
+                                if (playbackState.state == 2) {
                                     isPlayer = false
                                     eventTools.cleanLyric()
-                                    "registerCallback".log()
+                                    "onPlaybackStateChanged".log()
                                 }
-
                             }
                         }
-                    })
+                        break
+                    }
+                }
+            }
+        }
+        if (config.stopOption2) {
+            loadClass("android.media.session.MediaController").methodFinder().filterByParamCount(1).filterByName("unregisterCallback").first().createHook {
+                after {
+                    if (!isPlayer || useOwnMusicController) return@after
+                    if (it.args[0]::class.java.name.contains("statusbar")) {
+                        isPlayer = false
+                        eventTools.cleanLyric()
+                        "unregisterCallback".log()
+                    }
+
+                }
+            }
+            loadClass("android.media.session.MediaController").methodFinder().filterByParamCount(1).filterByName("registerCallback").first().createHook {
+                after {
+                    if (!isPlayer || useOwnMusicController) return@after
+                    if (it.args[0]::class.java.name.contains("statusbar")) {
+                        (it.thisObject as MediaController).registerCallback(object : MediaController.Callback() {
+                            override fun onPlaybackStateChanged(state: PlaybackState?) {
+                                super.onPlaybackStateChanged(state)
+                                if (state != null) {
+                                    if (state.state == PlaybackState.STATE_PAUSED) {
+                                        isPlayer = false
+                                        eventTools.cleanLyric()
+                                        "registerCallback".log()
+                                    }
+
+                                }
+                            }
+                        })
+                    }
                 }
             }
         }

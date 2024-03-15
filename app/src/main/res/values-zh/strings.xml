@@ -72,4 +72,6 @@
     <string name="salt_use_flyme_summary">在API模式正常时，不建议切换</string>
     <string name="multiple_modes_work">有多个可正常使用的模式</string>
     <string name="show_title">强制显示标题</string>
+    <string name="stop_option1">歌词暂停方案一</string>
+    <string name="stop_option2">歌词暂停方案二</string>
 </resources>
