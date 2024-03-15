@@ -51,6 +51,7 @@ object SystemUi : BaseHook() {
                         if (!isPlayer || useOwnMusicController) return@after
                         isPlayer = false
                         eventTools.cleanLyric()
+                        "clearCurrentMediaNotification".log()
                     }
                 }
             }
@@ -62,6 +63,7 @@ object SystemUi : BaseHook() {
                         if (!isPlayer || useOwnMusicController) return@after
                         isPlayer = false
                         eventTools.cleanLyric()
+                        "removePlayer\$default".log()
                     }
                 }
             }
@@ -77,6 +79,7 @@ object SystemUi : BaseHook() {
                             if (playbackState.state == 2) {
                                 isPlayer = false
                                 eventTools.cleanLyric()
+                                "onPlaybackStateChanged".log()
                             }
                         }
                     }
@@ -90,6 +93,7 @@ object SystemUi : BaseHook() {
                 if (it.args[0]::class.java.name.contains("statusbar")) {
                     isPlayer = false
                     eventTools.cleanLyric()
+                    "unregisterCallback".log()
                 }
 
             }
@@ -105,6 +109,7 @@ object SystemUi : BaseHook() {
                                 if (state.state == PlaybackState.STATE_PAUSED) {
                                     isPlayer = false
                                     eventTools.cleanLyric()
+                                    "registerCallback".log()
                                 }
 
                             }
