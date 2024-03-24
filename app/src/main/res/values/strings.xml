@@ -31,7 +31,7 @@
     <string name="update_app_rules">Update Support List</string>
     <string name="multi_rule">Details %s: %s</string>
     <string name="uninstall_rule">Not Installed: Supports %s modes in total</string>
-    <string name="app_rules_tips">Not included: does not mean it can\'t be used, it needs everyone to feedback the lowest support version after the inclusion can be normally displayed\nSome software is also not included, welcome to provide and feedback errors</string>
+    <string name="app_rules_tips">Not included: It doesn\'t mean that it can\'t be used, it just means that you don\'t know the minimum supported version, so there are no inclusion rules\nSome software is not included, welcome to provide and feedback errors</string>
     <string name="output_repeated_lyrics">Output Repeated Lyrics</string>
     <string name="enhanced_hidden_lyrics">Enhanced Hidden Lyrics</string>
     <string name="enhanced_hidden_lyrics_summary">Some software is not applicable, it will cause the lyrics to be ghosted</string>
@@ -74,4 +74,5 @@
     <string name="show_title">Force Show Title</string>
     <string name="stop_option1">Lyrics pause option one</string>
     <string name="stop_option2">Lyrics pause plan two</string>
+    <string name="version_differences">The release version will not output logs, and the Debug version will output logs, so it is recommended not to install the Debug version</string>
 </resources>

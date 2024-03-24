@@ -31,7 +31,7 @@
     <string name="update_app_rules">更新支持列表</string>
     <string name="multi_rule">详情%s：%s</string>
     <string name="uninstall_rule">未安装：共支持%s个模式</string>
-    <string name="app_rules_tips">未收录:不代表不能用，需要大家反馈最低支持版本收录后才能正常显示\n部分软件也没有收录，欢迎提供和反馈错误</string>
+    <string name="app_rules_tips">未收录:不代表不能用，仅仅代表不知道最低的支持版本，故没有收录规则\n部分软件也没有收录，欢迎提供和反馈错误</string>
     <string name="output_repeated_lyrics">输出重复歌词</string>
     <string name="enhanced_hidden_lyrics">增强隐藏歌词</string>
     <string name="enhanced_hidden_lyrics_summary">部分软件不适用，会导致歌词鬼畜</string>
@@ -74,4 +74,5 @@
     <string name="show_title">强制显示标题</string>
     <string name="stop_option1">歌词暂停方案一</string>
     <string name="stop_option2">歌词暂停方案二</string>
+    <string name="version_differences">发行版本Release不会输出log，Debug版本会输出log，非不要不建议安装Debug版本</string>
 </resources>
