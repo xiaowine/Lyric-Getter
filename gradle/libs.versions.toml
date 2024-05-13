@@ -1,6 +1,6 @@
 [versions]
 agp = "8.2.2"
-kotlin = "1.9.21"
+kotlin = "1.9.24"
 
 [libraries]
 core-ktx = { module = "androidx.core:core-ktx", version = "1.12.0" }
