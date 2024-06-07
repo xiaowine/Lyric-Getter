@@ -164,13 +164,16 @@ class AppRulesFragment : Fragment() {
                 appRules.forEach { appRule ->
                     var appInfos: AppInfos? = null
                     if (appInfosPackNames.contains(appRule.packageName)) {
-                        val packageInfo = installedPackages.filter { it.packageName == appRule.packageName }[0]
-                        val applicationInfo = packageInfo.applicationInfo
-                        appInfos = AppInfos(applicationInfo.loadLabel(packageManager).toString(), applicationInfo.loadIcon(packageManager), packageInfo.packageName, packageInfo.versionCode, appRule)
-
+                        val packageInfo = installedPackages.filter { it.packageName == appRule.packageName }.firstOrNull()
+                        if (packageInfo != null) {
+                            val applicationInfo = packageInfo.applicationInfo
+                            appInfos = AppInfos(applicationInfo.loadLabel(packageManager).toString(), applicationInfo.loadIcon(packageManager), packageInfo.packageName, packageInfo.versionCode, appRule)
+                        }
                     } else if (config.showAllRules) {
-                        val packageInfo = installedPackages.filter { it.packageName == "com.android.systemui" }[0]
-                        appInfos = AppInfos(appRule.name, packageInfo.applicationInfo.loadIcon(packageManager), appRule.packageName, 0, appRule, false)
+                        val packageInfo = installedPackages.filter { it.packageName == "com.android.systemui" }.firstOrNull()
+                        if (packageInfo != null) {
+                            appInfos = AppInfos(appRule.name, packageInfo.applicationInfo.loadIcon(packageManager), appRule.packageName, 0, appRule, false)
+                        }
                     }
                     goMainThread { appInfos?.let { appAdapter.addData(it) } }
                 }
