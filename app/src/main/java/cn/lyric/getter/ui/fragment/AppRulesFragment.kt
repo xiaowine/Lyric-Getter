@@ -164,13 +164,13 @@ class AppRulesFragment : Fragment() {
                 appRules.forEach { appRule ->
                     var appInfos: AppInfos? = null
                     if (appInfosPackNames.contains(appRule.packageName)) {
-                        val packageInfo = installedPackages.filter { it.packageName == appRule.packageName }.firstOrNull()
+                        val packageInfo = installedPackages.firstOrNull { it.packageName == appRule.packageName }
                         if (packageInfo != null) {
                             val applicationInfo = packageInfo.applicationInfo
                             appInfos = AppInfos(applicationInfo.loadLabel(packageManager).toString(), applicationInfo.loadIcon(packageManager), packageInfo.packageName, packageInfo.versionCode, appRule)
                         }
                     } else if (config.showAllRules) {
-                        val packageInfo = installedPackages.filter { it.packageName == "com.android.systemui" }.firstOrNull()
+                        val packageInfo = installedPackages.firstOrNull { it.packageName == "com.android.systemui" }
                         if (packageInfo != null) {
                             appInfos = AppInfos(appRule.name, packageInfo.applicationInfo.loadIcon(packageManager), appRule.packageName, 0, appRule, false)
                         }
