@@ -8,7 +8,7 @@ object Flamingo : BaseHook() {
 
     override fun init() {
         super.init()
-        if （isApi()） {
+        if isApi() {
             Api.hook()
         }
     }
