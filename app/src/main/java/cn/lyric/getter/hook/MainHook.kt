@@ -6,6 +6,7 @@ import cn.lyric.getter.hook.app.Api
 import cn.lyric.getter.hook.app.Apple
 import cn.lyric.getter.hook.app.Aqzscn
 import cn.lyric.getter.hook.app.Bodian
+import cn.lyric.getter.hook.app.Flamingo
 import cn.lyric.getter.hook.app.Kugou
 import cn.lyric.getter.hook.app.Kuwo
 import cn.lyric.getter.hook.app.LMusic
@@ -58,6 +59,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "cn.wenyu.bodian" -> initHooks(Bodian)
             "fun.upup.musicfree" -> initHooks(MusicFree)
             "com.mimicry.mymusic" -> initHooks(Mimicry)
+            "yos.music.player" -> initHooks(Flamingo)
             else -> initHooks(Api)
         }
     }
