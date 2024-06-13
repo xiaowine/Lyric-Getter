@@ -52,14 +52,12 @@ class AppRulesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (config.isFirstLookRules) {
-            MaterialAlertDialogBuilder(requireContext()).apply {
-                setTitle(R.string.remarks)
-                setMessage(R.string.rules_are_only_for_viewing_supported_versions)
-                setNegativeButton(R.string.ok) { _, _ -> config.isFirstLookRules = false }
-                setCancelable(false)
-                show()
-            }
+        MaterialAlertDialogBuilder(requireContext()).apply {
+            setTitle(R.string.remarks)
+            setMessage(R.string.rules_are_only_for_viewing_supported_versions)
+            setNegativeButton(R.string.ok) { _, _ -> }
+            setCancelable(false)
+            show()
         }
         appAdapter = AppRulesAdapter().apply {
             setOnItemClickListener(object : AppRulesAdapter.OnItemClickListener {

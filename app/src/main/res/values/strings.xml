@@ -66,7 +66,7 @@
     <string name="desktop_lyrics_mode">Desktop Lyrics Mode</string>
     <string name="enforced_mode">Enforced Mode</string>
     <string name="current_status">Current Status</string>
-    <string name="rules_are_only_for_viewing_supported_versions">App support list is only for viewing supported software versions\nThere may be some discrepancies with the actual acquisition</string>
+    <string name="rules_are_only_for_viewing_supported_versions">App support list is only for viewing supported software versions\nThere may be some discrepancies with the actual acquisition\nThe actual hook fetches the lyrics and does not refer to the data on this page</string>
     <string name="notice">Notice</string>
     <string name="salt_use_flyme">Salt/Sweet and Sour Music uses Meizu status bar lyrics interface</string>
     <string name="salt_use_flyme_summary">It is not recommended to switch when the API mode is normal</string>
