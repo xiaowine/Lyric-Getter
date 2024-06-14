@@ -493,6 +493,21 @@
           "remarks": ""
         }
       ]
+    },
+    {
+      "packageName": "org.kde.kdeconnect_tp",
+      "name": "KDE Connect",
+      "rules": [
+        {
+          "startVersionCode": 12000,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
     }
   ],
   "appRulesVersion": 8,
