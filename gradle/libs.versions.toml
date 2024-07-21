@@ -4,7 +4,7 @@ kotlin = "1.9.21"
 
 [libraries]
 core-ktx = { module = "androidx.core:core-ktx", version = "1.12.0" }
-material = { module = "com.google.android.material:material", version = "1.11.0" }
+material = { module = "com.google.android.material:material", version = "1.12.0" }
 modernandroidpreferences = { module = "de.maxr1998:modernandroidpreferences", version = "2.3.2" }
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version = "2.7.7" }
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version = "2.7.5" }
