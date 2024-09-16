@@ -66,7 +66,7 @@
     <string name="desktop_lyrics_mode">桌面歌词模式</string>
     <string name="enforced_mode">强制模式</string>
     <string name="current_status">当前状态</string>
-    <string name="rules_are_only_for_viewing_supported_versions">App支持列表仅供查看支持软件版本\n与实际获取可能有部分出入</string>
+    <string name="rules_are_only_for_viewing_supported_versions">App支持列表仅供查看支持软件版本\n与实际获取可能有部分出入\n实际Hook获取歌词并不会参考此页面数据</string>
     <string name="notice">通知</string>
     <string name="salt_use_flyme">椒盐/糖醋音乐使用魅族状态栏歌词接口</string>
     <string name="salt_use_flyme_summary">在API模式正常时，不建议切换</string>

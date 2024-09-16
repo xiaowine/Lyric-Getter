@@ -11,7 +11,6 @@ class Config {
     var enhancedHiddenLyrics: Boolean by serialLazy(false)
     var regexReplace: String by serialLazy("")
     var saltUseFlyme: Boolean by serialLazy(false)
-    var isFirstLookRules: Boolean by serialLazy(true)
     var updateTime: Long by serialLazy(0L)
     var showTitle: Boolean by serialLazy(false)
     var stopOption1: Boolean by serialLazy(true)

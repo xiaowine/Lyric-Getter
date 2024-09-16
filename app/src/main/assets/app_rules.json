@@ -463,8 +463,53 @@
           "remarks": ""
         }
       ]
+    },
+    {
+      "packageName": "com.mimicry.mymusic",
+      "name": "拟声",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "yos.music.player",
+      "name": "Flamingo",
+      "rules": [
+        {
+          "startVersionCode": 0,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 6,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
+    },
+    {
+      "packageName": "org.kde.kdeconnect_tp",
+      "name": "KDE Connect",
+      "rules": [
+        {
+          "startVersionCode": 12000,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
     }
   ],
-  "appRulesVersion": 7,
+  "appRulesVersion": 9,
   "version": 6
 }
