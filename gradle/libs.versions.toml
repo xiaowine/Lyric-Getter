@@ -1,6 +1,7 @@
 [versions]
 agp = "8.6.0"
 kotlin = "2.0.20"
+hidden-api = "4.2.0"
 
 [libraries]
 material = { module = "com.google.android.material:material", version = "1.12.0" }
@@ -13,6 +14,8 @@ swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout"
 
 xposed = { module = "de.robv.android.xposed:api", version = "82" }
 ezXHelper = { module = "com.github.kyuubiran:EzXHelper", version = "2.2.0" }
+dev-rikka-hidden-compat = { module = "dev.rikka.hidden:compat", version.ref = "hidden-api" }
+dev-rikka-hidden-stub = { module = "dev.rikka.hidden:stub", version.ref = "hidden-api" }
 dexkit = { module = "org.luckypray:dexkit", version = "2.0.1" }
 lyricGetter-api = { module = "com.github.xiaowine:Lyric-Getter-Api", version = "6.0.0" }
 xkt = { module = "com.github.xiaowine:XKT", version = "1.0.12" }
@@ -23,4 +26,4 @@ cardSlider = { module = "com.github.IslamKhSh:CardSlider", version = "1.0.1" }
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+refine = { id = "dev.rikka.tools.refine", version = "4.3.0" }
