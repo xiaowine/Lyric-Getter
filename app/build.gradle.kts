@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.konan.properties.Properties
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
+    alias(libs.plugins.refine)
 }
 
 val localProperties = Properties()
@@ -88,6 +89,8 @@ dependencies {
     implementation(libs.ezXHelper)
     implementation(libs.dexkit)
     compileOnly(libs.xposed)
+    compileOnly(libs.dev.rikka.hidden.stub)
+    implementation(libs.dev.rikka.hidden.compat)
 
     implementation(libs.core.ktx)
     implementation(libs.material)
