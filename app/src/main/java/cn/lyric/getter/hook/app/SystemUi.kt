@@ -9,6 +9,7 @@ import cn.lyric.getter.api.listener.LyricListener
 import cn.lyric.getter.api.listener.LyricReceiver
 import cn.lyric.getter.api.tools.Tools
 import cn.lyric.getter.hook.BaseHook
+import cn.lyric.getter.hook.UidObserveService
 import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.getApplication
 import cn.lyric.getter.tool.SystemMediaSessionListener
@@ -19,8 +20,15 @@ import cn.lyric.getter.tool.ConfigTools.xConfig as config
 
 
 object SystemUi : BaseHook() {
-    var isPlayer: Boolean = false
+    var isPlaying: Boolean = false
     private lateinit var receiver: LyricReceiver
+    val uidObserveService : UidObserveService by lazy {
+        UidObserveService { packageName ->
+            "Uid gone: $packageName".log()
+            eventTools.cleanLyric()
+            isPlaying = false
+        }
+    }
 
     private var title: String by observableChange("") { _, _, newValue ->
         "title: $newValue".log()
@@ -39,12 +47,15 @@ object SystemUi : BaseHook() {
         getApplication { application ->
             receiver = LyricReceiver(object : LyricListener() {
                 override fun onUpdate(lyricData: LyricData) {
-                    isPlayer = true
+                    isPlaying = true
                     useOwnMusicController = lyricData.extraData.useOwnMusicController
+                    if (lyricData.extraData.packageName.isNotEmpty()) {
+                        uidObserveService.registerForPackage(lyricData.extraData.packageName)
+                    }
                 }
 
                 override fun onStop(lyricData: LyricData) {
-                    isPlayer = false
+                    isPlaying = false
                 }
             })
             Tools.registerLyricListener(application, BuildConfig.API_VERSION, receiver)
@@ -67,17 +78,17 @@ object SystemUi : BaseHook() {
                         else -> "Unknown State"
                     }
                     "Playback state: $stateString".log()
-                    if (!isPlayer || useOwnMusicController) return
+                    if (!isPlaying || useOwnMusicController) return
                     if (state == PlaybackState.STATE_PAUSED) {
-                        isPlayer = false
+                        isPlaying = false
                         eventTools.cleanLyric()
                     }
                 }
 
                 override fun onCleared() {
                     super.onCleared()
-                    if (!isPlayer || useOwnMusicController) return
-                    isPlayer = false
+                    if (!isPlaying || useOwnMusicController) return
+                    isPlaying = false
                     eventTools.cleanLyric()
                 }
             }

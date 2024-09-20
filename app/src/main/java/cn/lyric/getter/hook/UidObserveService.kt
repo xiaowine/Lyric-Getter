@@ -4,6 +4,7 @@ import android.app.ActivityManagerHidden
 import android.content.pm.IPackageManager
 import android.os.Build
 import android.os.ServiceManager
+import cn.xiaowine.xkt.LogTool.log
 import rikka.hidden.compat.ActivityManagerApis
 import rikka.hidden.compat.adapter.UidObserverAdapter
 
@@ -34,6 +35,7 @@ class UidObserveService(private val onUidGoneCallback : (String) -> Unit) {
                 ActivityManagerHidden.PROCESS_STATE_UNKNOWN,
                 null
             )
+            "package: $packageName, uid: $appUid registered".log()
         }
     }
 
