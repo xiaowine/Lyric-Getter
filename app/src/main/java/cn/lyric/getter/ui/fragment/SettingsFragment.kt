@@ -84,22 +84,6 @@ class SettingsFragment : Fragment() {
                     false
                 }
             }
-            switch("stop_option1") {
-                titleRes = R.string.stop_option1
-                defaultValue = config.stopOption1
-                onClick {
-                    config.stopOption1 = checked
-                    false
-                }
-            }
-            switch("stop_option2") {
-                titleRes = R.string.stop_option2
-                defaultValue = config.stopOption2
-                onClick {
-                    config.stopOption2 = checked
-                    false
-                }
-            }
         }
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)

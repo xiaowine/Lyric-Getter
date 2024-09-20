@@ -72,7 +72,5 @@
     <string name="salt_use_flyme_summary">It is not recommended to switch when the API mode is normal</string>
     <string name="multiple_modes_work">There are multiple modes that can be used normally</string>
     <string name="show_title">Force Show Title</string>
-    <string name="stop_option1">Lyrics pause option one</string>
-    <string name="stop_option2">Lyrics pause plan two</string>
     <string name="version_differences">The release version will not output logs, and the Debug version will output logs, so it is recommended not to install the Debug version</string>
 </resources>
