@@ -13,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.R
-import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.data.AppInfos
 import cn.lyric.getter.data.AppRule
 import cn.lyric.getter.data.Rule
@@ -24,6 +23,7 @@ import cn.lyric.getter.tool.ActivityTools.updateAppRules
 import cn.lyric.getter.tool.AppRulesTools.getAppStatus
 import cn.lyric.getter.tool.AppRulesTools.getAppStatusDescription
 import cn.lyric.getter.tool.AppRulesTools.lyricType
+import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.ui.adapter.AppRulesAdapter
 import cn.lyric.getter.ui.dialog.MaterialProgressDialog
 import cn.lyric.getter.ui.viewmodel.AppRulesViewModel
@@ -164,13 +164,20 @@ class AppRulesFragment : Fragment() {
                     if (appInfosPackNames.contains(appRule.packageName)) {
                         val packageInfo = installedPackages.firstOrNull { it.packageName == appRule.packageName }
                         packageInfo?.let {
-                            val applicationInfo = packageInfo.applicationInfo
-                            appInfos = AppInfos(applicationInfo.loadLabel(packageManager).toString(), applicationInfo.loadIcon(packageManager), packageInfo.packageName, packageInfo.versionCode, appRule)
+                            val applicationInfo = packageInfo.applicationInfo ?: return@let
+                            appInfos = AppInfos(
+                                applicationInfo.loadLabel(packageManager).toString(),
+                                applicationInfo.loadIcon(packageManager),
+                                packageInfo.packageName,
+                                packageInfo.versionCode,
+                                appRule
+                            )
                         }
                     } else if (config.showAllRules) {
                         val packageInfo = installedPackages.firstOrNull { it.packageName == "com.android.systemui" }
                         packageInfo?.let {
-                            appInfos = AppInfos(appRule.name, packageInfo.applicationInfo.loadIcon(packageManager), appRule.packageName, 0, appRule, false)
+                            val applicationInfo = packageInfo.applicationInfo ?: return@let
+                            appInfos = AppInfos(appRule.name, applicationInfo.loadIcon(packageManager), appRule.packageName, 0, appRule, false)
                         }
                     }
                     goMainThread { appInfos?.let { appAdapter.addData(it) } }

@@ -99,10 +99,10 @@ class HomeFragment : Fragment() {
                         viewPager.adapter = NoticeAdapter(it)
                         notice.visibility = View.VISIBLE
                     }
-                    if (it.size==1){
-                        indicator.visibility=View.GONE
-                    }else{
-                        indicator.visibility=View.VISIBLE
+                    if (it.size == 1) {
+                        indicator.visibility = View.GONE
+                    } else {
+                        indicator.visibility = View.VISIBLE
                     }
                 }
                 floatingActionButton.setOnClickListener { view ->
@@ -121,7 +121,14 @@ class HomeFragment : Fragment() {
                     setOnMenuItemClickListener {
                         when (it.itemId) {
                             R.id.backup -> {
-                                backupPickerLauncher.launch("LyricGetter_Backup_${SimpleDateFormat("yyyy-MM-dd-HH:mm", Locale.getDefault()).format(System.currentTimeMillis())}.json")
+                                backupPickerLauncher.launch(
+                                    "LyricGetter_Backup_${
+                                        SimpleDateFormat(
+                                            "yyyy-MM-dd-HH:mm",
+                                            Locale.getDefault()
+                                        ).format(System.currentTimeMillis())
+                                    }.json"
+                                )
                             }
 
                             R.id.recovery -> {

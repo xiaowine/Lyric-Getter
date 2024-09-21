@@ -7,9 +7,9 @@ import cn.lyric.getter.hook.app.Apple
 import cn.lyric.getter.hook.app.Aqzscn
 import cn.lyric.getter.hook.app.Bodian
 import cn.lyric.getter.hook.app.Flamingo
+import cn.lyric.getter.hook.app.Kde
 import cn.lyric.getter.hook.app.Kugou
 import cn.lyric.getter.hook.app.Kuwo
-import cn.lyric.getter.hook.app.Kde
 import cn.lyric.getter.hook.app.LMusic
 import cn.lyric.getter.hook.app.Luna
 import cn.lyric.getter.hook.app.Meizu
@@ -31,7 +31,6 @@ import com.github.kyuubiran.ezxhelper.EzXHelper
 import de.robv.android.xposed.IXposedHookLoadPackage
 import de.robv.android.xposed.IXposedHookZygoteInit
 import de.robv.android.xposed.callbacks.XC_LoadPackage
-
 
 class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
     override fun handleLoadPackage(lpparam: XC_LoadPackage.LoadPackageParam) {

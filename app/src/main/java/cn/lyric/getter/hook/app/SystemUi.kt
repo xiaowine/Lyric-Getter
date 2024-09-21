@@ -22,7 +22,7 @@ import cn.lyric.getter.tool.ConfigTools.xConfig as config
 object SystemUi : BaseHook() {
     var isPlaying: Boolean = false
     private lateinit var receiver: LyricReceiver
-    val uidObserveService : UidObserveService by lazy {
+    val uidObserveService: UidObserveService by lazy {
         UidObserveService { packageName ->
             "Uid gone: $packageName".log()
             eventTools.cleanLyric()

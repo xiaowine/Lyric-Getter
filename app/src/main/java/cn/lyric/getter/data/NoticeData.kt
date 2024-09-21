@@ -7,6 +7,5 @@ data class NoticeData(
     val subhead: String,
     val content: String,
     val url: String = "",
-    @SerializedName("api_version")
-    val apiVersion: Int = 0,
+    @SerializedName("api_version") val apiVersion: Int = 0,
 )

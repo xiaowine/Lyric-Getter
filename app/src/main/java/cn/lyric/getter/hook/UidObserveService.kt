@@ -8,7 +8,7 @@ import cn.xiaowine.xkt.LogTool.log
 import rikka.hidden.compat.ActivityManagerApis
 import rikka.hidden.compat.adapter.UidObserverAdapter
 
-class UidObserveService(private val onUidGoneCallback : (String) -> Unit) {
+class UidObserveService(private val onUidGoneCallback: (String) -> Unit) {
 
     private var appUid = 0
 
@@ -24,7 +24,7 @@ class UidObserveService(private val onUidGoneCallback : (String) -> Unit) {
         }
     }
 
-    fun registerForPackage(packageName : String) {
+    fun registerForPackage(packageName: String) {
         if (appUid != 0 && appPackageName != "") return
         appPackageName = packageName
         getIPackageManager().onSuccess { pm ->
@@ -39,11 +39,11 @@ class UidObserveService(private val onUidGoneCallback : (String) -> Unit) {
         }
     }
 
-    private fun getIPackageManager() : Result<IPackageManager> {
+    private fun getIPackageManager(): Result<IPackageManager> {
         try {
             val binder = ServiceManager.getService("package")
             return Result.success(IPackageManager.Stub.asInterface(binder))
-        } catch (e : Exception) {
+        } catch (e: Exception) {
             return Result.failure(e)
         }
     }

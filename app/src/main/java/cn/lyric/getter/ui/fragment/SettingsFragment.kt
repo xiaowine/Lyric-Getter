@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.R
-import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.databinding.FragmentSettingsBinding
+import cn.lyric.getter.tool.ConfigTools.config
 import de.Maxr1998.modernpreferences.PreferencesAdapter
 import de.Maxr1998.modernpreferences.helpers.editText
 import de.Maxr1998.modernpreferences.helpers.onClick
@@ -22,7 +22,6 @@ import de.Maxr1998.modernpreferences.preferences.EditTextPreference
 class SettingsFragment : Fragment() {
 
     private var _binding: FragmentSettingsBinding? = null
-
 
     private val binding get() = _binding!!
 

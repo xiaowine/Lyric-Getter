@@ -24,7 +24,6 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
         fun onItemClick(position: Int, viewBinding: ItemsAppBinding)
     }
 
-
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
     }
@@ -33,7 +32,6 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
         notifyItemInserted(position)
         dataLists.add(position, value)
     }
-
 
     fun removeData(position: Int) {
         notifyItemRemoved(position)
@@ -44,7 +42,6 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
         notifyItemRangeRemoved(0, dataLists.size)
         dataLists.clear()
     }
-
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): BaseViewHolder<*> {
         context = viewGroup.context
@@ -80,7 +77,10 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
                     } else {
                         if (ConfigTools.config.showAllRules) {
                             status.forEach {
-                                description += "${context.getString(R.string.multi_rule).format(status.indexOf(it) + 1, getAppStatusDescription(it, rules[status.indexOf(it)]))}<br>"
+                                description += "${
+                                    context.getString(R.string.multi_rule)
+                                        .format(status.indexOf(it) + 1, getAppStatusDescription(it, rules[status.indexOf(it)]))
+                                }<br>"
                             }
                         } else {
                             val status1 = status.filter { it == AppStatus.API || it == AppStatus.Hook }
@@ -98,7 +98,6 @@ class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
             }
         }
     }
-
 
     override fun getItemCount() = dataLists.size
 }
