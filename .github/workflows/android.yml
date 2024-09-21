@@ -29,16 +29,15 @@ jobs:
             echo ${{ secrets.SIGNING_KEY }} | base64 --decode > key.jks
           fi
 
-      - name: set up JDK 17
+      - name: Setup JDK
         uses: actions/setup-java@v4
         with:
-          java-version: "17"
-          distribution: "microsoft"
+          distribution: 'zulu'
+          java-version: 21
 
       - name: Setup Gradle
-        uses: gradle/gradle-build-action@v3
+        uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-home-cache-cleanup: true
           cache-read-only: ${{ github.ref != 'refs/heads/master' }}
 
       - name: Build with Gradle
@@ -62,20 +61,14 @@ jobs:
           name: Lyric Getter release
           path: ./app/build/outputs/apk/release
 
-      - name: Upload Release AAB APK
-        uses: actions/upload-artifact@v3
-        with:
-          name: Lyric Getter aab
-          path: ./app/build/outputs/bundle/release
-
       - name: Upload Debug APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Lyric Getter debug
           path: ./app/build/outputs/apk/debug
 
       - name: Upload Release Mapping
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Lyric Getter mapping
           path: ./app/build/outputs/mapping/release/mapping.txt
