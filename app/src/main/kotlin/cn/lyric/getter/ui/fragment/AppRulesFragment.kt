@@ -45,7 +45,6 @@ class AppRulesFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentAppRulesBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -121,8 +120,7 @@ class AppRulesFragment : Fragment() {
     }
 
     fun showRuleDialog(rule: Rule, title: String, versionCode: Int) {
-        val items = arrayOf(
-            "${getString(R.string.current_status)}：${getAppStatusDescription(getAppStatus(rule, versionCode), rule, false)}",
+        val items = arrayOf("${getString(R.string.current_status)}：${getAppStatusDescription(getAppStatus(rule, versionCode), rule, false)}",
             "${getString(R.string.use_api)}：${rule.useApi.toString().toUpperFirstCaseAndLowerOthers()}",
             "${getString(R.string.api_version)}：${rule.useApi.takeIf { it }?.let { rule.apiVersion } ?: getString(R.string.no_have)}",
             "${getString(R.string.start_version_code)}：${rule.startVersionCode}",
@@ -146,7 +144,7 @@ class AppRulesFragment : Fragment() {
                 appAdapter.addData(it)
             }
             goMainThread {
-                binding.toolbar.title = "${getString(R.string.app_rules_fragment_label)}(${appRulesViewModel.dataLists.size})"
+                binding.toolbar.title = "${getString(R.string.app_rules_fragment_label)} (${appRulesViewModel.dataLists.size})"
             }
         } else {
             val dialog = MaterialProgressDialog(requireContext()).apply {
@@ -182,7 +180,7 @@ class AppRulesFragment : Fragment() {
                 }
                 dialog.dismiss()
                 goMainThread {
-                    binding.toolbar.title = "${getString(R.string.app_rules_fragment_label)}(${appAdapter.dataLists.size})"
+                    binding.toolbar.title = "${getString(R.string.app_rules_fragment_label)} (${appAdapter.dataLists.size})"
                 }
             }.start()
         }

@@ -6,7 +6,7 @@
     <string name="version_code_label">Module Version Number</string>
     <string name="version_type_label">Module Release Version</string>
     <string name="settings_fragment_label">Settings</string>
-    <string name="app_rules_fragment_label">Supported APP List</string>
+    <string name="app_rules_fragment_label">Supported APP</string>
     <string name="activated">Activated</string>
     <string name="unactivated">Not Activated</string>
     <string name="build_time_label">Build Time</string>
@@ -29,7 +29,7 @@
     <string name="app_rules_version_label">App Support List Version</string>
     <string name="show_app_rules">Show All App Support List</string>
     <string name="update_app_rules">Update Support List</string>
-    <string name="multi_rule">Details %s: %s</string>
+    <string name="multi_rule">Details %1$s: %2$s</string>
     <string name="uninstall_rule">Not Installed: Supports %s modes in total</string>
     <string name="app_rules_tips">Not included: It doesn\'t mean that it can\'t be used, it just means that you don\'t know the minimum supported version, so there are no inclusion rules\nSome software is not included, welcome to provide and feedback errors</string>
     <string name="output_repeated_lyrics">Output Repeated Lyrics</string>

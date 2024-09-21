@@ -12,23 +12,19 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:title="@string/app_rules_fragment_label" />
 
-
     </com.google.android.material.appbar.AppBarLayout>
-
 
     <FrameLayout
         android:id="@+id/app_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
             android:id="@+id/swipe_refresh_layout"
@@ -50,15 +46,14 @@
                         style="@style/Widget.Material3.CardView.Elevated"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="?dialogPreferredPadding"
+                        android:layout_marginHorizontal="@dimen/m3_appbar_expanded_title_margin_horizontal"
+                        android:layout_marginVertical="?dialogPreferredPadding"
                         app:cardBackgroundColor="?colorPrimary"
-                        tools:targetApi="p">
+                        tools:ignore="PrivateResource">
 
                         <com.google.android.material.textview.MaterialTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginEnd="24dp"
                             android:fontFamily="sans-serif-medium"
                             android:padding="?dialogPreferredPadding"
                             android:text="@string/app_rules_tips"
@@ -73,9 +68,11 @@
                         android:layout_height="match_parent" />
 
                 </LinearLayout>
+
             </androidx.core.widget.NestedScrollView>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </FrameLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

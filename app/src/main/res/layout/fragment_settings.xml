@@ -10,14 +10,12 @@
         android:layout_height="wrap_content"
         android:fitsSystemWindows="true">
 
-
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
             app:layout_collapseMode="pin"
             app:title="@string/settings_fragment_label" />
-
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -30,5 +28,7 @@
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
     </FrameLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,279 +1,282 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+        android:id="@+id/appbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/collapsing_toolbar_layout"
-                android:layout_width="match_parent"
-                android:layout_height="?collapsingToolbarLayoutLargeSize"
-                android:fitsSystemWindows="false"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                app:titleCollapseMode="scale">
+            android:id="@+id/collapsing_toolbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="?collapsingToolbarLayoutLargeSize"
+            android:fitsSystemWindows="false"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:titleCollapseMode="scale">
 
             <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    app:layout_collapseMode="pin"
-                    app:logo="@drawable/ic_launcher_round"
-                    app:title="@string/app_name"
-                    app:titleMarginStart="24dp" />
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                app:layout_collapseMode="pin"
+                app:logo="@drawable/ic_launcher_round"
+                app:title="@string/app_name"
+                app:titleMarginStart="24dp" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
-
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:layout_margin="?attr/dialogPreferredPadding"
-            android:contentDescription="@string/app_name"
-            android:src="@android:drawable/ic_popup_sync"
-            app:backgroundTint="?attr/colorPrimary"
-            app:tint="?attr/colorOnPrimary" />
-
-
     <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <androidx.core.widget.NestedScrollView
-                android:id="@+id/nested_scroll_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="none">
+            android:id="@+id/nested_scroll_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
             <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:animateLayoutChanges="true"
-                    android:clipChildren="false"
-                    android:clipToPadding="false"
-                    android:orientation="vertical"
-                    android:paddingHorizontal="@dimen/m3_appbar_expanded_title_margin_horizontal"
-                    android:paddingVertical="?dialogPreferredPadding"
-                    tools:ignore="PrivateResource">
-
-
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:paddingVertical="?dialogPreferredPadding"
+                tools:ignore="PrivateResource">
 
                 <com.google.android.material.card.MaterialCardView
-                        style="@style/Widget.Material3.CardView.Elevated"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:cardBackgroundColor="?colorPrimary"
-                        tools:targetApi="p">
+                    style="@style/Widget.Material3.CardView.Elevated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/m3_appbar_expanded_title_margin_horizontal"
+                    android:layout_marginBottom="?dialogPreferredPadding"
+                    app:cardBackgroundColor="?colorPrimary"
+                    tools:targetApi="p">
 
                     <RelativeLayout
-                            android:id="@+id/status"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:padding="?dialogPreferredPadding">
-
-                        <ImageView
-                                android:id="@+id/status_icon"
-                                android:layout_width="24dp"
-                                android:layout_height="24dp"
-                                android:layout_centerVertical="true"
-                                android:tint="?colorOnPrimary"
-                                app:srcCompat="@drawable/ic_round_check_circle"
-                                tools:ignore="ContentDescription,UseAppTint" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/status_title"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="24dp"
-                                android:layout_toEndOf="@id/status_icon"
-                                android:fontFamily="sans-serif-medium"
-                                android:text="@string/activated"
-                                android:textAppearance="?textAppearanceTitleMedium"
-                                android:textColor="?colorOnPrimary"
-                                android:textSize="16sp" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/status_summary"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_below="@id/status_title"
-                                android:layout_alignStart="@id/status_title"
-                                android:text="@string/welcome"
-                                android:textAppearance="?textAppearanceBodyMedium"
-                                android:textColor="?colorOnPrimary" />
-                    </RelativeLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-
-                <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginVertical="?dialogPreferredPadding"
-                        android:gravity="center"
-                        android:visibility="gone"
-                        android:id="@+id/notice"
-                        android:orientation="vertical">
-
-                    <com.google.android.material.textview.MaterialTextView
-                            android:text="@string/notice"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
-
-                    <com.github.islamkhsh.CardSliderViewPager
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:id="@+id/viewPager"
-                            android:layout_marginTop="8dp"
-                            app:auto_slide_time="3"
-                            app:cardSlider_indicator="@id/indicator" />
-
-                    <com.github.islamkhsh.CardSliderIndicator
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="?dialogPreferredPadding"
-                            app:selectedIndicator="@drawable/selected_dot"
-                            android:id="@+id/indicator" />
-
-                </LinearLayout>
-                <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/info_card"
+                        android:id="@+id/status"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp">
+                        android:padding="?dialogPreferredPadding">
+
+                        <ImageView
+                            android:id="@+id/status_icon"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_centerVertical="true"
+                            android:tint="?colorOnPrimary"
+                            app:srcCompat="@drawable/ic_round_check_circle"
+                            tools:ignore="ContentDescription,UseAppTint" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/status_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_toEndOf="@id/status_icon"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@string/activated"
+                            android:textAppearance="?textAppearanceTitleMedium"
+                            android:textColor="?colorOnPrimary"
+                            android:textSize="16sp" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/status_summary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/status_title"
+                            android:layout_alignStart="@id/status_title"
+                            android:text="@string/welcome"
+                            android:textAppearance="?textAppearanceBodyMedium"
+                            android:textColor="?colorOnPrimary" />
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <LinearLayout
+                    android:id="@+id/notice"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="?dialogPreferredPadding"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.google.android.material.textview.MaterialTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/notice" />
+
+                    <com.github.islamkhsh.CardSliderViewPager
+                        android:id="@+id/viewPager"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:auto_slide_time="3"
+                        app:cardSlider_baseShadow="0dp"
+                        app:cardSlider_indicator="@id/indicator"
+                        app:cardSlider_minShadow="0dp"
+                        app:cardSlider_pageMargin="14dp" />
+
+                    <com.github.islamkhsh.CardSliderIndicator
+                        android:id="@+id/indicator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="?dialogPreferredPadding"
+                        app:selectedIndicator="@drawable/selected_dot" />
+
+                </LinearLayout>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/info_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/m3_appbar_expanded_title_margin_horizontal">
 
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="?dialogPreferredPadding">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextLabel"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:padding="?dialogPreferredPadding">
+                            android:text="@string/api_version_label" />
 
                         <com.google.android.material.textview.MaterialTextView
-                                style="@style/TextLabel"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/device_label" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/device_value"
-                                style="@style/TextValue"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                style="@style/TextLabel"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/version_name_label" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/version_label_value"
-                                style="@style/TextValue"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                style="@style/TextLabel"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/version_code_label" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/version_code_value"
-                                style="@style/TextValue"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                style="@style/TextLabel"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/version_type_label" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/version_type_value"
-                                style="@style/TextValue"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                style="@style/TextLabel"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/build_time_label" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/build_time_value"
-                                style="@style/TextValue"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                style="@style/TextLabel"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/api_version_label"
-                                android:textStyle="bold" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/api_version_value"
-                                style="@style/TextValue"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:textStyle="bold" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                style="@style/TextLabel"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/config_version_label" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/config_version_value"
-                                style="@style/TextValue"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                style="@style/TextLabel"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/app_rules_version_label" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/app_rules_version_value"
-                                style="@style/TextValue"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                style="@style/TextLabel"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/app_rules_api_version_label" />
-
-                        <com.google.android.material.textview.MaterialTextView
-                                android:id="@+id/app_rules_api_version_value"
-                                style="@style/TextValue"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content" />
-                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/api_version_value"
                             style="@style/TextValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/device_label" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/device_value"
+                            style="@style/TextValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/version_name_label" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/version_label_value"
+                            style="@style/TextValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/version_code_label" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/version_code_value"
+                            style="@style/TextValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/version_type_label" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/version_type_value"
+                            style="@style/TextValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/build_time_label" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/build_time_value"
+                            style="@style/TextValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/config_version_label" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/config_version_value"
+                            style="@style/TextValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextLabel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/app_rules_version_label" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/app_rules_version_value"
+                            style="@style/TextValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/app_rules_api_version_label" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/app_rules_api_version_value"
+                            style="@style/TextValue"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <com.google.android.material.textview.MaterialTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/version_differences" />
                     </LinearLayout>
+
                 </com.google.android.material.card.MaterialCardView>
+
             </LinearLayout>
+
         </androidx.core.widget.NestedScrollView>
+
     </FrameLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="?attr/dialogPreferredPadding"
+        android:contentDescription="@string/app_name"
+        android:src="@android:drawable/ic_popup_sync"
+        app:backgroundTint="?attr/colorPrimary"
+        app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
+        app:tint="?attr/colorOnPrimary" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
