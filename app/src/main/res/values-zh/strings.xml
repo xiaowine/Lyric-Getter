@@ -72,5 +72,5 @@
     <string name="salt_use_flyme_summary">在API模式正常时，不建议切换</string>
     <string name="multiple_modes_work">有多个可正常使用的模式</string>
     <string name="show_title">强制显示标题</string>
-    <string name="version_differences">发行版本Release不会输出log，Debug版本会输出log，非不要不建议安装Debug版本</string>
+    <string name="version_differences">发行版本Release不会输出log，Debug版本会输出log，非必要不建议安装Debug版本</string>
 </resources>

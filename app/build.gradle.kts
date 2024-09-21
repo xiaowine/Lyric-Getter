@@ -51,18 +51,14 @@ android {
             setProguardFiles(
                 listOf(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
-                    "proguard-rules.pro",
-                    "proguard-log.pro"
+                    "proguard-rules.pro"
                 )
             )
         }
     }
     packaging {
         resources {
-            excludes += "/META-INF/**"
-            excludes += "/kotlin/**"
-            excludes += "/*.txt"
-            excludes += "/*.bin"
+            excludes += "**"
         }
         dex {
             useLegacyPackaging = true
@@ -72,7 +68,7 @@ android {
         viewBinding = true
         buildConfig = true
     }
-    kotlin.jvmToolchain(17)
+    kotlin.jvmToolchain(21)
     applicationVariants.all {
         outputs.all {
             (this as BaseVariantOutputImpl).outputFileName = "Lyrics Getter-$versionName-$versionCode-$name-$buildTime.apk"
