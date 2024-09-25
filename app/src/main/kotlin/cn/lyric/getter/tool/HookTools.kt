@@ -129,7 +129,7 @@ object HookTools {
                 after { param ->
                     val resultIntent = param.result as Intent
                     val application = param.args[0] as Application
-                    val resultCode = resultIntent.getIntExtra("intent_return_code", -114514)
+                    val resultCode = resultIntent.getIntExtra("intent_return_code", -2)
                     if (resultCode == 0) {
                         ClassLoaderProvider.classLoader = application.classLoader
                     }
