@@ -1,4 +1,4 @@
-package cn.lyric.getter.hook
+package cn.lyric.getter.observe
 
 import android.app.ActivityManagerHidden
 import android.content.pm.IPackageManager

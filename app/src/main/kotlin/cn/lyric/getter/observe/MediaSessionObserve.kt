@@ -1,4 +1,4 @@
-package cn.lyric.getter.tool
+package cn.lyric.getter.observe
 
 import android.content.ComponentName
 import android.content.Context
@@ -9,7 +9,7 @@ import android.media.session.PlaybackState
 import android.service.notification.NotificationListenerService
 import cn.xiaowine.xkt.LogTool.log
 
-open class SystemMediaSessionListener(context: Context) {
+open class MediaSessionObserve(context: Context) {
     private var mediaSessionManager: MediaSessionManager? = null
     private val activeControllers = mutableListOf<MediaController>()
 

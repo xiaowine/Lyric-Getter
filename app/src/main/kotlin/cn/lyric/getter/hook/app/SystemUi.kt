@@ -9,10 +9,10 @@ import cn.lyric.getter.api.listener.LyricListener
 import cn.lyric.getter.api.listener.LyricReceiver
 import cn.lyric.getter.api.tools.Tools
 import cn.lyric.getter.hook.BaseHook
-import cn.lyric.getter.hook.UidObserveService
+import cn.lyric.getter.observe.UidObserveService
 import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.getApplication
-import cn.lyric.getter.tool.SystemMediaSessionListener
+import cn.lyric.getter.observe.MediaSessionObserve
 import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.observableChange
 import com.github.kyuubiran.ezxhelper.EzXHelper.moduleRes
@@ -59,7 +59,7 @@ object SystemUi : BaseHook() {
                 }
             })
             Tools.registerLyricListener(application, BuildConfig.API_VERSION, receiver)
-            object : SystemMediaSessionListener(application) {
+            object : MediaSessionObserve(application) {
                 override fun onTitleChanged(title: String) {
                     super.onTitleChanged(title)
                     if (config.enhancedHiddenLyrics || config.showTitle) {

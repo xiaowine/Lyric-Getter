@@ -11,10 +11,15 @@ object MusicFree : BaseHook() {
 
     override fun init() {
         super.init()
-        loadClass("fun.upup.musicfree.lyricUtil.LyricView").methodFinder().filterByName("setText").first().createHook {
-            after {
+        val loadClass = loadClass("fun.upup.musicfree.lyricUtil.LyricView")
+        loadClass.methodFinder().filterByName("setText").first().createHook {
+            before {
                 HookTools.eventTools.sendLyric(it.args[0].toString())
+                it.result = null
             }
+        }
+        loadClass.methodFinder().filterByName("showLyricWindow").first().createHook {
+            returnConstant(null)
         }
     }
 }
