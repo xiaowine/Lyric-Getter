@@ -1,6 +1,8 @@
 package cn.lyric.getter.tool
 
 import android.content.Context
+import android.content.pm.PackageInfo
+import android.os.Build
 import cn.lyric.getter.R
 import cn.xiaowine.xkt.LogTool.log
 import java.io.DataOutputStream
@@ -33,5 +35,13 @@ object Tools {
                 Runtime.getRuntime().exec(command)
             }
         }
+    }
+
+    //修复高版本安卓系统无法获取版本号
+    fun PackageInfo.getVersionCode() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        longVersionCode.toInt()
+    } else {
+        @Suppress("DEPRECATION")
+        versionCode
     }
 }
