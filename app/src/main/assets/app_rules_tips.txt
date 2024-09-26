@@ -11,3 +11,7 @@ getLyricType：
 1：车载蓝牙歌词模式
 2：桌面歌词模式
 3：强制模式（也就是上面三种模式之外的方法）
+
+
+appRulesVersion：规则版本
+version：规则文件版本
