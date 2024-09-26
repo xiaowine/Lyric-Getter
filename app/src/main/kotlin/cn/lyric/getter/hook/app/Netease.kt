@@ -8,6 +8,7 @@ import cn.lyric.getter.tool.HookTools.dexKitBridge
 import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.fuckTinker
 import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
+import cn.lyric.getter.tool.Tools.getVersionCode
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
@@ -24,7 +25,7 @@ object Netease : BaseHook() {
         MockFlyme().mock()
         fuckTinker()
         HookTools.getApplication {
-            val verCode = it.packageManager?.getPackageInfo(it.packageName, 0)?.versionCode ?: 0
+            val verCode = it.packageManager?.getPackageInfo(it.packageName, 0)?.getVersionCode() ?: 0
             if (verCode >= 8000041 || it.packageName == "com.hihonor.cloudmusic") {
                 dexKitBridge(it.classLoader) { dexKitBridge ->
                     val result = dexKitBridge.findClass {
