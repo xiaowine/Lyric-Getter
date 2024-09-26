@@ -1,0 +1,13 @@
+startVersionCode：起始支持版本号
+endVersionCode：结束支持版本号
+excludeVersions：排除开始到结束中间的特定版本号
+apiVersion：接口版本号
+useApi：是否使用接口
+getLyricType：获取歌词类型（具体看下面）
+remarks：备注
+
+getLyricType：
+0：魅族状态栏歌词模式
+1：车载蓝牙歌词模式
+2：桌面歌词模式
+3：强制模式（也就是上面三种模式之外的方法）
