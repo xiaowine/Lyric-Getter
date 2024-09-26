@@ -48,6 +48,13 @@ class EventTools(val context: Context) {
                 })
             } else {
                 this.extraData.mergeExtra(extra!!)
+                if (this.extraData.packageName.isEmpty()) {
+                    this.extraData.mergeExtra(ExtraData().apply {
+                        this.packageName = context.packageName
+                    })
+                } else {
+//                    Log.d(TAG, "extraData.packageName: ${this.extraData.packageName}")
+                }
             }
 
         }
