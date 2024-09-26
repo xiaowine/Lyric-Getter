@@ -128,11 +128,20 @@
       "rules": [
         {
           "startVersionCode": 0,
-          "endVersionCode": 2147483647,
+          "endVersionCode": 10000,
           "excludeVersions": [],
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 1,
+          "remarks": ""
+        },
+        {
+          "startVersionCode": 10001,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 0,
           "remarks": ""
         }
       ]
@@ -141,6 +150,15 @@
       "packageName": "com.kugou.android.lite",
       "name": "酷狗音乐概念版",
       "rules": [
+        {
+          "startVersionCode": 10545,
+          "endVersionCode": 10648,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        },
         {
           "startVersionCode": 10545,
           "endVersionCode": 2147483647,
@@ -510,6 +528,6 @@
       ]
     }
   ],
-  "appRulesVersion": 9,
-  "version": 6
+  "appRulesVersion": 10,
+  "version": 7
 }

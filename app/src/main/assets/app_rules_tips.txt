@@ -13,5 +13,5 @@ getLyricType：
 3：强制模式（也就是上面三种模式之外的方法）
 
 
-appRulesVersion：规则版本
-version：规则文件版本
+appRulesVersion：规则版本(没改动hook点只有这个版本号+1)
+version：规则文件版本(改动hook点和上面版本号都+1)
