@@ -21,14 +21,14 @@ android {
         applicationId = "cn.lyric.getter"
         minSdk = 26
         targetSdk = 35
-        versionCode = 21
-        versionName = "2.0.13"
+        versionCode = 22
+        versionName = "2.0.14"
         dependenciesInfo.includeInApk = false
         ndk.abiFilters += arrayOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64")
         buildConfigField("long", "BUILD_TIME", "$buildTime")
         buildConfigField("int", "API_VERSION", "6")
         buildConfigField("int", "CONFIG_VERSION", "1")
-        buildConfigField("int", "APP_RULES_API_VERSION", "8")
+        buildConfigField("int", "APP_RULES_API_VERSION", "9")
     }
     val config = localProperties.getProperty("androidStoreFile")?.let {
         signingConfigs.create("config") {
