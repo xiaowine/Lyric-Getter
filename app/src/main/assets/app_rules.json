@@ -148,7 +148,7 @@
     },
     {
       "packageName": "com.kugou.android.lite",
-      "name": "酷狗音乐概念版",
+      "name": "酷狗概念版",
       "rules": [
         {
           "startVersionCode": 10545,
@@ -160,13 +160,13 @@
           "remarks": ""
         },
         {
-          "startVersionCode": 10545,
+          "startVersionCode": 10649,
           "endVersionCode": 2147483647,
           "excludeVersions": [],
           "apiVersion": 0,
           "useApi": false,
-          "getLyricType": 1,
-          "remarks": ""
+          "getLyricType": 0,
+          "remarks": "需在APP设置中打开状态栏歌词开关"
         }
       ]
     },
@@ -220,7 +220,7 @@
           "apiVersion": 0,
           "useApi": false,
           "getLyricType": 0,
-          "remarks": ""
+          "remarks": "需在APP设置中打开状态栏歌词开关"
         }
       ]
     },
