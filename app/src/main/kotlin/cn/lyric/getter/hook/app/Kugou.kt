@@ -27,7 +27,7 @@ object Kugou : BaseHook() {
                             hookLocalBroadcast("android.support.v4.content.LocalBroadcastManager")
                         }
 
-                        verCode <= 999999 -> {
+                        else -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("androidx.localbroadcastmanager.content.LocalBroadcastManager")
                         }
@@ -42,7 +42,7 @@ object Kugou : BaseHook() {
                             hookLocalBroadcast("android.support.v4.content.LocalBroadcastManager")
                         }
 
-                        verCode > 11001 -> {
+                        else -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("androidx.localbroadcastmanager.content.LocalBroadcastManager")
                         }
