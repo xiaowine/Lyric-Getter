@@ -526,8 +526,23 @@
           "remarks": ""
         }
       ]
+    },
+    {
+      "packageName": "com.huawei.music",
+      "name": "华为音乐",
+      "rules": [
+        {
+          "startVersionCode": 121136301,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": ""
+        }
+      ]
     }
   ],
-  "appRulesVersion": 11,
-  "version": 8
+  "appRulesVersion": 12,
+  "version": 9
 }
