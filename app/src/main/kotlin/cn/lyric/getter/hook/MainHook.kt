@@ -7,6 +7,7 @@ import cn.lyric.getter.hook.app.Apple
 import cn.lyric.getter.hook.app.Aqzscn
 import cn.lyric.getter.hook.app.Bodian
 import cn.lyric.getter.hook.app.Flamingo
+import cn.lyric.getter.hook.app.Huawei
 import cn.lyric.getter.hook.app.Kde
 import cn.lyric.getter.hook.app.Kugou
 import cn.lyric.getter.hook.app.Kuwo
@@ -61,6 +62,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "com.mimicry.mymusic" -> initHooks(Mimicry)
             "yos.music.player" -> initHooks(Flamingo)
             "org.kde.kdeconnect_tp" -> initHooks(Kde)
+            "com.huawei.music" -> initHooks(Huawei)
             else -> initHooks(Api)
         }
     }
