@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.refine)
+    kotlin("plugin.parcelize")
 }
 
 val localProperties = Properties()
@@ -96,5 +97,6 @@ dependencies {
     implementation(libs.cardSlider)
     implementation(libs.modernandroidpreferences)
     implementation(libs.swiperefreshlayout)
+
 
 }
