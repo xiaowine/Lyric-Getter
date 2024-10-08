@@ -8,12 +8,13 @@ import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.fuckTinker
 import cn.lyric.getter.tool.Tools.getVersionCode
-import cn.xiaowine.xkt.LogTool.log
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.EzXHelper.classLoader
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+import cn.xiaowine.xkt.LogTool.log
 import android.os.Process
+import java.util.Arrays
 
 object Kugou : BaseHook() {
     override fun init() {
@@ -26,30 +27,34 @@ object Kugou : BaseHook() {
                 "com.kugou.android" -> {
                     if (getProcessName(app) == "com.kugou.android") return@getApplication
                     when {
-                        verCode <= 10000 -> hookMethodForVersionA()
+                        verCode <= 10000 -> hookcarLyric()
                         verCode <= 12009 -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("android.support.v4.content.LocalBroadcastManager")
+                            hookfixStatusBarLyric()
                         }
 
                         else -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("androidx.localbroadcastmanager.content.LocalBroadcastManager")
+                            hookfixStatusBarLyric()
                         }
                     }
                 }
 
                 "com.kugou.android.lite" -> {
                     when {
-                        verCode <= 10648 -> hookMethodForVersionA()
+                        verCode <= 10648 -> hookcarLyric()
                         verCode <= 10999 -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("android.support.v4.content.LocalBroadcastManager")
+                            hookfixStatusBarLyric()
                         }
 
                         else -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("androidx.localbroadcastmanager.content.LocalBroadcastManager")
+                            hookfixStatusBarLyric()
                         }
                     }
                 }
@@ -68,7 +73,7 @@ object Kugou : BaseHook() {
         return null
     }
 
-    private fun hookMethodForVersionA() {
+    private fun hookcarLyric() {
         loadClass("com.kugou.framework.player.c").methodFinder()
             .filterByParamTypes(HashMap::class.java).first { name == "a" }
             .createHook {
@@ -78,7 +83,15 @@ object Kugou : BaseHook() {
                 }
             }
     }
-
+    private fun hookfixStatusBarLyric() {
+        loadClass("com.kugou.android.lyric.e").methodFinder()
+            .first { name == "a"  && parameterTypes.size == 3 && parameterTypes[2] == Boolean::class.java}
+            .createHook {
+                before { param ->
+                    param.args[2] = true
+                }
+            }
+    }
     private fun hookLocalBroadcast(className: String) {
         loadClass(className, classLoader).methodFinder()
             .first { name == "sendBroadcast" }
