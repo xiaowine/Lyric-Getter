@@ -541,8 +541,23 @@
           "remarks": ""
         }
       ]
+    },
+    {
+      "packageName": "org.akanework.gramophone",
+      "name": "Gramophone",
+      "rules": [
+        {
+          "startVersionCode": 14,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 3,
+          "remarks": "目前app在后台之后不会刷新"
+        }
+      ]
     }
   ],
-  "appRulesVersion": 13,
-  "version": 10
+  "appRulesVersion": 14,
+  "version": 11
 }
