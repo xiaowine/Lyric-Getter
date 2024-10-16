@@ -22,8 +22,8 @@ android {
         applicationId = "cn.lyric.getter"
         minSdk = 26
         targetSdk = 35
-        versionCode = 22
-        versionName = "2.0.14"
+        versionCode = 23
+        versionName = "2.0.15"
         dependenciesInfo.includeInApk = false
         ndk.abiFilters += arrayOf("arm64-v8a", "armeabi-v7a", "x86", "x86_64")
         buildConfigField("long", "BUILD_TIME", "$buildTime")
