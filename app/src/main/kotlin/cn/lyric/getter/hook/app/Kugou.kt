@@ -102,7 +102,7 @@ object Kugou : BaseHook() {
             .createHook {
                 after {
                     val mServiceName = XposedHelpers.getObjectField(it.thisObject, "serviceName")
-                    if (mServiceName == Context.WIFI_SERVICE && it.throwable != null) { // 当由错误抛出时才使用替代方法，防止软件崩溃。
+                    if (mServiceName == Context.WIFI_SERVICE && it.throwable != null) { // 当有错误抛出时才使用替代方法，防止软件崩溃。
                         it.throwable = null
                         it.result = null
                     }
