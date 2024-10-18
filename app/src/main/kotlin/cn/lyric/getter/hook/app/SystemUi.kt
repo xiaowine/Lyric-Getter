@@ -9,10 +9,10 @@ import cn.lyric.getter.api.listener.LyricListener
 import cn.lyric.getter.api.listener.LyricReceiver
 import cn.lyric.getter.api.tools.Tools
 import cn.lyric.getter.hook.BaseHook
+import cn.lyric.getter.observe.MediaSessionObserve
 import cn.lyric.getter.observe.UidObserveService
 import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.getApplication
-import cn.lyric.getter.observe.MediaSessionObserve
 import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.observableChange
 import com.github.kyuubiran.ezxhelper.EzXHelper.moduleRes
@@ -25,18 +25,23 @@ object SystemUi : BaseHook() {
     val uidObserveService: UidObserveService by lazy {
         UidObserveService { packageName ->
             "Uid gone: $packageName".log()
-            eventTools.cleanLyric()
+            eventTools.cleanLyric(packageName)
             isPlaying = false
         }
     }
 
-    private var title: String by observableChange("") { _, _, newValue ->
+    data class TitleInfo (
+        val changedApp: String,
+        val title: String
+    )
+
+    private var title: TitleInfo by observableChange(TitleInfo("","")) { _, _, newValue ->
         "title: $newValue".log()
         if (config.enhancedHiddenLyrics) {
-            eventTools.cleanLyric()
+            eventTools.cleanLyric(newValue.changedApp)
         }
         if (config.showTitle) {
-            eventTools.sendLyric(newValue)
+            eventTools.sendLyric(newValue.title)
         }
     }
 
@@ -60,16 +65,16 @@ object SystemUi : BaseHook() {
             })
             Tools.registerLyricListener(application, BuildConfig.API_VERSION, receiver)
             object : MediaSessionObserve(application) {
-                override fun onTitleChanged(title: String) {
-                    super.onTitleChanged(title)
+                override fun onTitleChanged(changedApp: String, title: String) {
+                    super.onTitleChanged(changedApp, title)
                     if (config.enhancedHiddenLyrics || config.showTitle) {
                         moduleRes.getString(R.string.enhanced_hidden_lyrics).log()
-                        this@SystemUi.title = title
+                        this@SystemUi.title = TitleInfo(changedApp, title)
                     }
                 }
 
-                override fun onStateChanged(state: Int) {
-                    super.onStateChanged(state)
+                override fun onStateChanged(changedApp: String, state: Int) {
+                    super.onStateChanged(changedApp, state)
                     val stateString = when (state) {
                         PlaybackState.STATE_PLAYING -> "Playing"
                         PlaybackState.STATE_PAUSED -> "Paused"
@@ -81,7 +86,7 @@ object SystemUi : BaseHook() {
                     if (!isPlaying || useOwnMusicController) return
                     if (state == PlaybackState.STATE_PAUSED) {
                         isPlaying = false
-                        eventTools.cleanLyric()
+                        eventTools.cleanLyric(changedApp)
                     }
                 }
 
