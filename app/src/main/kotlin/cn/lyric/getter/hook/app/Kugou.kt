@@ -21,8 +21,7 @@ object Kugou : BaseHook() {
         fuckTinker()
         HookTools.openBluetoothA2dpOn()
         HookTools.getApplication { app ->
-            val verCode: Int =
-                app.packageManager?.getPackageInfo(app.packageName, 0)?.getVersionCode() ?: 0
+            val verCode: Int = app.packageManager?.getPackageInfo(app.packageName, 0)?.getVersionCode() ?: 0
             when (app.packageName) {
                 "com.kugou.android" -> {
                     if (getProcessName(app) == "com.kugou.android") return@getApplication
@@ -43,6 +42,7 @@ object Kugou : BaseHook() {
                 }
 
                 "com.kugou.android.lite" -> {
+                    if (getProcessName(app) == "com.kugou.android.lite.support") return@getApplication
                     when {
                         verCode <= 10648 -> hookCarLyric()
                         verCode <= 10999 -> {
