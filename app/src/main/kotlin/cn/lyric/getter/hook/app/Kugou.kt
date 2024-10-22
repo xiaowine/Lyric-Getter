@@ -24,7 +24,7 @@ object Kugou : BaseHook() {
             val verCode: Int = app.packageManager?.getPackageInfo(app.packageName, 0)?.getVersionCode() ?: 0
             when (app.packageName) {
                 "com.kugou.android" -> {
-                    if (getProcessName(app) == "com.kugou.android") return@getApplication
+                    if (getProcessName(app) == "com.kugou.android.support") return@getApplication
                     when {
                         verCode <= 10000 -> hookCarLyric()
                         verCode <= 12009 -> {
@@ -37,6 +37,7 @@ object Kugou : BaseHook() {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("androidx.localbroadcastmanager.content.LocalBroadcastManager")
                             hookFixStatusBarLyric()
+                            fixProbabilityCollapse()
                         }
                     }
                 }
