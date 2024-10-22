@@ -37,6 +37,7 @@ object Kugou : BaseHook() {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("androidx.localbroadcastmanager.content.LocalBroadcastManager")
                             hookFixStatusBarLyric()
+                            fixProbabilityCollapse()
                         }
                     }
                 }
