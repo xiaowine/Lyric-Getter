@@ -547,11 +547,11 @@
       "name": "Gramophone",
       "rules": [
         {
-          "startVersionCode": 14,
+          "startVersionCode": 17,
           "endVersionCode": 2147483647,
           "excludeVersions": [],
           "apiVersion": 6,
-          "useApi": true,
+          "useApi": false,
           "getLyricType": 0,
           "remarks": "请设置中打开开关"
         }
