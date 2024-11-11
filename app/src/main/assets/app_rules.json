@@ -556,6 +556,21 @@
           "remarks": "请设置中打开开关"
         }
       ]
+    },
+    {
+      "packageName": "music.hifistatus",
+      "name": "音乐播放器",
+      "rules": [
+        {
+          "startVersionCode": 16,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 6,
+          "useApi": true,
+          "getLyricType": 0,
+          "remarks": ""
+        }
+      ]
     }
   ],
   "appRulesVersion": 14,
