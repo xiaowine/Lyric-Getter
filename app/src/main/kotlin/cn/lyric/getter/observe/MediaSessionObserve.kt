@@ -77,7 +77,7 @@ open class MediaSessionObserve(context: Context) {
 
     fun cleanup() {
         mediaSessionManager?.removeOnActiveSessionsChangedListener(activeSessionsListener)
-        activeControllers.entries.forEach { it.key.unregisterCallback(it.value) }
+        activeControllers.forEach { it.key.unregisterCallback(it.value) }
     }
 
     open fun onTitleChanged(caller: String, title: String) {}
