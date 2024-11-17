@@ -16,11 +16,11 @@ open class MediaSessionObserve(context: Context) {
     // 监听活跃会话的变化
     private val activeSessionsListener = MediaSessionManager.OnActiveSessionsChangedListener { controllers ->
         "activeSessionsListener: ${controllers?.size}".log()
-        if (controllers?.size == 0) {
+        if (controllers?.size == 0) 
             onCleared()
-        }
+        
         // 清理之前的回调
-        activeControllers.entries.forEach { it.key.unregisterCallback(it.value) }
+        activeControllers.forEach { it.key.unregisterCallback(it.value) }
         activeControllers.clear()
 
         controllers?.let {
@@ -70,19 +70,19 @@ open class MediaSessionObserve(context: Context) {
     }
 
     // 显示媒体元数据
-    private fun displayMediaMetadata(changedApp: String, metadata: MediaMetadata) {
+    private fun displayMediaMetadata(caller: String, metadata: MediaMetadata) {
         val title = metadata.getString(MediaMetadata.METADATA_KEY_TITLE) ?: "Unknown Title"
-        onTitleChanged(changedApp, title)
+        onTitleChanged(caller, title)
     }
 
     fun cleanup() {
         mediaSessionManager?.removeOnActiveSessionsChangedListener(activeSessionsListener)
-        activeControllers.entries.forEach { it.key.unregisterCallback(it.value) }
+        activeControllers.forEach { it.key.unregisterCallback(it.value) }
     }
 
-    open fun onTitleChanged(changedApp: String, title: String) {}
+    open fun onTitleChanged(caller: String, title: String) {}
 
-    open fun onStateChanged(changedApp: String, state: Int) {}
+    open fun onStateChanged(caller: String, state: Int) {}
 
     open fun onCleared() {}
 }

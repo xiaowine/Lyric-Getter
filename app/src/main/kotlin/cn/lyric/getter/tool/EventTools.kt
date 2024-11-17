@@ -46,19 +46,21 @@ class EventTools(val context: Context) {
                     this.delay = 0
                 })
             } else {
-                this.extraData.mergeExtra(extra!!)
+                this.extraData.mergeExtra(extra!!.apply {
+                    this.packageName = this.packageName.takeIf { it.isNotEmpty() } ?: context.packageName
+                })
             }
-
         }
     }
 
-    fun cleanLyric(stopPlayPkg: String = "") {
+    fun cleanLyric(caller: String = "") {
         context.sendBroadcast(Intent().apply {
             action = "Lyric_Data"
             val lyricData = LyricData().apply {
                 this.type = OperateType.STOP
                 this.extraData.mergeExtra(ExtraData().apply {
-                    this.packageName = stopPlayPkg
+                    this.packageName = caller.takeIf { it.isNotEmpty() }
+                        ?: context.packageName.takeIf { it != "com.android.systemui" } ?: ""
                 })
             }
             putExtra("Data", lyricData)
