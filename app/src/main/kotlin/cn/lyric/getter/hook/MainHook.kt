@@ -25,6 +25,7 @@ import cn.lyric.getter.hook.app.QQMusic
 import cn.lyric.getter.hook.app.Qinalt
 import cn.lyric.getter.hook.app.RPlayer
 import cn.lyric.getter.hook.app.Salt
+import cn.lyric.getter.hook.app.MusicPlayer
 import cn.lyric.getter.hook.app.SystemUi
 import cn.lyric.getter.hook.app.Toside
 import cn.xiaowine.xkt.LogTool
@@ -65,6 +66,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "org.kde.kdeconnect_tp" -> initHooks(Kde)
             "com.huawei.music" -> initHooks(Huawei)
             "org.akanework.gramophone" -> initHooks(Gramophone)
+            "music.hifistatus" -> initHooks(MusicPlayer)
             else -> initHooks(Api)
         }
     }
