@@ -18,7 +18,7 @@ class EventTools(val context: Context) {
         newValue?.run {
             val regexReplace = lyric.regexReplace(xConfig.regexReplace, "")
             if (regexReplace.isEmpty()) {
-                cleanLyric()
+                cleanLyric(newValue.extraData.packageName)
             } else {
                 context.sendBroadcast(Intent().apply {
                     action = "Lyric_Data"
@@ -30,7 +30,6 @@ class EventTools(val context: Context) {
             }
         }
     }
-
 
     fun sendLyric(lyric: String, extra: ExtraData? = null) {
         val str = lyric.trim()
@@ -47,18 +46,22 @@ class EventTools(val context: Context) {
                     this.delay = 0
                 })
             } else {
-                this.extraData.mergeExtra(extra!!)
+                this.extraData.mergeExtra(extra!!.apply {
+                    this.packageName = this.packageName.takeIf { it.isNotEmpty() } ?: context.packageName
+                })
             }
-
         }
     }
 
-
-    fun cleanLyric() {
+    fun cleanLyric(caller: String = "") {
         context.sendBroadcast(Intent().apply {
             action = "Lyric_Data"
             val lyricData = LyricData().apply {
                 this.type = OperateType.STOP
+                this.extraData.mergeExtra(ExtraData().apply {
+                    this.packageName = caller.takeIf { it.isNotEmpty() }
+                        ?: context.packageName.takeIf { it != "com.android.systemui" } ?: ""
+                })
             }
             putExtra("Data", lyricData)
             Log.d(TAG, lyricData.toString())

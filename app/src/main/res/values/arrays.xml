@@ -32,5 +32,6 @@
         <item>yos.music.player</item>
         <item>org.kde.kdeconnect_tp</item>
         <item>com.huawei.music</item>
+        <item>music.hifistatus</item>
     </array>
 </resources>
