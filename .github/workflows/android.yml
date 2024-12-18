@@ -50,6 +50,7 @@ jobs:
           ./gradlew bundleRelease
 
       - name: Deploy
+        if: ${{ github.event_name != 'pull_request' }}
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ github.token }}
