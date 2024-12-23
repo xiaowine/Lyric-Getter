@@ -19,6 +19,7 @@ import cn.lyric.getter.databinding.FragmentHomeBinding
 import cn.lyric.getter.tool.ActivityTools.getAppRules
 import cn.lyric.getter.tool.BackupTools
 import cn.lyric.getter.tool.ConfigTools.config
+import cn.lyric.getter.tool.Tools.getPhoneName
 import cn.lyric.getter.tool.Tools.restartTheScopedSoftware
 import cn.lyric.getter.ui.adapter.NoticeAdapter
 import cn.lyric.getter.ui.viewmodel.HomeViewModel
@@ -149,7 +150,7 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
-            deviceValue.text = "${Build.BRAND} ${Build.MODEL} Android${Build.VERSION.RELEASE}"
+            deviceValue.text = "$getPhoneName (${Build.DEVICE}) Android ${Build.VERSION.RELEASE}"
             versionLabelValue.text = BuildConfig.VERSION_NAME
             versionCodeValue.text = BuildConfig.VERSION_CODE.toString()
             versionTypeValue.text = BuildConfig.BUILD_TYPE.toUpperFirstCaseAndLowerOthers()
