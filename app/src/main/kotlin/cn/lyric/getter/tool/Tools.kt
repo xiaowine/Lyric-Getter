@@ -1,5 +1,6 @@
 package cn.lyric.getter.tool
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.os.Build
@@ -9,6 +10,18 @@ import java.io.DataOutputStream
 
 object Tools {
     var xpActivation: Boolean = false
+
+    val getPhoneName by lazy {
+        val marketName = getSystemProperties("ro.product.marketname")
+        if (marketName.isNotEmpty()) bigtextone(marketName) else bigtextone(Build.BRAND) + " " + Build.MODEL
+    }
+
+    fun bigtextone(st:String): String {
+        val formattedBrand = st.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase() else it.toString()
+        }
+        return formattedBrand
+    }
 
     fun restartTheScopedSoftware(context: Context) {
         var s = ""
@@ -43,5 +56,17 @@ object Tools {
     } else {
         @Suppress("DEPRECATION")
         versionCode
+    }
+
+    @SuppressLint("PrivateApi")
+    fun getSystemProperties(key: String): String {
+        val ret: String = try {
+            Class.forName("android.os.SystemProperties").getDeclaredMethod("get", String::class.java).invoke(null, key) as String
+        } catch (iAE: IllegalArgumentException) {
+            throw iAE
+        } catch (e: Exception) {
+            ""
+        }
+        return ret
     }
 }
