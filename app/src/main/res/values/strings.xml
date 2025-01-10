@@ -73,5 +73,5 @@
     <string name="multiple_modes_work">There are multiple modes that can be used normally</string>
     <string name="show_title">Force show title</string>
     <string name="version_differences">The release version won\'t generate logs, and the Debug version will generate logs, so it\'s recommended not to install the Debug version.</string>
-    <string name="fuckwyy">网易云状态栏歌词强开</string>
+    <string name="fuckwyy">NetEase Cloud Status Bar Lyrics Forced Open</string>
 </resources>
