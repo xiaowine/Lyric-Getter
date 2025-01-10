@@ -1,8 +1,10 @@
 package cn.lyric.getter.hook.app
 
 import android.annotation.SuppressLint
+import android.content.SharedPreferences
 import android.os.Build
 import cn.lyric.getter.hook.BaseHook
+import cn.lyric.getter.tool.ConfigTools.xConfig
 import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.MockFlyme
 import cn.lyric.getter.tool.HookTools.dexKitBridge
@@ -11,6 +13,7 @@ import cn.lyric.getter.tool.HookTools.fuckTinker
 import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
 import cn.lyric.getter.tool.MeiZuNotification
 import cn.lyric.getter.tool.Tools.getVersionCode
+import cn.xiaowine.xkt.LogTool.log
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.setStaticObject
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
@@ -57,6 +60,14 @@ object Netease : BaseHook() {
                     loadClass(result.name).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {
                         after { hookParam ->
                             eventTools.sendLyric(hookParam.result as String)
+                        }
+                    }
+                    if (verCode >= 9002033 ){
+                        loadClass("vh0.a").methodFinder().filterByParamCount(0).filterByName("a").first().createHook {
+                            after { hookParam ->
+                                val a = hookParam.result as SharedPreferences
+                                a.edit().putBoolean("status_bar_lyric_setting_key",xConfig.fuckwyy).commit()
+                            }
                         }
                     }
                 }
