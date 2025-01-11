@@ -8,6 +8,7 @@ import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.fuckTinker
+import cn.lyric.getter.tool.HookTools.getProcessName
 import cn.lyric.getter.tool.Tools.getVersionCode
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.EzXHelper.classLoader
@@ -60,16 +61,6 @@ object Kugou : BaseHook() {
         }
     }
 
-    private fun getProcessName(context: Context): String? {
-        val pid = Process.myPid()
-        val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
-        for (process in manager.runningAppProcesses) {
-            if (process.pid == pid) {
-                return process.processName
-            }
-        }
-        return null
-    }
 
     private fun hookCarLyric() {
         loadClass("com.kugou.framework.player.c").methodFinder()
