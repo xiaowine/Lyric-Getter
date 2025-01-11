@@ -1,11 +1,13 @@
 package cn.lyric.getter.tool
 
+import android.app.ActivityManager
 import android.app.AndroidAppHelper
 import android.app.Application
 import android.app.Notification
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.Process
 import cn.xiaowine.xkt.LogTool.log
 import cn.xiaowine.xkt.Tool.isNot
 import cn.xiaowine.xkt.Tool.isNotNull
@@ -92,6 +94,20 @@ object HookTools {
                 callback(it.thisObject as Application)
             }
         }
+    }
+
+    /** 获取应用进程名
+     * @param context 为应用context
+     * @return 为进程名*/
+    fun getProcessName(context: Context): String? {
+        val pid = Process.myPid()
+        val manager = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        for (process in manager.runningAppProcesses) {
+            if (process.pid == pid) {
+                return process.processName
+            }
+        }
+        return null
     }
 
     fun lockNotStopLyric(classLoader: ClassLoader, fileFilter: ArrayList<String>? = null) {
