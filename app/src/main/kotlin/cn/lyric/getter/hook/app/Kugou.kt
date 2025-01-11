@@ -30,13 +30,11 @@ object Kugou : BaseHook() {
                         verCode <= 12009 -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("android.support.v4.content.LocalBroadcastManager")
-                            hookFixStatusBarLyric()
                         }
 
                         else -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("androidx.localbroadcastmanager.content.LocalBroadcastManager")
-                            hookFixStatusBarLyric()
                             fixProbabilityCollapse()
                         }
                     }
@@ -49,13 +47,11 @@ object Kugou : BaseHook() {
                         verCode <= 10935 -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("android.support.v4.content.LocalBroadcastManager")
-                            hookFixStatusBarLyric()
                         }
 
                         else -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("androidx.localbroadcastmanager.content.LocalBroadcastManager")
-                            hookFixStatusBarLyric()
                             fixProbabilityCollapse()
                         }
                     }
@@ -82,16 +78,6 @@ object Kugou : BaseHook() {
                 after {
                     val hashMap = it.args[0] as HashMap<*, *>
                     eventTools.sendLyric(hashMap[0].toString())
-                }
-            }
-    }
-
-    private fun hookFixStatusBarLyric() {
-        loadClass("com.kugou.android.lyric.e").methodFinder()
-            .first { name == "a" && parameterTypes.size == 3 && parameterTypes[2] == Boolean::class.java }
-            .createHook {
-                before { param ->
-                    param.args[2] = true
                 }
             }
     }
