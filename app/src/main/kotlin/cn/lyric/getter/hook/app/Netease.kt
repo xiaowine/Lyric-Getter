@@ -6,18 +6,16 @@ import android.os.Build
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.ConfigTools.xConfig
 import cn.lyric.getter.tool.HookTools
-import cn.lyric.getter.tool.HookTools.MockFlyme
 import cn.lyric.getter.tool.HookTools.dexKitBridge
 import cn.lyric.getter.tool.HookTools.eventTools
-import cn.lyric.getter.tool.HookTools.fuckTinker
 import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
 import cn.lyric.getter.tool.MeiZuNotification
 import cn.lyric.getter.tool.Tools.getVersionCode
-import cn.xiaowine.xkt.LogTool.log
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.setStaticObject
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
+import com.github.kyuubiran.ezxhelper.params
 import java.lang.reflect.Method
 
 private fun Method.replaceName() {
@@ -47,7 +45,7 @@ object Netease : BaseHook() {
         }
         Class::class.java.methodFinder().first { name == "getField" }.replaceName()
         Class::class.java.methodFinder().first { name == "getDeclaredField" }.replaceName()
-        fuckTinker()
+        //fuckTinker()
         HookTools.getApplication {
             val verCode = it.packageManager?.getPackageInfo(it.packageName, 0)?.getVersionCode() ?: 0
             if (verCode >= 8000041 || it.packageName == "com.hihonor.cloudmusic") {
@@ -63,7 +61,12 @@ object Netease : BaseHook() {
                         }
                     }
                     if (verCode >= 9002033 ){
-                        loadClass("vh0.a").methodFinder().filterByParamCount(0).filterByName("a").first().createHook {
+                        val fuckwyy = dexKitBridge.findClass {
+                            matcher {
+                                usingStrings("com/netease/cloudmusic/module/lyric/flyme/StatusBarLyricSettingManager.class:setSwitchStatus:(Z)V")
+                            }
+                        }.single()
+                        loadClass(fuckwyy.name).methodFinder().filterByParamCount(0).filterByName("a").first().createHook {
                             after { hookParam ->
                                 val a = hookParam.result as SharedPreferences
                                 a.edit().putBoolean("status_bar_lyric_setting_key",xConfig.fuckwyy).commit()
