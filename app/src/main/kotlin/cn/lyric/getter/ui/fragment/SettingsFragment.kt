@@ -83,9 +83,10 @@ class SettingsFragment : Fragment() {
             }
             switch("fuckwyy") {
                 titleRes = R.string.fuckwyy
-                defaultValue = config.fuckwyy
+                summaryRes = R.string.fuckwyy_tips
+                defaultValue = config.fuckwyysb163
                 onClick {
-                    config.fuckwyy = checked
+                    config.fuckwyysb163 = checked
                     false
                 }
             }

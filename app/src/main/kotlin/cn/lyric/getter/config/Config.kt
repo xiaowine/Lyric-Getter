@@ -12,6 +12,6 @@ class Config {
     var saltUseFlyme: Boolean by serialLazy(false)
     var updateTime: Long by serialLazy(0L)
     var showTitle: Boolean by serialLazy(false)
-    var fuckwyy: Boolean by serialLazy(false)
+    var fuckwyysb163: Boolean by serialLazy(false)
 }
         
