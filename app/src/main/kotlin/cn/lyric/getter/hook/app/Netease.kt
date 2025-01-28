@@ -45,7 +45,6 @@ object Netease : BaseHook() {
         }
         Class::class.java.methodFinder().first { name == "getField" }.replaceName()
         Class::class.java.methodFinder().first { name == "getDeclaredField" }.replaceName()
-        //fuckTinker()
         HookTools.getApplication {
             val verCode = it.packageManager?.getPackageInfo(it.packageName, 0)?.getVersionCode() ?: 0
             if (verCode >= 8000041 || it.packageName == "com.hihonor.cloudmusic") {
@@ -60,16 +59,16 @@ object Netease : BaseHook() {
                             eventTools.sendLyric(hookParam.result as String)
                         }
                     }
-                    if (verCode >= 9002033 ){
-                        val fuckwyy = dexKitBridge.findClass {
+                    if (xConfig.fuckwyysb163){
+                        val sbNetease = dexKitBridge.findClass {
                             matcher {
                                 usingStrings("com/netease/cloudmusic/module/lyric/flyme/StatusBarLyricSettingManager.class:setSwitchStatus:(Z)V")
                             }
                         }.single()
-                        loadClass(fuckwyy.name).methodFinder().filterByParamCount(0).filterByName("a").first().createHook {
+                        loadClass(sbNetease.name).methodFinder().filterByParamCount(0).filterByName("a").first().createHook {
                             after { hookParam ->
                                 val a = hookParam.result as SharedPreferences
-                                a.edit().putBoolean("status_bar_lyric_setting_key",xConfig.fuckwyy).commit()
+                                a.edit().putBoolean("status_bar_lyric_setting_key",xConfig.fuckwyysb163).commit()
                             }
                         }
                     }

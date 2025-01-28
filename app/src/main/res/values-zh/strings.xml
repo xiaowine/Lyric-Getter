@@ -74,4 +74,5 @@
     <string name="show_title">强制显示标题</string>
     <string name="version_differences">发行版本 Release 不会输出 Log，Debug 版本会输出 Log，非必要不建议安装 Debug 版本</string>
     <string name="fuckwyy">网易云状态栏歌词强开</string>
+    <string name="fuckwyy_tips">开启开关可能导致网易云出现异常，本模块概不负责</string>
 </resources>
