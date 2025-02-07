@@ -74,5 +74,5 @@
     <string name="show_title">Force show title</string>
     <string name="version_differences">The release version won\'t generate logs, and the Debug version will generate logs, so it\'s recommended not to install the Debug version.</string>
     <string name="fuckwyy">Force opening of lyrics in NetEase Cloud status bar</string>
-    <string name="fuckwyy_tips">Turning on the switch may cause abnormalities in the NetEase Cloud, which is not responsible for this module</string>
+    <string name="fuckwyy_tips">Turning on the switch may cause abnormalities in NetEase Cloud, which isn\'t responsible for this module.</string>
 </resources>
