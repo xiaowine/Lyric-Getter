@@ -81,11 +81,11 @@ object SystemUi : BaseHook() {
                         PlaybackState.STATE_PAUSED -> "Paused"
                         PlaybackState.STATE_STOPPED -> "Stopped"
                         PlaybackState.STATE_BUFFERING -> "Buffering"
-                        else -> "Unknown State"
+                        else -> "Unknown State: $state"
                     }
                     "Playback state: $stateString".log()
                     if (!isPlaying || useOwnMusicController) return
-                    if (state == PlaybackState.STATE_PAUSED) {
+                    if (state == PlaybackState.STATE_PAUSED || state == PlaybackState.STATE_STOPPED) {
                         isPlaying = false
                         eventTools.cleanLyric(caller)
                     }

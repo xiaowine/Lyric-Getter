@@ -81,7 +81,7 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
                 if (it.isInit) return@forEach
                 it.init()
                 it.isInit = true
-                "Inited hook: ${it.javaClass.name}".log()
+                "Inited hook: ${it.javaClass.name}, Package Name: ${EzXHelper.hostPackageName}".log()
             } catch (e: Exception) {
                 e.printStackTrace()
                 "Init hook ${it.javaClass.name} failed".log()
