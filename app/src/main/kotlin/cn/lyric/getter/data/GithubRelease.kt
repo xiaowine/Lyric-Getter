@@ -1,16 +1,19 @@
 package cn.lyric.getter.data
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class GithubReleaseApi(
     val assets: List<Asset>,
     val body: String,
     val name: String,
-    @SerializedName("tag_name") val tagName: String
+    @SerialName("tag_name") val tagName: String
 )
 
+@Serializable
 data class Asset(
-    @SerializedName("browser_download_url") val browserDownloadUrl: String,
-    @SerializedName("content_type") val contentType: String,
+    @SerialName("browser_download_url") val browserDownloadUrl: String,
+    @SerialName("content_type") val contentType: String,
     val name: String
 )

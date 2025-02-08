@@ -1,11 +1,13 @@
 package cn.lyric.getter.data
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class NoticeData(
     val title: String,
     val subhead: String,
     val content: String,
     val url: String = "",
-    @SerializedName("api_version") val apiVersion: Int = 0,
+    @SerialName("api_version") val apiVersion: Int = 0,
 )

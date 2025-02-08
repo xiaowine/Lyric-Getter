@@ -1,6 +1,5 @@
 package cn.lyric.getter.ui
 
-
 import android.app.Application
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.tool.ActivityTools
@@ -11,7 +10,6 @@ import cn.xiaowine.dsp.data.MODE
 import cn.xiaowine.xkt.AcTool
 import cn.xiaowine.xkt.LogTool
 import com.google.android.material.color.DynamicColors
-
 
 class App : Application() {
     override fun onCreate() {

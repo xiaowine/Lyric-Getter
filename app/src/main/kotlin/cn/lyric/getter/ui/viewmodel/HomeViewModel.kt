@@ -5,9 +5,10 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.data.NoticeData
+import cn.lyric.getter.tool.JsonTools
 import cn.xiaowine.xkt.SimpleHttpTool.get
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
+import kotlin.collections.set
+import kotlin.text.get
 
 class HomeViewModel(private val state: SavedStateHandle) : ViewModel() {
     var noticeList: MutableLiveData<ArrayList<NoticeData>> = MutableLiveData()
@@ -19,9 +20,9 @@ class HomeViewModel(private val state: SavedStateHandle) : ViewModel() {
         }
 
     var expanded: Boolean
-        get() = state["expanded"] ?: true
+        get() = state.get<Boolean>("expanded") != false
         set(value) {
-            state["expanded"] = value
+            state.set("expanded", value)
         }
     var appRulesVersionValue: String?
         get() = state["appRulesVersionValue"]
@@ -37,9 +38,10 @@ class HomeViewModel(private val state: SavedStateHandle) : ViewModel() {
     fun getNotice() {
         Thread {
             "https://xiaowine.github.io/Lyric-Getter/notice_list.json".get(onSuccess = {
-                val type = object : TypeToken<ArrayList<NoticeData>>() {}.type
-                val list: ArrayList<NoticeData> = Gson().fromJson(it, type)
-                val b = list.filter { notice -> notice.apiVersion == BuildConfig.API_VERSION }.sortedByDescending { notice -> notice.apiVersion }.isNotEmpty()
+                val list: ArrayList<NoticeData> = JsonTools.json.decodeFromString(it)
+                val b = list.filter { notice -> notice.apiVersion == BuildConfig.API_VERSION }
+                    .sortedByDescending { notice -> notice.apiVersion }
+                    .isNotEmpty()
                 if (b) {
                     noticeList.postValue(list)
                 } else {

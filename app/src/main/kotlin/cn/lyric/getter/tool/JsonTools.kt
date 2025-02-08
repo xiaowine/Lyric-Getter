@@ -1,26 +1,27 @@
 package cn.lyric.getter.tool
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import kotlinx.serialization.json.Json
 import java.io.InputStreamReader
 
 object JsonTools {
-    val gson = Gson()
+    val json = Json {
+        prettyPrint = true
+        ignoreUnknownKeys = true
+    }
 
     inline fun <reified T> String.parseJSON(): T {
-        return gson.fromJson(this, T::class.java)
+        return json.decodeFromString(this)
     }
 
     inline fun <reified T> InputStreamReader.parseJSON(): T {
-        return gson.fromJson(this, T::class.java)
+        return json.decodeFromString(this.readText())
     }
 
     fun Any.toJSON(print: Boolean = false): String {
         return if (print) {
-            val gson = GsonBuilder().setPrettyPrinting().create()
-            gson.toJson(this, Any::class.java)
+            json.encodeToString(this)
         } else {
-            gson.toJson(this, Any::class.java)
+            Json.encodeToString(this)
         }
     }
 }
