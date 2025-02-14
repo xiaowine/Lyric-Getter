@@ -42,7 +42,6 @@ object Kugou : BaseHook() {
                 }
 
                 "com.kugou.android.lite" -> {
-                    if (getProcessName(app) == "com.kugou.android.lite.support") return@getApplication
                     when {
                         verCode <= 10648 -> hookCarLyric()
                         verCode <= 10935 -> {
