@@ -25,7 +25,7 @@ object Kugou : BaseHook() {
             val verCode: Int = app.packageManager?.getPackageInfo(app.packageName, 0)?.getVersionCode() ?: 0
             when (app.packageName) {
                 "com.kugou.android" -> {
-                    if (getProcessName(app) == "com.kugou.android.lite.support"){
+                    if (getProcessName(app) == "com.kugou.android.support"){
                         when{
                             verCode <= 10000 -> hookCarLyric()
                         }
