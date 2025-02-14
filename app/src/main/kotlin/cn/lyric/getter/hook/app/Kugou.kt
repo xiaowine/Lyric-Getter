@@ -25,13 +25,18 @@ object Kugou : BaseHook() {
             val verCode: Int = app.packageManager?.getPackageInfo(app.packageName, 0)?.getVersionCode() ?: 0
             when (app.packageName) {
                 "com.kugou.android" -> {
+                    if (getProcessName(app) == "com.kugou.android.lite.support"){
+                        when{
+                            verCode <= 10000 -> hookCarLyric()
+                        }
+                    }
+                    if (getProcessName(app) == "com.kugou.android.support") return@getApplication
                     when {
-                        verCode <= 10000 -> hookCarLyric()
+                        verCode <= 10000 -> HookTools.MockFlyme().mock()
                         verCode <= 12009 -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("android.support.v4.content.LocalBroadcastManager")
                         }
-
                         else -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("androidx.localbroadcastmanager.content.LocalBroadcastManager")
@@ -41,13 +46,18 @@ object Kugou : BaseHook() {
                 }
 
                 "com.kugou.android.lite" -> {
+                    if (getProcessName(app) == "com.kugou.android.lite.support"){
+                        when {
+                            verCode <= 10648 -> hookCarLyric()
+                        }
+                    }
+                    if (getProcessName(app) == "com.kugou.android.lite.support") return@getApplication
                     when {
-                        verCode <= 10648 -> hookCarLyric()
+                        verCode <= 10648 -> HookTools.MockFlyme().mock()
                         verCode <= 10935 -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("android.support.v4.content.LocalBroadcastManager")
                         }
-
                         else -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("androidx.localbroadcastmanager.content.LocalBroadcastManager")
