@@ -2,7 +2,7 @@
 agp = "8.8.0"
 androix-core-ktx = "1.15.0"
 androix-navigation-ui-ktx = "2.8.6"
-androix-navigation-fragment-ktx = "2.8.6"
+androix-navigation-fragment-ktx = "2.8.7"
 androix-lifecycle-viewmodel-ktx = "2.8.7"
 
 kotlin = "2.1.10"
