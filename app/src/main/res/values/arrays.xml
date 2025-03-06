@@ -33,5 +33,7 @@
         <item>org.kde.kdeconnect_tp</item>
         <item>com.huawei.music</item>
         <item>music.hifistatus</item>
+        <item>com.heytap.music</item>
+        <item>com.oppo.music</item>
     </array>
 </resources>
