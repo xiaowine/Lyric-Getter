@@ -52,11 +52,6 @@ object Netease : BaseHook() {
             val verCode = it.packageManager?.getPackageInfo(it.packageName, 0)?.getVersionCode() ?: 0
             if (verCode >= 8000041 || it.packageName == "com.hihonor.cloudmusic") {
                 dexKitBridge(it.classLoader) { dexKitBridge ->
-                    val result = dexKitBridge.findClass {
-                        matcher {
-                            addEqString("StatusBarLyricController")
-                        }
-                    }.single()
                     loadClass("androidx.core.app.NotificationManagerCompat", it.classLoader).methodFinder().first { name == "notify" }.createHook {
                         after {
                             val notification = it.args[1] as Notification
