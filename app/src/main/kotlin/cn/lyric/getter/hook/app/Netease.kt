@@ -1,6 +1,7 @@
 package cn.lyric.getter.hook.app
 
 import android.annotation.SuppressLint
+import android.app.Notification
 import android.content.SharedPreferences
 import android.os.Build
 import cn.lyric.getter.hook.BaseHook
@@ -11,6 +12,8 @@ import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.mediaMetadataCompatLyric
 import cn.lyric.getter.tool.MeiZuNotification
 import cn.lyric.getter.tool.Tools.getVersionCode
+import cn.xiaowine.xkt.Tool.isNot
+import cn.xiaowine.xkt.Tool.isNotNull
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.ClassUtils.setStaticObject
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
@@ -54,9 +57,18 @@ object Netease : BaseHook() {
                             addEqString("StatusBarLyricController")
                         }
                     }.single()
-                    loadClass(result.name).methodFinder().filterByParamCount(0).filterByReturnType(String::class.java).first().createHook {
-                        after { hookParam ->
-                            eventTools.sendLyric(hookParam.result as String)
+                    loadClass("androidx.core.app.NotificationManagerCompat", it.classLoader).methodFinder().first { name == "notify" }.createHook {
+                        after {
+                            val notification = it.args[1] as Notification
+                            val charSequence = notification.tickerText
+                            val isLyric = notification.flags and MeiZuNotification.FLAG_ALWAYS_SHOW_TICKER != 0 || notification.flags and MeiZuNotification.FLAG_ONLY_UPDATE_TICKER != 0
+                            if (isLyric) {
+                                charSequence.isNotNull {
+                                    eventTools.sendLyric(charSequence.toString())
+                                }.isNot {
+                                    eventTools.cleanLyric()
+                                }
+                            }
                         }
                     }
                     if (xConfig.fuckwyysb163){
