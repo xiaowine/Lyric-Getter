@@ -571,8 +571,38 @@
           "remarks": ""
         }
       ]
+    },
+    {
+      "packageName": "com.heytap.music",
+      "name": "OPPO 音乐",
+      "rules": [
+        {
+          "startVersionCode": 101031021,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": "hook方法可能导致异常请注意，并同时解决定制应用无法启动"
+        }
+      ]
+    },
+    {
+      "packageName": "com.oppo.music",
+      "name": "OPPO 音乐",
+      "rules": [
+        {
+          "startVersionCode": 101031021,
+          "endVersionCode": 2147483647,
+          "excludeVersions": [],
+          "apiVersion": 0,
+          "useApi": false,
+          "getLyricType": 1,
+          "remarks": "hook方法可能导致异常请注意，并同时解决定制应用无法启动"
+        }
+      ]
     }
   ],
-  "appRulesVersion": 16,
-  "version": 13
+  "appRulesVersion": 17,
+  "version": 14
 }
