@@ -152,15 +152,6 @@
       "rules": [
         {
           "startVersionCode": 10545,
-          "endVersionCode": 10648,
-          "excludeVersions": [],
-          "apiVersion": 0,
-          "useApi": false,
-          "getLyricType": 1,
-          "remarks": ""
-        },
-        {
-          "startVersionCode": 10649,
           "endVersionCode": 2147483647,
           "excludeVersions": [],
           "apiVersion": 0,
@@ -592,7 +583,7 @@
       "name": "OPPO 音乐",
       "rules": [
         {
-          "startVersionCode": 101031021,
+          "startVersionCode": 101013011,
           "endVersionCode": 2147483647,
           "excludeVersions": [],
           "apiVersion": 0,
