@@ -46,15 +46,9 @@ object Kugou : BaseHook() {
                 }
 
                 "com.kugou.android.lite" -> {
-                    if (getProcessName(app) == "com.kugou.android.lite.support"){
-                        when {
-                            verCode <= 10648 -> hookCarLyric()
-                        }
-                    }
                     if (getProcessName(app) == "com.kugou.android.lite.support") return@getApplication
                     when {
-                        verCode <= 10648 -> HookTools.MockFlyme().mock()
-                        verCode <= 10935 -> {
+                        verCode <= 10648 -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("android.support.v4.content.LocalBroadcastManager")
                         }
