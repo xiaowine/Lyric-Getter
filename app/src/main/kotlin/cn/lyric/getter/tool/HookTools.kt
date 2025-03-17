@@ -110,6 +110,11 @@ object HookTools {
         return null
     }
 
+    fun extractValues(text: String, keyword: String): String? {
+        val regex = Regex("text=(.*?)\\s+scenes=") // 匹配关键字
+        return regex.find(text)?.groupValues?.get(1)?.trim()
+    }
+
     fun lockNotStopLyric(classLoader: ClassLoader, fileFilter: ArrayList<String>? = null) {
         dexKitBridge(classLoader) { dexKitBridge ->
             dexKitBridge.apply {

@@ -51,6 +51,7 @@ object Kugou : BaseHook() {
                         verCode <= 10648 -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("android.support.v4.content.LocalBroadcastManager")
+                            fixProbabilityCollapse()
                         }
                         else -> {
                             HookTools.MockFlyme().mock()
