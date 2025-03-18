@@ -3,6 +3,8 @@ package cn.lyric.getter.tool
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Context
+import android.text.method.LinkMovementMethod
+import android.widget.TextView
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.R
 import cn.lyric.getter.data.AppRules
@@ -14,6 +16,8 @@ import cn.xiaowine.xkt.AcTool.showToast
 import cn.xiaowine.xkt.SimpleHttpTool.get
 import cn.xiaowine.xkt.Tool.goMainThread
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import io.noties.markwon.Markwon
+import io.noties.markwon.image.glide.GlideImagesPlugin
 import java.io.File
 
 @SuppressLint("StaticFieldLeak")
@@ -69,9 +73,21 @@ object ActivityTools {
                     it.parseJSON<GithubReleaseApi>().run {
                         if (tagName.split("-")[0].toInt() > BuildConfig.VERSION_CODE) {
                             goMainThread {
+                                val markwon = Markwon.builder(context)
+                                    .usePlugin(GlideImagesPlugin.create(context)) // 图片支持
+                                    .build()
+                                val markdown = " ##   $name \n" + body.trimIndent()
+                                val textView = TextView(context).apply {
+                                    setPadding(32, 40, 32, 40)
+                                    // 可根据需求设置 maxHeight，防止太大撑满屏幕
+                                    maxHeight = 2000
+                                    movementMethod = LinkMovementMethod.getInstance() // 支持链接点击
+                                }
+                                markwon.setMarkdown(textView, markdown)
                                 MaterialAlertDialogBuilder(context).apply {
                                     setTitle(R.string.new_version_detected)
-                                    setMessage("${name}\n${body}")
+                                    //setMessage("${name}\n${spannedText}")
+                                    setView(textView)
                                     setPositiveButton(R.string.update) { _, _ ->
                                         assets.forEach { asset ->
                                             if (asset.name.contains("release", true) && asset.contentType == "application/vnd.android.package-archive") {
