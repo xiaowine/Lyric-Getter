@@ -94,5 +94,7 @@ dependencies {
     implementation(libs.cardSlider)
     implementation(libs.modernandroidpreferences)
     implementation(libs.swiperefreshlayout)
-
+    implementation(libs.markwon)
+    implementation(libs.markwonimage)
+    implementation(libs.markwonimageglide)
 }

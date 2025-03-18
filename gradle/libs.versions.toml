@@ -11,6 +11,7 @@ hidden-api = "4.3.3"
 material = "1.12.0"
 swiperefreshlayout = "1.2.0-beta01"
 modernandroidpreferences = "2.3.2"
+markwonversion = "4.6.2"
 
 [libraries]
 material = { module = "com.google.android.material:material", version.ref = "material" }
@@ -21,7 +22,9 @@ navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androix-navigation-fragment-ktx" }
 lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androix-lifecycle-viewmodel-ktx" }
 swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
-
+markwon = { module = "io.noties.markwon:core", version.ref = "markwonversion" }
+markwonimage = { module = "io.noties.markwon:image", version.ref = "markwonversion" }
+markwonimageglide = { module = "io.noties.markwon:image-glide", version.ref = "markwonversion" }
 xposed = { module = "de.robv.android.xposed:api", version = "82" }
 ezXHelper = { module = "com.github.kyuubiran:EzXHelper", version = "2.2.1" }
 dev-rikka-hidden-compat = { module = "dev.rikka.hidden:compat", version.ref = "hidden-api" }
