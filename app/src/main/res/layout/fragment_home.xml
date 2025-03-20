@@ -13,7 +13,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/collapsing_toolbar_layout"
             android:layout_width="match_parent"
-            android:layout_height="?collapsingToolbarLayoutLargeSize"
+            android:layout_height="?collapsingToolbarLayoutMediumSize"
             android:fitsSystemWindows="false"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
             app:titleCollapseMode="scale">
@@ -25,7 +25,7 @@
                 app:layout_collapseMode="pin"
                 app:logo="@drawable/ic_launcher_round"
                 app:title="@string/app_name"
-                app:titleMarginStart="24dp" />
+                app:titleMarginStart="12dp" />
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -1,8 +1,7 @@
 [versions]
 agp = "8.9.0"
 androix-core-ktx = "1.15.0"
-androix-navigation-ui-ktx = "2.8.6"
-androix-navigation-fragment-ktx = "2.8.6"
+androix-navigation-ktx = "2.8.9"
 androix-lifecycle-viewmodel-ktx = "2.8.7"
 
 kotlin = "2.1.10"
@@ -18,13 +17,13 @@ material = { module = "com.google.android.material:material", version.ref = "mat
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "androix-core-ktx" }
 modernandroidpreferences = { module = "de.maxr1998:modernandroidpreferences", version.ref = "modernandroidpreferences" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androix-navigation-ui-ktx" }
-navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androix-navigation-fragment-ktx" }
+navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androix-navigation-ktx" }
+navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androix-navigation-ktx" }
 lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androix-lifecycle-viewmodel-ktx" }
 swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
 markwon = { module = "io.noties.markwon:core", version.ref = "markwonversion" }
-markwonimage = { module = "io.noties.markwon:image", version.ref = "markwonversion" }
-markwonimageglide = { module = "io.noties.markwon:image-glide", version.ref = "markwonversion" }
+markwon-image = { module = "io.noties.markwon:image", version.ref = "markwonversion" }
+markwon-image-glide = { module = "io.noties.markwon:image-glide", version.ref = "markwonversion" }
 xposed = { module = "de.robv.android.xposed:api", version = "82" }
 ezXHelper = { module = "com.github.kyuubiran:EzXHelper", version = "2.2.1" }
 dev-rikka-hidden-compat = { module = "dev.rikka.hidden:compat", version.ref = "hidden-api" }

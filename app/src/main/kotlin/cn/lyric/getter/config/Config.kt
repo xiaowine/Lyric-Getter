@@ -13,5 +13,6 @@ class Config {
     var updateTime: Long by serialLazy(0L)
     var showTitle: Boolean by serialLazy(false)
     var fuckwyysb163: Boolean by serialLazy(false)
+    var fuckfuckwyysb163: Boolean by serialLazy(false)
 }
         

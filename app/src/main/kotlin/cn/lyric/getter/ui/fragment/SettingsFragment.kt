@@ -90,6 +90,15 @@ class SettingsFragment : Fragment() {
                     false
                 }
             }
+            switch("fuckwyy2") {
+                titleRes = R.string.fuckfuckwyy
+                summaryRes = R.string.fuckfuckwyy_tips
+                defaultValue = config.fuckfuckwyysb163
+                onClick {
+                    config.fuckfuckwyysb163 = checked
+                    false
+                }
+            }
         }
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)

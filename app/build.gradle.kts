@@ -22,7 +22,7 @@ android {
     defaultConfig {
         applicationId = "cn.lyric.getter"
         minSdk = 26
-        targetSdk = 35
+        targetSdk = 36
         versionCode = 26
         versionName = "2.0.26"
         dependenciesInfo.includeInApk = false
@@ -95,6 +95,6 @@ dependencies {
     implementation(libs.modernandroidpreferences)
     implementation(libs.swiperefreshlayout)
     implementation(libs.markwon)
-    implementation(libs.markwonimage)
-    implementation(libs.markwonimageglide)
+    implementation(libs.markwon.image)
+    implementation(libs.markwon.image.glide)
 }
