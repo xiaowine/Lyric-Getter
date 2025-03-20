@@ -75,4 +75,6 @@
     <string name="version_differences">A versão de lançamento não gerará logs e a versão Debug gerará logs, portanto, é recomendado não instalar a versão Debug.</string>
     <string name="fuckwyy">Forçar abertura das letras na barra de status do NetEase Cloud</string>
     <string name="fuckwyy_tips">Ativar o interruptor pode causar anomalias no NetEase Cloud, que não se responsabiliza por este módulo.</string>
+    <string name="fuckfuckwyy">Desativar detecção do NetEase Cloud</string>
+    <string name="fuckfuckwyy_tips">Tente ignorar a detecção do NetEase Cloud Hook. Não nos responsabilizamos caso você seja bloqueado por esse módulo.</string>
 </resources>
