@@ -77,4 +77,6 @@
     <string name="fuckwyy_tips">Turning on the switch may cause abnormalities in NetEase Cloud, which isn\'t responsible for this module.</string>
     <string name="fuckfuckwyy">Disable NetEase Cloud detection</string>
     <string name="fuckfuckwyy_tips">Try to bypass NetEase Cloud Hook detection, not responsible if you are blocked because of this module.</string>
+    <string name="fuckwyyabout">NetEase Cloud Lyrics Getting Settings</string>
+    <string name="lyricsetting">Lyrics acquisition settings</string>
 </resources>

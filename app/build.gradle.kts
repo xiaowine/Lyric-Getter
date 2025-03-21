@@ -75,6 +75,7 @@ android {
 
 
 dependencies {
+    implementation(libs.preference.ktx)
     compileOnly(libs.xposed)
     compileOnly(libs.dev.rikka.hidden.stub)
 
