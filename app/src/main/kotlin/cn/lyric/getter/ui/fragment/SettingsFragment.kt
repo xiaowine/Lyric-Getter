@@ -8,11 +8,18 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.R
+import cn.lyric.getter.api.API
+import cn.lyric.getter.api.data.LyricData
+import cn.lyric.getter.api.listener.LyricReceiver
+import cn.lyric.getter.api.listener.LyricListener
+import cn.lyric.getter.api.tools.Tools.registerLyricListener
+import cn.lyric.getter.api.tools.Tools.unregisterLyricListener
 import cn.lyric.getter.databinding.FragmentSettingsBinding
 import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.ui.dialog.MD3SwitchHelp
@@ -43,14 +50,6 @@ class SettingsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val screen = screen(context) {
-            switch("salt_use_flyme") {
-                titleRes = R.string.salt_use_flyme
-                summaryRes = R.string.salt_use_flyme_summary
-                onClick {
-                    config.saltUseFlyme = checked
-                    false
-                }
-            }
             editText("regex_replace") {
                 titleRes = R.string.regex_replace
                 defaultValue = config.regexReplace
@@ -59,25 +58,60 @@ class SettingsFragment : Fragment() {
                     false
                 }
             }
-            accentButtonPref("lyricsetting") {
-                titleRes = R.string.lyricsetting
-                onClick {
-                    context?.let { showlyricSwitchDialog(it) }
-                    false
-                }
-            }
-            accentButtonPref("fuckwyyabout") {
-                titleRes = R.string.fuckwyyabout
-                onClick {
-                    context?.let { showfuckwyySwitchDialog(it) }
-                    false
-                }
-            }
         }
-        binding.recyclerView.apply {
-            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
-            adapter = PreferencesAdapter(screen)
+
+        /** 椒盐魅族接口  */
+        val salt_use_flyme = context?.let { MD3SwitchHelp(it) }
+        val salt_use_flymeView = salt_use_flyme?.getView()
+        salt_use_flyme?.switchTitle?.setText(R.string.salt_use_flyme)
+        salt_use_flyme?.setTips(R.string.salt_use_flyme_summary)
+        salt_use_flyme?.switchButton?.isChecked = (config.saltUseFlyme)
+        val switch = salt_use_flyme?.switchButton
+        switch?.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+            config.saltUseFlyme = isChecked
         }
+        // 设置点击监听器
+        salt_use_flymeView?.setOnClickListener {
+            // 切换开关状态
+            salt_use_flyme.switchButton.isChecked = !salt_use_flyme.switchButton.isChecked
+            config.saltUseFlyme = salt_use_flyme.switchButton.isChecked
+        }
+
+        /** 歌词获取设置  */
+        val lyricsetting = context?.let { MD3SwitchHelp(it) }
+        val lyricsettingView = lyricsetting?.getView()
+        lyricsetting?.switchTitle?.setText(R.string.lyricsetting)
+        val switchsetting = lyricsetting?.switchButton
+        switchsetting?.visibility = View.GONE
+        // 设置点击监听器
+        lyricsettingView?.setOnClickListener {
+            context?.let { showlyricSwitchDialog(it) }
+        }
+
+        /** fuckwyy  */
+        val fuckwyyabout = context?.let { MD3SwitchHelp(it) }
+        val fuckwyyaboutView = fuckwyyabout?.getView()
+        fuckwyyabout?.switchTitle?.setText(R.string.fuckwyyabout)
+        fuckwyyabout?.switchButton?.visibility = View.GONE
+        // 设置点击监听器
+        fuckwyyaboutView?.setOnClickListener {
+            context?.let { showfuckwyySwitchDialog(it) }
+        }
+
+        /** testlyric  */
+        val testlyric = context?.let { MD3SwitchHelp(it) }
+        val testlyricView = testlyric?.getView()
+        testlyric?.switchTitle?.setText(R.string.testlyric)
+        testlyric?.switchButton?.visibility = View.GONE
+        // 设置点击监听器
+        testlyricView?.setOnClickListener {
+            context?.let { showtestlyric(it) }
+        }
+
+        binding.fragmentSettingLinearlayout.addView(salt_use_flymeView)
+        binding.fragmentSettingLinearlayout.addView(lyricsettingView)
+        binding.fragmentSettingLinearlayout.addView(fuckwyyaboutView)
+        binding.fragmentSettingLinearlayout.addView(testlyricView)
     }
 
     override fun onDestroyView() {
@@ -187,5 +221,48 @@ class SettingsFragment : Fragment() {
             .setTitle(R.string.fuckwyyabout)
             .setView(allview)
             .show()
+    }
+
+    private fun showtestlyric(context: Context){
+        val testlyricview : View = LayoutInflater.from(context).inflate(R.layout.dialog_lyric_test, null)
+        val testappname : TextView = testlyricview.findViewById(R.id.test_app_name_text)
+        val testappicon : TextView = testlyricview.findViewById(R.id.test_app_icon_text)
+        val testappcustomicon : TextView = testlyricview.findViewById(R.id.test_app_customIcon_text)
+        val testappplay : TextView = testlyricview.findViewById(R.id.test_app_play_text)
+        val testapplyric : TextView = testlyricview.findViewById(R.id.test_app_lyric_text)
+        val testappdelay : TextView = testlyricview.findViewById(R.id.test_app_delay_text)
+        val receiver = LyricReceiver(object : LyricListener() {
+            override fun onUpdate(lyricData: LyricData) {
+                testapplyric.text = lyricData.lyric
+                testappicon.text = lyricData.extraData.base64Icon
+                testappcustomicon.text = lyricData.extraData.customIcon.toString()
+                testappplay.text = lyricData.type.toString()
+                testappname.text = lyricData.extraData.packageName
+                testappdelay.text = lyricData.extraData.delay.toString()
+
+            }
+
+            override fun onStop(lyricData: LyricData) {
+                testapplyric.text = lyricData.lyric
+                testappicon.text = lyricData.extraData.base64Icon
+                testappcustomicon.text = lyricData.extraData.customIcon.toString()
+                testappplay.text = lyricData.type.toString()
+                testappname.text = lyricData.extraData.packageName
+                testappdelay.text = lyricData.extraData.delay.toString()
+            }
+        })
+
+        val dialog = MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.testlyric)
+            .setView(testlyricview)
+            .create()
+
+        dialog.setOnDismissListener {
+            // 这里写关闭时需要执行的函数
+            unregisterLyricListener(context, receiver)
+        }
+        registerLyricListener(context, API.API_VERSION, receiver)
+        dialog.show()
+
     }
 }

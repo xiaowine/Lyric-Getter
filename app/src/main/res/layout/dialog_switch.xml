@@ -3,7 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="16dp"
+    android:padding="14dp"
+    android:layout_centerInParent="true"
+    android:background="?attr/selectableItemBackground"
     android:gravity="center_vertical">
 
     <!-- 左侧内容区域 -->
@@ -30,6 +32,7 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:maxLines="3"
+            android:visibility="gone"
             android:ellipsize="end"/>
 
     </LinearLayout>

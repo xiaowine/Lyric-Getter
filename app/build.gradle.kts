@@ -76,6 +76,7 @@ android {
 
 dependencies {
     implementation(libs.preference.ktx)
+    implementation(libs.cardview)
     compileOnly(libs.xposed)
     compileOnly(libs.dev.rikka.hidden.stub)
 
