@@ -30,7 +30,6 @@ import cn.lyric.getter.hook.app.Oppo
 import cn.lyric.getter.hook.app.Poweramp
 import cn.lyric.getter.hook.app.SystemUi
 import cn.lyric.getter.hook.app.Toside
-import cn.lyric.getter.hook.app.Vivo
 import cn.xiaowine.xkt.LogTool
 import cn.xiaowine.xkt.LogTool.log
 import com.github.kyuubiran.ezxhelper.EzXHelper
@@ -73,7 +72,6 @@ class MainHook : IXposedHookLoadPackage, IXposedHookZygoteInit {
             "com.heytap.music" -> initHooks(Oppo)
             "com.oppo.music" -> initHooks(Oppo)
             "com.maxmpz.audioplayer" -> initHooks(Poweramp)
-            "com.android.bbkmusic" -> initHooks(Vivo)
             else -> initHooks(Api)
         }
     }

@@ -40,6 +40,12 @@ class MD3SwitchHelp(context: Context) {
             switchtips.text = tips
         }
     }
+    /** View点击效果 */
+    fun setViewClickToggleSwitch() {
+        dialogView.setOnClickListener {
+            switchButton.isChecked = !switchButton.isChecked
+        }
+    }
 
     fun setTips(@StringRes resId: Int) {
         setTips(dialogView.context.getString(resId))

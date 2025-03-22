@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.CompoundButton
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -22,6 +23,7 @@ import cn.lyric.getter.api.tools.Tools.registerLyricListener
 import cn.lyric.getter.api.tools.Tools.unregisterLyricListener
 import cn.lyric.getter.databinding.FragmentSettingsBinding
 import cn.lyric.getter.tool.ConfigTools.config
+import cn.lyric.getter.ui.dialog.EditTextDialogHelper
 import cn.lyric.getter.ui.dialog.MD3SwitchHelp
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import de.Maxr1998.modernpreferences.PreferencesAdapter
@@ -77,6 +79,29 @@ class SettingsFragment : Fragment() {
             config.saltUseFlyme = salt_use_flyme.switchButton.isChecked
         }
 
+        /** 歌词屏蔽  */
+        val regex_replace = context?.let { MD3SwitchHelp(it) }
+        val regex_replaceView = regex_replace?.getView()
+        regex_replace?.switchTitle?.setText(R.string.regex_replace)
+        val regex_replaceswitch = regex_replace?.switchButton
+        regex_replaceswitch?.visibility = View.GONE
+        // 设置点击监听器
+        regex_replaceView?.setOnClickListener {
+            context?.let {
+                context?.getString(R.string.regex_replace)?.let { it1 ->
+                    EditTextDialogHelper(it).setText(config.regexReplace).setHint(it1)
+                    val dialog = EditTextDialogHelper(it).show { inputText ->
+                        config.regexReplace = inputText.toString()
+                    }
+                    dialog.setTitle(R.string.regex_replace)
+                    dialog.show()
+                }
+            }
+
+        }
+
+
+
         /** 歌词获取设置  */
         val lyricsetting = context?.let { MD3SwitchHelp(it) }
         val lyricsettingView = lyricsetting?.getView()
@@ -109,6 +134,7 @@ class SettingsFragment : Fragment() {
         }
 
         binding.fragmentSettingLinearlayout.addView(salt_use_flymeView)
+        binding.fragmentSettingLinearlayout.addView(regex_replaceView)
         binding.fragmentSettingLinearlayout.addView(lyricsettingView)
         binding.fragmentSettingLinearlayout.addView(fuckwyyaboutView)
         binding.fragmentSettingLinearlayout.addView(testlyricView)
@@ -127,11 +153,12 @@ class SettingsFragment : Fragment() {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            setPadding(24, 24, 24, 24) // 根据需要设置 padding
+            setPadding(0, 24, 0, 0) // 根据需要设置 padding
         }
 
         /** 增强隐藏歌词 */
         val enhanced_hidden_lyrics = MD3SwitchHelp(context)
+        enhanced_hidden_lyrics.setViewClickToggleSwitch()
         val SwitchdialogView = enhanced_hidden_lyrics.getView()
         enhanced_hidden_lyrics.switchTitle.setText(R.string.enhanced_hidden_lyrics)
         enhanced_hidden_lyrics.setTips(R.string.enhanced_hidden_lyrics_summary)
@@ -143,6 +170,7 @@ class SettingsFragment : Fragment() {
 
         /** 输出重复歌词 */
         val output_repeated_lyrics = MD3SwitchHelp(context)
+        output_repeated_lyrics.setViewClickToggleSwitch()
         val SwitchdialogView2 = output_repeated_lyrics.getView()
         output_repeated_lyrics.switchTitle.setText(R.string.output_repeated_lyrics)
         output_repeated_lyrics.switchButton.isChecked = (config.outputRepeatedLyrics)
@@ -154,6 +182,7 @@ class SettingsFragment : Fragment() {
         /** 息屏输出歌词 */
         val allow_some_software_to_output_after_the_screen = MD3SwitchHelp(context)
         val SwitchdialogView3 = allow_some_software_to_output_after_the_screen.getView()
+        allow_some_software_to_output_after_the_screen.setViewClickToggleSwitch()
         allow_some_software_to_output_after_the_screen.switchTitle.setText(R.string.allow_some_software_to_output_after_the_screen)
         allow_some_software_to_output_after_the_screen.switchButton.isChecked = (config.allowSomeSoftwareToOutputAfterTheScreen)
         val switch3 = allow_some_software_to_output_after_the_screen.switchButton
@@ -163,6 +192,7 @@ class SettingsFragment : Fragment() {
 
         /** 输出重复歌词 */
         val show_title = MD3SwitchHelp(context)
+        show_title.setViewClickToggleSwitch()
         val SwitchdialogView4 = show_title.getView()
         show_title.switchTitle.setText(R.string.show_title)
         show_title.switchButton.isChecked = (config.showTitle)
@@ -190,10 +220,11 @@ class SettingsFragment : Fragment() {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            setPadding(24, 24, 24, 24) // 根据需要设置 padding
+            setPadding(0, 24, 0, 0) // 根据需要设置 padding
         }
         /** 网易云检测 */
         val fuckwyy2 = MD3SwitchHelp(context)
+        fuckwyy2.setViewClickToggleSwitch()
         val SwitchdialogView2 = fuckwyy2.getView()
         fuckwyy2.switchTitle.setText(R.string.fuckfuckwyy)
         fuckwyy2.setTips(R.string.fuckfuckwyy_tips)
@@ -205,6 +236,7 @@ class SettingsFragment : Fragment() {
 
         /** 网易云强开 */
         val fuckwyy = MD3SwitchHelp(context)
+        fuckwyy.setViewClickToggleSwitch()
         val SwitchdialogView = fuckwyy.getView()
         fuckwyy.switchTitle.setText(R.string.fuckwyy)
         fuckwyy.setTips(R.string.fuckwyy_tips)
