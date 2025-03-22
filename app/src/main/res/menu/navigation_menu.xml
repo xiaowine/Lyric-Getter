@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/app_nav"
-        android:icon="@drawable/ic_round_settings"
+        android:icon="@drawable/ic_android_black_24dp"
         android:title="@string/app_rules_fragment_label" />
     <item
         android:id="@+id/home_nav"
