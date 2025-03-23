@@ -1,48 +1,52 @@
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:padding="15dp"
     android:clickable="true"
     android:focusable="true"
-    android:layout_centerInParent="true"
-    android:background="?attr/selectableItemBackground"
-    android:gravity="center_vertical">
+    android:background="?attr/selectableItemBackground">
 
-    <!-- 左侧内容区域 -->
     <LinearLayout
+        android:id="@+id/textContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:orientation="vertical"
-        android:layout_marginEnd="16dp">
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/switchButton">
 
         <TextView
             android:id="@+id/switchTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="?android:textColorPrimary"
             android:textSize="18sp"
-            android:layout_marginBottom="9dp"
             android:maxLines="2"
-            android:ellipsize="end" />
+            android:ellipsize="end"
+            android:layout_marginBottom="4dp"/>
 
         <TextView
             android:id="@+id/switchtips"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:maxLines="3"
-            android:visibility="gone"
-            android:ellipsize="end"/>
+            android:ellipsize="end"
+            android:visibility="gone"/>
 
     </LinearLayout>
 
-    <!-- 右侧开关控件 -->
     <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/switchButton"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/switchTitle"
+        app:layout_constraintBottom_toBottomOf="@+id/switchTitle"
+        tools:ignore="NotSibling" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

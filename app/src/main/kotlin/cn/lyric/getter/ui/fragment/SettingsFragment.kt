@@ -7,18 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.CompoundButton
-import android.widget.FrameLayout
 import android.widget.LinearLayout
+import android.widget.ScrollView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.R
 import cn.lyric.getter.api.API
 import cn.lyric.getter.api.data.LyricData
-import cn.lyric.getter.api.listener.LyricReceiver
 import cn.lyric.getter.api.listener.LyricListener
+import cn.lyric.getter.api.listener.LyricReceiver
 import cn.lyric.getter.api.tools.Tools.registerLyricListener
 import cn.lyric.getter.api.tools.Tools.unregisterLyricListener
 import cn.lyric.getter.databinding.FragmentSettingsBinding
@@ -26,13 +23,6 @@ import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.ui.dialog.EditTextDialogHelper
 import cn.lyric.getter.ui.dialog.MD3SwitchHelp
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import de.Maxr1998.modernpreferences.PreferencesAdapter
-import de.Maxr1998.modernpreferences.helpers.accentButtonPref
-import de.Maxr1998.modernpreferences.helpers.editText
-import de.Maxr1998.modernpreferences.helpers.onClick
-import de.Maxr1998.modernpreferences.helpers.screen
-import de.Maxr1998.modernpreferences.helpers.switch
-import de.Maxr1998.modernpreferences.preferences.EditTextPreference
 
 class SettingsFragment : Fragment() {
 
@@ -51,42 +41,21 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val screen = screen(context) {
-            editText("regex_replace") {
-                titleRes = R.string.regex_replace
-                defaultValue = config.regexReplace
-                textChangeListener = EditTextPreference.OnTextChangeListener { _, text ->
-                    config.regexReplace = text.toString()
-                    false
-                }
-            }
-        }
-
         /** 椒盐魅族接口  */
-        val salt_use_flyme = context?.let { MD3SwitchHelp(it) }
-        val salt_use_flymeView = salt_use_flyme?.getView()
-        salt_use_flyme?.switchTitle?.setText(R.string.salt_use_flyme)
-        salt_use_flyme?.setTips(R.string.salt_use_flyme_summary)
-        salt_use_flyme?.switchButton?.isChecked = (config.saltUseFlyme)
-        val switch = salt_use_flyme?.switchButton
-        switch?.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+        val saltUseFlymeOnCheckedChangeListener = CompoundButton.OnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             config.saltUseFlyme = isChecked
         }
-        // 设置点击监听器
-        salt_use_flymeView?.setOnClickListener {
-            // 切换开关状态
-            salt_use_flyme.switchButton.isChecked = !salt_use_flyme.switchButton.isChecked
-            config.saltUseFlyme = salt_use_flyme.switchButton.isChecked
+        val saltUseFlymeView = context?.let {
+            diyview(
+                it,
+                R.string.salt_use_flyme,
+                R.string.salt_use_flyme_summary,
+                config.saltUseFlyme,
+                saltUseFlymeOnCheckedChangeListener)
         }
 
         /** 歌词屏蔽  */
-        val regex_replace = context?.let { MD3SwitchHelp(it) }
-        val regex_replaceView = regex_replace?.getView()
-        regex_replace?.switchTitle?.setText(R.string.regex_replace)
-        val regex_replaceswitch = regex_replace?.switchButton
-        regex_replaceswitch?.visibility = View.GONE
-        // 设置点击监听器
-        regex_replaceView?.setOnClickListener {
+        val regex_replaceOnClickListener = View.OnClickListener{
             context?.let {
                 context?.getString(R.string.regex_replace)?.let { it1 ->
                     EditTextDialogHelper(it).setText(config.regexReplace).setHint(it1)
@@ -95,49 +64,76 @@ class SettingsFragment : Fragment() {
                     }
                     dialog.setTitle(R.string.regex_replace)
                     dialog.show()
+                    dialog.window?.apply { // After the window is created, get the SoftInputMode
+                        clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+                        clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
+                        setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
+                    }
                 }
             }
-
         }
-
-
+        val regex_replaceView = context?.let { diyview(
+            it,
+            R.string.regex_replace,
+            0,
+            false,
+            null,
+            true,
+            true,
+            regex_replaceOnClickListener
+        ) }
 
         /** 歌词获取设置  */
-        val lyricsetting = context?.let { MD3SwitchHelp(it) }
-        val lyricsettingView = lyricsetting?.getView()
-        lyricsetting?.switchTitle?.setText(R.string.lyricsetting)
-        val switchsetting = lyricsetting?.switchButton
-        switchsetting?.visibility = View.GONE
-        // 设置点击监听器
-        lyricsettingView?.setOnClickListener {
+        val lyricsettingOnClickListener = View.OnClickListener{
             context?.let { showlyricSwitchDialog(it) }
         }
+        val lyricsettingView = context?.let { diyview(
+            it,
+            R.string.lyricsetting,
+            0,
+            false,
+            null,
+            true,
+            true,
+            lyricsettingOnClickListener
+        ) }
 
         /** fuckwyy  */
-        val fuckwyyabout = context?.let { MD3SwitchHelp(it) }
-        val fuckwyyaboutView = fuckwyyabout?.getView()
-        fuckwyyabout?.switchTitle?.setText(R.string.fuckwyyabout)
-        fuckwyyabout?.switchButton?.visibility = View.GONE
-        // 设置点击监听器
-        fuckwyyaboutView?.setOnClickListener {
+        val fuckwyyaboutOnClickListener = View.OnClickListener{
             context?.let { showfuckwyySwitchDialog(it) }
         }
+        val fuckwyyaboutview = context?.let { diyview(
+            it,
+            R.string.fuckwyyabout,
+            0,
+            false,
+            null,
+            true,
+            true,
+            fuckwyyaboutOnClickListener
+        ) }
 
         /** testlyric  */
-        val testlyric = context?.let { MD3SwitchHelp(it) }
-        val testlyricView = testlyric?.getView()
-        testlyric?.switchTitle?.setText(R.string.testlyric)
-        testlyric?.switchButton?.visibility = View.GONE
-        // 设置点击监听器
-        testlyricView?.setOnClickListener {
+        val testlyricOnCListener = View.OnClickListener{
             context?.let { showtestlyric(it) }
         }
+        val testlyricview = context?.let { diyview(
+            it,
+            R.string.testlyric,
+            0,
+            false,
+            null,
+            true,
+            true,
+            testlyricOnCListener
+        ) }
 
-        binding.fragmentSettingLinearlayout.addView(salt_use_flymeView)
+
+        binding.fragmentSettingLinearlayout.addView(saltUseFlymeView)
         binding.fragmentSettingLinearlayout.addView(regex_replaceView)
         binding.fragmentSettingLinearlayout.addView(lyricsettingView)
-        binding.fragmentSettingLinearlayout.addView(fuckwyyaboutView)
-        binding.fragmentSettingLinearlayout.addView(testlyricView)
+        binding.fragmentSettingLinearlayout.addView(fuckwyyaboutview)
+        binding.fragmentSettingLinearlayout.addView(testlyricview)
     }
 
     override fun onDestroyView() {
@@ -147,111 +143,94 @@ class SettingsFragment : Fragment() {
 
     private fun showlyricSwitchDialog(context: Context) {
         /** all view */
-        val allview = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            setPadding(0, 24, 0, 0) // 根据需要设置 padding
-        }
+       val (scrollview, allview)  = allscrollview(context)
 
         /** 增强隐藏歌词 */
-        val enhanced_hidden_lyrics = MD3SwitchHelp(context)
-        enhanced_hidden_lyrics.setViewClickToggleSwitch()
-        val SwitchdialogView = enhanced_hidden_lyrics.getView()
-        enhanced_hidden_lyrics.switchTitle.setText(R.string.enhanced_hidden_lyrics)
-        enhanced_hidden_lyrics.setTips(R.string.enhanced_hidden_lyrics_summary)
-        enhanced_hidden_lyrics.switchButton.isChecked = (config.enhancedHiddenLyrics)
-        val switch = enhanced_hidden_lyrics.switchButton
-        switch.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+        val enhanced_hidden_lyricsCheckedChange = CompoundButton.OnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             config.enhancedHiddenLyrics = isChecked
         }
+        val enhanced_hidden_lyricsView = diyview(
+            context,
+            R.string.enhanced_hidden_lyrics,
+            R.string.enhanced_hidden_lyrics_summary,
+            config.enhancedHiddenLyrics,
+            enhanced_hidden_lyricsCheckedChange)
 
         /** 输出重复歌词 */
-        val output_repeated_lyrics = MD3SwitchHelp(context)
-        output_repeated_lyrics.setViewClickToggleSwitch()
-        val SwitchdialogView2 = output_repeated_lyrics.getView()
-        output_repeated_lyrics.switchTitle.setText(R.string.output_repeated_lyrics)
-        output_repeated_lyrics.switchButton.isChecked = (config.outputRepeatedLyrics)
-        val switch2 = output_repeated_lyrics.switchButton
-        switch2.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+        val output_repeated_lyricsCheckedChange = CompoundButton.OnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             config.outputRepeatedLyrics = isChecked
         }
+        val output_repeated_lyricsView = diyview(
+            context,
+            R.string.output_repeated_lyrics,
+            0,
+            config.outputRepeatedLyrics,
+            output_repeated_lyricsCheckedChange
+        )
 
         /** 息屏输出歌词 */
-        val allow_some_software_to_output_after_the_screen = MD3SwitchHelp(context)
-        val SwitchdialogView3 = allow_some_software_to_output_after_the_screen.getView()
-        allow_some_software_to_output_after_the_screen.setViewClickToggleSwitch()
-        allow_some_software_to_output_after_the_screen.switchTitle.setText(R.string.allow_some_software_to_output_after_the_screen)
-        allow_some_software_to_output_after_the_screen.switchButton.isChecked = (config.allowSomeSoftwareToOutputAfterTheScreen)
-        val switch3 = allow_some_software_to_output_after_the_screen.switchButton
-        switch3.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+        val allow_some_software_to_output_after_the_screen = CompoundButton.OnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             config.allowSomeSoftwareToOutputAfterTheScreen = isChecked
         }
+        val allow_some_software_to_output_after_the_screenView = diyview(
+            context,
+            R.string.allow_some_software_to_output_after_the_screen,
+            0,
+            config.allowSomeSoftwareToOutputAfterTheScreen,
+            allow_some_software_to_output_after_the_screen
+        )
 
         /** 输出重复歌词 */
-        val show_title = MD3SwitchHelp(context)
-        show_title.setViewClickToggleSwitch()
-        val SwitchdialogView4 = show_title.getView()
-        show_title.switchTitle.setText(R.string.show_title)
-        show_title.switchButton.isChecked = (config.showTitle)
-        val switch4 = show_title.switchButton
-        switch4.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+        val show_title = CompoundButton.OnCheckedChangeListener{ _: CompoundButton?, isChecked : Boolean ->
             config.showTitle = isChecked
         }
+        val SwitchdialogView = diyview(
+            context,
+            R.string.show_title,
+            0,
+            config.showTitle,
+            show_title
+        )
 
+        allview.addView(enhanced_hidden_lyricsView)
+        allview.addView(output_repeated_lyricsView)
+        allview.addView(allow_some_software_to_output_after_the_screenView)
         allview.addView(SwitchdialogView)
-        allview.addView(SwitchdialogView2)
-        allview.addView(SwitchdialogView3)
-        allview.addView(SwitchdialogView4)
 
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.lyricsetting)
-            .setView(allview)
+            .setView(scrollview)
             .show()
     }
 
     private fun showfuckwyySwitchDialog(context: Context) {
         /** all view */
-        val allview = LinearLayout(context).apply {
-            orientation = LinearLayout.VERTICAL
-            layoutParams = LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-            )
-            setPadding(0, 24, 0, 0) // 根据需要设置 padding
-        }
+        val (scrollview, allview)  = allscrollview(context)
         /** 网易云检测 */
-        val fuckwyy2 = MD3SwitchHelp(context)
-        fuckwyy2.setViewClickToggleSwitch()
-        val SwitchdialogView2 = fuckwyy2.getView()
-        fuckwyy2.switchTitle.setText(R.string.fuckfuckwyy)
-        fuckwyy2.setTips(R.string.fuckfuckwyy_tips)
-        fuckwyy2.switchButton.isChecked = (config.fuckfuckwyysb163)
-        val switch2 = fuckwyy2.switchButton
-        switch2.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+        val fuckwyy2 = CompoundButton.OnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             config.fuckfuckwyysb163 = isChecked
         }
+        val fuckwyy2View = diyview(
+            context,
+            R.string.fuckfuckwyy,
+            R.string.fuckfuckwyy_tips,
+            config.fuckfuckwyysb163,
+            fuckwyy2
+        )
+
 
         /** 网易云强开 */
-        val fuckwyy = MD3SwitchHelp(context)
-        fuckwyy.setViewClickToggleSwitch()
-        val SwitchdialogView = fuckwyy.getView()
-        fuckwyy.switchTitle.setText(R.string.fuckwyy)
-        fuckwyy.setTips(R.string.fuckwyy_tips)
-        fuckwyy.switchButton.isChecked = (config.fuckwyysb163)
-        val switch = fuckwyy.switchButton
-        switch.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
+        val fuckwyyCheckedChange = CompoundButton.OnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             config.fuckwyysb163 = isChecked
         }
+        val fuckwyyView = diyview(context, R.string.fuckwyy, R.string.fuckwyy_tips, config.fuckwyysb163,fuckwyyCheckedChange)
 
-        allview.addView(SwitchdialogView)
-        allview.addView(SwitchdialogView2)
+        allview.addView(fuckwyyView)
+        allview.addView(fuckwyy2View)
 
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.fuckwyyabout)
-            .setView(allview)
+            .setView(scrollview)
             .show()
     }
 
@@ -296,5 +275,71 @@ class SettingsFragment : Fragment() {
         registerLyricListener(context, API.API_VERSION, receiver)
         dialog.show()
 
+    }
+
+
+    private fun allscrollview(context: Context): Pair<ScrollView, LinearLayout> {
+        val scrollView = ScrollView(context).apply {
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.MATCH_PARENT
+            )
+        }
+
+        val allview = LinearLayout(context).apply {
+            orientation = LinearLayout.VERTICAL
+            layoutParams = LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+            setPadding(0, 24, 0, 0)
+        }
+        scrollView.addView(allview)
+        return Pair(scrollView, allview)
+    }
+
+
+    /** 开关界面简单封装定制
+     * @param context Context
+     * @param title 标题文本
+     * @param tips 提示文本
+     * @param iscleck 是否开启开关
+     * @param CheckedChange OnCheckedChangeListener
+     * @param hidetips 是否隐藏提示
+     * @param hideswich 是否隐藏开关
+     * @param setOnClickListener View点击监听器
+     * @return 配置好的界面 */
+    private fun diyview(context: Context,
+                        title:Int = 0,
+                        tips:Int = 0,
+                        iscleck:Boolean = false,
+                        CheckedChange:CompoundButton.OnCheckedChangeListener? = null,
+                        hidetips:Boolean = false,
+                        hideswich:Boolean = false,
+                        setOnClickListener: View.OnClickListener? = null): View {
+        val Switch = MD3SwitchHelp(context)
+        Switch.setViewClickToggleSwitch()
+        val SwitchdialogView = Switch.getView()
+        if (title == 0 ){
+            Switch.setTitle("Test")
+        } else{
+            Switch.switchTitle.setText(title)
+        }
+
+        if (hidetips || tips == 0){
+            Switch.switchtips.visibility = View.GONE
+        } else {
+            Switch.setTips(tips)
+        }
+        if (hideswich || CheckedChange == null){
+            Switch.switchButton.visibility = View.GONE
+        } else{
+            Switch.switchButton.isChecked = (iscleck)
+            Switch.switchButton.setOnCheckedChangeListener(CheckedChange)
+        }
+        if (setOnClickListener != null){
+            SwitchdialogView.setOnClickListener(setOnClickListener)
+        }
+        return SwitchdialogView
     }
 }

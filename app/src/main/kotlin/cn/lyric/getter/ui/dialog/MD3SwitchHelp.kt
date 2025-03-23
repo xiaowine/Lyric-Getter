@@ -14,7 +14,7 @@ class MD3SwitchHelp(context: Context) {
     private val dialogView: View = LayoutInflater.from(context).inflate(R.layout.dialog_switch, null)
     val switchButton: MaterialSwitch = dialogView.findViewById(R.id.switchButton)
     val switchTitle: TextView = dialogView.findViewById(R.id.switchTitle)
-    private val switchtips: TextView = dialogView.findViewById(R.id.switchtips)
+    val switchtips: TextView = dialogView.findViewById(R.id.switchtips)
 
     fun setTitle(title: String) {
         switchTitle.text = title

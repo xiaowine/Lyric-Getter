@@ -4,9 +4,10 @@ import android.content.Context
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
 import android.view.WindowManager
 import android.widget.EditText
-import androidx.annotation.StringRes
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import cn.lyric.getter.R
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -41,9 +42,8 @@ class EditTextDialogHelper(private val context: Context) {
             .create() // 创建dialog，但不立即显示
 
         dialog.window?.apply {
-            setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
-            setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
             setGravity(Gravity.TOP)
+            setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         }
 
         dialog.setOnShowListener {
