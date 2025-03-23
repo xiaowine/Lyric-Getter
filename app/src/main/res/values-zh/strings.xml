@@ -80,8 +80,8 @@
     <string name="fuckwyyabout">网易云歌词获取设置</string>
     <string name="lyricsetting">歌词获取设置</string>
     <string name="test_app_delay">延迟时间（毫秒）</string>
-    <string name="test_app_useOwnMusicController">是否使用自定义音乐控制器</string>
-    <string name="test_app_customIcon">是否使用自定义图标</string>
+    <string name="test_app_useOwnMusicController">使用自定义音乐控制器</string>
+    <string name="test_app_customIcon">使用自定义图标</string>
     <string name="test_app_icon">软件图标</string>
     <string name="test_app_lyric">软件歌词</string>
     <string name="test_app_play">播放状态</string>

@@ -79,12 +79,12 @@
     <string name="fuckfuckwyy_tips">Try to bypass NetEase Cloud Hook detection, not responsible if you are blocked because of this module.</string>
     <string name="fuckwyyabout">NetEase Cloud Lyrics Getting Settings</string>
     <string name="lyricsetting">Lyrics acquisition settings</string>
-    <string name="test_app_delay">延迟时间（毫秒）</string>
-    <string name="test_app_useOwnMusicController">是否使用自定义音乐控制器</string>
-    <string name="test_app_customIcon">是否使用自定义图标</string>
-    <string name="test_app_icon">软件图标</string>
-    <string name="test_app_lyric">软件歌词</string>
-    <string name="test_app_play">播放状态</string>
-    <string name="test_app_name">软件包名称</string>
-    <string name="testlyric">歌词获取测试</string>
+    <string name="test_app_delay">Delay time (ms)</string>
+    <string name="test_app_useOwnMusicController">Is use custom music controller</string>
+    <string name="test_app_customIcon">Is use custom icon</string>
+    <string name="test_app_icon">App icon</string>
+    <string name="test_app_lyric">App lyrics</string>
+    <string name="test_app_play">Playback status</string>
+    <string name="test_app_name">App name</string>
+    <string name="testlyric">Lyrics test</string>
 </resources>

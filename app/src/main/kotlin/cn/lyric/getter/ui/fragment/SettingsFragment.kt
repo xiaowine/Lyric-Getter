@@ -147,16 +147,16 @@ class SettingsFragment : Fragment() {
                     context = context,
                     titleResId = R.string.fuckfuckwyy,
                     summaryResId = R.string.fuckfuckwyy_tips,
-                    isChecked = config.fuckfuckwyysb163,
-                    onCheckedChange = { _, isChecked -> config.fuckfuckwyysb163 = isChecked }
+                    isChecked = config.fuckWyy2,
+                    onCheckedChange = { _, isChecked -> config.fuckWyy2 = isChecked }
                 ))
             addView(
                 createSwitchView(
                     context = context,
                     titleResId = R.string.fuckwyy,
                     summaryResId = R.string.fuckwyy_tips,
-                    isChecked = config.fuckwyysb163,
-                    onCheckedChange = { _, isChecked -> config.fuckwyysb163 = isChecked }
+                    isChecked = config.fuckWyy,
+                    onCheckedChange = { _, isChecked -> config.fuckWyy = isChecked }
                 ))
         }
 

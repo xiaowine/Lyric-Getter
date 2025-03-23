@@ -47,7 +47,7 @@ object Netease : BaseHook() {
     override fun init() {
         super.init()
 
-        if (xConfig.fuckfuckwyysb163) {
+        if (xConfig.fuckWyy2) {
             try {
                 loadClass("android.app.Instrumentation").methodFinder()
                     .filterByName("newApplication")
@@ -99,7 +99,7 @@ object Netease : BaseHook() {
                             }
                         }
                     }
-                    if (xConfig.fuckwyysb163) {
+                    if (xConfig.fuckWyy) {
                         val sbNetease = dexKitBridge.findClass {
                             matcher {
                                 usingStrings("com/netease/cloudmusic/module/lyric/flyme/StatusBarLyricSettingManager.class:setSwitchStatus:(Z)V")
@@ -112,7 +112,7 @@ object Netease : BaseHook() {
                                     a.edit(commit = true) {
                                         putBoolean(
                                             "status_bar_lyric_setting_key",
-                                            xConfig.fuckwyysb163
+                                            xConfig.fuckWyy
                                         )
                                     }
                                 }
