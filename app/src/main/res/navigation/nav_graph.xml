@@ -5,7 +5,6 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/home_nav">
 
-
     <fragment
         android:id="@+id/app_nav"
         android:name="cn.lyric.getter.ui.fragment.AppRulesFragment"

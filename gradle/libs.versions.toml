@@ -4,18 +4,18 @@ androix-core-ktx = "1.15.0"
 androix-navigation-ktx = "2.8.9"
 androix-lifecycle-viewmodel-ktx = "2.8.7"
 
-kotlin = "2.1.10"
+kotlin = "2.1.20"
 kotlinx-serialization-json = "1.8.0"
 hidden-api = "4.3.3"
 material = "1.12.0"
 swiperefreshlayout = "1.2.0-beta01"
-modernandroidpreferences = "2.3.2"
 markwonversion = "4.6.2"
+preference-ktx = "1.2.1"
+cardview = "1.0.0"
 
 [libraries]
 material = { module = "com.google.android.material:material", version.ref = "material" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "androix-core-ktx" }
-modernandroidpreferences = { module = "de.maxr1998:modernandroidpreferences", version.ref = "modernandroidpreferences" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androix-navigation-ktx" }
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androix-navigation-ktx" }
@@ -33,6 +33,8 @@ lyricGetter-api = { module = "com.github.xiaowine:Lyric-Getter-Api", version = "
 xkt = { module = "com.github.xiaowine:XKT", version = "1.0.12" }
 dsp = { module = "com.github.xiaowine:dsp", version = "1.1.3" }
 cardSlider = { module = "com.github.IslamKhSh:CardSlider", version = "1.0.1" }
+preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference-ktx" }
+cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

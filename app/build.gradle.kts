@@ -17,7 +17,7 @@ if (rootProject.file("local.properties").canRead())
 
 android {
     namespace = "cn.lyric.getter"
-    compileSdk = 35
+    compileSdk = 36
     val buildTime = System.currentTimeMillis()
     defaultConfig {
         applicationId = "cn.lyric.getter"
@@ -75,6 +75,8 @@ android {
 
 
 dependencies {
+    implementation(libs.preference.ktx)
+    implementation(libs.cardview)
     compileOnly(libs.xposed)
     compileOnly(libs.dev.rikka.hidden.stub)
 
@@ -92,7 +94,6 @@ dependencies {
     implementation(libs.xkt)
     implementation(libs.dsp)
     implementation(libs.cardSlider)
-    implementation(libs.modernandroidpreferences)
     implementation(libs.swiperefreshlayout)
     implementation(libs.markwon)
     implementation(libs.markwon.image)

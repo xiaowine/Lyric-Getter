@@ -106,7 +106,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginBottom="?dialogPreferredPadding"
                     android:gravity="center"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <com.google.android.material.textview.MaterialTextView
                         android:layout_width="wrap_content"

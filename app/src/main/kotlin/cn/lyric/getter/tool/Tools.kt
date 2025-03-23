@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageInfo
 import android.os.Build
+import android.util.TypedValue
 import cn.lyric.getter.R
 import cn.xiaowine.xkt.LogTool.log
 import java.io.DataOutputStream
@@ -14,14 +15,14 @@ object Tools {
     val getPhoneName by lazy {
         val marketName = getSystemProperties("ro.product.marketname")
         val vivomarketName = getSystemProperties("ro.vivo.market.name")
-        if (bigtextone(Build.BRAND) =="Vivo" ){
-            bigtextone(vivomarketName)
-        } else{
-            if (marketName.isNotEmpty()) bigtextone(marketName) else bigtextone(Build.BRAND) + " " + Build.MODEL
+        if (bigFirstText(Build.BRAND) == "Vivo") {
+            bigFirstText(vivomarketName)
+        } else {
+            if (marketName.isNotEmpty()) bigFirstText(marketName) else bigFirstText(Build.BRAND) + " " + Build.MODEL
         }
     }
 
-    fun bigtextone(st:String): String {
+    fun bigFirstText(st: String): String {
         val formattedBrand = st.replaceFirstChar {
             if (it.isLowerCase()) it.titlecase() else it.toString()
         }
@@ -55,7 +56,14 @@ object Tools {
         }
     }
 
-    //修复高版本安卓系统无法获取版本号
+    fun dp2px(context: Context, dpValue: Float): Int {
+        return TypedValue.applyDimension(
+            TypedValue.COMPLEX_UNIT_DIP,
+            dpValue,
+            context.resources.displayMetrics
+        ).toInt()
+    }
+
     fun PackageInfo.getVersionCode() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
         longVersionCode.toInt()
     } else {
@@ -66,10 +74,11 @@ object Tools {
     @SuppressLint("PrivateApi")
     fun getSystemProperties(key: String): String {
         val ret: String = try {
-            Class.forName("android.os.SystemProperties").getDeclaredMethod("get", String::class.java).invoke(null, key) as String
+            Class.forName("android.os.SystemProperties")
+                .getDeclaredMethod("get", String::class.java).invoke(null, key) as String
         } catch (iAE: IllegalArgumentException) {
             throw iAE
-        } catch (e: Exception) {
+        } catch (_: Exception) {
             ""
         }
         return ret
