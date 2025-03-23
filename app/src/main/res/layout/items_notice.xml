@@ -1,49 +1,49 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clickable="true"
-        android:focusable="true"
-        android:minHeight="?attr/listPreferredItemHeight"
-        app:cardBackgroundColor="?colorPrimary">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:focusable="true"
+    android:minHeight="?attr/listPreferredItemHeight"
+    app:cardBackgroundColor="?colorPrimary">
 
     <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="16dp">
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="16dp">
 
         <com.google.android.material.textview.MaterialTextView
-                android:textColor="?colorOnPrimary"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/title"
-                android:singleLine="true"
-                android:ellipsize="marquee"
-                android:textAppearance="@style/TextAppearance.Material3.TitleLarge" />
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.Material3.TitleLarge"
+            android:textColor="?colorOnPrimary" />
 
         <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/subhead"
-                android:singleLine="true"
-                android:ellipsize="marquee"
-                android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-                android:textColor="?colorOnPrimary"
-                android:layout_marginTop="8dp" />
+            android:id="@+id/subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
+            android:textColor="?colorOnPrimary" />
 
         <com.google.android.material.textview.MaterialTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/content"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                android:textColor="?colorOnPrimary"
-                android:textSize="14sp"
-                android:layout_marginTop="8dp"
-                android:maxLines="8"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:maxLines="8"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?colorOnPrimary"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
