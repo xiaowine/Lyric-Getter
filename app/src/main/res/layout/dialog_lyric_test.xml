@@ -4,15 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
-    android:spacing="12dp">
+    android:paddingHorizontal="24dp"
+    android:paddingVertical="12dp">
 
+    <!-- Using a reusable pattern for all label-value pairs -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toTopOf="@+id/test_app_name"
-        app:layout_constraintTop_toTopOf="@+id/test_app_name">
+        android:layout_marginBottom="12dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_name"
@@ -20,30 +19,27 @@
             android:layout_height="wrap_content"
             android:text="@string/test_app_name"
             android:textSize="16sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/test_app_name_text"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/test_app_name_text"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_name_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@+id/test_app_name"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/test_app_name" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:background="#00FFFFFF"
-        app:cardBackgroundColor="#00FFFFFF"
-        app:cardPreventCornerOverlap="false"
-        app:cardUseCompatPadding="false">
-
+        android:layout_marginBottom="12dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_play"
@@ -51,26 +47,28 @@
             android:layout_height="wrap_content"
             android:text="@string/test_app_play"
             android:textSize="16sp"
-            app:layout_constraintBaseline_toBaselineOf="@+id/test_app_play_text"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/test_app_play_text"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_play_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:maxLines="1"
             android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="@+id/test_app_play"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/test_app_play" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp">
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_lyric"
@@ -78,7 +76,9 @@
             android:layout_height="wrap_content"
             android:text="@string/test_app_lyric"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/test_app_lyric_text"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -86,19 +86,19 @@
             android:id="@+id/test_app_lyric_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:ellipsize="marquee"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/test_app_lyric"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/test_app_lyric" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cardView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp">
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_icon"
@@ -108,7 +108,9 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/test_app_icon_text"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_icon_text"
@@ -117,15 +119,14 @@
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/test_app_icon"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/test_app_icon" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp">
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_useOwnMusicController"
@@ -135,7 +136,9 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/test_app_useOwnMusicController_text"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_useOwnMusicController_text"
@@ -144,15 +147,14 @@
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/test_app_useOwnMusicController"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/test_app_useOwnMusicController" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp">
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_customIcon"
@@ -162,24 +164,25 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/test_app_customIcon_text"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_customIcon_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/test_app_customIcon"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/test_app_customIcon" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp">
-
+        android:layout_marginBottom="8dp">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_delay"
@@ -189,7 +192,9 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/test_app_delay_text"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_delay_text"
@@ -198,8 +203,8 @@
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/test_app_delay"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@+id/test_app_delay" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

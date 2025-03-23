@@ -19,6 +19,7 @@ import cn.lyric.getter.api.tools.Tools.registerLyricListener
 import cn.lyric.getter.api.tools.Tools.unregisterLyricListener
 import cn.lyric.getter.databinding.FragmentSettingsBinding
 import cn.lyric.getter.tool.ConfigTools.config
+import cn.lyric.getter.tool.Tools.dp2px
 import cn.lyric.getter.ui.dialog.EditTextDialogHelper
 import cn.lyric.getter.ui.dialog.PreferencesHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -228,6 +229,7 @@ class SettingsFragment : Fragment() {
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.MATCH_PARENT
             )
+            setPadding(0, 0, 0, dp2px(context, 8f))
         }
 
         val contentLayout = LinearLayout(context).apply {
