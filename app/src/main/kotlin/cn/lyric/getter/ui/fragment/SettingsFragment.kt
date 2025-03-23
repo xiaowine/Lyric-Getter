@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.CompoundButton
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -21,119 +20,24 @@ import cn.lyric.getter.api.tools.Tools.unregisterLyricListener
 import cn.lyric.getter.databinding.FragmentSettingsBinding
 import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.ui.dialog.EditTextDialogHelper
-import cn.lyric.getter.ui.dialog.MD3SwitchHelp
+import cn.lyric.getter.ui.dialog.PreferencesHelper
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SettingsFragment : Fragment() {
 
     private var _binding: FragmentSettingsBinding? = null
-
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /** 椒盐魅族接口  */
-        val saltUseFlymeOnCheckedChangeListener = CompoundButton.OnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            config.saltUseFlyme = isChecked
-        }
-        val saltUseFlymeView = context?.let {
-            diyview(
-                it,
-                R.string.salt_use_flyme,
-                R.string.salt_use_flyme_summary,
-                config.saltUseFlyme,
-                saltUseFlymeOnCheckedChangeListener)
-        }
-
-        /** 歌词屏蔽  */
-        val regex_replaceOnClickListener = View.OnClickListener{
-            context?.let {
-                context?.getString(R.string.regex_replace)?.let { it1 ->
-                    EditTextDialogHelper(it).setText(config.regexReplace).setHint(it1)
-                    val dialog = EditTextDialogHelper(it).show { inputText ->
-                        config.regexReplace = inputText.toString()
-                    }
-                    dialog.setTitle(R.string.regex_replace)
-                    dialog.show()
-                    dialog.window?.apply { // After the window is created, get the SoftInputMode
-                        clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-                        clearFlags(WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM)
-                        setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE)
-                    }
-                }
-            }
-        }
-        val regex_replaceView = context?.let { diyview(
-            it,
-            R.string.regex_replace,
-            0,
-            false,
-            null,
-            true,
-            true,
-            regex_replaceOnClickListener
-        ) }
-
-        /** 歌词获取设置  */
-        val lyricsettingOnClickListener = View.OnClickListener{
-            context?.let { showlyricSwitchDialog(it) }
-        }
-        val lyricsettingView = context?.let { diyview(
-            it,
-            R.string.lyricsetting,
-            0,
-            false,
-            null,
-            true,
-            true,
-            lyricsettingOnClickListener
-        ) }
-
-        /** fuckwyy  */
-        val fuckwyyaboutOnClickListener = View.OnClickListener{
-            context?.let { showfuckwyySwitchDialog(it) }
-        }
-        val fuckwyyaboutview = context?.let { diyview(
-            it,
-            R.string.fuckwyyabout,
-            0,
-            false,
-            null,
-            true,
-            true,
-            fuckwyyaboutOnClickListener
-        ) }
-
-        /** testlyric  */
-        val testlyricOnCListener = View.OnClickListener{
-            context?.let { showtestlyric(it) }
-        }
-        val testlyricview = context?.let { diyview(
-            it,
-            R.string.testlyric,
-            0,
-            false,
-            null,
-            true,
-            true,
-            testlyricOnCListener
-        ) }
-
-
-        binding.fragmentSettingLinearlayout.addView(saltUseFlymeView)
-        binding.fragmentSettingLinearlayout.addView(regex_replaceView)
-        binding.fragmentSettingLinearlayout.addView(lyricsettingView)
-        binding.fragmentSettingLinearlayout.addView(fuckwyyaboutview)
-        binding.fragmentSettingLinearlayout.addView(testlyricview)
+        setupSettings()
     }
 
     override fun onDestroyView() {
@@ -141,144 +45,184 @@ class SettingsFragment : Fragment() {
         _binding = null
     }
 
-    private fun showlyricSwitchDialog(context: Context) {
-        /** all view */
-       val (scrollview, allview)  = allscrollview(context)
+    private fun setupSettings() {
+        val context = context ?: return
 
-        /** 增强隐藏歌词 */
-        val enhanced_hidden_lyricsCheckedChange = CompoundButton.OnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            config.enhancedHiddenLyrics = isChecked
+        binding.fragmentSettingLinearlayout.apply {
+            addView(
+                createSwitchView(
+                    context = context,
+                    titleResId = R.string.salt_use_flyme,
+                    summaryResId = R.string.salt_use_flyme_summary,
+                    isChecked = config.saltUseFlyme,
+                    onCheckedChange = { _, isChecked -> config.saltUseFlyme = isChecked }
+                ))
+            addView(
+                createClickableView(
+                    context = context,
+                    titleResId = R.string.regex_replace,
+                    onClick = { openRegexReplaceDialog(context) }
+                ))
+            addView(
+                createClickableView(
+                    context = context,
+                    titleResId = R.string.lyricsetting,
+                    onClick = { showLyricSettingsDialog(context) }
+                ))
+            addView(
+                createClickableView(
+                    context = context,
+                    titleResId = R.string.fuckwyyabout,
+                    onClick = { showFuckWyySettingsDialog(context) }
+                ))
+            addView(
+                createClickableView(
+                    context = context,
+                    titleResId = R.string.testlyric,
+                    onClick = { showTestLyricDialog(context) }
+                ))
         }
-        val enhanced_hidden_lyricsView = diyview(
-            context,
-            R.string.enhanced_hidden_lyrics,
-            R.string.enhanced_hidden_lyrics_summary,
-            config.enhancedHiddenLyrics,
-            enhanced_hidden_lyricsCheckedChange)
+    }
 
-        /** 输出重复歌词 */
-        val output_repeated_lyricsCheckedChange = CompoundButton.OnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            config.outputRepeatedLyrics = isChecked
+    private fun openRegexReplaceDialog(context: Context) {
+        val title = context.getString(R.string.regex_replace)
+
+        EditTextDialogHelper(context)
+            .setTitle(title)
+            .setText(config.regexReplace)
+            .show {
+                config.regexReplace = it
+            }
+    }
+
+    private fun showLyricSettingsDialog(context: Context) {
+        val (scrollView, contentLayout) = createScrollableDialogLayout(context)
+
+        contentLayout.apply {
+            addView(
+                createSwitchView(
+                    context = context,
+                    titleResId = R.string.enhanced_hidden_lyrics,
+                    summaryResId = R.string.enhanced_hidden_lyrics_summary,
+                    isChecked = config.enhancedHiddenLyrics,
+                    onCheckedChange = { _, isChecked -> config.enhancedHiddenLyrics = isChecked }
+                ))
+            addView(
+                createSwitchView(
+                    context = context,
+                    titleResId = R.string.output_repeated_lyrics,
+                    isChecked = config.outputRepeatedLyrics,
+                    onCheckedChange = { _, isChecked -> config.outputRepeatedLyrics = isChecked }
+                ))
+            addView(
+                createSwitchView(
+                    context = context,
+                    titleResId = R.string.allow_some_software_to_output_after_the_screen,
+                    isChecked = config.allowSomeSoftwareToOutputAfterTheScreen,
+                    onCheckedChange = { _, isChecked ->
+                        config.allowSomeSoftwareToOutputAfterTheScreen = isChecked
+                    }
+                ))
+            addView(
+                createSwitchView(
+                    context = context,
+                    titleResId = R.string.show_title,
+                    isChecked = config.showTitle,
+                    onCheckedChange = { _, isChecked -> config.showTitle = isChecked }
+                ))
         }
-        val output_repeated_lyricsView = diyview(
-            context,
-            R.string.output_repeated_lyrics,
-            0,
-            config.outputRepeatedLyrics,
-            output_repeated_lyricsCheckedChange
-        )
-
-        /** 息屏输出歌词 */
-        val allow_some_software_to_output_after_the_screen = CompoundButton.OnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            config.allowSomeSoftwareToOutputAfterTheScreen = isChecked
-        }
-        val allow_some_software_to_output_after_the_screenView = diyview(
-            context,
-            R.string.allow_some_software_to_output_after_the_screen,
-            0,
-            config.allowSomeSoftwareToOutputAfterTheScreen,
-            allow_some_software_to_output_after_the_screen
-        )
-
-        /** 输出重复歌词 */
-        val show_title = CompoundButton.OnCheckedChangeListener{ _: CompoundButton?, isChecked : Boolean ->
-            config.showTitle = isChecked
-        }
-        val SwitchdialogView = diyview(
-            context,
-            R.string.show_title,
-            0,
-            config.showTitle,
-            show_title
-        )
-
-        allview.addView(enhanced_hidden_lyricsView)
-        allview.addView(output_repeated_lyricsView)
-        allview.addView(allow_some_software_to_output_after_the_screenView)
-        allview.addView(SwitchdialogView)
 
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.lyricsetting)
-            .setView(scrollview)
+            .setView(scrollView)
             .show()
     }
 
-    private fun showfuckwyySwitchDialog(context: Context) {
-        /** all view */
-        val (scrollview, allview)  = allscrollview(context)
-        /** 网易云检测 */
-        val fuckwyy2 = CompoundButton.OnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            config.fuckfuckwyysb163 = isChecked
+    private fun showFuckWyySettingsDialog(context: Context) {
+        val (scrollView, contentLayout) = createScrollableDialogLayout(context)
+
+        contentLayout.apply {
+            addView(
+                createSwitchView(
+                    context = context,
+                    titleResId = R.string.fuckfuckwyy,
+                    summaryResId = R.string.fuckfuckwyy_tips,
+                    isChecked = config.fuckfuckwyysb163,
+                    onCheckedChange = { _, isChecked -> config.fuckfuckwyysb163 = isChecked }
+                ))
+            addView(
+                createSwitchView(
+                    context = context,
+                    titleResId = R.string.fuckwyy,
+                    summaryResId = R.string.fuckwyy_tips,
+                    isChecked = config.fuckwyysb163,
+                    onCheckedChange = { _, isChecked -> config.fuckwyysb163 = isChecked }
+                ))
         }
-        val fuckwyy2View = diyview(
-            context,
-            R.string.fuckfuckwyy,
-            R.string.fuckfuckwyy_tips,
-            config.fuckfuckwyysb163,
-            fuckwyy2
-        )
-
-
-        /** 网易云强开 */
-        val fuckwyyCheckedChange = CompoundButton.OnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
-            config.fuckwyysb163 = isChecked
-        }
-        val fuckwyyView = diyview(context, R.string.fuckwyy, R.string.fuckwyy_tips, config.fuckwyysb163,fuckwyyCheckedChange)
-
-        allview.addView(fuckwyyView)
-        allview.addView(fuckwyy2View)
 
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.fuckwyyabout)
-            .setView(scrollview)
+            .setView(scrollView)
             .show()
     }
 
-    private fun showtestlyric(context: Context){
-        val testlyricview : View = LayoutInflater.from(context).inflate(R.layout.dialog_lyric_test, null)
-        val testappname : TextView = testlyricview.findViewById(R.id.test_app_name_text)
-        val testappicon : TextView = testlyricview.findViewById(R.id.test_app_icon_text)
-        val testappcustomicon : TextView = testlyricview.findViewById(R.id.test_app_customIcon_text)
-        val testappplay : TextView = testlyricview.findViewById(R.id.test_app_play_text)
-        val testapplyric : TextView = testlyricview.findViewById(R.id.test_app_lyric_text)
-        val testappdelay : TextView = testlyricview.findViewById(R.id.test_app_delay_text)
+    private fun showTestLyricDialog(context: Context) {
+        val testLyricView = LayoutInflater.from(context).inflate(R.layout.dialog_lyric_test, null)
+
+        val testAppName = testLyricView.findViewById<TextView>(R.id.test_app_name_text)
+        val testAppIcon = testLyricView.findViewById<TextView>(R.id.test_app_icon_text)
+        val testAppCustomIcon = testLyricView.findViewById<TextView>(R.id.test_app_customIcon_text)
+        val testAppPlay = testLyricView.findViewById<TextView>(R.id.test_app_play_text)
+        val testAppLyric = testLyricView.findViewById<TextView>(R.id.test_app_lyric_text)
+        val testAppDelay = testLyricView.findViewById<TextView>(R.id.test_app_delay_text)
+
         val receiver = LyricReceiver(object : LyricListener() {
             override fun onUpdate(lyricData: LyricData) {
-                testapplyric.text = lyricData.lyric
-                testappicon.text = lyricData.extraData.base64Icon
-                testappcustomicon.text = lyricData.extraData.customIcon.toString()
-                testappplay.text = lyricData.type.toString()
-                testappname.text = lyricData.extraData.packageName
-                testappdelay.text = lyricData.extraData.delay.toString()
-
+                updateTestLyricViews(
+                    lyricData, testAppLyric, testAppIcon, testAppCustomIcon,
+                    testAppPlay, testAppName, testAppDelay
+                )
             }
 
             override fun onStop(lyricData: LyricData) {
-                testapplyric.text = lyricData.lyric
-                testappicon.text = lyricData.extraData.base64Icon
-                testappcustomicon.text = lyricData.extraData.customIcon.toString()
-                testappplay.text = lyricData.type.toString()
-                testappname.text = lyricData.extraData.packageName
-                testappdelay.text = lyricData.extraData.delay.toString()
+                updateTestLyricViews(
+                    lyricData, testAppLyric, testAppIcon, testAppCustomIcon,
+                    testAppPlay, testAppName, testAppDelay
+                )
             }
         })
 
         val dialog = MaterialAlertDialogBuilder(context)
             .setTitle(R.string.testlyric)
-            .setView(testlyricview)
+            .setView(testLyricView)
             .create()
 
         dialog.setOnDismissListener {
-            // 这里写关闭时需要执行的函数
             unregisterLyricListener(context, receiver)
         }
+
         registerLyricListener(context, API.API_VERSION, receiver)
         dialog.show()
-
     }
 
+    private fun updateTestLyricViews(
+        lyricData: LyricData,
+        testAppLyric: TextView,
+        testAppIcon: TextView,
+        testAppCustomIcon: TextView,
+        testAppPlay: TextView,
+        testAppName: TextView,
+        testAppDelay: TextView
+    ) {
+        testAppLyric.text = lyricData.lyric
+        testAppIcon.text = lyricData.extraData.base64Icon
+        testAppCustomIcon.text = lyricData.extraData.customIcon.toString()
+        testAppPlay.text = lyricData.type.toString()
+        testAppName.text = lyricData.extraData.packageName
+        testAppDelay.text = lyricData.extraData.delay.toString()
+    }
 
-    private fun allscrollview(context: Context): Pair<ScrollView, LinearLayout> {
+    private fun createScrollableDialogLayout(context: Context): Pair<ScrollView, LinearLayout> {
         val scrollView = ScrollView(context).apply {
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -286,60 +230,85 @@ class SettingsFragment : Fragment() {
             )
         }
 
-        val allview = LinearLayout(context).apply {
+        val contentLayout = LinearLayout(context).apply {
             orientation = LinearLayout.VERTICAL
             layoutParams = LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT
             )
-            setPadding(0, 24, 0, 0)
         }
-        scrollView.addView(allview)
-        return Pair(scrollView, allview)
+
+        scrollView.addView(contentLayout)
+        return Pair(scrollView, contentLayout)
     }
 
+    private fun createSwitchView(
+        context: Context,
+        titleResId: Int,
+        summaryResId: Int = 0,
+        isChecked: Boolean = false,
+        onCheckedChange: (CompoundButton, Boolean) -> Unit
+    ): View {
+        return createCustomView(
+            context = context,
+            titleResId = titleResId,
+            summaryResId = summaryResId,
+            isChecked = isChecked,
+            onCheckedChange = onCheckedChange,
+            hideSummary = summaryResId == 0,
+            hideSwitch = false
+        )
+    }
 
-    /** 开关界面简单封装定制
-     * @param context Context
-     * @param title 标题文本
-     * @param tips 提示文本
-     * @param iscleck 是否开启开关
-     * @param CheckedChange OnCheckedChangeListener
-     * @param hidetips 是否隐藏提示
-     * @param hideswich 是否隐藏开关
-     * @param setOnClickListener View点击监听器
-     * @return 配置好的界面 */
-    private fun diyview(context: Context,
-                        title:Int = 0,
-                        tips:Int = 0,
-                        iscleck:Boolean = false,
-                        CheckedChange:CompoundButton.OnCheckedChangeListener? = null,
-                        hidetips:Boolean = false,
-                        hideswich:Boolean = false,
-                        setOnClickListener: View.OnClickListener? = null): View {
-        val Switch = MD3SwitchHelp(context)
-        Switch.setViewClickToggleSwitch()
-        val SwitchdialogView = Switch.getView()
-        if (title == 0 ){
-            Switch.setTitle("Test")
-        } else{
-            Switch.switchTitle.setText(title)
-        }
+    private fun createClickableView(
+        context: Context,
+        titleResId: Int,
+        onClick: (View) -> Unit
+    ): View {
+        return createCustomView(
+            context = context,
+            titleResId = titleResId,
+            onClick = onClick,
+            hideSummary = true,
+            hideSwitch = true
+        )
+    }
 
-        if (hidetips || tips == 0){
-            Switch.switchtips.visibility = View.GONE
+    private fun createCustomView(
+        context: Context,
+        titleResId: Int,
+        summaryResId: Int = 0,
+        isChecked: Boolean = false,
+        onCheckedChange: ((CompoundButton, Boolean) -> Unit)? = null,
+        hideSummary: Boolean = false,
+        hideSwitch: Boolean = false,
+        onClick: ((View) -> Unit)? = null
+    ): View {
+        val preferences = PreferencesHelper(context)
+        preferences.setViewClickToggleSwitch()
+        val switchView = preferences.getView()
+
+        // Title
+        preferences.preferencesTitle.setText(titleResId)
+
+        // Summary
+        if (hideSummary || summaryResId == 0) {
+            preferences.preferencesSummary.visibility = View.GONE
         } else {
-            Switch.setTips(tips)
+            preferences.setSummary(summaryResId)
         }
-        if (hideswich || CheckedChange == null){
-            Switch.switchButton.visibility = View.GONE
-        } else{
-            Switch.switchButton.isChecked = (iscleck)
-            Switch.switchButton.setOnCheckedChangeListener(CheckedChange)
+
+        // Switch
+        if (hideSwitch || onCheckedChange == null) {
+            preferences.preferencesButton.visibility = View.GONE
+        } else {
+            preferences.preferencesButton.isChecked = isChecked
+            preferences.preferencesButton.setOnCheckedChangeListener(onCheckedChange)
         }
-        if (setOnClickListener != null){
-            SwitchdialogView.setOnClickListener(setOnClickListener)
-        }
-        return SwitchdialogView
+
+        // Click listener
+        onClick?.let { switchView.setOnClickListener(it) }
+
+        return switchView
     }
 }

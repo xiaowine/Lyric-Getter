@@ -4,7 +4,7 @@ androix-core-ktx = "1.15.0"
 androix-navigation-ktx = "2.8.9"
 androix-lifecycle-viewmodel-ktx = "2.8.7"
 
-kotlin = "2.1.10"
+kotlin = "2.1.20"
 kotlinx-serialization-json = "1.8.0"
 hidden-api = "4.3.3"
 material = "1.12.0"

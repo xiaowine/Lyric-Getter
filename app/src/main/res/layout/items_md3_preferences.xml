@@ -1,42 +1,42 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="15dp"
+    android:background="?attr/selectableItemBackground"
     android:clickable="true"
     android:focusable="true"
-    android:background="?attr/selectableItemBackground">
+    android:paddingHorizontal="24dp"
+    android:paddingVertical="12dp">
 
     <LinearLayout
         android:id="@+id/textContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
         android:orientation="vertical"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/switchButton">
+        app:layout_constraintEnd_toStartOf="@+id/switchButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/switchTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:maxLines="2"
+            android:layout_marginBottom="4dp"
             android:ellipsize="end"
-            android:layout_marginBottom="4dp"/>
+            android:maxLines="2"
+            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/switchtips"
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/switchSummary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:maxLines="3"
             android:ellipsize="end"
-            android:visibility="gone"/>
+            android:maxLines="3"
+            android:textSize="12sp"
+            android:visibility="gone" />
 
     </LinearLayout>
 
@@ -44,9 +44,9 @@
         android:id="@+id/switchButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/switchTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/switchTitle"
-        app:layout_constraintBottom_toBottomOf="@+id/switchTitle"
         tools:ignore="NotSibling" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
