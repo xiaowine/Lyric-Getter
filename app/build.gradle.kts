@@ -94,7 +94,6 @@ dependencies {
     implementation(libs.xkt)
     implementation(libs.dsp)
     implementation(libs.cardSlider)
-    implementation(libs.modernandroidpreferences)
     implementation(libs.swiperefreshlayout)
     implementation(libs.markwon)
     implementation(libs.markwon.image)
