@@ -87,4 +87,7 @@
     <string name="test_app_play">Status de reprodução</string>
     <string name="test_app_name">Nome do app</string>
     <string name="testlyric">Testar letras</string>
+    <string name="app_no_permissions">Permissões insuficientes</string>
+    <string name="app_get_permissions">Se você não conseguir obter a lista de apps instalados, vá para as Configurações para ativar a permissão da lista de apps instalados.</string>
+    <string name="app_go_setting">Vá para Configurações</string>
 </resources>
