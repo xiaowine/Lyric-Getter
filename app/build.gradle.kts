@@ -7,7 +7,6 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.kotlinSerialization)
-    alias(libs.plugins.refine)
     kotlin("plugin.parcelize")
 }
 
@@ -50,7 +49,12 @@ android {
             isMinifyEnabled = true
             isShrinkResources = true
             vcsInfo.include = false
-            setProguardFiles(listOf(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"))
+            setProguardFiles(
+                listOf(
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
+                )
+            )
         }
     }
     packaging {
@@ -68,15 +72,14 @@ android {
     kotlin.jvmToolchain(21)
     applicationVariants.all {
         outputs.all {
-            (this as BaseVariantOutputImpl).outputFileName = "Lyrics Getter-$versionName-$versionCode-$name-$buildTime.apk"
+            (this as BaseVariantOutputImpl).outputFileName =
+                "Lyrics Getter-$versionName-$versionCode-$name-$buildTime.apk"
         }
     }
 }
 
 
 dependencies {
-    implementation(libs.preference.ktx)
-    implementation(libs.cardview)
     compileOnly(libs.xposed)
     compileOnly(libs.dev.rikka.hidden.stub)
 
@@ -84,17 +87,21 @@ dependencies {
     implementation(libs.dexkit)
     implementation(libs.dev.rikka.hidden.compat)
 
-    implementation(libs.core.ktx)
-    implementation(libs.material)
-    implementation(libs.navigation.fragment.ktx)
-    implementation(libs.navigation.ui.ktx)
-    implementation(libs.kotlinx.serialization.json)
     implementation(libs.lyricGetter.api)
-    implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.xkt)
     implementation(libs.dsp)
-    implementation(libs.cardSlider)
+
+    implementation(libs.core.ktx)
+    implementation(libs.material)
+    implementation(libs.preference.ktx)
+    implementation(libs.navigation.fragment.ktx)
+    implementation(libs.navigation.ui.ktx)
+    implementation(libs.lifecycle.viewmodel.ktx)
     implementation(libs.swiperefreshlayout)
+    implementation(libs.cardSlider)
+
+    implementation(libs.kotlinx.serialization.json)
+
     implementation(libs.markwon)
     implementation(libs.markwon.image)
     implementation(libs.markwon.image.glide)

@@ -9,7 +9,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
-class EditTextDialogHelper(private val context: Context) {
+class EditTextDialog(private val context: Context) {
     private val rootLayout = LinearLayout(context).apply {
         orientation = LinearLayout.VERTICAL
         layoutParams = LinearLayout.LayoutParams(
@@ -35,12 +35,12 @@ class EditTextDialogHelper(private val context: Context) {
         rootLayout.addView(textInputLayout)
     }
 
-    fun setTitle(title: String): EditTextDialogHelper {
+    fun setTitle(title: String): EditTextDialog {
         this.title = title
         return this
     }
 
-    fun setText(text: String): EditTextDialogHelper {
+    fun setText(text: String): EditTextDialog {
         editText.setText(text)
         editText.setSelection(text.length)
         return this

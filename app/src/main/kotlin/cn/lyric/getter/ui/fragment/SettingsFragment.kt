@@ -20,8 +20,8 @@ import cn.lyric.getter.api.tools.Tools.unregisterLyricListener
 import cn.lyric.getter.databinding.FragmentSettingsBinding
 import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.tool.Tools.dp2px
-import cn.lyric.getter.ui.dialog.EditTextDialogHelper
-import cn.lyric.getter.ui.dialog.PreferencesHelper
+import cn.lyric.getter.ui.dialog.EditTextDialog
+import cn.lyric.getter.ui.view.Preferences
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class SettingsFragment : Fragment() {
@@ -88,7 +88,7 @@ class SettingsFragment : Fragment() {
     private fun openRegexReplaceDialog(context: Context) {
         val title = context.getString(R.string.regex_replace)
 
-        EditTextDialogHelper(context)
+        EditTextDialog(context)
             .setTitle(title)
             .setText(config.regexReplace)
             .show {
@@ -286,7 +286,7 @@ class SettingsFragment : Fragment() {
         hideSwitch: Boolean = false,
         onClick: ((View) -> Unit)? = null
     ): View {
-        val preferences = PreferencesHelper(context)
+        val preferences = Preferences(context)
         preferences.setViewClickToggleSwitch()
         val switchView = preferences.getView()
 

@@ -1,4 +1,4 @@
-package cn.lyric.getter.ui.dialog
+package cn.lyric.getter.ui.view
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.annotation.StringRes
 import cn.lyric.getter.R
 import com.google.android.material.materialswitch.MaterialSwitch
 
-class PreferencesHelper(context: Context) {
+class Preferences(context: Context) {
     private val preferencesView: View =
         LayoutInflater.from(context).inflate(R.layout.items_md3_preferences, null)
     val preferencesButton: MaterialSwitch = preferencesView.findViewById(R.id.switchButton)

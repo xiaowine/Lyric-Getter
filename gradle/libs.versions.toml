@@ -1,43 +1,52 @@
 [versions]
 agp = "8.9.0"
-androix-core-ktx = "1.15.0"
-androix-navigation-ktx = "2.8.9"
-androix-lifecycle-viewmodel-ktx = "2.8.7"
-
 kotlin = "2.1.20"
+
+androix-core-ktx = "1.15.0"
+androix-lifecycle-viewmodel-ktx = "2.8.7"
+androidx-preference-ktx = "1.2.1"
+androix-navigation-ktx = "2.8.9"
+androix-swiperefreshlayout = "1.2.0-beta01"
+material = "1.12.0"
+cardSlider = "1.0.1"
+
 kotlinx-serialization-json = "1.8.0"
 hidden-api = "4.3.3"
-material = "1.12.0"
-swiperefreshlayout = "1.2.0-beta01"
 markwonversion = "4.6.2"
-preference-ktx = "1.2.1"
-cardview = "1.0.0"
+ezXHelper = "2.2.1"
+dexkit = "2.0.3"
+xposed-api = "82"
 
 [libraries]
-material = { module = "com.google.android.material:material", version.ref = "material" }
 core-ktx = { module = "androidx.core:core-ktx", version.ref = "androix-core-ktx" }
-kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
 navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androix-navigation-ktx" }
 navigation-fragment-ktx = { module = "androidx.navigation:navigation-fragment-ktx", version.ref = "androix-navigation-ktx" }
 lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androix-lifecycle-viewmodel-ktx" }
-swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "swiperefreshlayout" }
+preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "androidx-preference-ktx" }
+swiperefreshlayout = { module = "androidx.swiperefreshlayout:swiperefreshlayout", version.ref = "androix-swiperefreshlayout" }
+
+cardSlider = { module = "com.github.IslamKhSh:CardSlider", version.ref = "cardSlider" }
+
+material = { module = "com.google.android.material:material", version.ref = "material" }
+
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization-json" }
+
 markwon = { module = "io.noties.markwon:core", version.ref = "markwonversion" }
 markwon-image = { module = "io.noties.markwon:image", version.ref = "markwonversion" }
 markwon-image-glide = { module = "io.noties.markwon:image-glide", version.ref = "markwonversion" }
-xposed = { module = "de.robv.android.xposed:api", version = "82" }
-ezXHelper = { module = "com.github.kyuubiran:EzXHelper", version = "2.2.1" }
+
 dev-rikka-hidden-compat = { module = "dev.rikka.hidden:compat", version.ref = "hidden-api" }
 dev-rikka-hidden-stub = { module = "dev.rikka.hidden:stub", version.ref = "hidden-api" }
-dexkit = { module = "org.luckypray:dexkit", version = "2.0.3" }
+
+xposed = { module = "de.robv.android.xposed:api", version.ref = "xposed-api" }
+ezXHelper = { module = "com.github.kyuubiran:EzXHelper", version.ref = "ezXHelper" }
+dexkit = { module = "org.luckypray:dexkit", version.ref = "dexkit" }
+
 lyricGetter-api = { module = "com.github.xiaowine:Lyric-Getter-Api", version = "6.0.0" }
 xkt = { module = "com.github.xiaowine:XKT", version = "1.0.12" }
 dsp = { module = "com.github.xiaowine:dsp", version = "1.1.3" }
-cardSlider = { module = "com.github.IslamKhSh:CardSlider", version = "1.0.1" }
-preference-ktx = { group = "androidx.preference", name = "preference-ktx", version.ref = "preference-ktx" }
-cardview = { group = "androidx.cardview", name = "cardview", version.ref = "cardview" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-refine = { id = "dev.rikka.tools.refine", version = "4.4.0" }
