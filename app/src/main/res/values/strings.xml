@@ -87,4 +87,7 @@
     <string name="test_app_play">Playback status</string>
     <string name="test_app_name">App name</string>
     <string name="testlyric">Lyrics test</string>
+    <string name="app_no_permissions">Insufficient permissions</string>
+    <string name="app_get_permissions">If you can\'t get the list of installed apps, go to Settings to enable the Installed Apps list permission.</string>
+    <string name="app_go_setting">Go Setting</string>
 </resources>

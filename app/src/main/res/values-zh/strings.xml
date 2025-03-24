@@ -87,4 +87,7 @@
     <string name="test_app_play">播放状态</string>
     <string name="test_app_name">软件包名称</string>
     <string name="testlyric">歌词获取测试</string>
+    <string name="app_no_permissions">权限不足</string>
+    <string name="app_get_permissions">无法获取已安装应用列表，请前往设置开启已安装应用列表权限。</string>
+    <string name="app_go_setting">去设置</string>
 </resources>
