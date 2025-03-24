@@ -9,4 +9,17 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowTranslucentStatus">true</item>
     </style>
+
+    <style name="Theme.DialogTransparentActivityTheme" parent="Theme.Material3.DynamicColors.Dark">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="colorPrimaryVariant">@color/material_grey_300</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
 </resources>
