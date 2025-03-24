@@ -15,6 +15,7 @@
         android:theme="@style/Theme.MyApplication">
         <activity
             android:name="cn.lyric.getter.ui.activity.MainActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,6 +24,11 @@
                 <category android:name="de.robv.android.xposed.category.MODULE_SETTINGS" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.activity.DialogTransparentActivity"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:exported="true"
+            android:theme="@style/Theme.DialogTransparentActivityTheme"/>
         <activity-alias
             android:name=".launcher"
             android:enabled="true"

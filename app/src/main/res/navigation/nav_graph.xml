@@ -9,7 +9,7 @@
         android:id="@+id/app_nav"
         android:name="cn.lyric.getter.ui.fragment.AppRulesFragment"
         android:label="@string/settings_fragment_label"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_app_rules" />
     <fragment
         android:id="@+id/home_nav"
         android:name="cn.lyric.getter.ui.fragment.HomeFragment"
