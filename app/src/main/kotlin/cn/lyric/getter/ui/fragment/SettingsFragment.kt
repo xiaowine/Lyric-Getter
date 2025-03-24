@@ -1,6 +1,7 @@
 package cn.lyric.getter.ui.fragment
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -20,7 +21,7 @@ import cn.lyric.getter.api.tools.Tools.unregisterLyricListener
 import cn.lyric.getter.databinding.FragmentSettingsBinding
 import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.tool.Tools.dp2px
-import cn.lyric.getter.ui.dialog.EditTextDialog
+import cn.lyric.getter.ui.activity.DialogTransparentActivity
 import cn.lyric.getter.ui.view.Preferences
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -62,7 +63,9 @@ class SettingsFragment : Fragment() {
                 createClickableView(
                     context = context,
                     titleResId = R.string.regex_replace,
-                    onClick = { openRegexReplaceDialog(context) }
+                    onClick = {
+                        val intent = Intent(context, DialogTransparentActivity::class.java)
+                        startActivity(intent) }
                 ))
             addView(
                 createClickableView(
@@ -83,17 +86,6 @@ class SettingsFragment : Fragment() {
                     onClick = { showTestLyricDialog(context) }
                 ))
         }
-    }
-
-    private fun openRegexReplaceDialog(context: Context) {
-        val title = context.getString(R.string.regex_replace)
-
-        EditTextDialog(context)
-            .setTitle(title)
-            .setText(config.regexReplace)
-            .show {
-                config.regexReplace = it
-            }
     }
 
     private fun showLyricSettingsDialog(context: Context) {

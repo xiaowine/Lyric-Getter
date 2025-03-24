@@ -2,8 +2,11 @@
 
 package cn.lyric.getter.ui.fragment
 
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -192,6 +195,28 @@ class AppRulesFragment : Fragment() {
             }
             Thread {
                 val installedPackages = manager.getInstalledPackages(0)
+
+                if (installedPackages.isEmpty() || installedPackages.size < 10) {
+                    goMainThread {
+                        context?.let {
+                            MaterialAlertDialogBuilder(it)
+                                .setTitle(R.string.app_no_permissions)
+                                .setMessage(R.string.app_get_permissions)
+                                .setPositiveButton(R.string.app_go_setting) { _, _ ->
+                                    val intent =
+                                        Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                                    val uri = Uri.fromParts("package", "cn.lyric.getter", null)
+                                    intent.setData(uri)
+                                    startActivity(intent)
+
+                                }
+                                .setNegativeButton(R.string.cancel, null)
+                                .show()
+                        }
+                        dialog.dismiss()
+                    }
+                    return@Thread
+                }
                 val appInfosPackNames = installedPackages.map { it.packageName }
                 appRules.forEach { appRule ->
                     var appInfos: AppInfos? = null
