@@ -92,7 +92,7 @@
     <string name="app_go_setting">去设置</string>
     <string name="sendtestlyric">发送测试歌词</string>
     <string name="cleantestlyric">清除测试歌词</string>
-    <string name="mifocus_tips">仅Hyperos 2.0可用，并解决白名单，使用的时候请打开通知</string>
-    <string name="mifocus">同时发送 Hyperos焦点通知</string>
+    <string name="mifocus_tips">仅 HyperOS 2.0 可用，并解决白名单，使用的时候请打开通知</string>
+    <string name="mifocus">同时发送 HyperOS 焦点通知</string>
     <string name="testlyric_tips">提示：这里测试没问题可能是其他软件问题，要是发送测试歌词有问题请反馈，无问题就是其他原因，焦点通知是拿来测试您是否解除了白名单用。</string>
 </resources>
