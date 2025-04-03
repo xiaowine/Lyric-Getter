@@ -1,5 +1,6 @@
 package cn.lyric.getter.ui.fragment
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,19 +10,13 @@ import android.view.ViewGroup
 import android.widget.CompoundButton
 import android.widget.LinearLayout
 import android.widget.ScrollView
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import cn.lyric.getter.R
-import cn.lyric.getter.api.API
-import cn.lyric.getter.api.data.LyricData
-import cn.lyric.getter.api.listener.LyricListener
-import cn.lyric.getter.api.listener.LyricReceiver
-import cn.lyric.getter.api.tools.Tools.registerLyricListener
-import cn.lyric.getter.api.tools.Tools.unregisterLyricListener
 import cn.lyric.getter.databinding.FragmentSettingsBinding
 import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.tool.Tools.dp2px
 import cn.lyric.getter.ui.activity.DialogTransparentActivity
+import cn.lyric.getter.ui.activity.TestActivity
 import cn.lyric.getter.ui.view.Preferences
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
@@ -83,7 +78,8 @@ class SettingsFragment : Fragment() {
                 createClickableView(
                     context = context,
                     titleResId = R.string.testlyric,
-                    onClick = { showTestLyricDialog(context) }
+                    onClick = {  val intent = Intent(context, TestActivity::class.java)
+                        startActivity(intent)}
                 ))
         }
     }
@@ -159,61 +155,6 @@ class SettingsFragment : Fragment() {
             .show()
     }
 
-    private fun showTestLyricDialog(context: Context) {
-        val testLyricView = LayoutInflater.from(context).inflate(R.layout.dialog_lyric_test, null)
-
-        val testAppName = testLyricView.findViewById<TextView>(R.id.test_app_name_text)
-        val testAppIcon = testLyricView.findViewById<TextView>(R.id.test_app_icon_text)
-        val testAppCustomIcon = testLyricView.findViewById<TextView>(R.id.test_app_customIcon_text)
-        val testAppPlay = testLyricView.findViewById<TextView>(R.id.test_app_play_text)
-        val testAppLyric = testLyricView.findViewById<TextView>(R.id.test_app_lyric_text)
-        val testAppDelay = testLyricView.findViewById<TextView>(R.id.test_app_delay_text)
-
-        val receiver = LyricReceiver(object : LyricListener() {
-            override fun onUpdate(lyricData: LyricData) {
-                updateTestLyricViews(
-                    lyricData, testAppLyric, testAppIcon, testAppCustomIcon,
-                    testAppPlay, testAppName, testAppDelay
-                )
-            }
-
-            override fun onStop(lyricData: LyricData) {
-                updateTestLyricViews(
-                    lyricData, testAppLyric, testAppIcon, testAppCustomIcon,
-                    testAppPlay, testAppName, testAppDelay
-                )
-            }
-        })
-
-        val dialog = MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.testlyric)
-            .setView(testLyricView)
-            .create()
-
-        dialog.setOnDismissListener {
-            unregisterLyricListener(context, receiver)
-        }
-
-        registerLyricListener(context, API.API_VERSION, receiver)
-        dialog.show()
-    }
-
-    private fun updateTestLyricViews(
-        lyricData: LyricData,
-        testAppLyric: TextView,
-        testAppIcon: TextView,
-        testAppCustomIcon: TextView,
-        testAppPlay: TextView,
-        testAppName: TextView,
-        testAppDelay: TextView
-    ) {
-        testAppLyric.text = lyricData.lyric
-        testAppIcon.text = lyricData.extraData.base64Icon
-        testAppCustomIcon.text = lyricData.extraData.customIcon.toString()
-        testAppPlay.text = lyricData.type.toString()
-        testAppName.text = lyricData.extraData.packageName
-        testAppDelay.text = lyricData.extraData.delay.toString()
-    }
 
     private fun createScrollableDialogLayout(context: Context): Pair<ScrollView, LinearLayout> {
         val scrollView = ScrollView(context).apply {
