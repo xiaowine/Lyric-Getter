@@ -47,7 +47,7 @@
                     app:cardBackgroundColor="?colorPrimary"
                     tools:ignore="PrivateResource">
 
-                    <include layout="@layout/dialog_lyric_test" />
+                    <include layout="@layout/item_lyric_test" />
 
                 </com.google.android.material.card.MaterialCardView>
                     <LinearLayout
