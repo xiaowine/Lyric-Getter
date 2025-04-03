@@ -90,4 +90,9 @@
     <string name="app_no_permissions">Insufficient permissions</string>
     <string name="app_get_permissions">If you can\'t get the list of installed apps, go to Settings to enable the installed apps list permission.</string>
     <string name="app_go_setting">Go to Settings</string>
+    <string name="sendtestlyric">Send test lyrics</string>
+    <string name="cleantestlyric">Clear Test Lyrics</string>
+    <string name="mifocus_tips">Only Hyperos 2.0 is available and solves whitelisting, please turn on notifications when using it</string>
+    <string name="mifocus">Send Hyperos Focus notifications at the same time</string>
+    <string name="testlyric_tips">Tips: here test no problem may be other software problems, if you have problems sending test lyrics please feedback, no problem is other reasons, focus notification is used to test whether you lifted the whitelist with.</string>
 </resources>

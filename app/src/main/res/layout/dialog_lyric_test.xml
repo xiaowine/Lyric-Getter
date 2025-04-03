@@ -18,18 +18,23 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/test_app_name"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/test_app_name_text"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_name_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             app:layout_constraintBaseline_toBaselineOf="@+id/test_app_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_weight="1"
@@ -47,6 +52,8 @@
             android:layout_height="wrap_content"
             android:text="@string/test_app_play"
             android:textSize="16sp"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/test_app_play_text"
             app:layout_constraintHorizontal_weight="1"
@@ -56,6 +63,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_play_text"
             android:layout_width="0dp"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:textSize="16sp"
@@ -72,6 +81,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_lyric"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/test_app_lyric"
@@ -84,10 +95,16 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_lyric_text"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:maxLines="3"
+            android:maxLines="1"
             android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:scrollHorizontally="true"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/test_app_lyric"
             app:layout_constraintEnd_toEndOf="parent"
@@ -102,6 +119,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_icon"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/test_app_icon"
@@ -114,6 +133,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_icon_text"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -131,6 +152,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_useOwnMusicController"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/test_app_useOwnMusicController"
@@ -143,6 +166,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_useOwnMusicController_text"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
@@ -159,6 +184,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_customIcon"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/test_app_customIcon"
@@ -172,6 +199,8 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_customIcon_text"
             android:layout_width="0dp"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             android:layout_height="wrap_content"
             android:textSize="16sp"
             app:layout_constraintBaseline_toBaselineOf="@+id/test_app_customIcon"
@@ -187,6 +216,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_delay"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/test_app_delay"
@@ -199,6 +230,8 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/test_app_delay_text"
+            android:textAppearance="?textAppearanceTitleMedium"
+            android:textColor="?colorOnPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textSize="16sp"
