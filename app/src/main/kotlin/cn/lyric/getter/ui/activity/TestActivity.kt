@@ -28,7 +28,7 @@ class TestActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.test)
+        setContentView(R.layout.activity_test)
 
 
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
