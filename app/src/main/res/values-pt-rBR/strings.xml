@@ -90,9 +90,9 @@
     <string name="app_no_permissions">Permissões insuficientes</string>
     <string name="app_get_permissions">Se você não conseguir obter a lista de apps instalados, vá para as Configurações para ativar a permissão da lista de apps instalados.</string>
     <string name="app_go_setting">Vá para Configurações</string>
-    <string name="sendtestlyric">Enviar letras de teste</string>
-    <string name="cleantestlyric">Limpar letras de teste</string>
+    <string name="send_test_lyric">Enviar letras de teste</string>
+    <string name="clean_test_lyric">Limpar letras de teste</string>
     <string name="mifocus_tips">Somente o HyperOS 2.0 está disponível e resolve a lista de permissões. Por favor, ative as notificações ao usar.</string>
     <string name="mifocus">Enviar notificações de foco do HyperOS</string>
-    <string name="testlyric_tips">Aviso: Se o teste aqui não apresentar problemas, pode ser um problema com outro software. Se houver problemas ao enviar as letras de teste, por favor, envie seu feedback. Se não houver problemas, a causa é outra. A notificação de foco é usada para testar se você desativou a lista de permissões.</string>
+    <string name="test_lyric_tips">Aviso: Se o teste aqui não apresentar problemas, pode ser um problema com outro software. Se houver problemas ao enviar as letras de teste, por favor, envie seu feedback. Se não houver problemas, a causa é outra. A notificação de foco é usada para testar se você desativou a lista de permissões.</string>
 </resources>
