@@ -28,7 +28,6 @@ import java.util.LinkedList
 import java.util.Timer
 import java.util.TimerTask
 
-
 object Apple : BaseHook() {
     private lateinit var lyricConvertConstructor: Data
 
@@ -152,7 +151,7 @@ object Apple : BaseHook() {
                 }
             }
         }
-        HookTools.dexKitBridge { dexKitBridge->
+        HookTools.dexKitBridge { dexKitBridge ->
             val result = dexKitBridge.findMethod {
                 matcher {
                     returnType = "com.apple.android.music.ttml.javanative.model.LyricsLine\$LyricsLinePtr"

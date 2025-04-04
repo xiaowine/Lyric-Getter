@@ -73,12 +73,12 @@
     <string name="multiple_modes_work">There are multiple modes that can be used normally</string>
     <string name="show_title">Force show title</string>
     <string name="version_differences">The release version doesn\'t generate logs, while the Debug version generates logs. Therefore, it\'s recommended not to install the Debug version.</string>
-    <string name="fuckwyy">Force opening of lyrics in NetEase Cloud status bar</string>
-    <string name="fuckwyy_tips">Turning on the switch may cause abnormalities in NetEase Cloud, which isn\'t responsible for this module.</string>
-    <string name="fuckfuckwyy">Disable NetEase Cloud detection</string>
-    <string name="fuckfuckwyy_tips">Try to bypass NetEase Cloud Hook detection. We\'re not responsible if you\'re blocked because of this module.</string>
-    <string name="fuckwyyabout">NetEase Cloud lyrics acquisition settings</string>
-    <string name="lyricsetting">Lyrics acquisition settings</string>
+    <string name="fuck_wyy">Force opening of lyrics in NetEase Cloud status bar</string>
+    <string name="fuck_wyy_tips">Turning on the switch may cause abnormalities in NetEase Cloud, which isn\'t responsible for this module.</string>
+    <string name="fuck_fuck_wyy">Disable NetEase Cloud detection</string>
+    <string name="fuck_fuck_wyy_tips">Try to bypass NetEase Cloud Hook detection. We\'re not responsible if you\'re blocked because of this module.</string>
+    <string name="fuck_wyy_about">NetEase Cloud lyrics acquisition settings</string>
+    <string name="lyric_setting">Lyrics acquisition settings</string>
     <string name="test_app_delay">Delay time (ms)</string>
     <string name="test_app_useOwnMusicController">Custom music controller</string>
     <string name="test_app_customIcon">Custom icon</string>
@@ -86,13 +86,13 @@
     <string name="test_app_lyric">App lyrics</string>
     <string name="test_app_play">Playback status</string>
     <string name="test_app_name">App name</string>
-    <string name="testlyric">Lyrics test</string>
+    <string name="lyric_test">Lyrics test</string>
     <string name="app_no_permissions">Insufficient permissions</string>
     <string name="app_get_permissions">If you can\'t get the list of installed apps, go to Settings to enable the installed apps list permission.</string>
     <string name="app_go_setting">Go to Settings</string>
-    <string name="sendtestlyric">Send test lyrics</string>
-    <string name="cleantestlyric">Clear test lyrics</string>
+    <string name="send_test_lyric">Send test lyrics</string>
+    <string name="clean_test_lyric">Clear test lyrics</string>
     <string name="mifocus_tips">Only HyperOS 2.0 is available and resolves whitelisting. Please turn on notifications when using it.</string>
     <string name="mifocus">Send HyperOS focus notifications</string>
-    <string name="testlyric_tips">Warning: If the test here doesn\'t show any issues, it may be a problem with other software. If there are issues when sending the test lyrics, please provide your feedback. If there are no issues, the cause is something else. The focus notification is used to test if you\'ve disabled the whitelist.</string>
+    <string name="test_lyric_tips">Warning: If the test here doesn\'t show any issues, it may be a problem with other software. If there are issues when sending the test lyrics, please provide your feedback. If there are no issues, the cause is something else. The focus notification is used to test if you\'ve disabled the whitelist.</string>
 </resources>

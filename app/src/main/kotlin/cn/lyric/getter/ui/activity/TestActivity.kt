@@ -21,15 +21,13 @@ import cn.lyric.getter.tool.Tools
 import cn.lyric.getter.ui.view.Preferences
 import com.google.android.material.appbar.MaterialToolbar
 
-class TestActivity: AppCompatActivity() {
-
+class TestActivity : AppCompatActivity() {
     private lateinit var receiver: LyricReceiver
-    private var mi : Boolean = false
+    private var mi: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_test)
-
 
         val toolbar = findViewById<MaterialToolbar>(R.id.toolbar)
         toolbar.setNavigationOnClickListener {
@@ -53,7 +51,7 @@ class TestActivity: AppCompatActivity() {
                     lyricData, testAppLyric, testAppIcon, testAppCustomIcon,
                     testAppPlay, testAppName, testAppDelay
                 )
-                if (mi) Tools.sendNotification(lyricData.lyric,lyricData.extraData.packageName,this@TestActivity)
+                if (mi) Tools.sendNotification(lyricData.lyric, lyricData.extraData.packageName, this@TestActivity)
             }
 
             override fun onStop(lyricData: LyricData) {
@@ -70,15 +68,15 @@ class TestActivity: AppCompatActivity() {
             addView(
                 createClickableView(
                     context = context,
-                    titleResId = R.string.sendtestlyric,
-                    onClick = {EventTools(context).sendLyric("testlyric") }
+                    titleResId = R.string.send_test_lyric,
+                    onClick = { EventTools(context).sendLyric("testlyric") }
                 )
             )
             addView(
                 createClickableView(
                     context = context,
-                    titleResId = R.string.cleantestlyric,
-                    onClick = {EventTools(context).cleanLyric() }
+                    titleResId = R.string.clean_test_lyric,
+                    onClick = { EventTools(context).cleanLyric() }
                 )
             )
             addView(
@@ -87,10 +85,12 @@ class TestActivity: AppCompatActivity() {
                     titleResId = R.string.mifocus,
                     summaryResId = R.string.mifocus_tips,
                     isChecked = mi,
-                    onCheckedChange = { _, isChecked -> mi = isChecked
-                    if (!isChecked){
-                        Tools.cancelNotification(context = this@TestActivity)
-                    }}
+                    onCheckedChange = { _, isChecked ->
+                        mi = isChecked
+                        if (!isChecked) {
+                            Tools.cancelNotification(context = this@TestActivity)
+                        }
+                    }
                 )
             )
         }
@@ -109,7 +109,7 @@ class TestActivity: AppCompatActivity() {
         if (mi) Tools.cancelNotification(context = this@TestActivity)
     }
 
-    override fun onResume(){
+    override fun onResume() {
         super.onResume()
         registerLyricListener(this@TestActivity, API.API_VERSION, receiver)
     }
@@ -127,9 +127,10 @@ class TestActivity: AppCompatActivity() {
         testAppIcon.text = lyricData.extraData.base64Icon
         testAppCustomIcon.text = lyricData.extraData.customIcon.toString()
         testAppPlay.text = lyricData.type.toString()
-        this.let { testAppName.text = it.getPackageManager().getApplicationInfo(lyricData.extraData.packageName,0).loadLabel(it.packageManager) }
+        this.let { testAppName.text = it.getPackageManager().getApplicationInfo(lyricData.extraData.packageName, 0).loadLabel(it.packageManager) }
         testAppDelay.text = lyricData.extraData.delay.toString()
     }
+
     private fun createSwitchView(
         context: Context,
         titleResId: Int,
@@ -147,7 +148,6 @@ class TestActivity: AppCompatActivity() {
             hideSwitch = false
         )
     }
-
 
     private fun createClickableView(
         context: Context,
@@ -200,5 +200,4 @@ class TestActivity: AppCompatActivity() {
 
         return switchView
     }
-
 }

@@ -1,9 +1,8 @@
 package cn.lyric.getter.hook.app
 
-
+import android.media.MediaMetadata
 import android.media.session.PlaybackState
-import cn.lyric.getter.BuildConfig
-import cn.lyric.getter.R
+import cn.lyric.getter.api.data.ExtraData
 import cn.lyric.getter.api.data.LyricData
 import cn.lyric.getter.api.listener.LyricListener
 import cn.lyric.getter.api.listener.LyricReceiver
@@ -14,14 +13,10 @@ import cn.lyric.getter.observe.UidObserveService
 import cn.lyric.getter.tool.HookTools.eventTools
 import cn.lyric.getter.tool.HookTools.getApplication
 import cn.xiaowine.xkt.LogTool.log
-import cn.xiaowine.xkt.Tool.observableChange
-import com.github.kyuubiran.ezxhelper.EzXHelper.moduleRes
-import cn.lyric.getter.tool.ConfigTools.xConfig as config
-
 
 object SystemUi : BaseHook() {
     var isPlaying: Boolean = false
-    var playApp: String = ""
+    var playingApp: String = ""
     private lateinit var receiver: LyricReceiver
     val uidObserveService: UidObserveService by lazy {
         UidObserveService { packageName ->
@@ -31,19 +26,19 @@ object SystemUi : BaseHook() {
         }
     }
 
-    data class TitleInfo(
-        val caller: String,
-        val title: String
-    )
-
-    private var title: TitleInfo by observableChange(TitleInfo("", "")) { _, _, newValue ->
-        "title: $newValue".log()
-        if (config.enhancedHiddenLyrics)
-            eventTools.cleanLyric(newValue.caller)
-
-        if (config.showTitle)
-            eventTools.sendLyric(newValue.title)
-    }
+    // data class TitleInfo(
+    //     val caller: String,
+    //     val title: String
+    // )
+    //
+    // private var title: TitleInfo by observableChange(TitleInfo("", "")) { _, _, newValue ->
+    //     "title: $newValue".log()
+    //     if (config.enhancedHiddenLyrics)
+    //         eventTools.cleanLyric(newValue.caller)
+    //
+    //      if (config.showTitle)
+    //          eventTools.sendLyric(newValue.title)
+    // }
 
     private var useOwnMusicController: Boolean = false
 
@@ -55,7 +50,7 @@ object SystemUi : BaseHook() {
                     isPlaying = true
                     useOwnMusicController = lyricData.extraData.useOwnMusicController
                     if (lyricData.extraData.packageName.isNotEmpty()) {
-                        playApp = lyricData.extraData.packageName
+                        playingApp = lyricData.extraData.packageName
                         uidObserveService.registerForPackage(lyricData.extraData.packageName)
                     }
                 }
@@ -64,18 +59,23 @@ object SystemUi : BaseHook() {
                     isPlaying = false
                 }
             })
-            Tools.registerLyricListener(application, BuildConfig.API_VERSION, receiver)
+            Tools.registerLyricListener(application, receiver)
+
             object : MediaSessionObserve(application) {
-                override fun onTitleChanged(caller: String, title: String) {
-                    super.onTitleChanged(caller, title)
-                    if (config.enhancedHiddenLyrics || config.showTitle) {
-                        moduleRes.getString(R.string.enhanced_hidden_lyrics).log()
-                        this@SystemUi.title = TitleInfo(caller, title)
-                    }
+                override fun onMediaDataChanged(packageName: String, metadata: MediaMetadata) {
+                    super.onMediaDataChanged(packageName, metadata)
+
+                    eventTools.sendMediaData(ExtraData().apply {
+                        this.packageName = packageName
+                        this.mediaMetadata = metadata
+                        this.artist = metadata.getString(MediaMetadata.METADATA_KEY_ARTIST) ?: "Unknown Artist"
+                        this.album = metadata.getString(MediaMetadata.METADATA_KEY_ALBUM) ?: "Unknown Album"
+                        this.title = metadata.getString(MediaMetadata.METADATA_KEY_TITLE) ?: "Unknown Title"
+                    })
                 }
 
-                override fun onStateChanged(caller: String, state: Int) {
-                    super.onStateChanged(caller, state)
+                override fun onStateChanged(packageName: String, state: Int) {
+                    super.onStateChanged(packageName, state)
                     val stateString = when (state) {
                         PlaybackState.STATE_PLAYING -> "Playing"
                         PlaybackState.STATE_PAUSED -> "Paused"
@@ -87,7 +87,7 @@ object SystemUi : BaseHook() {
                     if (!isPlaying || useOwnMusicController) return
                     if (state == PlaybackState.STATE_PAUSED || state == PlaybackState.STATE_STOPPED) {
                         isPlaying = false
-                        eventTools.cleanLyric(caller)
+                        eventTools.cleanLyric(packageName)
                     }
                 }
 
@@ -95,7 +95,7 @@ object SystemUi : BaseHook() {
                     super.onCleared()
                     if (!isPlaying || useOwnMusicController) return
                     isPlaying = false
-                    eventTools.cleanLyric(playApp)
+                    eventTools.cleanLyric(playingApp)
                 }
             }
         }

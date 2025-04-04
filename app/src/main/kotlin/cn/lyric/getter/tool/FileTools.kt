@@ -3,22 +3,20 @@
 package cn.lyric.getter.tool
 
 import android.content.ContentResolver
-import android.provider.MediaStore
-import android.content.CursorLoader
-import android.os.Build
-import android.provider.DocumentsContract
-import android.os.Environment
 import android.content.ContentUris
 import android.content.Context
+import android.content.CursorLoader
 import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.DocumentsContract
+import android.provider.MediaStore
 import cn.xiaowine.xkt.Tool.isNotNull
 import cn.xiaowine.xkt.Tool.isNull
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
-import java.lang.Exception
-import java.lang.IllegalArgumentException
 
 class FileTools(private val context: Context) {
     fun copyFile(src: File?, destPath: String?, destFileName: String): String {

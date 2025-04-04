@@ -14,6 +14,7 @@ object Oppo : BaseHook() {
     init {
         System.loadLibrary("dexkit")
     }
+
     override fun init() {
 
         /** 绕过oppo设备限制 */
@@ -33,16 +34,17 @@ object Oppo : BaseHook() {
                 when (app.packageName) {
                     "com.heytap.music" -> {
                         /** 强开蓝牙歌词 */
-                        loadClass("com.allsaints.music.player.thirdpart.MediaSessionHelper").methodFinder().first{ name == "l" }.createHook {
-                            after{ params ->
+                        loadClass("com.allsaints.music.player.thirdpart.MediaSessionHelper").methodFinder().first { name == "l" }.createHook {
+                            after { params ->
                                 params.result = true
                             }
                         }
                     }
+
                     "com.oppo.music" -> {
                         /** 强开蓝牙歌词 */
-                        loadClass("com.allsaints.music.player.thirdpart.MediaSessionHelper").methodFinder().first{ name == "l" }.createHook {
-                            after{ params ->
+                        loadClass("com.allsaints.music.player.thirdpart.MediaSessionHelper").methodFinder().first { name == "l" }.createHook {
+                            after { params ->
                                 params.result = true
                             }
                         }

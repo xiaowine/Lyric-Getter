@@ -1,6 +1,5 @@
 package cn.lyric.getter.hook.app
 
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.media.AudioManager
@@ -17,7 +16,6 @@ import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
 import java.util.Timer
 import java.util.TimerTask
-
 
 @SuppressLint("StaticFieldLeak")
 object Kuwo : BaseHook() {

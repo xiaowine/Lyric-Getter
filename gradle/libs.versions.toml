@@ -42,7 +42,7 @@ xposed = { module = "de.robv.android.xposed:api", version.ref = "xposed-api" }
 ezXHelper = { module = "com.github.kyuubiran:EzXHelper", version.ref = "ezXHelper" }
 dexkit = { module = "org.luckypray:dexkit", version.ref = "dexkit" }
 
-lyricGetter-api = { module = "com.github.xiaowine:Lyric-Getter-Api", version = "6.0.0" }
+lyricGetter-api = { module = "com.github.HChenX:Lyric-Getter-Api", version = "7.0.0" }
 xkt = { module = "com.github.xiaowine:XKT", version = "1.0.12" }
 dsp = { module = "com.github.xiaowine:dsp", version = "1.1.3" }
 

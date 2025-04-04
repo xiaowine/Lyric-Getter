@@ -9,6 +9,6 @@ object Kde : BaseHook() {
         super.init()
         HookTools.getApplication {
             mediaMetadataCompatLyric(it.classLoader)
-            }
         }
     }
+}

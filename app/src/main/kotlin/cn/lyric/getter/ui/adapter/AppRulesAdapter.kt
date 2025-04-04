@@ -6,12 +6,12 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cn.lyric.getter.R
-import cn.lyric.getter.tool.ConfigTools
 import cn.lyric.getter.data.AppInfos
 import cn.lyric.getter.data.AppStatus
 import cn.lyric.getter.databinding.ItemsAppBinding
 import cn.lyric.getter.tool.AppRulesTools.getAppStatus
 import cn.lyric.getter.tool.AppRulesTools.getAppStatusDescription
+import cn.lyric.getter.tool.ConfigTools
 
 class AppRulesAdapter : RecyclerView.Adapter<BaseViewHolder<*>>() {
     lateinit var context: Context

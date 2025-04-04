@@ -34,5 +34,4 @@
         android:importantForAccessibility="auto"
         app:srcCompat="@drawable/lycaon_icon"
         tools:ignore="ContentDescription,NotSibling,ObsoleteLayoutParam" />
-
 </LinearLayout>

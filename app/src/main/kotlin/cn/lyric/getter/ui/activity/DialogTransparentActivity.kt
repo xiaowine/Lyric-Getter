@@ -7,8 +7,7 @@ import cn.lyric.getter.R
 import cn.lyric.getter.tool.ConfigTools.config
 import cn.lyric.getter.ui.dialog.EditTextDialog
 
-
-class DialogTransparentActivity: AppCompatActivity() {
+class DialogTransparentActivity : AppCompatActivity() {
 
     private fun openRegexReplaceDialog(context: Context) {
         val title = context.getString(R.string.regex_replace)

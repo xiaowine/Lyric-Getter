@@ -7,8 +7,6 @@ import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.data.NoticeData
 import cn.lyric.getter.tool.JsonTools
 import cn.xiaowine.xkt.SimpleHttpTool.get
-import kotlin.collections.set
-import kotlin.text.get
 
 class HomeViewModel(private val state: SavedStateHandle) : ViewModel() {
     var noticeList: MutableLiveData<ArrayList<NoticeData>> = MutableLiveData()

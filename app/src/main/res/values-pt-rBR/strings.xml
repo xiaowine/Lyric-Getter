@@ -73,12 +73,12 @@
     <string name="multiple_modes_work">Existem vários modos que podem ser usados ​​normalmente</string>
     <string name="show_title">Forçar título de exibição</string>
     <string name="version_differences">A versão de lançamento não gera logs, enquanto a versão Debug gera logs. Por isso, recomenda-se não instalar a versão Debug.</string>
-    <string name="fuckwyy">Forçar abertura das letras na barra de status do NetEase Cloud</string>
-    <string name="fuckwyy_tips">Ativar o interruptor pode causar anomalias no NetEase Cloud, que não se responsabiliza por este módulo.</string>
-    <string name="fuckfuckwyy">Desativar detecção do NetEase Cloud</string>
-    <string name="fuckfuckwyy_tips">Tente ignorar a detecção do NetEase Cloud Hook. Não nos responsabilizamos caso você seja bloqueado por esse módulo.</string>
-    <string name="fuckwyyabout">Configurações de aquisição de letras do NetEase Cloud</string>
-    <string name="lyricsetting">Configurações de aquisição de letras</string>
+    <string name="fuck_wyy">Forçar abertura das letras na barra de status do NetEase Cloud</string>
+    <string name="fuck_wyy_tips">Ativar o interruptor pode causar anomalias no NetEase Cloud, que não se responsabiliza por este módulo.</string>
+    <string name="fuck_fuck_wyy">Desativar detecção do NetEase Cloud</string>
+    <string name="fuck_fuck_wyy_tips">Tente ignorar a detecção do NetEase Cloud Hook. Não nos responsabilizamos caso você seja bloqueado por esse módulo.</string>
+    <string name="fuck_wyy_about">Configurações de aquisição de letras do NetEase Cloud</string>
+    <string name="lyric_setting">Configurações de aquisição de letras</string>
     <string name="test_app_delay">Tempo de atraso (ms)</string>
     <string name="test_app_useOwnMusicController">Controlador de música personalizado</string>
     <string name="test_app_customIcon">Ícone personalizado</string>
@@ -86,7 +86,7 @@
     <string name="test_app_lyric">Letras do app</string>
     <string name="test_app_play">Status de reprodução</string>
     <string name="test_app_name">Nome do app</string>
-    <string name="testlyric">Testar letras</string>
+    <string name="lyric_test">Testar letras</string>
     <string name="app_no_permissions">Permissões insuficientes</string>
     <string name="app_get_permissions">Se você não conseguir obter a lista de apps instalados, vá para as Configurações para ativar a permissão da lista de apps instalados.</string>
     <string name="app_go_setting">Vá para Configurações</string>
