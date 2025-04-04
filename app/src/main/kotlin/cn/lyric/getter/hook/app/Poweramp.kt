@@ -25,10 +25,10 @@ object Poweramp : BaseHook() {
                 val xc = it.args[0] // `XC` 参数，包含歌词信息
                 val c = it.args[2] //判断歌词是否为现在的
                 val a = xc.toString()
-                val b = extractValues(a,"text")
+                val b = extractValues(a, "text")
                 if (!b.isNullOrEmpty()) {
-                    if (b != "null" ){
-                        if (c != 0){
+                    if (b != "null") {
+                        if (c != 0) {
                             eventTools.sendLyric(b)
                         }
                     } else {

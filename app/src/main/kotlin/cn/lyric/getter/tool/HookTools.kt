@@ -211,17 +211,21 @@ object HookTools {
 
     class QQLite(classLoader: ClassLoader? = null) {
         init {
-            loadClass("com.tencent.qqmusiccommon.util.music.RemoteLyricController", classLoader).methodFinder().first { name == "BluetoothA2DPConnected" }.createHook { returnConstant(true) }
-
-            val remoteControlManager = loadClass("com.tencent.qqmusiccommon.util.music.RemoteControlManager", classLoader)
-
-            remoteControlManager.methodFinder().first { name == "updataMetaData" }.createHook {
-                before {
-                    val lyric = if (it.args[1].isNull()) return@before else it.args[1].toString()
-                    if ("NEED_NOT_UPDATE_TITLE" == lyric) return@before
-                    eventTools.sendLyric(lyric)
+            loadClass("com.tencent.qqmusiccommon.util.music.RemoteLyricController", classLoader).methodFinder()
+                .first { name == "BluetoothA2DPConnected" }
+                .createHook {
+                    returnConstant(true)
                 }
-            }
+
+            loadClass("com.tencent.qqmusiccommon.util.music.RemoteControlManager", classLoader).methodFinder()
+                .first { name == "updataMetaData" }
+                .createHook {
+                    before {
+                        val lyric = if (it.args[1].isNull()) return@before else it.args[1].toString()
+                        if ("NEED_NOT_UPDATE_TITLE" == lyric) return@before
+                        eventTools.sendLyric(lyric)
+                    }
+                }
         }
     }
 

@@ -1,9 +1,7 @@
 package cn.lyric.getter.hook.app
 
-import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
-import android.os.Process
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.eventTools
@@ -25,8 +23,8 @@ object Kugou : BaseHook() {
             val verCode: Int = app.packageManager?.getPackageInfo(app.packageName, 0)?.getVersionCode() ?: 0
             when (app.packageName) {
                 "com.kugou.android" -> {
-                    if (getProcessName(app) == "com.kugou.android.support"){
-                        when{
+                    if (getProcessName(app) == "com.kugou.android.support") {
+                        when {
                             verCode <= 10000 -> hookCarLyric()
                         }
                     }
@@ -37,6 +35,7 @@ object Kugou : BaseHook() {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("android.support.v4.content.LocalBroadcastManager")
                         }
+
                         else -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("androidx.localbroadcastmanager.content.LocalBroadcastManager")
@@ -53,6 +52,7 @@ object Kugou : BaseHook() {
                             hookLocalBroadcast("android.support.v4.content.LocalBroadcastManager")
                             fixProbabilityCollapse()
                         }
+
                         else -> {
                             HookTools.MockFlyme().mock()
                             hookLocalBroadcast("androidx.localbroadcastmanager.content.LocalBroadcastManager")

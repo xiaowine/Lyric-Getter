@@ -73,12 +73,12 @@
     <string name="multiple_modes_work">有多个可正常使用的模式</string>
     <string name="show_title">强制显示标题</string>
     <string name="version_differences">发行版本 Release 不会输出 Log，Debug 版本会输出 Log，非必要不建议安装 Debug 版本</string>
-    <string name="fuckwyy">网易云状态栏歌词强开</string>
-    <string name="fuckwyy_tips">开启开关可能导致网易云出现异常，本模块概不负责</string>
-    <string name="fuckfuckwyy">禁用网易云检测</string>
-    <string name="fuckfuckwyy_tips">尝试绕过网易云 Hook 检测，如因此被封禁本模块概不负责</string>
-    <string name="fuckwyyabout">网易云歌词获取设置</string>
-    <string name="lyricsetting">歌词获取设置</string>
+    <string name="fuck_wyy">网易云状态栏歌词强开</string>
+    <string name="fuck_wyy_tips">开启开关可能导致网易云出现异常，本模块概不负责</string>
+    <string name="fuck_fuck_wyy">禁用网易云检测</string>
+    <string name="fuck_fuck_wyy_tips">尝试绕过网易云 Hook 检测，如因此被封禁本模块概不负责</string>
+    <string name="fuck_wyy_about">网易云歌词获取设置</string>
+    <string name="lyric_setting">歌词获取设置</string>
     <string name="test_app_delay">延迟时间（毫秒）</string>
     <string name="test_app_useOwnMusicController">自定义音乐控制器</string>
     <string name="test_app_customIcon">自定义图标</string>
@@ -86,13 +86,13 @@
     <string name="test_app_lyric">软件歌词</string>
     <string name="test_app_play">播放状态</string>
     <string name="test_app_name">软件包名称</string>
-    <string name="testlyric">歌词测试</string>
+    <string name="lyric_test">歌词测试</string>
     <string name="app_no_permissions">权限不足</string>
     <string name="app_get_permissions">无法获取已安装应用列表，请前往设置开启已安装应用列表权限。</string>
     <string name="app_go_setting">去设置</string>
-    <string name="sendtestlyric">发送测试歌词</string>
-    <string name="cleantestlyric">清除测试歌词</string>
+    <string name="send_test_lyric">发送测试歌词</string>
+    <string name="clean_test_lyric">清除测试歌词</string>
     <string name="mifocus_tips">仅 HyperOS 2.0 可用，并解决白名单，使用的时候请打开通知</string>
     <string name="mifocus">同时发送 HyperOS 焦点通知</string>
-    <string name="testlyric_tips">提示：这里测试没问题可能是其他软件问题，要是发送测试歌词有问题请反馈，无问题就是其他原因，焦点通知是拿来测试您是否解除了白名单用。</string>
+    <string name="test_lyric_tips">提示：这里测试没问题可能是其他软件问题，要是发送测试歌词有问题请反馈，无问题就是其他原因，焦点通知是拿来测试您是否解除了白名单用。</string>
 </resources>

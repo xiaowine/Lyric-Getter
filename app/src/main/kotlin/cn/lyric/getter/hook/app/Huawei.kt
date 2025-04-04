@@ -1,9 +1,7 @@
 package cn.lyric.getter.hook.app
 
 import cn.lyric.getter.hook.BaseHook
-import cn.lyric.getter.tool.HookTools
 import cn.lyric.getter.tool.HookTools.eventTools
-import cn.xiaowine.xkt.LogTool.log
 import com.github.kyuubiran.ezxhelper.ClassUtils.loadClass
 import com.github.kyuubiran.ezxhelper.HookFactory.`-Static`.createHook
 import com.github.kyuubiran.ezxhelper.finders.MethodFinder.`-Static`.methodFinder
@@ -36,7 +34,7 @@ object Huawei : BaseHook() {
                     val lyricWithoutBrackets = Arrays.toString(lyric).substring(1, Arrays.toString(lyric).length - 1)
                     //lyricWithoutBrackets.log()
                     eventTools.sendLyric(lyricWithoutBrackets)
-                    }
-               }
+                }
             }
+    }
 }

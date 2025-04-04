@@ -31,6 +31,21 @@ class EventTools(val context: Context) {
         }
     }
 
+    fun sendMediaData(extra: ExtraData) {
+        context.sendBroadcast(Intent().apply {
+            action = "Lyric_Data"
+            val lyricData = LyricData().apply {
+                this.type = OperateType.MEDIA_DATA
+                this.extraData.mergeExtra(extra.apply {
+                    this.packageName = this.packageName.takeIf { it.isNotEmpty() }
+                        ?: context.packageName.takeIf { it != "com.android.systemui" } ?: ""
+                })
+            }
+            putExtra("Data", lyricData)
+            Log.d(TAG, lyricData.toString())
+        })
+    }
+
     fun sendLyric(lyric: String, extra: ExtraData? = null) {
         val str = lyric.trim()
         if (str.isEmpty()) return
@@ -53,13 +68,13 @@ class EventTools(val context: Context) {
         }
     }
 
-    fun cleanLyric(caller: String = "") {
+    fun cleanLyric(packageName: String = "") {
         context.sendBroadcast(Intent().apply {
             action = "Lyric_Data"
             val lyricData = LyricData().apply {
                 this.type = OperateType.STOP
                 this.extraData.mergeExtra(ExtraData().apply {
-                    this.packageName = caller.takeIf { it.isNotEmpty() }
+                    this.packageName = packageName.takeIf { it.isNotEmpty() }
                         ?: context.packageName.takeIf { it != "com.android.systemui" } ?: ""
                 })
             }

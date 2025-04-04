@@ -1,5 +1,6 @@
 package cn.lyric.getter.hook.app
 
+import android.media.MediaMetadata
 import cn.lyric.getter.BuildConfig
 import cn.lyric.getter.api.data.ExtraData
 import cn.lyric.getter.hook.BaseHook
@@ -23,9 +24,24 @@ object Api : BaseHook() {
         isApi(classLoader) { clazz ->
             clazz.constructorFinder().first().createHook {
                 before { hookParam ->
-                    hookParam.thisObject.objectHelper().getObjectOrNullAs<Int>("API_VERSION").isNotNull {
-                        if (it == BuildConfig.API_VERSION) {
+                    hookParam.thisObject.objectHelper().getObjectOrNullAs<Int>("API_VERSION").isNotNull { version ->
+                        if (version == BuildConfig.API_VERSION || version == 7 /* 不知名 API 版本 */) {
                             hookParam.thisObject.objectHelper().setObject("hasEnable", true)
+                            clazz.methodFinder().first { name == "onMediaData" }.isNotNull {
+                                it.createHook {
+                                    after { hookParam ->
+                                        val metadata = hookParam.args[0] as MediaMetadata
+
+                                        eventTools.sendMediaData(ExtraData().apply {
+                                            this.packageName = packageName
+                                            this.mediaMetadata = metadata
+                                            this.artist = metadata.getString(MediaMetadata.METADATA_KEY_ARTIST) ?: "Unknown Artist"
+                                            this.album = metadata.getString(MediaMetadata.METADATA_KEY_ALBUM) ?: "Unknown Album"
+                                            this.title = metadata.getString(MediaMetadata.METADATA_KEY_TITLE) ?: "Unknown Title"
+                                        })
+                                    }
+                                }
+                            }
                             clazz.methodFinder().first { name == "sendLyric" }.createHook {
                                 after { hookParam ->
                                     val extraData = ExtraData()

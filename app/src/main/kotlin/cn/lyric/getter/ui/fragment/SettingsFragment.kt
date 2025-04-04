@@ -1,6 +1,5 @@
 package cn.lyric.getter.ui.fragment
 
-import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -60,26 +59,29 @@ class SettingsFragment : Fragment() {
                     titleResId = R.string.regex_replace,
                     onClick = {
                         val intent = Intent(context, DialogTransparentActivity::class.java)
-                        startActivity(intent) }
+                        startActivity(intent)
+                    }
                 ))
             addView(
                 createClickableView(
                     context = context,
-                    titleResId = R.string.lyricsetting,
+                    titleResId = R.string.lyric_setting,
                     onClick = { showLyricSettingsDialog(context) }
                 ))
             addView(
                 createClickableView(
                     context = context,
-                    titleResId = R.string.fuckwyyabout,
+                    titleResId = R.string.fuck_wyy_about,
                     onClick = { showFuckWyySettingsDialog(context) }
                 ))
             addView(
                 createClickableView(
                     context = context,
-                    titleResId = R.string.testlyric,
-                    onClick = {  val intent = Intent(context, TestActivity::class.java)
-                        startActivity(intent)}
+                    titleResId = R.string.lyric_test,
+                    onClick = {
+                        val intent = Intent(context, TestActivity::class.java)
+                        startActivity(intent)
+                    }
                 ))
         }
     }
@@ -88,14 +90,14 @@ class SettingsFragment : Fragment() {
         val (scrollView, contentLayout) = createScrollableDialogLayout(context)
 
         contentLayout.apply {
-            addView(
-                createSwitchView(
-                    context = context,
-                    titleResId = R.string.enhanced_hidden_lyrics,
-                    summaryResId = R.string.enhanced_hidden_lyrics_summary,
-                    isChecked = config.enhancedHiddenLyrics,
-                    onCheckedChange = { _, isChecked -> config.enhancedHiddenLyrics = isChecked }
-                ))
+            // addView(
+            //     createSwitchView(
+            //         context = context,
+            //         titleResId = R.string.enhanced_hidden_lyrics,
+            //         summaryResId = R.string.enhanced_hidden_lyrics_summary,
+            //         isChecked = config.enhancedHiddenLyrics,
+            //         onCheckedChange = { _, isChecked -> config.enhancedHiddenLyrics = isChecked }
+            //     ))
             addView(
                 createSwitchView(
                     context = context,
@@ -112,17 +114,17 @@ class SettingsFragment : Fragment() {
                         config.allowSomeSoftwareToOutputAfterTheScreen = isChecked
                     }
                 ))
-            addView(
-                createSwitchView(
-                    context = context,
-                    titleResId = R.string.show_title,
-                    isChecked = config.showTitle,
-                    onCheckedChange = { _, isChecked -> config.showTitle = isChecked }
-                ))
+            // addView(
+            //     createSwitchView(
+            //         context = context,
+            //         titleResId = R.string.show_title,
+            //         isChecked = config.showTitle,
+            //         onCheckedChange = { _, isChecked -> config.showTitle = isChecked }
+            //     ))
         }
 
         MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.lyricsetting)
+            .setTitle(R.string.lyric_setting)
             .setView(scrollView)
             .show()
     }
@@ -134,23 +136,23 @@ class SettingsFragment : Fragment() {
             addView(
                 createSwitchView(
                     context = context,
-                    titleResId = R.string.fuckfuckwyy,
-                    summaryResId = R.string.fuckfuckwyy_tips,
+                    titleResId = R.string.fuck_fuck_wyy,
+                    summaryResId = R.string.fuck_fuck_wyy_tips,
                     isChecked = config.fuckWyy2,
                     onCheckedChange = { _, isChecked -> config.fuckWyy2 = isChecked }
                 ))
             addView(
                 createSwitchView(
                     context = context,
-                    titleResId = R.string.fuckwyy,
-                    summaryResId = R.string.fuckwyy_tips,
+                    titleResId = R.string.fuck_wyy,
+                    summaryResId = R.string.fuck_wyy_tips,
                     isChecked = config.fuckWyy,
                     onCheckedChange = { _, isChecked -> config.fuckWyy = isChecked }
                 ))
         }
 
         MaterialAlertDialogBuilder(context)
-            .setTitle(R.string.fuckwyyabout)
+            .setTitle(R.string.fuck_wyy_about)
             .setView(scrollView)
             .show()
     }

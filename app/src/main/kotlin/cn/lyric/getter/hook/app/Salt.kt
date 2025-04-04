@@ -1,6 +1,5 @@
 package cn.lyric.getter.hook.app
 
-
 import cn.lyric.getter.hook.BaseHook
 import cn.lyric.getter.tool.ConfigTools.xConfig
 import cn.lyric.getter.tool.HookTools
