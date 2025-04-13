@@ -10,7 +10,7 @@ androix-swiperefreshlayout = "1.2.0-beta01"
 material = "1.12.0"
 cardSlider = "1.0.1"
 
-kotlinx-serialization-json = "1.8.0"
+kotlinx-serialization-json = "1.8.1"
 hidden-api = "4.3.3"
 markwonversion = "4.6.2"
 ezXHelper = "2.2.1"
