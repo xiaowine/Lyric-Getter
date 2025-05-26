@@ -14,7 +14,7 @@ kotlinx-serialization-json = "1.8.0"
 hidden-api = "4.3.3"
 markwonversion = "4.6.2"
 ezXHelper = "2.2.1"
-dexkit = "2.0.3"
+dexkit = "2.0.5"
 xposed-api = "82"
 
 [libraries]
